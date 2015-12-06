@@ -1,7 +1,7 @@
 name: Metatheorem
 markdown: redcarpet
 highlighter: pygments
-permalink: :year/:month/:day/:title.html
+permalink: /blog/:year/:month/:day/:title.html
 collections:
   services:
     output: false
