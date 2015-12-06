@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "Resources for Categories in CS"
-date: 2015-09-30
+date: 2015-12-06
 categories:
  - computer science
  - category theory
