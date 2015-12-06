@@ -6,7 +6,7 @@ sitemap:
     changefreq: monthly
 ---
 
-{% assign collection = site.posts | sort: "date" %}
+{% assign collection = site.posts | sort: "date" | reverse %}
 <div class="list-group">
 {% for post in collection %}
   <a href="/blog{{ post.url }}" class="list-group-item">
