@@ -25,7 +25,7 @@ Turing-computable Horn clause based logical programming is a very successful tec
 
 Part of NIST’s mission is to promote industrial innovation. Looking forward, tomorrow’s industry requires a more sophisticated set of tools to address the complexity and dynamism of new mechanisms such as cybe-physical systems and the Internet of Things. Category theory, which has demonstrated its ability to simplify and organize complex problems in mathematics and the sciences, may offer just such a toolbox. A new generation of accessible textbooks makes industrial application of these techniques more realistic, but we still lack the coherent collection of software tools necessary to realize this promise. The development of this software will benefit not only modern industry, but also category theory itself.
 
-<strong>(Module signature/type class/trait/theory presentation) combinators</strong by Jacques Carette
+<strong>(Module signature/type class/trait/theory presentation) combinators</strong> by Jacques Carette
 
 First, from a categorical viewpoint, it is easy to see that module signatures (a la ML), type classes (a la Haskell), traits (a la Scala) and theory presentations (most logics, but also our system MathScheme) all belong to a family of syntactic presentations of certain information. By analysing large code bases, we see a clear need for better mechanisms for building these.
 

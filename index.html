@@ -8,10 +8,12 @@ sitemap:
 
 {% assign collection = site.posts | sort: "date" | reverse %}
 <div class="list-group">
-{% for post in collection %}
-  <a href="/blog{{ post.url }}" class="list-group-item">
-    {% if post.title %} <h3>{{ post.title }}</h3> {% endif %}
+  {% for post in collection %}
+  
+  <div class="list-group-item">
+    {% if post.title %} <a href="/blog{{ post.url }}"><h3>{{ post.title }}</h3></a> {% endif %}
     {% if post.date %} {{ post.date | date: "%d %B %Y" }} {% endif %}
-  </a>
+    <a href="/blog{{ post.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}"></a>
+  </div>  
 {% endfor %}
 </div>
