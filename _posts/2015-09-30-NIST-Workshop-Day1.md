@@ -1,6 +1,6 @@
 ---
 layout: blog
-Title: "NIST Workshop on Computational Category Theory: Day 1 and Day 2"
+title: "NIST Workshop on Computational Category Theory: Day 1 and Day 2"
 date: 2015-09-30
 categories:
  - conference
