@@ -6,5 +6,12 @@ sitemap:
     changefreq: monthly
 ---
 
-
-
+{% assign collection = site.posts | sort: "date" %}
+<div class="list-group">
+{% for post in collection %}
+  <a href="{{ post.url }}" class="list-group-item">
+    {% if post.title %} <h3>{{ post.title }}</h3> {% endif %}
+    {% if post.date %} {{ post.date | date: "%d %B %Y" }} {% endif %}    
+  </a>
+{% endfor %}
+</div>
