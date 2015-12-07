@@ -16,5 +16,6 @@ sitemap:
     {% if post.date %} {{ post.date | date: "%d %B %Y" }} {% endif %}
     | <a href="http://heades.github.io/blog{{ post.url }}#disqus_thread"></a>
   </div>  
-{% endfor %}
+  {% endfor %}
+  
 </div>
