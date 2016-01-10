@@ -33,7 +33,7 @@ We model the programmatic fragment in a cartesian closed category extended with 
 <img width="100%" src="http://blog.metatheorem.org/wp-content/uploads/2014/12/comm-diag.png">
 In any cartesian closed category we have the morphism \\(\pi_2 : \Gamma \times (T \Rightarrow T) \to (T \Rightarrow T)\\). Using this morphism we can define the following morphism in a cartesian closed category with fixpoint operators:
 <center>
-\\( \mathsf{cur}(\pi_2;\mathsf{fix}_T) : \Gamma \to (T \Rightarrow T) \Rightarrow T \\)
+\\(\mathsf{cur}(\pi_2;\mathsf{fix}_T) : \Gamma \to (T \Rightarrow T) \Rightarrow T\\)
 </center>
 This morphism is the \\(\mathsf{Y}\\) combinator.  That is, we can define
 <center>
