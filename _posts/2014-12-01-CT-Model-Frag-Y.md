@@ -14,8 +14,6 @@ categories:
 
 \\(\newcommand{\interp}[1]{\unicode{x27e6} #1 \unicode{x27e7}}\\)
 
-\\( \interp{A} \Rightarrow \\)
-
 I recently published a <a href="http://blog.metatheorem.org/?p=1993">post</a> on the categorical model of fragmented system T.  Aaron Stump -- my Ph.D. advisor -- asked a very good question.  One property the Trellys team wants in a PL is a non-terminating fragment to conduct general purpose programming.  However, as Aaron pointed out fragmented system T has a terminating programmatic fragment, but what if we make it non-terminating? He asked particularly about adding the Y combinator.
 My response was that I did not know how to add just the Y combinator, but I argued that the programmatic fragment could be non-terminating by making it uni-typed.
 
@@ -34,16 +32,16 @@ The idea is to argue how we can model the theory in a cartesian closed category 
 
 We model the programmatic fragment in a cartesian closed category extended with fixpoints for each object.
 <img width="100%" src="http://blog.metatheorem.org/wp-content/uploads/2014/12/comm-diag.png">
-In any cartesian closed category we have the morphism \\(\pi_2 : \Gamma \times (T \Rightarrow T) \to (T \Rightarrow T)\\). Using this morphism we can define the following morphism in a cartesian closed category with fixpoint operators:
+In any cartesian closed category we have the morphism \\( \pi\_2 : \Gamma \times (T \Rightarrow T) \to (T \Rightarrow T) \\). Using this morphism we can define the following morphism in a cartesian closed category with fixpoint operators:
 <center>
-\\(\mathsf{cur}(\pi_2;\mathsf{fix}_T) : \Gamma \to (T \Rightarrow T) \Rightarrow T\\)
+\\(\mathsf{cur}(\pi\_2;\mathsf{fix}\_T) : \Gamma \to (T \Rightarrow T) \Rightarrow T\\)
 </center>
 This morphism is the \\(\mathsf{Y}\\) combinator.  That is, we can define
 <center>
-\\( \interp{\Gamma \vdash_{\mathsf{Y}} Y : (T \to T) \to T}\,=\,\mathsf{cur}(\pi_2;\mathsf{fix}_{\interp{T}}) \\)        
+\\( \interp{\Gamma \vdash_{\mathsf{Y}} Y : (T \to T) \to T}\,=\,\mathsf{cur}(\pi\_2;\mathsf{fix}\_{\interp{T}}) \\)        
 </center>
 
-A categorical model must have enough structure to model every typable term, but it must also model the reduction rules.  That is, for any \\(\Gamma \vdash_{\theta} t_1 : T\\) and \\(\Gamma \vdash_{\theta} t_2 : T\\), if \\(t_1 \leadsto t_2\\), then \\(\interp{\Gamma \vdash_{\theta} t_1 : T} = \interp{\Gamma \vdash_{\theta} t_2 : T}\\), where \\(\theta \in \{\mathsf{S},\mathsf{Y}\}\\). It is well-known that if \\(\theta = \mathsf{S}\\), then the reduction rules of STLC can be modeled by a cartesian closed category. In fact, we have \\(\beta\\)-equality in the model: 
+A categorical model must have enough structure to model every typable term, but it must also model the reduction rules.  That is, for any \\(\Gamma \vdash\_{\theta} t\_1 : T\\) and \\(\Gamma \vdash\_{\theta} t\_2 : T\\), if \\(t\_1 \leadsto t\_2\\), then \\(\interp{\Gamma \vdash\_{\theta} t\_1 : T} = \interp{\Gamma \vdash\_{\theta} t\_2 : T}\\), where \\(\theta \in \{\mathsf{S},\mathsf{Y}\}\\). It is well-known that if \\(\theta = \mathsf{S}\\), then the reduction rules of STLC can be modeled by a cartesian closed category. In fact, we have \\(\beta\\)-equality in the model: 
 <center>
 (\\(\beta\\)-cat) \\( \langle \mathsf{cur}(f),g \rangle;\mathsf{app} = \langle \mathsf{id},g \rangle;(\mathsf{cur}(f) \times id);\mathsf{app} = \langle \mathsf{id},g\rangle;f \\)
 </center>
@@ -57,7 +55,7 @@ We call the previous fact \\(\mathsf{Y}\\)-cat.  Now we can show that a cartesia
 </center>
 It took me the better part of the weekend to get the equational reasoning right, so hopefully I did not make any mistakes.
 
-The way we model the Y combinator is slightly different from the book <a href="http://www.di.ens.fr/users/longo/files/CategTypesStructures/book.pdf">here</a>.  There the authors use the morphism \\( !_{\Gamma};\mathsf{cur}(\pi_2;\mathsf{fix}_T) : \Gamma \to (T \Rightarrow T) \Rightarrow T \\), where \\(!_\Gamma : \Gamma \to \top\\) is the terminal morphism, but I do not see a reason to use the terminal morphism when we can just use \\(\pi_2\\). We obtain the same result here, but I might be missing something.
+The way we model the Y combinator is slightly different from the book <a href="http://www.di.ens.fr/users/longo/files/CategTypesStructures/book.pdf">here</a>.  There the authors use the morphism \\( !\_{\Gamma};\mathsf{cur}(\pi\_2;\mathsf{fix}\_T) : \Gamma \to (T \Rightarrow T) \Rightarrow T \\), where \\(!\_\Gamma : \Gamma \to \top\\) is the terminal morphism, but I do not see a reason to use the terminal morphism when we can just use \\(\pi\_2\\). We obtain the same result here, but I might be missing something.
 
 Finally, we arrive at the following main theorem:
 <div class="theorem">   Suppose that \\(\mathcal{S}\\) is cartesian closed category (a model of the logical fragment of fragmented Y), and that \\(\mathcal{Y}\\) is a cartesian closed category with fixpoint operators (a model of the programmatic fragment of fragmented Y).  Then \\( (\mathcal{S}, S, \mathcal{Y}) \\) is a  model of fragmented Y, where  \\( S : \mathcal{S} \to \mathcal{Y} \\) is a full and faithful functor.</div>
