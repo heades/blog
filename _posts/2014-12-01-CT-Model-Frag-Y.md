@@ -13,6 +13,9 @@ categories:
 </script>
 
 \\(\newcommand{\interp}[1]{\unicode{x27e6} #1 \unicode{x27e7}}\\)
+
+\\( \interp{A} \\)
+
 I recently published a <a href="http://blog.metatheorem.org/?p=1993">post</a> on the categorical model of fragmented system T.  Aaron Stump -- my Ph.D. advisor -- asked a very good question.  One property the Trellys team wants in a PL is a non-terminating fragment to conduct general purpose programming.  However, as Aaron pointed out fragmented system T has a terminating programmatic fragment, but what if we make it non-terminating? He asked particularly about adding the Y combinator.
 My response was that I did not know how to add just the Y combinator, but I argued that the programmatic fragment could be non-terminating by making it uni-typed.
 
