@@ -1,3 +1,13 @@
+---
+layout: blog
+title: "On the Categorical Model of Fragmented Y"
+date: 2014-12-01
+categories: 
+ - category theory
+ - trellys
+ - Y combinator
+---
+
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({ TeX: { extensions: ["AMSsymbols.js"] }});
 </script>
