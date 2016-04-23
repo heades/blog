@@ -28,8 +28,8 @@ First, we need some basic results.
 <div class="proof">
   This follows easily from the universial mapping property for products. &#9612;
 </div>
-In any CCC \\( C \\), if \\(\perp\\) is an initial object in \\(\cat{C}\\), then so is \\(\perp \times A\\) for any object \\(A\\) of \\(\cat{C}\\).
-<div class="lemma"> </div>
+
+<div class="lemma"> In any CCC \\( C \\), if \\(\perp\\) is an initial object in \\(\cat{C}\\), then so is \\(\perp \times A\\) for any object \\(A\\) of \\(\cat{C}\\).</div>
 <div class="proof">
   We know that the universal morphism for the initial object is unique, and hence, the homspace \\(\homs{\perp}{A \Rightarrow B}\\) for any object \\(B\\) of \\(\cat{C}\\).  Then using the right adjoint to the product functor we know that \\(\homs{\perp}{A \Rightarrow B} \cong \homs{\perp \times A}{B}\\), and hence, there is only one arrow between \\(\perp \times A\\) and \\(B\\). &#9612;
 </div>
