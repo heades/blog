@@ -1,5 +1,4 @@
 name: Metatheorem
-markdown: redcarpet
 highlighter: pygments
 baseurl: /blog
 permalink: :year/:month/:day/:title.html
