@@ -1,5 +1,5 @@
 name: Metatheorem
-highlighter: pygments
+highlighter: rouge
 baseurl: /blog
 permalink: :year/:month/:day/:title.html
 collections:
