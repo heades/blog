@@ -61,9 +61,11 @@ Finally, we have the main result of this post due to Crolard.
 </span>  
 <span class="proof">
   Suppose \\(\cat{C}\\) is a biCCC, and \\(A\\) and \\(B\\) are objects of \\(\cat{C}\\).  We know from above that \\(B \cong \top \times B\\). Thus, we know that \\(\homs{B}{A} \cong \homs{\top \times B}{A}\\). Using the internal hom adjunction we know the following:
-    \\(\homs{B}{A} \cong \homs{\top \times B}{A} \cong \homs{\top}{B \Rightarrow A}\\)
-    <br>
+  <br>
+  \\(\homs{B}{A} \cong \homs{\top \times B}{A} \cong \homs{\top}{B \Rightarrow A}\\)
+  <br>
   Taking the dual of this chain of isomorphisms yields:
+  <br>
   \\(\homs{A}{B} \cong \homs{A}{\perp + B} \cong \homs{B - A}{\perp}\\)
   <br>
   Therefore, by Joyal's theorem above \\(\homs{A}{B}\\) has at most one element. &#9612;
