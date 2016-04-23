@@ -24,42 +24,42 @@ Now coimplication corresponds to the left adjoint of the coproduct functor.  Thi
 The question this post gives an answer to is "does it make sense to have a category that is both cartesian closed and cocartesian co-closed?"  The answer happens to be negative and is due to <a href="http://www.sciencedirect.com/science/article/pii/S0304397599001243">Tristan Crolard</a>.  The main result that we will need is due to <a href="https://en.wikipedia.org/wiki/André_Joyal">Andr&eacute; Joyal</a>.  We will show that any category which is both cartesian closed and cocartesian coclosed is degenerative in the sense that it is a preorder, that is, for any two objects \\(A\\) and \\(B\\) the homspace \\(\homs{A}{B}\\) has at most one element.  We call a category that is both a CCC and a coCCC a <strong>bi-cartesian closed categories (biCCC)</strong>.
 
 First, we need some basic results.  
-<div class="lemma"> In any CCC \\(\cat{C}\\), if \\(\perp\\) is an initial object in \\(\cat{C}\\) and \\(\homs{A}{\perp}\\) is non-empty, then \\(A \cong A \times \perp\\).</div>
-<div class="proof">
+<span class="lemma"> In any CCC \\(\cat{C}\\), if \\(\perp\\) is an initial object in \\(\cat{C}\\) and \\(\homs{A}{\perp}\\) is non-empty, then \\(A \cong A \times \perp\\).</span>
+<span class="proof">
   This follows easily from the universial mapping property for products. &#9612;
-</div>
+</span>
 
-<div class="lemma"> In any CCC \\( C \\), if \\(\perp\\) is an initial object in \\(\cat{C}\\), then so is \\(\perp \times A\\) for any object \\(A\\) of \\(\cat{C}\\).</div>
-<div class="proof">
+<span class="lemma"> In any CCC \\( C \\), if \\(\perp\\) is an initial object in \\(\cat{C}\\), then so is \\(\perp \times A\\) for any object \\(A\\) of \\(\cat{C}\\).</span>
+<span class="proof">
   We know that the universal morphism for the initial object is unique, and hence, the homspace \\(\homs{\perp}{A \Rightarrow B}\\) for any object \\(B\\) of \\(\cat{C}\\).  Then using the right adjoint to the product functor we know that \\(\homs{\perp}{A \Rightarrow B} \cong \homs{\perp \times A}{B}\\), and hence, there is only one arrow between \\(\perp \times A\\) and \\(B\\). &#9612;
-</div>
+</span>
 
-<div class="lemma"> In any CCC \\(\cat{C}\\), if \\(\top\\) is a terminal object in \\(\cat{C}\\), then for any object \\(A\\), \\(\top \times A \cong A \cong A \times \top\\).</div>
-<div class="proof">
+<span class="lemma"> In any CCC \\(\cat{C}\\), if \\(\top\\) is a terminal object in \\(\cat{C}\\), then for any object \\(A\\), \\(\top \times A \cong A \cong A \times \top\\).</span>
+<span class="proof">
   This follows easily from the universial mapping property for products. &#9612;
-</div>
+</span>
 
 Observe the following.
-<div class="lemma"> A biCCC is a CCC whose dual is also a CCC.</div>
-<div class="proof">
+<span class="lemma"> A biCCC is a CCC whose dual is also a CCC.</span>
+<span class="proof">
   Follows from a straightforward use of duality. &#9612;
-</div>
+</span>
 Thus, the three basic results we gave apply to any biCCC.
 
 We have now arrived at the main result by Joyal.
-<div class="theorem">
-  In any CCC \\(\cat{C}\\), if \\(\perp\\) is an initial object in \\(\cat{C}\\) and \\(\homs{A}{\perp}\\) is non-empty, then \\(A\\) is an initial object in \\(\cat{C}\\).</div>
-<div class="proof">
+<span class="theorem">
+  In any CCC \\(\cat{C}\\), if \\(\perp\\) is an initial object in \\(\cat{C}\\) and \\(\homs{A}{\perp}\\) is non-empty, then \\(A\\) is an initial object in \\(\cat{C}\\).</span>
+<span class="proof">
   Suppose \\(\cat{C}\\) is a CCC such that \\(\perp\\) is an initial object in \\(\cat{C}\\), and \\(A\\) is an arbitrary object in \\(\cat{C}\\).  Furthermore, suppose \\(\homs{A}{\perp}\\) is non-empty.  By the first basic lemma above we know that \\(A \cong A \times \perp\\), and by the second \\(A \times \perp\\) is initial, thus \\(A\\) is initial. &#9612;
-</div>
+</span>
 
 Notice that the proof of the previous lemma hinges on the fact that the universal morphism is unique.  If we took the initial object to be weak instead, then the previous result would not hold.
 
 Finally, we have the main result of this post due to Crolard.
-<div class="theorem">
+<span class="theorem">
   If \\(\cat{C}\\) is a biCCC, then for any two object \\(A\\) and \\(B\\) of \\(\cat{C}\\), \\(\homs{A}{B}\\) has at most one element.
-</div>  
-<div class="proof">
+</span>  
+<span class="proof">
   Suppose \\(\cat{C}\\) is a biCCC, and \\(A\\) and \\(B\\) are objects of \\(\cat{C}\\).  We know from above that \\(B \cong \top \times B\\). Thus, we know that \\(\homs{B}{A} \cong \homs{\top \times B}{A}\\). Using the internal hom adjunction we know the following:
   <center>
     \\(\homs{B}{A} \cong \homs{\top \times B}{A} \cong \homs{\top}{B \Rightarrow A}\\)
@@ -69,7 +69,7 @@ Finally, we have the main result of this post due to Crolard.
     \\(\homs{A}{B} \cong \homs{A}{\perp + B} \cong \homs{B - A}{\perp}\\)
   </center>
   Therefore, by Joyal's theorem above \\(\homs{A}{B}\\) has at most one element. &#9612;
-</div>
+</span>
 
 Again, the previous result hinges on Joyal's result, but can be prevented by using weak initial objects.
 
