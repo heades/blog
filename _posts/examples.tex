@@ -1,0 +1,16 @@
+\begin{array}{ccccccccccccccccccccccc}  
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma \vdash \Delta
+  }{\Gamma,!_0A \vdash \Delta}
+  & \quad & 
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma,!_r A,!_s A \vdash \Delta
+  }{\Gamma,!_{r+s}A \vdash \Delta}
+  & \quad &
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma,A \vdash \Delta
+  }{\Gamma,!_1A \vdash \Delta}
+\end{array}
