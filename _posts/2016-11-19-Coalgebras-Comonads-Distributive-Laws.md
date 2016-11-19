@@ -6,7 +6,7 @@ categories:
  - category theory
  - categorical logic
  - distributive laws
- - algebras
+ - coalgebras
  - comonads
  - adjunctions
 ---
@@ -64,7 +64,7 @@ I plan to write a follow up post describing how this result can be
 used to to create various adjoint models of linear logic, but here we
 show that when we have two comonads on a category with a distributive
 law, then those comonads in addition to their composition can be
-decomposed into a composition of adjunctions between their algebras.
+decomposed into a composition of adjunctions between their coalgebras.
 
 Suppose $$(k,\varepsilon,\delta)$$ is a comonad on a category
 $$\cat{L}$$.  Then it is well known that it can be decomposed into the
