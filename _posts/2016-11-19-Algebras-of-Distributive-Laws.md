@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "Algebras, Comonads, and Distributive Laws"
+title: "Coalgebras, Comonads, and Distributive Laws"
 date: 2016-11-19
 categories:
  - category theory
