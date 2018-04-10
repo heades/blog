@@ -9,7 +9,7 @@ categories:
 What is the NSF CAREER award?
 --
 
-The NSF CAREER award is perhaps the most prestigious young researchers award given by the National Science Foundation (NSF).  The PI of a submitted proposal must be on the tenure track, but untenured.  The award is over a five year period, and the minimum proposal budget is $400,000.  There is no upper bound, but on average the amount is around $500,000.  A PI has only three tries to get funded.  Finally, the proposal itself must consist of a research proposal and an integration of research into education proposal.  For more of the details please see the [NSF solicitation]().
+The NSF CAREER award is perhaps the most prestigious young researchers award given by the National Science Foundation (NSF).  The PI of a submitted proposal must be on the tenure track, but untenured.  The award is over a five year period, and the minimum proposal budget is $400,000.  There is no upper bound, but on average the amount is around $500,000.  A PI has only three tries to get funded.  Finally, the proposal itself must consist of a research proposal and an integration of research into education proposal.  For more of the details please see the [NSF solicitation](https://www.nsf.gov/pubs/2017/nsf17537/nsf17537.htm).
 
 Why have a workshop?
 ---
