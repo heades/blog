@@ -9,3 +9,4 @@ collections:
     output: false
 gems:
   - jekyll-feed
+theme: jekyll-theme-midnight
