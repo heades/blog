@@ -1,0 +1,394 @@
+\begin{definition}
+  \label{def:exp-action}
+  A \emph{linear category}, $\cat{C}$, consists of the following structure:
+  \begin{itemize}
+  \item A is a symmetric monoidal category $(\mathcal{A},\otimes,I,\lambda,\rho,\alpha,\beta)$,
+  \item A linear exponential comonad,
+    $(!_{-},\delta,\varepsilon)$, which has the following
+    structure:
+    
+    \begin{itemize}    
+    \item The functor $! : \mathcal{A} \mto \mathcal{A}$ forms comonad
+      on $\cat{A}$.  That is, there are two natural transformations
+      $\delta : ! A \mto !! A$ and $\varepsilon : !A \mto A$ that make
+      the following diagrams commute:
+      \begin{center}
+        \begin{math}
+          \begin{array}{cccc}
+            \bfig
+            \square|amma|/->`->`->`->/<1000,500>[
+              !A`
+              !!A`
+              !!A`
+              !!!A;
+              \delta`
+              \delta`
+              \delta`
+              !\delta]
+            \efig
+            & \quad &
+            \bfig
+            \btriangle|mma|/->`=`->/<600,500>[
+              !A`
+              !!A`
+              !A;
+              \delta``
+              \varepsilon]
+
+            \qtriangle|amm|/->`=`->/<600,500>[
+              !A`
+              !!A`
+              !A;
+              \delta``
+              !\varepsilon]
+            \efig
+          \end{array}
+        \end{math}
+      \end{center}    
+
+    \item Four natural transformations:
+      \begin{itemize}
+      \item (Monoidal Map) $\mm_{A,B} : ! A \otimes ! B \mto ! (A \otimes B)$
+      \item (Monoidal Unit Map) $\mm_I : I \mto ! I$
+      \item (Contraction) $\con : !A \mto !A \otimes !A$
+      \item (Weakening) $\weak : ! A \mto I$
+      \end{itemize}
+
+      \item The functor $! : \mathcal{A} \mto \mathcal{A}$ is symmetric
+      monoidal.  That is, the following diagrams must commute:
+      \begin{center}
+        \begin{math}
+          \begin{array}{c}
+            \begin{array}{llllllll}
+              \bfig
+              \square|amma|/->`<-`->`->/<1000,500>[
+                !I \otimes !A`
+                !(I \otimes A)`
+                I \otimes !A`
+                !A;
+                \mm`
+                \nm \otimes \id`
+                !\lambda`
+                \lambda]
+              \efig
+              & \quad &
+              \bfig
+              \square|amma|/->`<-`->`->/<1000,500>[
+                !A \otimes !I`
+                !(A \otimes I)`
+                !A \otimes I`
+                !A;
+                \mm`
+                \id \otimes \nm`
+                !\rho`
+                \rho]
+              \efig              
+            \end{array}
+            \\
+            \bfig
+              \square|amma|/->`->`->`->/<1000,500>[
+                !A \otimes !B`
+                !(A \otimes B)`
+                !(B) \otimes !(A)`
+                !(B \otimes A);
+                \mm`
+                !\beta`
+                \beta`
+                \mm]
+              \efig                        
+            \\
+            \bfig
+            \square|amma|/->`<-``->/<1500,500>[
+              (!A \otimes !B) \otimes !C`
+              !(A \otimes B) \otimes !C`
+              !A \otimes (!B \otimes !C)`
+              !A \otimes !(B \otimes C);
+              \mm \otimes \id`
+              \alpha``
+              \id \otimes \mm]
+
+            \square(1500,0)|amma|/->``<-`->/<1500,500>[
+              !(A \otimes B) \otimes !C`
+              !((A \otimes B) \otimes C)`
+              !A \otimes !(B \otimes C)`
+              !(A \otimes (B \otimes C));
+              \mm``
+              !\alpha`
+              \mm]
+            \efig            
+          \end{array}
+        \end{math}
+      \end{center}
+
+    \item The functor $! : \cat{A} \mto \cat{A}$ is a symmetric
+      monoidal comonad.  That is, the following diagrams must commute:
+      \begin{center}
+        \begin{math}
+          \begin{array}{ccc}
+            \bfig
+            \square|amma|/->`->``/<1000,500>[
+              !A \otimes !B`
+              !(A \otimes B)`
+              !!A \otimes !!B`;
+              \mm`
+              \delta \otimes \delta``]
+
+            \square(0,-500)|amma|/`->``->/<1000,500>[
+              !!A \otimes !!B``
+              !(!A \otimes !B)`
+              !!(A \otimes B);`
+              \mm``
+              !\mm]
+
+            \morphism(1000,500)|m|<0,-1000>[
+              !(A \otimes B)`
+              !!(A \otimes B);
+              \delta]
+            \efig
+            & \quad &
+            \bfig
+            \qtriangle|amm|<1000,500>[
+              !A \otimes !_1B`
+              !(A \otimes B)`
+              A \otimes B;
+              \mm`
+              \varepsilon \otimes \varepsilon`
+              \varepsilon]
+            \efig\\\\
+            
+            \bfig
+            \square|amma|<1000,500>[
+              I`
+              !I`
+              !I`
+              !!I;
+              \nm`
+              \nm`
+              \delta`
+              !\nm]
+            \efig
+            & \quad &
+            \bfig
+            \qtriangle|amm|/->`=`->/<1000,500>[
+              I`
+              ! I`
+              I;
+              \nm``
+              \varepsilon]
+            \efig
+          \end{array}
+        \end{math}
+      \end{center}
+
+    \item Weakening must satisfy the following diagrams:
+      \begin{center}
+        \begin{math}
+          \begin{array}{ccc}
+            \bfig
+            \square|amma|<1000,500>[
+              !A \otimes !B`
+              !(A \otimes B)`
+              I \otimes I`
+              I;
+              \mm`
+              \weak \otimes \weak`
+              \weak`
+              \lambda = \rho]
+            \efig
+            & \quad &
+            \bfig
+            \qtriangle|amm|/->`=`->/<1000,500>[
+              I`
+              !I`
+              I;
+              \nm``
+              \weak]
+            \efig
+          \end{array}
+        \end{math}
+      \end{center}
+
+    \item Contraction must satisfy the following diagrams:
+      \begin{center}
+        \begin{math}
+          \begin{array}{ccc}
+            \bfig
+            \square|amma|/->`->``/<1500,500>[
+              !A \otimes !B`
+              !(A \otimes B)`
+              (!A \otimes !A) \otimes (!B \otimes !B)`;
+              \mm`
+              \con \otimes \con``]
+
+            \square(0,-500)|amma|/`->``->/<1500,500>[
+              (!A \otimes !A) \otimes (!B \otimes !B)``
+              (!A \otimes !B) \otimes (!A \otimes !B)`
+              !(A \otimes B) \otimes !(A \otimes B);`
+              \cong``
+              \mm \otimes \mm]
+
+            \morphism(1500,500)|m|<0,-1000>[
+              !(A \otimes B)`
+              !(A \otimes B) \otimes !(A \otimes B);
+              \con]
+            \efig
+            & \quad &
+            \bfig
+            \square|amma|<1000,500>[
+              I`
+              !I`
+              I \otimes I`
+              !I \otimes !I;
+              \nm`
+              \lambda^{-1} = \rho^{-1}`
+              \con`
+              \nm \otimes \nm]
+            \efig
+          \end{array}
+        \end{math}
+      \end{center}
+
+    \item Weakening and contraction form a commutative comonoid.  That
+      is, the following diagrams commute:
+      \begin{center}
+        \begin{math}
+          \begin{array}{c}
+            \begin{array}{lllll}
+              \bfig
+              \btriangle|amm|/->`->`<-/<1000,500>[
+                !A`
+                I \otimes !A`
+                !A \otimes !A;
+                \lambda^{-1}`
+                \con`
+                \weak \otimes \id]
+
+              \qtriangle|amm|/->``->/<1000,500>[
+                !A`
+                !A \otimes I`
+                !A \otimes !A;
+                \rho^{-1}``
+                \id \otimes \weak]              
+              \efig              
+              & \quad &
+              \bfig
+
+              \btriangle|mma|/->`->`->/<1000,500>[
+                !A`
+                !A \otimes !A`
+                !A \otimes !A;
+                \con`
+                \con`
+                \beta]              
+              \efig
+            \end{array}\\
+            \bfig
+            \square|amma|/->`=``->/<1500,500>[
+              !A`
+              !A \otimes !A`
+              !A`
+              !A \otimes !A;
+              \con```
+              \con]
+
+            \square(1500,0)|amma|/->``<-`->/<1500,500>[
+              !A \otimes !A`
+              !A \otimes (!A \otimes !A)`
+              !A \otimes !A`
+              (!A \otimes !A) \otimes !A;
+              \id \otimes \con``
+              \alpha^{-1}`
+              \con \otimes \id]
+            \efig
+          \end{array}
+        \end{math}
+      \end{center}            
+
+    \item Weakening and contraction are coalgebra morphisms.  That is,
+      the following diagrams must commute:
+      \begin{center}
+        \begin{math}
+          \begin{array}{lll}
+            \bfig
+            \square|amma|/=`->``/<1000,500>[
+              !A`
+              !A`
+              !!A`;`
+              \delta``]
+
+            \square(0,-500)|amma|/`->``<-/<1000,500>[
+              !!A``
+              !I`
+              I;`
+              !\weak``
+              \nm]
+
+            \morphism(1000,500)|m|<0,-1000>[
+              !A`
+              I;
+              \weak]
+            \efig
+            & \quad &
+            \bfig
+            \square|amma|/=`->`->`/<1000,500>[
+              ! A`
+              ! A`
+              ! ! A`
+              !A \otimes !A;`
+              \delta`
+              \con`]
+
+            \square(0,-500)|amma|/`->`->`<-/<1000,500>[
+              ! ! A`
+              !A \otimes ! A`
+              !(!A \otimes !A)`
+              !!A \otimes !!A;`
+              ! \con`
+              \delta \otimes \delta`
+              \mm]
+            \efig
+          \end{array}
+        \end{math}
+      \end{center}
+      
+    \item $\delta_A : !A \mto !!A$ is a comonoid morphism between the
+      comonoids $(!A,\weak,\con)$ and $(!!A,\weak,\con)$.  That is,
+      the following diagrams must commute:
+      \begin{center}
+        \begin{math}
+          \begin{array}{lll}            
+            \bfig
+            \btriangle|mma|/->`->`->/<1000,500>[
+              !A`
+              !!A`
+              I;
+              \delta`
+              \weak`
+              \weak]            
+            \efig
+            & \quad &
+            \bfig
+      \square|amma|/=`->``/<1000,500>[
+        !A`
+        !A`
+        !!A`;`
+        \delta``]
+      
+      \square(0,-500)|amma|/`->``<-/<1000,500>[
+        !!A``
+        !!A \otimes !!A`
+        !A \otimes !A;`
+        \con``
+        \delta \otimes \delta]
+      
+      \morphism(1000,500)|m|<0,-1000>[
+        !A`
+        !A \otimes !A;
+        \con]
+      \efig
+          \end{array}
+        \end{math}
+      \end{center}                
+  \end{itemize}
+  \end{itemize}    
+\end{definition}
