@@ -57,7 +57,7 @@ Linear categories are one of the first sound and complete categorical models of 
       
    b. Whenever $$f : (!A,\delta_A) \mto (!B,\delta_B)$$ is a coalgebra morphism between free coalgebras, then it is also a comonoid morphism.
 
-There is a lot packed into this definition,  but we will expanded it in the next two sections.
+There is a lot packed into this definition,  but we will expanded it in the next section.
 
 Linear Categories Simplified
 ----------------------------
