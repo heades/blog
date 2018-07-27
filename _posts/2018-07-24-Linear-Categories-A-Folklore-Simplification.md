@@ -115,7 +115,7 @@ Essentially, the simplification amounts to realizing that part b can be proven f
 All of the structure in the previous definition except for the last bullet corresponds to part 1 and part 2.a of the original definition of a linear category.  The last bullet is a simplification of part 2.b.  We now show that we can prove part 2.b from the assumptions in this simplified definition.
 
 
-<span class="lemma">Whenever $$f : (!A,\delta_A) \mto (!B,\delta_B)$$ is a coalgebra morphism between free coalgebras, then it is also a comonoid morphism.</span>
+<span class="lemma"> Whenever $$f : (!A,\delta_A) \mto (!B,\delta_B)$$ is a coalgebra morphism between free coalgebras, then it is also a comonoid morphism.</span>
 
 <span class="proof"></span>
   Suppose $$f : (!A,\delta_A) \mto (!B,\delta_B)$$ is a coalgebra morphism between free coalgebras.  This assumption amounts to assuming the following diagram commutes:
