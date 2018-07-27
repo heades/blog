@@ -72,7 +72,7 @@ Essentially, the simplification amounts to realizing that part b can be proven f
 
    - The endofunctor $$! : \mathcal{A} \mto \mathcal{A}$$ forms comonad on $$\cat{A}$$.  That is, there are two natural transformations $$\delta : ! A \mto !! A$$ and $$\varepsilon : !A \mto A$$ that make the following diagrams commute:
    
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/comonad-diags.png" width="75%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/comonad-diags.png" width="75%"></center>
 
    - Four natural transformations:
 
@@ -86,76 +86,75 @@ Essentially, the simplification amounts to realizing that part b can be proven f
 
    - The functor $$! : \mathcal{A} \mto \mathcal{A}$$ is symmetric monoidal.  That is, the following diagrams must commute:
 
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/sym-monoidal-diags.png" width="100%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/sym-monoidal-diags.png" width="100%"></center>
 
    - The functor $$! : \cat{A} \mto \cat{A}$$ is a symmetric monoidal comonad.  That is, the following diagrams must commute:
 
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/smc-comonad-diags.png" width="90%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/smc-comonad-diags.png" width="90%"></center>
 
    - Weakening must satisfy the following diagrams:
 
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/weakening-diags.png" width="90%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/weakening-diags.png" width="90%"></center>
 
    - Contraction must satisfy the following diagrams:
 
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contraction-diags.png" width="100%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contraction-diags.png" width="100%"></center>
 
    - Weakening and contraction form a commutative comonoid.  That is, the following diagrams commute:
 
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/comm-comonoid-diags.png" width="100%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/comm-comonoid-diags.png" width="100%"></center>
 
    - Weakening and contraction are coalgebra morphisms.  That is, the following diagrams must commute:
 
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/coalgebra-morphisms.png" width="90%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/coalgebra-morphisms.png" width="90%"></center>
 
    - $$\delta_A : !A \mto !!A$$ is a comonoid morphism between the comonoids $$(!A,\w,\c)$$ and $$(!!A,\w,\c)$$.  That is, the following diagrams must commute:
 
-     <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/delta-comonoid-morphism-diags.png" width="90%"></center>
+     <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/delta-comonoid-morphism-diags.png" width="90%"></center>
 
 All of the structure in the previous definition except for the last bullet corresponds to part 1 and part 2.a of the original definition of a linear category.  The last bullet is a simplification of part 2.b.  We now show that we can prove part 2.b from the assumptions in this simplified definition.
 
 
 <span class="lemma">Whenever $$f : (!A,\delta_A) \mto (!B,\delta_B)$$ is a coalgebra morphism between free coalgebras, then it is also a comonoid morphism.</span>
 
-<span class="proof">
+<span class="proof"></span>
   Suppose $$f : (!A,\delta_A) \mto (!B,\delta_B)$$ is a coalgebra morphism between free coalgebras.  This assumption amounts to assuming the following diagram commutes:
 
-  <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/f-coalgebra-morph-diag.png" width="20%"></center>
+  <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/f-coalgebra-morph-diag.png" width="20%"></center>
 
   It suffices to show that $$f : (!A,\delta_A) \mto (!B,\delta_B)$$ is also a comonoid morphism. Hence, we must show that the following diagrams commute:
 
-  <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/must-show-diags.png" width="50%"></center>
+  <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/must-show-diags.png" width="50%"></center>
 
   The left diagram commutes, because the following expanded one does:
 
-  <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/weakening-proof.png" width="50%"></center>
+  <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/weakening-proof.png" width="50%"></center>
 
   Diagrams $$(1)$$ and $$(4)$$ commute because $$\delta$$ is a comonoid morphism, diagram $$(2)$$ commutes because $$f$$ is assumed to be a coalgebra morphism, and diagram $$(3)$$ commutes by naturality of $$\w$$.  Note that we have numbered the previous diagram in the order of the necessary replacements needed when doing the same proof equationally, and we do the same for the next diagram.  This should make it easier to reconstruct the proof.
 
   The diagram for contraction commutes (the diagram on the right above), because the following expanded one does:
 
-  <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contraction-proof.png" width="70%"></center>
+  <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contraction-proof.png" width="70%"></center>
 
   Diagram $$(3)$$ commutes because $$f$$ is assumed to be a coalgebra morphism, diagram $$(4)$$ commutes by naturality of $$\c$$, diagram $$(5)$$ commutes by naturality of $$\m$$, and diagram $$(6)$$ commutes by naturality of $$\varepsilon$$.
 
   Diagrams $$(1)$$ and $$(8)$$ commute, because the following one does:  
 
-  <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contaction-diag-one.png" width="50%"></center>
+  <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contaction-diag-one.png" width="50%"></center>
 
   The left triangle commutes, because $$! : \cat{A} \mto \cat{A}$$ is a comonad, and the bottom diagram commutes by naturality of $$\varepsilon$$.
 
   Finally, diagrams $$(2)$$ and $$(7)$$ do not actually commute, but are parallel morphisms whose cofork is $$\delta$$.  That is, the following diagram commutes:
 
-  <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contraction-diag-two.png" width="50%"></center>
+  <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/contraction-diag-two.png" width="50%"></center>
 
   The left diagram commutes because $$\delta : !X \mto !!X$$ is a comonoid morphism, and the right diagram commutes because weakening and contraction are coalgebra morphisms.
 
   Therefore, the original diagram above corresponds to the following equational proof:
 
-  <center><img src="/blog/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/eq-reasoning.png" width="50%"></center>
-
+  <center><img src="/images/posts/2018-07-24-Linear-Categories-A-Folklore-Simplification/eq-reasoning.png" width="50%"></center>
   &#9612;
-</span>
+
 
 Conclusion
 ---------
