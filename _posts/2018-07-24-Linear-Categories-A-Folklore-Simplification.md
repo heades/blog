@@ -43,7 +43,7 @@ Linear Categories
 
 Linear categories are one of the first sound and complete categorical models of intuitionistic linear logic proposed in Gavin Bierman's [thesis](https://pdfs.semanticscholar.org/4abd/9b55397235e50c1ea9756626cd54e3ecb353.pdf).  He shows that the linear exponential, $$!A$$, can be modeled as a symmetric monoidal comonad. His original definition ([Definition 35 on p. 140](https://pdfs.semanticscholar.org/4abd/9b55397235e50c1ea9756626cd54e3ecb353.pdf)) is as follows.
 
-<span class="definition">A *linear category*, $$\cat{C}$$, consists of the following structure:</span>    
+<span class="definition"> A *linear category*, $$\cat{C}$$, consists of the following structure:</span>    
 
 1. A symmetric monoidal category, $$\cat{C}$$, with finite products and coproducts,
 2. A symmetric monoidal comonad $$(!,\varepsilon, \delta, \m_{A,B}, \m_I)$$ such that
@@ -64,7 +64,7 @@ Linear Categories Simplified
 
 Essentially, the simplification amounts to realizing that part b can be proven from the previous parts of the definition of a linear category, but with an additional assumption that is simpler than part b.    The expanded simplified definition is as follows.
 
-<span class="definition">A *linear category*, $$\cat{A}$$, consists of the following structure:</span>    
+<span class="definition"> A *linear category*, $$\cat{A}$$, consists of the following structure:</span>    
 
 1. A is a symmetric monoidal category $$(\mathcal{A},\otimes,I,\lambda,\rho,\alpha,\beta)$$,
 
