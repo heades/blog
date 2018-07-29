@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "New Papers and Talks"
-date: 2018-07-24
+date: 2018-07-29
 categories:
  - papers
  - talks
