@@ -18,7 +18,7 @@ The abstract and title for my PLAS talk are as follows:
 
 The slides for this talk can be found [here](http://metatheorem.org/includes/talks/PLAS-Kent-2018/).
 
-Following my amazing week at Kent I gave a talk presenting my coauthors, Jiaming Jiang, Aubrey Bryant, and [Valeria de Paiva](http://www.valeriadepaiva.org/), and my new paper at the [Fifth International Workshop on Graphical Models for Security](http://gramsec.uni.lu/):
+Following my amazing week at Kent I gave a talk presenting my coauthors, Jiaming Jiang and Aubrey Bryant, and my new paper at the [Fifth International Workshop on Graphical Models for Security](http://gramsec.uni.lu/):
 
   - **Title**: _On Linear Logic, Functional Programming, and Attack Trees_
        
@@ -27,7 +27,7 @@ Following my amazing week at Kent I gave a talk presenting my coauthors, Jiaming
 
 The paper can be found [here](http://metatheorem.org/includes/pubs/GraMSec18.pdf) and the slides for my talk [here](http://metatheorem.org/includes/talks/GraMSec-2018/).
 
-Finally, I had to fill in for Jiaming at the [Joint Workshop on Linearity & TLLA](), because her flight got delayed, but she is the first author and lead of the following paper that is joint work with myself and Valeria de Paiva:
+Finally, I had to fill in for Jiaming at the [Joint Workshop on Linearity & TLLA](), because her flight got delayed, but she is the first author and lead of the following paper that is joint work with myself and [Valeria de Paiva](http://www.valeriadepaiva.org/):
 
   - **Title**: _On the Lambek Calculus with an Exchange Modality_
        
