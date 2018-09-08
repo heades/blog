@@ -13,7 +13,7 @@ all : pdf
 
 pdf : note.pdf
 
-note.pdf : note.tex double.tex graded-exp.tex
+note.pdf : note.tex graded-exp.tex algebras.tex
 	pdflatex note
 	pdflatex note
 	pdflatex note
