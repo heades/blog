@@ -17,7 +17,7 @@ The complete job ad can be found [here](https://jobs.acm.org/jobs/tenure-track-a
 
 The positions are open rank and not specific to any one subfield, and the percent effort between teaching and research will be balanced.
 
-However, [Clement Aubert](http://spots.augusta.edu/caubert/) and I are looking to recruit at least one of these positions for our new lab:
+However, [Clément Aubert](http://spots.augusta.edu/caubert/) and I are looking to recruit at least one of these positions for our new lab:
 
 [The ForML Lab](http://metatheorem.org/formlab/)
 
