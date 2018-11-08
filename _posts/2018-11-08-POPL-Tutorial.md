@@ -8,13 +8,13 @@ categories:
  - granual
 ---
 
-I am pleased to announce that the [Granule Project](https://granule-project.github.io/) will have a [tutorial](https://popl19.sigplan.org/event/popl-2019-tutorialfest-t3-linear-and-graded-modal-types-for-fine-grained-program-reasoning) during the [POPL 2019 TutorialFest](https://popl19.sigplan.org/track/POPL-2019-TutorialFest) this year in Portugal.  The purpose of the tutorial is to give an indepth look at everything the Granule Project is trying to accomplish and it will cover what results we have now, and what we are working on for the future.
+I am pleased to announce that the [Granule Project](https://granule-project.github.io/) will have a [tutorial](https://popl19.sigplan.org/event/popl-2019-tutorialfest-t3-linear-and-graded-modal-types-for-fine-grained-program-reasoning) during the [POPL 2019 TutorialFest](https://popl19.sigplan.org/track/POPL-2019-TutorialFest) this year in Portugal.  The purpose of the tutorial is to give an in-depth look at everything the Granule Project is trying to accomplish and it will cover what results we have now, and what we are working on for the future.
 
 The abstract is:
 
 "Linear types have long been heralded as a mechanism for enforcing strict adherence to resource-based protocols, e.g., file handles, operation system APIs, and communication protocols in concurrency. Recent work has seen linear types become an increasingly popular topic in our community, with the rise in the work on session types, with new proposed extensions to Haskell for linear types, and with languages such as Rust and ATS. This tutorial provides an introduction to linear types and a look at the state-of-the-art in type systems extending linear types with graded modal types as a basis for more fine-grained program reasoning as embodied by the Granule programming language. Granule combines linear types with lightweight dependent types and graded modal types, providing a rich type system for enforcing fine-grained resource constraints on top of a functional language in the style of Haskell/ML. This tutorial will cover both the theoretical and practical aspects of linear and graded modal types, with an opportunity to try Granule via exercises as well an introduction to the research context and recent work in the literature."
 
-The schdule for our tutorial will look something along the lines of the following:
+The schedule for our tutorial will look something along the lines of the following:
 
 1. (40 minutes) Introduction to linear types (Orchard)
    - Basics of how linear type systems work and are defined;
