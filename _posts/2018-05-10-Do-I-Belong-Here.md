@@ -6,6 +6,8 @@ categories:
  - life
 ---
 
+Update:  I've had a number of people ask about my support structure along the way.  I added a new section called "My Support Structure", that details how my family has helped me throughout my journey.
+
 I am wrapping up the preparation of my tenure application which is due August 16th.  This marks a major milestone in my life, and as a result, has caused me to reflect a bit on my path to where I am today.  In doing so I have decided to share my very non-traditional path with everyone.  I've decided to do this, because I've had to overcome a bit of struggle to get here, and I generally feel less alone when I know of others who deal with similar problems, and even more so when those people are generally successful in their life.  In this post, I would like to share my story and problems I deal with in the hope that someone out there might feel less alone.
 
 This post is extremely hard for me to write.  The things I am going to reveal are things I have kept a secret for a very long time.  I think of this post as a bit of therapy for myself as much as it is -- hopefully -- useful to others.
@@ -73,6 +75,19 @@ At UIowa I didn't know which research area I wanted to focus in, but I knew it h
 I managed to do pretty well as a graduate student, and then secured a professorship at Augusta University where I have been for five years now.  I'm very thankful I got a position at a place I love.  So that's my path.
 
 I think the biggest take away from this story is I kept pushing and didn't give up on becoming an academic.  I had struggles and still do, but perseverance helps a lot.
+
+My Support Structure
+--------------------
+
+Throughout this post I have mentioned several teachers, professors, and mentors who have helped shape my thinking in such a way that has impacted my lives trajectory, but none of them compare to the support I've gotten from my family.  I don't see my parents as making the wrong decision to have me put into special education, they were doing as they were advised, and trying to do what they thought was best for their son.  I would've done the same thing.
+
+I have one trait that has helped a lot with my success.  It's my perseverance, dedication, and work ethic.  I get these traits from my parents.  My father, Harley Eades Jr, was a mechanic for thirty years or more, and hated it, but decided to quite his job, and open his own powder-coating shop called [Like New Parts](https://www.likenewparts.com/) knowing how much of a risk it was, but has managed to create an outstanding business that is highly respected in his community.  My whole life he has worked tirelessly for his family to have what he didn't have growing up.  My mother, Judy Eades, has worked in the fast-food industry for over thirty years, she loves her job, and is one of the most hardworking and dedicated people I have met.  She began as a third shift biscuit maker and worked her way up to a general manager who has won a ton of awards!  They taught me to work hard to get what I want, and that's what I did.
+
+My parents also supported me through everything.  One thing I didn't mention above about my search for who I wanted to be is that I tried everything!  I tried to be a musician, a cowboy, a DJ, a professional skate boarder and roller bladder, a goth (some things never go away), and finally an academic.  In middle school I was full punk/goth, and they got me leather jackets, and let me put on makeup, and anything I wanted to do.  They wanted us to be happy, and as long as we were not committing any crimes, then they let us do it.  They let me be myself, and it has led me to continue to be myself, and I am super grateful for that.
+
+I honestly would not be who I am without my parents.  I love them to death, and their support has helped me beyond what I can describe in a blog post.
+
+My brothers and sisters have also greatly supported me.  On top of just being there when I needed them they would let me stay at their places when I was at Millikin, and would let me vent when things weren't going so well, and let me borrow money when I was a poor student.  I'm lucky, because my family is super close, and we all care for each other, and all do our best to help each other out.  This is a privilege that not everyone has, and having this support structure has had an incredibly positive impact on my life.
 
 Imposter Syndrome
 -----------------
