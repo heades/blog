@@ -1,0 +1,274 @@
+
+\begin{figure}
+  \begin{center}
+    \begin{math}
+      \begin{array}{rrcll}
+        \text{(Terms)} & [[t]], [[A]], [[B]], [[C]], [[D]]
+         & ::= & [[Type l]]                   & \text{(Universe of Types)}\\
+        &&  |  & [[( x : A ) -o B]]           & \text{(Dependent Linear Arrow)}\\
+        &&  |  & [[( x : A ) * B]]            & \text{(Dependent Tensor Product)}\\
+        &&  |  & [[x]]                        & \text{(Variable)}\\
+        &&  |  & [[\x.t]]                     & \text{(Lambda Expression)}\\
+        &&  |  & [[t1 t2]]                    & \text{(Function Application)}\\
+        &&  |  & [[(t1 , t2)]]                & \text{(Linear Pair)}\\
+        &&  |  & [[let ( x , y ) = t1 in t2]] & \text{(Linear Pair Eliminator)}\\
+        \\
+        \text{(Levels)} & [[l]] 
+        & ::= & [[0]]                  & \text{(Level $0$)}\\
+        && |  & [[1]]                  & \text{(Level $1$)}\\
+        && |  & [[max(l1,l2)]]         & \text{(Maximum)}\\
+        \\
+        \text{(Typing Contexts)} & [[G]] 
+        & ::= & [[.]]                  & \text{(Empty Context)}\\
+        && |  & [[x:A]]                & \text{(Context Element)}\\
+        && |  & [[G1,G2]]              & \text{(Context Extension)}\\
+      \end{array}
+    \end{math}
+  \end{center}
+  \caption{LDTT Expression Syntax}
+  \label{fig:ldtt-syntax}
+\end{figure}
+
+\begin{figure}
+  \begin{mathpar}
+    \inferrule* [right=$\mathsf{Type}$] {
+      [[l1 < l2]]
+    }{[[. |- Type l1 : Type l2]]}
+    \and
+    \inferrule* [right=$[[-o]]$] {
+      [[G1 |- A : Type l1]]\\
+      [[G1 , G2 , x : A |- B : Type l2]]      
+    }{[[G1 , G2 |- ( x : A ) -o B : Type max(l1,l2)]]}
+    \and    
+    \inferrule* [right=$[[*]]$] {
+      [[G1 |- A : Type l1]]\\
+      [[G1 , G2, x : A |- B : Type l2]]
+    }{[[G1 , G2 |- ( x : A ) * B : Type max(l1,l2)]]}
+    \and    
+    \inferrule* [right=$\mathsf{Var}$] {      
+      [[G |- A : Type l]]\\
+      [[-| (G,x:A)]]
+    }{[[G, x : A |- x : A]]}
+    \and
+    \inferrule* [right=$[[-o]]_i$] {
+      [[G1,x : A |- B : Type l]]\\
+      [[G1,G2,x : A |- t : B]]
+    }{[[G1,G2 |- \x.t : (x : A) -o B]]}
+    \and
+    \inferrule* [right=$[[-o]]_e$] {
+      [[G2 |- t1 : (y : A) -o B  ]]\\
+      [[G1 |- t2 : A]]
+    }{[[G1 , G2 |- t1 t2 : [t2/y]B]]}
+    \and
+    \inferrule* [right=$[[*]]_i$] {
+      {
+        \begin{array}{l}
+          [[x nin FV(t2)]]\\
+          [[G1 |- B1 : Type l1]]\\
+          [[G1,G3,x : B1 |- B2 : Type l2]]
+        \end{array}
+      }\\
+      {
+        \begin{array}{l}
+          \\
+          [[G1,G2 |- t1 : B1]]\\
+          [[G1,G3,G4,x : B1 |- t2 : B2]]
+        \end{array}
+      }
+    }{[[G1,G2,G3,G4 |- (t1 , t2) : (x : B1) * B2]]}
+    \and
+    \inferrule* [right=$[[*]]_e$] {
+      {
+        \begin{array}{l}
+          [[x,y nin FV(B3)]]\\
+          [[G1 |- B1 : Type l1]]\\
+          [[G1,G2,x : B1 |- B2 : Type l2]]
+        \end{array}
+      }\\
+      {
+        \begin{array}{l}
+          \\
+          [[G1,G2,G3 |- t1 : ( x : B1 ) * B2]]\\
+          [[G1,G2,G4,x : B1,y : B2 |- t2 : B3]]
+        \end{array}
+      }
+    }{[[G1,G2,G3,G4 |- let ( x , y ) = t1 in t2 : B3]]}
+  \end{mathpar}
+  \caption{LDTT Typing Rules}
+  \label{fig:ldtt-typing-rules}
+\end{figure}
+
+
+\subsection{Metatheorems}
+\label{subsec:metatheorems}
+This section houses all of our metatheorems.  First, we consider any
+two distinctly named contexts to be disjoint. Throughout the following
+proofs we work up to dependent reordering of contexts.  That is, we do
+not consider a typing derivation, $[[G1,x : A,y : B,G2 |- t : C]]$,
+different from the typing derivation, $[[G1,y : B,x : A,G2 |- t :
+    C]]$, when $[[x nin FV(B)]]$.
+
+\subsubsection{Basic Metatheory}
+\label{subsec:basic_metatheory}
+
+\begin{lemma}[Inversion Principles]
+  \label{lemma:inversion_principles}
+  \begin{enumerate}[label=\roman*.]
+  \item[] 
+  \item If $[[G |- (x : A) -o B : Type l]]$, then $[[G1 |- A : Type l1]]$,
+    $[[G1,G2, x : A |- B : Type l2]]$, and $[[l]] = [[max(l1,l2)]]$ for some contexts $[[G1]]$ and
+    $[[G2]]$, and levels $[[l1]]$ and $[[l2]]$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{lemma}[Well-Formed Context Dependency Append]
+  \label{lemma:well-formed_context_dependency_append}
+  If $[[|- G1]]$ and $[[|- G2]]$, then $[[|- (G1,G2)]]$.
+\end{lemma}
+
+\begin{restatable}[Well-formed Context Dependency]{lemma}{wfxDepLem}
+  \label{lemma:well-formed_context_dependency}
+  If $[[G |- t : A]]$, then $[[|- G]]$.  
+\end{restatable}
+
+\begin{lemma}[Well-Formed Linear Contexts Append]
+  \label{lemma:well-formed_linear_contexts_append}
+  $[[-| G1]]$ and $[[-| G2]]$ iff $[[-| (G1,G2)]]$.
+\end{lemma}
+
+\begin{lemma}[Well-Formed Linear Contexts Extension]
+  \label{lemma:well-formed_linear_contexts_extension}
+  If $[[-| (G,x : A)]]$, then $[[-| G]]$.
+\end{lemma}
+
+\begin{restatable}[Well-formed Linear Context]{lemma}{wfxLinLem}
+  \label{lemma:well-formed_context_linearity}
+  If $[[G |- t : A]]$, then $[[-| G]]$.
+\end{restatable}
+
+\begin{corollary}[Well-Formed Contexts]
+  \label{corollary:well-formed_contexts}
+  If $[[G |- t : A]]$, then $[[G Ok]]$.
+\end{corollary}
+
+\begin{restatable}[Substitution for Typing]{lemma}{substLem}
+  \label{lemma:substitution_for_typing}  
+  Suppose
+  $[[G2 |- A : Type l]]$,
+  $[[G1,G2,x : A,G4 |- t2 : B]]$, and
+  $[[G2,G3 |- t1 : A]]$.  Then
+  $[[G1,G2,G3,[t1/x]G3 |- [t1/x]t2 : [t1/x]B]]$.
+\end{restatable}
+
+\begin{restatable}[Kinding for Typing]{lemma}{kindingLem}
+  \label{lemma:kinding_for_typing}
+If $[[G |- t : A]]$, then $[[G' |- A : Type l]]$ for some $[[G']] \subseteq [[G]]$ and level $[[l]]$.
+\end{restatable}
+
+\begin{lemma}[Arrow Kinding]
+  \label{lemma:arrow_kinding}
+  If $[[G |- t : (x : A) -o B]]$, then $[[G', x : A |- B : Type l]]$
+  for some subcontext $[[G']] \subseteq [[G]]$ and level $[[l]]$.
+\end{lemma}
+
+% subsubsection basic_metatheory (end)
+
+\subsubsection{Linearity}
+\label{subsec:linearity}
+\begin{definition}
+  \label{def:disjointness}
+  Suppose $[[G1 |- t : A]]$ and $[[G2]]$ is a second context.  Then we
+  say $[[t]]$ and $[[G2]]$ are \emph{disjoint}, denoted $[[t >< G2]]$,
+  if and only if $[[FV(t)]] \cap |[[G2]]| = \emptyset$.
+\end{definition}
+
+\begin{lemma}[Distributivity of Disjointness]
+  \label{lemma:distributivity_of_disjointness}
+  Suppose $[[t]]$ is a term, and that $[[t >< G]]$
+  holds for some context $[[G]]$.  Furthermore, assume that the names
+  in the domain of $[[G]]$ differ from the names of any bound
+  variables in $[[t]]$.  Then by case analysis over the structure of
+  $[[t]]$, the following distributivity properties hold:
+  \begin{enumerate}[label=\roman*.]
+  \item $[[((x : A) -o B) >< G]]$ if and only if $[[A >< G]]$ and $[[B >< G]]$
+  \item $[[((x : A) * B) >< G]]$ if and only if $[[A >< G]]$ and $[[B >< G]]$  
+  \item $[[(\x.t) >< G]]$ if and only if $[[t >< G]]$
+  \item $[[(t1 t2) >< G]]$ if and only if $[[t1 >< G]]$ and $[[t2 >< G]]$
+  \item $[[(t1,t2) >< G]]$ if and only if $[[t1 >< G]]$ and $[[t2 >< G]]$
+  \item $[[(let (x,y) = t1 in t2) >< G]]$ if and only if $[[t1 >< G]]$ and $[[t2 >< G]]$
+  \end{enumerate}
+\end{lemma}
+
+\begin{restatable}[Every Variable Must be Used]{lemma}{noWeakLem}
+  \label{lemma:no_weakening}
+  If $[[G |- t : A]]$, then for every
+  $[[x : A in G]]$, $[[x in FV(G)]]$ or $[[x in FV(t)]]$ or $[[x in FV(A)]]$.  
+\end{restatable}
+
+\begin{lemma}
+  \label{lemma:disjoint-contra}
+  If $[[G |- t : A]]$ and $[[{t,A} >< G]]$, then $[[G]] = [[.]]$.
+\end{lemma}
+
+\begin{restatable}[Disjointness]{lemma}{disjointnessLem}
+  \label{lemma:disjointness}
+  If $[[G |- t : B]]$, $[[x : A in G]]$, $[[G1]] \subseteq [[G]]$, and $[[G1 |- A : Type l]]$, then
+  $[[t >< G1]]$.
+\end{restatable}
+
+\begin{restatable}[Linearity]{theorem}{linThm}
+  \label{thm:linearity}
+  If $[[G |- t : B]]$, then for every $[[x : A in G]]$, $[[x]]$ appears only once in
+  $[[G]]$, or only once in $[[t]]$, or only once in $[[B]]$.
+\end{restatable}
+
+\begin{corollary}
+  \label{corollary:linearity}
+  If $[[G,x : A,G' |- t : B]]$, then $[[x]]$ appears only once in
+  $[[G']]$, or only once in $[[t]]$, or only once in $[[B]]$.
+\end{corollary}
+% subsubsection linearity (end)
+
+\subsubsection{Trivialization}
+\label{subsec:trivialization}
+
+\begin{restatable}[$\lambda$-Bound Variables Must be Used]{lemma}{boundMustLem}
+  \label{lemma:lambda-bound_variables_must_be_used}
+  If $[[G |- \x.t : (x : A) -o B]]$, then $[[x in FV(t)]]$ and $[[x in FV(B)]]$.
+\end{restatable}
+
+\begin{lemma}[Closed Types]
+  \label{lemma:closed_ctxs}
+  If $[[G |- t : B]]$, $[[x : A in G]]$, $[[G1]] \subseteq [[G]]$, $[[G1 |- A : Type l]]$, and $[[B >< G1]]$,
+  then $[[G1]] = [[.]]$.
+\end{lemma}
+
+\begin{lemma}[Arrow Bound Variables Must be Used]
+  \label{lemma:arrow_bound_variables_must_be_used}
+  If $[[G |- t : (x : A) -o B]]$, then $[[x in FV(B)]]$.
+\end{lemma}
+
+\begin{lemma}[No Type Dependency]
+  \label{lemma:no_type_dependency}
+  For any type $[[A]]$ and level $[[l]]$, there is no type $[[B]]$ such that
+  $[[x : A |- B : Type l]]$.
+\end{lemma}
+
+\begin{restatable}[All Types are $\mathsf{Type}$]{lemma}{allTypesLem}
+  \label{lemma:all_types_are_type}
+  If $[[. |- A : Type l']]$, then $[[A]]$ is $[[Type l]]$ for some level $[[l]]$.
+\end{restatable}
+
+\begin{restatable}[Trivialization]{theorem}{trivThm}
+  \label{theorem:trivalization}
+  If $[[. |- t : A]]$, then $[[t]]$ is $[[Type l1]]$ and $[[A]]$ is
+  $[[Type l2]]$ for some $[[l1]]$ and $[[l2]]$.
+\end{restatable}
+
+% subsubsection trivialization (end)
+% subsection metatheorems (end)
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: spec-with-notes.tex
+%%% End:

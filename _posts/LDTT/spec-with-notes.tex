@@ -1,0 +1,66 @@
+\documentclass{article}
+
+\usepackage{amssymb,amsmath,mathtools,amsthm,thm-restate}
+\usepackage{cmll}
+\usepackage{stmaryrd}
+\usepackage{mathpartir}
+\usepackage{supertabular}
+\usepackage{color}
+\usepackage{fullpage}
+\usepackage{verbatim}
+\usepackage[textwidth=2cm]{todonotes}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{mnsymbol}
+
+%% Inline comments:
+\newcommand{\HDEI}[1]{\todo[inline,color=blue]{{\color{white} HDE: #1}}}
+\newcommand{\DOI}[1]{\todo[inline]{DO: #1}}
+%% Margin comments:
+\newcommand{\HDEM}[1]{\todo[color=blue]{{\color{white} HDE: #1}}}
+\newcommand{\DOM}[1]{\todo{DO: #1}}
+
+\date{}
+
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+      \setlength{\topsep}{0pt}%
+      \setlength{\leftmargin}{#1}%
+      \setlength{\rightmargin}{#2}%
+      \setlength{\listparindent}{\parindent}%
+      \setlength{\itemindent}{\parindent}%
+      \setlength{\parsep}{\parskip}%
+    }%
+  \item[]}{\end{list}}
+
+%% Ott
+\input{ldtt-inc}
+
+\renewcommand{\LDTTall}{
+  %% \LDTTmetavars\\
+  \LDTTgrammar\\[1em]
+  \LDTTdefnss}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+\begin{document}
+
+\section{Linear Dependent Types}
+\label{sec:linear_dependent_types}
+\input{ldtt-output}
+% section linear_dependent_types (end)
+
+\section{LDTT Complete Specification}
+\label{sec:ldtt_complete_specification}
+\LDTTall{}
+% section ldtt_complete_specification (end)
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,273 @@
+
+\begin{figure}
+  \begin{center}
+    \begin{math}
+      \begin{array}{rrcll}
+        \text{(Terms)} & \LDTTnt{t}, \LDTTnt{A}, \LDTTnt{B}, \LDTTnt{C}, \LDTTnt{D}
+         & ::= &  \mathsf{Type}_{ \LDTTnt{l} }                    & \text{(Universe of Types)}\\
+        &&  |  & \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}           & \text{(Dependent Linear Arrow)}\\
+        &&  |  & \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \otimes  \LDTTnt{B}            & \text{(Dependent Tensor Product)}\\
+        &&  |  & \LDTTmv{x}                        & \text{(Variable)}\\
+        &&  |  &  \lambda  \LDTTmv{x}  .  \LDTTnt{t}                      & \text{(Lambda Expression)}\\
+        &&  |  & \LDTTnt{t_{{\mathrm{1}}}} \, \LDTTnt{t_{{\mathrm{2}}}}                    & \text{(Function Application)}\\
+        &&  |  & \LDTTsym{(}  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{,}  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{)}                & \text{(Linear Pair)}\\
+        &&  |  &  \mathsf{let}\,( \LDTTmv{x} , \LDTTmv{y} ) =  \LDTTnt{t_{{\mathrm{1}}}} \,\mathsf{in}\, \LDTTnt{t_{{\mathrm{2}}}}  & \text{(Linear Pair Eliminator)}\\
+        \\
+        \text{(Levels)} & \LDTTnt{l} 
+        & ::= & \LDTTsym{0}                  & \text{(Level $0$)}\\
+        && |  & \LDTTsym{1}                  & \text{(Level $1$)}\\
+        && |  &  \LDTTnt{l_{{\mathrm{1}}}}  \mathop{\sqcup}  \LDTTnt{l_{{\mathrm{2}}}}          & \text{(Maximum)}\\
+        \\
+        \text{(Typing Contexts)} & \Gamma 
+        & ::= &  \emptyset                   & \text{(Empty Context)}\\
+        && |  & \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}                & \text{(Context Element)}\\
+        && |  & \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}              & \text{(Context Extension)}\\
+      \end{array}
+    \end{math}
+  \end{center}
+  \caption{LDTT Expression Syntax}
+  \label{fig:ldtt-syntax}
+\end{figure}
+
+\begin{figure}
+  \begin{mathpar}
+    \inferrule* [right=$\mathsf{Type}$] {
+      \LDTTnt{l_{{\mathrm{1}}}}  \LDTTsym{<}  \LDTTnt{l_{{\mathrm{2}}}}
+    }{ \emptyset   \vdash   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{1}}}} }   \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{2}}}} } }
+    \and
+    \inferrule* [right=$ \multimap $] {
+      \Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{1}}}} } \\
+      \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{2}}}} }       
+    }{\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \vdash  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{  \LDTTnt{l_{{\mathrm{1}}}}  \mathop{\sqcup}  \LDTTnt{l_{{\mathrm{2}}}}  } }
+    \and    
+    \inferrule* [right=$ \otimes $] {
+      \Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{1}}}} } \\
+      \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{2}}}} } 
+    }{\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \vdash  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \otimes  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{  \LDTTnt{l_{{\mathrm{1}}}}  \mathop{\sqcup}  \LDTTnt{l_{{\mathrm{2}}}}  } }
+    \and    
+    \inferrule* [right=$\mathsf{Var}$] {      
+      \Gamma  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } \\
+      \dashv  \LDTTsym{(}  \Gamma  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}
+    }{\Gamma  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}}
+    \and
+    \inferrule* [right=$ \multimap _i$] {
+      \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } \\
+      \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{B}
+    }{\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \vdash   \lambda  \LDTTmv{x}  .  \LDTTnt{t}   \LDTTsym{:}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}}
+    \and
+    \inferrule* [right=$ \multimap _e$] {
+      \Gamma_{{\mathrm{2}}}  \vdash  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{:}  \LDTTsym{(}  \LDTTmv{y}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}\\
+      \Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{:}  \LDTTnt{A}
+    }{\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \vdash  \LDTTnt{t_{{\mathrm{1}}}} \, \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{:}  \LDTTsym{[}  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{/}  \LDTTmv{y}  \LDTTsym{]}  \LDTTnt{B}}
+    \and
+    \inferrule* [right=$ \otimes _i$] {
+      {
+        \begin{array}{l}
+          \LDTTmv{x} \, \not\in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{)}\\
+          \Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{B_{{\mathrm{1}}}}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{1}}}} } \\
+          \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{3}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{1}}}}  \vdash  \LDTTnt{B_{{\mathrm{2}}}}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{2}}}} } 
+        \end{array}
+      }\\
+      {
+        \begin{array}{l}
+          \\
+          \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \vdash  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{1}}}}\\
+          \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{3}}}  \LDTTsym{,}  \Gamma_{{\mathrm{4}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{1}}}}  \vdash  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{2}}}}
+        \end{array}
+      }
+    }{\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \Gamma_{{\mathrm{3}}}  \LDTTsym{,}  \Gamma_{{\mathrm{4}}}  \vdash  \LDTTsym{(}  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{,}  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{)}  \LDTTsym{:}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{1}}}}  \LDTTsym{)}  \otimes  \LDTTnt{B_{{\mathrm{2}}}}}
+    \and
+    \inferrule* [right=$ \otimes _e$] {
+      {
+        \begin{array}{l}
+          \LDTTmv{x}  \LDTTsym{,}  \LDTTmv{y} \, \not\in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{B_{{\mathrm{3}}}}  \LDTTsym{)}\\
+          \Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{B_{{\mathrm{1}}}}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{1}}}} } \\
+          \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{1}}}}  \vdash  \LDTTnt{B_{{\mathrm{2}}}}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{2}}}} } 
+        \end{array}
+      }\\
+      {
+        \begin{array}{l}
+          \\
+          \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \Gamma_{{\mathrm{3}}}  \vdash  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{:}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{1}}}}  \LDTTsym{)}  \otimes  \LDTTnt{B_{{\mathrm{2}}}}\\
+          \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \Gamma_{{\mathrm{4}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{1}}}}  \LDTTsym{,}  \LDTTmv{y}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{2}}}}  \vdash  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{:}  \LDTTnt{B_{{\mathrm{3}}}}
+        \end{array}
+      }
+    }{\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \Gamma_{{\mathrm{3}}}  \LDTTsym{,}  \Gamma_{{\mathrm{4}}}  \vdash   \mathsf{let}\,( \LDTTmv{x} , \LDTTmv{y} ) =  \LDTTnt{t_{{\mathrm{1}}}} \,\mathsf{in}\, \LDTTnt{t_{{\mathrm{2}}}}   \LDTTsym{:}  \LDTTnt{B_{{\mathrm{3}}}}}
+  \end{mathpar}
+  \caption{LDTT Typing Rules}
+  \label{fig:ldtt-typing-rules}
+\end{figure}
+
+
+\subsection{Metatheorems}
+\label{subsec:metatheorems}
+This section houses all of our metatheorems.  First, we consider any
+two distinctly named contexts to be disjoint. Throughout the following
+proofs we work up to dependent reordering of contexts.  That is, we do
+not consider a typing derivation, $\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{,}  \LDTTmv{y}  \LDTTsym{:}  \LDTTnt{B}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{C}$,
+different from the typing derivation, $\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \LDTTmv{y}  \LDTTsym{:}  \LDTTnt{B}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{C}$, when $\LDTTmv{x} \, \not\in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{B}  \LDTTsym{)}$.
+
+\subsubsection{Basic Metatheory}
+\label{subsec:basic_metatheory}
+
+\begin{lemma}[Inversion Principles]
+  \label{lemma:inversion_principles}
+  \begin{enumerate}[label=\roman*.]
+  \item[] 
+  \item If $\Gamma  \vdash  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } $, then $\Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{1}}}} } $,
+    $\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{2}}}} } $, and $\LDTTnt{l} =  \LDTTnt{l_{{\mathrm{1}}}}  \mathop{\sqcup}  \LDTTnt{l_{{\mathrm{2}}}} $ for some contexts $\Gamma_{{\mathrm{1}}}$ and
+    $\Gamma_{{\mathrm{2}}}$, and levels $\LDTTnt{l_{{\mathrm{1}}}}$ and $\LDTTnt{l_{{\mathrm{2}}}}$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{lemma}[Well-Formed Context Dependency Append]
+  \label{lemma:well-formed_context_dependency_append}
+  If $\vdash  \Gamma_{{\mathrm{1}}}$ and $\vdash  \Gamma_{{\mathrm{2}}}$, then $\vdash  \LDTTsym{(}  \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{)}$.
+\end{lemma}
+
+\begin{restatable}[Well-formed Context Dependency]{lemma}{wfxDepLem}
+  \label{lemma:well-formed_context_dependency}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$, then $\vdash  \Gamma$.  
+\end{restatable}
+
+\begin{lemma}[Well-Formed Linear Contexts Append]
+  \label{lemma:well-formed_linear_contexts_append}
+  $\dashv  \Gamma_{{\mathrm{1}}}$ and $\dashv  \Gamma_{{\mathrm{2}}}$ iff $\dashv  \LDTTsym{(}  \Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{)}$.
+\end{lemma}
+
+\begin{lemma}[Well-Formed Linear Contexts Extension]
+  \label{lemma:well-formed_linear_contexts_extension}
+  If $\dashv  \LDTTsym{(}  \Gamma  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}$, then $\dashv  \Gamma$.
+\end{lemma}
+
+\begin{restatable}[Well-formed Linear Context]{lemma}{wfxLinLem}
+  \label{lemma:well-formed_context_linearity}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$, then $\dashv  \Gamma$.
+\end{restatable}
+
+\begin{corollary}[Well-Formed Contexts]
+  \label{corollary:well-formed_contexts}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$, then $ \Gamma \,\mathsf{Ok} $.
+\end{corollary}
+
+\begin{restatable}[Substitution for Typing]{lemma}{substLem}
+  \label{lemma:substitution_for_typing}  
+  Suppose
+  $\Gamma_{{\mathrm{2}}}  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } $,
+  $\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{,}  \Gamma_{{\mathrm{4}}}  \vdash  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{:}  \LDTTnt{B}$, and
+  $\Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \Gamma_{{\mathrm{3}}}  \vdash  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{:}  \LDTTnt{A}$.  Then
+  $\Gamma_{{\mathrm{1}}}  \LDTTsym{,}  \Gamma_{{\mathrm{2}}}  \LDTTsym{,}  \Gamma_{{\mathrm{3}}}  \LDTTsym{,}  \LDTTsym{[}  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{/}  \LDTTmv{x}  \LDTTsym{]}  \Gamma_{{\mathrm{3}}}  \vdash  \LDTTsym{[}  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{/}  \LDTTmv{x}  \LDTTsym{]}  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{:}  \LDTTsym{[}  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{/}  \LDTTmv{x}  \LDTTsym{]}  \LDTTnt{B}$.
+\end{restatable}
+
+\begin{restatable}[Kinding for Typing]{lemma}{kindingLem}
+  \label{lemma:kinding_for_typing}
+If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$, then $\Gamma'  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } $ for some $\Gamma' \subseteq \Gamma$ and level $\LDTTnt{l}$.
+\end{restatable}
+
+\begin{lemma}[Arrow Kinding]
+  \label{lemma:arrow_kinding}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}$, then $\Gamma'  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } $
+  for some subcontext $\Gamma' \subseteq \Gamma$ and level $\LDTTnt{l}$.
+\end{lemma}
+
+% subsubsection basic_metatheory (end)
+
+\subsubsection{Linearity}
+\label{subsec:linearity}
+\begin{definition}
+  \label{def:disjointness}
+  Suppose $\Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$ and $\Gamma_{{\mathrm{2}}}$ is a second context.  Then we
+  say $\LDTTnt{t}$ and $\Gamma_{{\mathrm{2}}}$ are \emph{disjoint}, denoted $\LDTTnt{t}  \rtimes  \Gamma_{{\mathrm{2}}}$,
+  if and only if $ \mathsf{FV}( \LDTTnt{t} )  \cap |\Gamma_{{\mathrm{2}}}| = \emptyset$.
+\end{definition}
+
+\begin{lemma}[Distributivity of Disjointness]
+  \label{lemma:distributivity_of_disjointness}
+  Suppose $\LDTTnt{t}$ is a term, and that $\LDTTnt{t}  \rtimes  \Gamma$
+  holds for some context $\Gamma$.  Furthermore, assume that the names
+  in the domain of $\Gamma$ differ from the names of any bound
+  variables in $\LDTTnt{t}$.  Then by case analysis over the structure of
+  $\LDTTnt{t}$, the following distributivity properties hold:
+  \begin{enumerate}[label=\roman*.]
+  \item $\LDTTsym{(}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}  \LDTTsym{)}  \rtimes  \Gamma$ if and only if $\LDTTnt{A}  \rtimes  \Gamma$ and $\LDTTnt{B}  \rtimes  \Gamma$
+  \item $\LDTTsym{(}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \otimes  \LDTTnt{B}  \LDTTsym{)}  \rtimes  \Gamma$ if and only if $\LDTTnt{A}  \rtimes  \Gamma$ and $\LDTTnt{B}  \rtimes  \Gamma$  
+  \item $\LDTTsym{(}   \lambda  \LDTTmv{x}  .  \LDTTnt{t}   \LDTTsym{)}  \rtimes  \Gamma$ if and only if $\LDTTnt{t}  \rtimes  \Gamma$
+  \item $\LDTTsym{(}  \LDTTnt{t_{{\mathrm{1}}}} \, \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{)}  \rtimes  \Gamma$ if and only if $\LDTTnt{t_{{\mathrm{1}}}}  \rtimes  \Gamma$ and $\LDTTnt{t_{{\mathrm{2}}}}  \rtimes  \Gamma$
+  \item $\LDTTsym{(}  \LDTTnt{t_{{\mathrm{1}}}}  \LDTTsym{,}  \LDTTnt{t_{{\mathrm{2}}}}  \LDTTsym{)}  \rtimes  \Gamma$ if and only if $\LDTTnt{t_{{\mathrm{1}}}}  \rtimes  \Gamma$ and $\LDTTnt{t_{{\mathrm{2}}}}  \rtimes  \Gamma$
+  \item $\LDTTsym{(}   \mathsf{let}\,( \LDTTmv{x} , \LDTTmv{y} ) =  \LDTTnt{t_{{\mathrm{1}}}} \,\mathsf{in}\, \LDTTnt{t_{{\mathrm{2}}}}   \LDTTsym{)}  \rtimes  \Gamma$ if and only if $\LDTTnt{t_{{\mathrm{1}}}}  \rtimes  \Gamma$ and $\LDTTnt{t_{{\mathrm{2}}}}  \rtimes  \Gamma$
+  \end{enumerate}
+\end{lemma}
+
+\begin{restatable}[Every Variable Must be Used]{lemma}{noWeakLem}
+  \label{lemma:no_weakening}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$, then for every
+  $ \LDTTmv{x}  :  \LDTTnt{A}  \in  \Gamma $, $ \LDTTmv{x}  \in \mathsf{FV}( \Gamma ) $ or $\LDTTmv{x} \, \in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{t}  \LDTTsym{)}$ or $\LDTTmv{x} \, \in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{A}  \LDTTsym{)}$.  
+\end{restatable}
+
+\begin{lemma}
+  \label{lemma:disjoint-contra}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$ and $\LDTTsym{\{}  \LDTTnt{t}  \LDTTsym{,}  \LDTTnt{A}  \LDTTsym{\}}  \rtimes  \Gamma$, then $\Gamma =  \emptyset $.
+\end{lemma}
+
+\begin{restatable}[Disjointness]{lemma}{disjointnessLem}
+  \label{lemma:disjointness}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{B}$, $ \LDTTmv{x}  :  \LDTTnt{A}  \in  \Gamma $, $\Gamma_{{\mathrm{1}}} \subseteq \Gamma$, and $\Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } $, then
+  $\LDTTnt{t}  \rtimes  \Gamma_{{\mathrm{1}}}$.
+\end{restatable}
+
+\begin{restatable}[Linearity]{theorem}{linThm}
+  \label{thm:linearity}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{B}$, then for every $ \LDTTmv{x}  :  \LDTTnt{A}  \in  \Gamma $, $\LDTTmv{x}$ appears only once in
+  $\Gamma$, or only once in $\LDTTnt{t}$, or only once in $\LDTTnt{B}$.
+\end{restatable}
+
+\begin{corollary}
+  \label{corollary:linearity}
+  If $\Gamma  \LDTTsym{,}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{,}  \Gamma'  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{B}$, then $\LDTTmv{x}$ appears only once in
+  $\Gamma'$, or only once in $\LDTTnt{t}$, or only once in $\LDTTnt{B}$.
+\end{corollary}
+% subsubsection linearity (end)
+
+\subsubsection{Trivialization}
+\label{subsec:trivialization}
+
+\begin{restatable}[$\lambda$-Bound Variables Must be Used]{lemma}{boundMustLem}
+  \label{lemma:lambda-bound_variables_must_be_used}
+  If $\Gamma  \vdash   \lambda  \LDTTmv{x}  .  \LDTTnt{t}   \LDTTsym{:}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}$, then $\LDTTmv{x} \, \in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{t}  \LDTTsym{)}$ and $\LDTTmv{x} \, \in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{B}  \LDTTsym{)}$.
+\end{restatable}
+
+\begin{lemma}[Closed Types]
+  \label{lemma:closed_ctxs}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{B}$, $ \LDTTmv{x}  :  \LDTTnt{A}  \in  \Gamma $, $\Gamma_{{\mathrm{1}}} \subseteq \Gamma$, $\Gamma_{{\mathrm{1}}}  \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } $, and $\LDTTnt{B}  \rtimes  \Gamma_{{\mathrm{1}}}$,
+  then $\Gamma_{{\mathrm{1}}} =  \emptyset $.
+\end{lemma}
+
+\begin{lemma}[Arrow Bound Variables Must be Used]
+  \label{lemma:arrow_bound_variables_must_be_used}
+  If $\Gamma  \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTsym{(}  \LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \LDTTsym{)}  \multimap  \LDTTnt{B}$, then $\LDTTmv{x} \, \in \, \mathsf{FV} \, \LDTTsym{(}  \LDTTnt{B}  \LDTTsym{)}$.
+\end{lemma}
+
+\begin{lemma}[No Type Dependency]
+  \label{lemma:no_type_dependency}
+  For any type $\LDTTnt{A}$ and level $\LDTTnt{l}$, there is no type $\LDTTnt{B}$ such that
+  $\LDTTmv{x}  \LDTTsym{:}  \LDTTnt{A}  \vdash  \LDTTnt{B}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l} } $.
+\end{lemma}
+
+\begin{restatable}[All Types are $\mathsf{Type}$]{lemma}{allTypesLem}
+  \label{lemma:all_types_are_type}
+  If $ \emptyset   \vdash  \LDTTnt{A}  \LDTTsym{:}   \mathsf{Type}_{ \LDTTnt{l'} } $, then $\LDTTnt{A}$ is $ \mathsf{Type}_{ \LDTTnt{l} } $ for some level $\LDTTnt{l}$.
+\end{restatable}
+
+\begin{restatable}[Trivialization]{theorem}{trivThm}
+  \label{theorem:trivalization}
+  If $ \emptyset   \vdash  \LDTTnt{t}  \LDTTsym{:}  \LDTTnt{A}$, then $\LDTTnt{t}$ is $ \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{1}}}} } $ and $\LDTTnt{A}$ is
+  $ \mathsf{Type}_{ \LDTTnt{l_{{\mathrm{2}}}} } $ for some $\LDTTnt{l_{{\mathrm{1}}}}$ and $\LDTTnt{l_{{\mathrm{2}}}}$.
+\end{restatable}
+
+% subsubsection trivialization (end)
+% subsection metatheorems (end)
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: spec-with-notes.tex
+%%% End:

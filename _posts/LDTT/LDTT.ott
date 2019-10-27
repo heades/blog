@@ -1,0 +1,206 @@
+metavar termvar, n, w, x, y, z, a, b ::=
+metavar typevar, W, X, Y, Z ::=
+metavar monoidEl, e ::=
+metavar basetype, o ::=
+indexvar index, i , j, k ::=
+
+grammar
+
+  l :: 'L_' ::=                 {{com Level }}
+    | 0               :: :: Zero    {{com Lowest Level}}
+    | 1               :: :: One     {{com First Level }}
+    | max ( l1 , l2 ) :: :: Max     {{com Least Upper Bound}}
+    {{tex [[l1]] \mathop{\sqcup} [[l2]] }}
+    | min ( l1 , l2 ) :: :: Min
+    {{tex [[l1]] \mathop{\sqcap} [[l2]] }}   {{com Greatest Lower Bound }}    
+    | add ( l1 , l2 ) :: :: Add     {{com Addition }}
+    {{tex [[l1]] + [[l2]] }}
+
+ t, A , B , C , D , E, K, T , R, S :: 'Term_' ::= {{com Term }}
+   | Type l                                    :: :: Type    {{com Universe of Types }}
+   {{tex \mathsf{Type}_{[[l]]} }}
+   | ( x : A ) -o B                            :: :: Arrow  {{com Linear Dependent Products }}
+   | ( x : A ) * B                             :: :: DTen    {{com Dependent Tensor }}
+   | x                                         :: :: Var     {{com Variable }}
+   | \ x .  t                                  :: :: Fun     {{com $\lambda$-abstraction }}
+   {{tex \lambda [[x]] . [[t]] }}
+   | t1 t2                                     :: :: App     {{com Application }}   
+   | ( t1 , t2 )                               :: :: TenFun2 {{com Type-level term tensor introduction }}   
+   | let ( x , y ) = t1 in t2                  :: :: TenEl2   {{com Term tensor elimination }}
+   {{tex \mathsf{let}\,([[x]],[[y]]) = [[t1]]\,\mathsf{in}\,[[t2]] }}
+   | ( t )                                     :: S :: Parens
+   | [ t1 / x ] t2                             :: M :: Sub
+   | A -> B                                    :: M :: SArrow
+   | ( x : A ) -> B                            :: M :: NLArrow   
+      
+ G {{tex \Gamma }} :: 'Ctx_' ::= {{com Context }}
+   | .               :: :: Empty   {{com Empty Context }}
+   {{tex \emptyset }}
+   | x : A                   ::   :: TermEl  {{com Term Variable }}
+   | G1 , G2                 ::   :: Ex      {{com Extension }}
+   | ( G )                   :: S :: Parens
+   | x1 : A1 , ... , xi : Ai :: M :: Expand
+   | [ t / x ] G             :: M :: Subst
+
+ terminals :: 'terminals_' ::=
+     | -o    :: :: LArrow
+     {{tex \multimap }}
+     | ->    :: :: Arrow
+     {{tex \rightarrow }}
+     | <:    :: :: Sub
+     | <=    :: :: lte
+     {{tex \leq }}
+     | >=    :: :: gte
+     {{tex \geq }}
+     | >     :: :: gt
+     {{tex > }}          
+     | *     :: :: Ten
+     {{tex \otimes }}
+     | **    :: :: Prod
+     {{tex \times }}
+     | |-    :: :: Entails
+     {{tex \vdash }}
+     | -|    :: :: Dashv
+     {{tex \dashv }}
+     | /-    :: :: NEntails
+     {{tex \not \vdash }}
+     | True  :: :: True
+     {{tex \mathsf{True} }}
+     | False :: :: False
+     {{tex \mathsf{False} }}
+     | nin   :: :: NotIn
+     {{tex \not\in }}
+     | in   :: :: In
+     {{tex \in }}     
+     | FV    :: :: FV
+     {{tex \mathsf{FV} }} 
+     | BV    :: :: BV
+     {{tex \mathsf{BV} }} 
+     | FTV   :: :: FTV
+     {{tex \mathsf{FTV} }}
+     | ><    :: :: Deps
+     {{tex \rtimes }}
+
+ formula :: 'formula_' ::=
+    | judgement                  ::   :: judgement
+    | judgement1 ... judgementi  ::   :: judgementV
+    | x1 , ... , xi nin FV ( t ) :: M :: FV3
+    | x1 , ... , xi nin BV ( t ) :: M :: BV3
+    | x1 , ... , xi in FV ( t )  :: M :: FV4
+    | x1 , ... , xi in BV ( t )  :: M :: BV4        
+    | l >= 1                     :: M :: LGt
+    | x in FV( G )               :: M :: FVCtx
+    {{tex [[x]] \in \mathsf{FV}([[G]]) }}
+    | x nin FV( G )               :: M :: NFVCtx
+    {{tex [[x]] \not\in \mathsf{FV}([[G]]) }}
+    | | FV( G ) | x = 1          :: M :: Quant
+    {{tex |\mathsf{FV}([[G]])|_{[[x]]} = 1 }}
+    | x : A in G                 :: M :: InCtx
+    {{tex [[x]] : [[A]] \in [[G]] }}
+    | x : A nin G                :: M :: NinCtx
+    {{tex [[x]] : [[A]] \not\in [[G]] }}    
+    | FV( t )                    :: M :: fv
+    {{tex \mathsf{FV}([[t]]) }}
+    | l1 < l2                    :: M :: Lleq
+    | t >< A                     :: M :: Dets6
+    | t >< G                     :: M :: Dets
+    | t >< G1 G2                 :: M :: Dets7
+    {{tex [[t]] \rtimes_{[[G1]]} [[G2]] }}
+    | { t1 , ... , ti } >< G     :: M :: Dets5
+    | G /- t : A                 :: M :: NType
+    | G Linear                   :: M :: ctx_linear
+    {{tex [[G]]\,\mathsf{Linear} }}
+    | |FV[G]| x <= 1             :: M :: FVList
+    {{tex |\mathsf{FV[G]}|_{[[x]]} \leq 1 }}
+    | G1 <= G2                   :: M :: SubCtx
+    {{tex [[G1]] \subseteq [[G2]] }}
+    
+defns
+  Judgments :: '' ::=
+
+defn
+  |- G :: :: p_ok :: 'P_'
+  {{com Context Dependency is Well Formed }}
+by
+
+  ---- :: E
+  |- .
+
+  |- G 
+  G1 <= G
+  G1 |- A : Type l   
+  ---------------- :: X
+  |- G,x : A
+
+defn
+  -| G :: :: j_ok :: 'J_'
+by
+
+ ---- :: E
+ -| .
+
+ -| G
+ |FV[G]| x <= 1  
+ -------------- :: X
+ -| x : A,G
+
+defn
+  G Ok :: :: ctx_ok :: 'Ok_'
+  {{tex [[G]]\,\mathsf{Ok} }}
+  {{com Well-formed Contexts }}
+by
+  
+  |- G -| G  
+  --------- :: K
+  G Ok
+
+defn
+  G |- t : A :: :: typing :: 'T_'
+  {{com Typing }}
+by
+
+  l1 < l2
+  ---------------------- :: Type
+  . |- Type l1 : Type l2
+
+  G1 |- A : Type l1
+  G1 , G2 , x : A |- B : Type l2
+  ------------------------------------------- :: Arrow
+  G1 , G2 |- ( x : A ) -o B : Type max(l1,l2)
+
+  G1 |- A : Type l1
+  G1 , G2, x : A |- B : Type l2
+  ------------------------------------------ :: Ten
+  G1 , G2 |- ( x : A ) * B : Type max(l1,l2)
+
+  -| (G,x:A)
+  G |- A : Type l
+  ----------------- :: Var
+  G, x : A |- x : A
+
+  G1,x : A |- B : Type l
+  G1,G2,x : A |- t : B
+  ---------------------------- :: Fun
+  G1,G2 |- \x.t : (x : A) -o B
+
+  G1 |- t2 : A
+  G2 |- t1 : (y : A) -o B  
+  -------------------------- :: App
+  G1 , G2 |- t1 t2 : [t2/y]B  
+
+  x nin FV(t2)
+  G1 |- B1 : Type l1
+  G1,G3,x : B1 |- B2 : Type l2
+  G1,G2 |- t1 : B1
+  G1,G3,G4,x : B1 |- t2 : B2
+  ---------------------------------------- :: Pair
+  G1,G2,G3,G4 |- (t1 , t2) : (x : B1) * B2
+
+  x,y nin FV(B3)
+  G1 |- B1 : Type l1
+  G1,G2,x : B1 |- B2 : Type l2
+  G1,G2,G3 |- t1 : ( x : B1 ) * B2
+  G1,G2,G4,x : B1,y : B2 |- t2 : B3
+  -------------------------------------------- :: Let
+  G1,G2,G3,G4 |- let ( x , y ) = t1 in t2 : B3
+
