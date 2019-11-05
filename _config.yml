@@ -10,3 +10,4 @@ collections:
 gems:
   - jekyll-feed
 theme: jekyll-theme-midnight
+ncoding: utf-8
