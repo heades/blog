@@ -9,6 +9,8 @@ categories:
  - advice
 ---
 
+xxxxxx
+
 The Center for Undergradaute Research at Augusta University asked me to be on two panels about mentoring undergraduate research assistants.  The first being for new faculty and the second for students.  I decided to write up my thoughts on mentoring students so that panel attendees may access my answers later, but also just to share them
 
 What is Undergraduate Research to Me?
@@ -139,3 +141,5 @@ Student Panel Q&A
 - Why would you encourage students to participate?
 
   I would encourage students to participate if they are interested in going to graduate school, interested in research, or are just interested in figuring out what research is and if they like it.  But, I am also up front about things; for example, I would not encourage students to participate if they do not like writing or presenting, if those are things that they just cannot see themselves doing, then I doubt research would be good for them, and that is okay, because research is not for everyone.
+
+xxxxxx
