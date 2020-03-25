@@ -7,7 +7,7 @@ collections:
     output: false
   pubs:
     output: false
-gems:
-  - jekyll-feed
 theme: jekyll-theme-midnight
 ncoding: utf-8
+plugins:
+  - jekyll-feed
