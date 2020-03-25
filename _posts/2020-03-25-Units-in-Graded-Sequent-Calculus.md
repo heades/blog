@@ -25,7 +25,7 @@ While this watchful precision can be somewhat uncomfortable if you're Bob Cratch
 
 Our initial formulation of the left rule for the tensor unit was:
 
-<center><img width="40%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/unitl.png"></center>
+<center><img width="40%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/unitL.png"></center>
 
 Notice that this rule allows you to introduce $$I$$ into the context, at a grade of $$1$$. In ordinary linear logic, the tensor unit is sometimes called the 'empty resource', unique among linear hypotheses in that it is the only one derivable from the empty context, and similarly the only one that can be discarded without being used. This behavior is a clue that the grade of $$1$$ is incorrect, since anything with a nonzero grade makes an impact on our 'bill', in the language of Scrooge. And certainly, the careful accounting demanded by our system made a vivid case for why the unit grade was wrong.
 
