@@ -61,20 +61,10 @@ The presentation information is as follows:
   The interested reader will find more material here
   
     - https://www.irif.fr/~mellies/template-games.html
+    
     - https://www.youtube.com/watch?v=ZC2jtq2R3cw
     
-  and in the companion papers [1,2,3].
-
-  [1] PAM. Categorical combinatorics of scheduling and synchronization in game semantics. Proceedings of POPL 2019.
-       - https://www.irif.fr/~mellies/papers/Mellies19popl.pdf
-       - https://www.irif.fr/~mellies/slides/popl-slides-january-2019.pdf
-
-  [2] PAM. Template games and differential linear logic. Proceedings of LICS 2019.
-       - https://www.irif.fr/~mellies/template-games/2-template-games-and-differential-linear-logic.pdf
-
-  [3] PAM. Une étude micrologique de la négation (in French)
-       - https://www.irif.fr/~mellies/hdr-mellies.pdf
-
+  and in the companion papers [1,2,3].  
 
 - **Bio:**
 
@@ -95,4 +85,20 @@ The presentation information is as follows:
   geometric and interactive structures at work in logic and
   mathematics.
 
+- **References:**
 
+    [1] PAM. Categorical combinatorics of scheduling and synchronization
+    in game semantics. Proceedings of POPL 2019.
+  
+    - https://www.irif.fr/~mellies/papers/Mellies19popl.pdf
+       
+    - https://www.irif.fr/~mellies/slides/popl-slides-january-2019.pdf
+
+    [2] PAM. Template games and differential linear logic. Proceedings
+    of LICS 2019.
+  
+    - https://www.irif.fr/~mellies/template-games/2-template-games-and-differential-linear-logic.pdf
+
+    [3] PAM. Une étude micrologique de la négation (in French)
+  
+    - https://www.irif.fr/~mellies/hdr-mellies.pdf
