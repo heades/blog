@@ -59,8 +59,10 @@ The presentation information is as follows:
   combinatorics, performed in the category of small 2-categories.
 
   The interested reader will find more material here
+  
     - https://www.irif.fr/~mellies/template-games.html
     - https://www.youtube.com/watch?v=ZC2jtq2R3cw
+    
   and in the companion papers [1,2,3].
 
   [1] PAM. Categorical combinatorics of scheduling and synchronization in game semantics. Proceedings of POPL 2019.
