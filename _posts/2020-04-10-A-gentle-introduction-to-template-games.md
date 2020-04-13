@@ -30,7 +30,7 @@ who would like to attend the talk online.
 
 The presentation information is as follows:
 
-- **When:** April 24th at 2pm EDT / 7pm France time
+- **When:** April 24th at 2pm EDT / 8pm CEST
 - **RSVP:** April 20th by email ([harley.eades@gmail.com](mailto:harley.eades@gmail.com))
 - **Who:** [Paul-André Melliès](https://www.irif.fr/~mellies/) (CNRS, University of Paris)
 - **Title:** "A gentle introduction to template games"
