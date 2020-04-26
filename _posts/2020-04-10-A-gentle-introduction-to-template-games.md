@@ -13,6 +13,8 @@ categories:
  - programming languages
 ---
 
+**Update: Find the recording of this talk [here](https://youtu.be/b6FHzy5xJZ4).**
+
 This year I'm the faculty chair of the School of Computer and Cyber
 Sciences' Colloquium Series.  As many of you, I've had to transition
 this course online.  Thus, when choosing the final speaker of the
