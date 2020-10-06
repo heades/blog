@@ -1,0 +1,100 @@
+embed
+  {{tex-preamble \usepackage{cmll}
+                 \usepackage{stmaryrd}
+                 \usepackage{relsize} }}
+
+metavar termvar, x, y , z, f  ::=
+metavar semiringEl, r , s ::=
+metavar type, T , S ::=
+indexvar i , j ::= 
+
+
+grammar
+
+  p :: 'P_' ::= {{com Patterns}}
+    | *     ::   :: Unit
+    | x > y ::   :: Tensor
+    | ( p ) ::   :: Paren
+
+  A, B, C, DD {{tex D}} :: 'A_' ::= {{com Types}}
+    | A > B          ::   :: Pair     {{com Tensor Product }}
+    | A -> B         ::   :: RFType   {{com Right Implication }}
+    | B <- A         ::   :: LFType   {{com Left Implication }}
+    | ( A )          :: M :: Parens   {{com Parentheses}}
+    | h( A )         :: M :: HParens
+    {{tex [[A]] }}
+    | A -o B         :: M :: ILLImp   {{com For Blogging }}
+
+  G {{tex \Gamma}}, D {{tex \Delta}} :: 'LCtx_' ::= {{com Linear Typing Context }}
+    | .               ::   :: Empty    {{com Empty Context}}
+    {{tex \emptyset }}
+    | A               ::   :: El2      {{com Context Element}}
+    | G1 , G2         ::   :: Ext      {{com Context Extension }}
+    | h( G )          :: M :: HGaren
+    {{tex [[G]] }}
+    | ( G )           :: M :: Garen
+    {{tex ([[G]]) }}
+
+  terminals :: 'terminals_' ::=
+    | ->              ::   :: Arrow
+    {{tex \rightharpoonup }}
+    | <-              ::   :: LeftArrow
+    {{tex \leftharpoonup }}
+    | -o              ::   :: ILLArrow
+    {{tex \multimap }}
+    | >               ::   :: Rhd
+    {{tex \rhd }}
+
+  formula :: 'formula_' ::=
+    | judgement             ::  :: judgement
+    | formula1 && formula2  ::  :: Quad
+    {{tex [[formula1]] \quad [[formula2]] }}
+    | ( formula )           :: S :: parens
+    {{tex [[formula]] }}
+
+defns
+  Typing :: '' ::=
+
+defn
+  G |-S A :: :: seqcalc :: 'S_'
+  {{com Sequent Calculus }}
+  {{tex [[G]] \vdash [[A]] }} by
+
+  -------- :: id
+  A |-S  A 
+
+  G1, A, B,G2 |-S C
+  ------------------ :: TenL
+  G1, A > B,G2 |-S C
+
+  G1 |-S A && G2 |-S B
+  -------------------- :: TenR
+  G1,G2 |-S A > B
+
+  G2 |-S A && G1,B,G3 |-S C
+  ------------------------- :: ImpLr
+  G1,A -> B,G2,G3 |-S C
+
+  G2 |-S A && G1,B,G3 |-S C
+  ------------------------- :: ImpLl
+  G1,G2,B <- A,G3 |-S C
+
+  G,A |-S B  
+  ------------ :: ImpRr
+  G |-S A -> B
+
+  A,G |-S B
+  ------------ :: ImpRl
+  G |-S B <- A 
+
+  G2 |-S A && G1,A,G3 |-S B
+  ------------------------- :: Cut
+  G1,G2,G3 |-S B
+
+  G,A |-S B
+  ------------ :: ILLImpR
+  G |-S A -o B
+
+  G1, A, B, G2 |-S C
+  ------------------ :: Ex
+  G1, B, A, G2 |-S C

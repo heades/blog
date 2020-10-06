@@ -1,0 +1,133 @@
+embed
+  {{tex-preamble \usepackage{cmll}
+                 \usepackage{stmaryrd}
+                 \usepackage{relsize} }}
+
+metavar termvar, x, y , z ::=
+metavar semiringEl, r , s ::=
+metavar type, T , S ::=
+indexvar i , j ::= 
+
+
+grammar
+
+  A, B, C, DD {{tex D}} :: 'A_' ::= {{com Objects }}
+    | I              ::   :: Unit     {{com Unit }}
+    | A > B          ::   :: Pair     {{com Tensor Product }}
+    | A -> B         ::   :: RFType   {{com Right Implication }}
+    | B <- A         ::   :: LFType   {{com Left Implication }}
+    | ( A )          :: M :: Parens   {{com Parentheses}}
+    | h( A )         :: M :: HParens
+    {{tex [[A]] }}
+
+  f, g, h :: 'M_' ::= {{com Morphisms }}
+    | id A     ::   :: Id     {{com Identity }}
+    {{tex \mathsf{id}_{[[A]]} }}
+    | f > g  ::   :: Ten    {{com Tensor Product }}
+    | f -> g ::   :: RImp   {{com Right Implication }}
+    | rcurry f ::   :: RCurry {{com Right Curry }}
+    {{tex \mathsf{curry}^r([[f]]) }}
+    | reval A B  ::   :: REval  {{com Right Evaluator }}
+    {{tex \mathsf{eval}^r_{[[A]],[[B]]} }}
+    | g <- f ::   :: LImp   {{com Left Implication }}
+    | lcurry f ::   :: LCurry {{com Left Curry }}
+    {{tex \mathsf{curry}^l([[f]]) }}
+    | leval A B  ::   :: LEval  {{com Left Evaluator }}
+    {{tex \mathsf{eval}^l_{[[A]],[[B]]} }}
+    | g [ f1 , ... , fi ]  ::   :: Comp   {{com Composition }}
+    | ( f )  :: S :: Parens {{com Parentheses }}
+    | h( f )  :: M :: HParens {{com Hidden Parentheses }}
+    | id G :: M :: Ids
+    {{tex \mathsf{id}_{[[G]]} }}
+
+  G {{tex \Gamma}}, D {{tex \Delta}} :: 'MCtx_' ::= {{com Multicontext }}
+    | .               ::   :: Empty    {{com Empty Context}}
+    {{tex \emptyset }}
+    | A               ::   :: El2      {{com Context Element}}
+    | G1 , G2         ::   :: Ext      {{com Context Extension }}
+    | h( G )          :: M :: HGaren
+    {{tex [[G]] }}
+    | { G }           :: M :: Garen
+    {{tex ([[G]]) }}
+    | G1 , ... , Gi  :: M :: Fam
+
+  terminals :: 'terminals_' ::=
+    | ->              ::   :: Arrow
+    {{tex \rightharpoonup }}
+    | <-              ::   :: LeftArrow
+    {{tex \leftharpoonup }}
+    | -o              ::   :: ILLArrow
+    {{tex \multimap }}
+    | >               ::   :: Rhd
+    {{tex \rhd }}
+
+  formula :: 'formula_' ::=
+    | judgement             ::  :: judgement
+    | judgement1 ... judgementi :: :: JFam
+    | formula1 && formula2  ::  :: Quad
+    {{tex [[formula1]] \quad [[formula2]] }}
+    | ( formula )           :: S :: parens
+    {{tex [[formula]] }}
+
+defns
+  Typing :: '' ::=
+
+defn
+  [ G ] -[ f ]-> A :: :: mtype :: 'M_'
+  {{com Morphism Typing }}
+  {{tex \langle [[G]] \rangle \mto^{[[f]]} [[A]] }} by
+
+  [A,B,(C <- (A > B))] -[ f ]-> C
+  ----------
+  [A > B,(C <- (A > B))] -[ f ]-> C
+  ----------
+  [A > B,(C <- (A > B))] -[ f ]-> C
+
+  -------------------- :: id
+  [ A ] -[ id A ]->  A 
+
+  [ G1,A,B,G2 ] -[ f ]-> C
+  -------------------------- :: TenL
+  [ G1,A > B,G2 ] -[ f ]-> C
+
+  [ G1,A,I,G2 ] -[ f ]-> C
+  ------------------------ :: UnitL1
+  [ G1,A,G2 ] -[ f ]-> C
+
+  [ G1,I,A,G2 ] -[ f ]-> C
+  ------------------------ :: UnitL2
+  [ G1,A,G2 ] -[ f ]-> C
+
+  [ G1 ]-[ f ]-> A && [ G2 ] -[ g ]-> B
+  -------------------------------------- :: TenR
+  [ G1,G2 ] -[ f > g ]-> A > B
+
+  ---------------------------------- :: REval
+  [ (A -> B), A ] -[ reval A B ]-> B
+
+  ---------------------------------- :: LEval
+  [ A,(B <- A) ] -[ leval A B ]-> B
+
+  [ G,A ] -[ f ]-> B  
+  ---------------------------- :: RCurry
+  [ G ] -[ rcurry f ]-> A -> B
+
+  [ A,G ] -[ f ]-> B  
+  ---------------------------- :: LCurry
+  [ G ] -[ lcurry f ]-> B <- A
+ 
+  [ G1 ] -[ f1 ]-> A1 ... [ Gi ] -[ fi ]-> Ai
+  [ A1 , ... , Ai ]-[ g ]-> B
+  --------------------------------------------- :: MComp
+  [ G1 , ... , Gi ] -[ g[ f1 , ... , fi ] ]-> B
+
+defn
+  [ G ] -[ f = g ]-> A :: :: meq :: 'MEq_'
+  {{com Morphism Equality }}
+  {{tex \langle [[G]] \rangle\,[[f]] = [[g]] : [[A]] }} by
+
+  ----------------------------------------------------- :: RCurry
+  [G, A] -[ h(reval A B)[id G,rcurry(f),id A] = f ]-> B
+
+  ---------------------------------------------------- :: LCurry
+  [A,G] -[ h(leval A B)[id A,rcurry(f),id G] = f ]-> B

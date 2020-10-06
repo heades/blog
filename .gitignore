@@ -1,9 +1,3 @@
+/_posts/$post
+*.lock
 _site/*
-_site/*
-_site
-/Gemfile.lock
-*.aux
-*.log
-*.pdf
-/_posts/simplified-linear-cat/commands.tex
-/_posts/simplified-linear-cat/double.tex
