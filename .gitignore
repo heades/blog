@@ -1,3 +1,9 @@
 /_posts/$post
 *.lock
 _site/*
+/_posts/monad-comonad.agda
+/_posts/monad-comonad.hs
+/_posts/permutations.hs
+/_posts/simplified-linear-cat/commands.tex
+/_posts/simplified-linear-cat/double.tex
+/_posts/simplified-linear-cat/note.pdf

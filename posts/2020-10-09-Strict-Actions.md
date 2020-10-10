@@ -1,7 +1,7 @@
 ---
 layout: blog
-title: "Graded Coalgebras as Types"
-date: 2020-10-06
+title: "Strict vs Lax Graded Necessiity Modalities"
+date: 2020-10-09
 categories:
  - logic
  - linear logic
@@ -30,4 +30,3 @@ $
 $
 </div>
 
-Given a comonad $\Box : \cat{1} \mto \Endo(\cat{C},\cat{C})$. Blah Blah blah blah
