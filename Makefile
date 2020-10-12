@@ -1,2 +1,2 @@
 all :
-	bundle exec jekyll serve --watch
+	bundle exec jekyll serve --drafts --watch

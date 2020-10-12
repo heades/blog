@@ -3,7 +3,7 @@
 post=$1
 
 echo "Processing $post"
-sed 's/\$/\$\$/g' $post > "../_posts/$post"
+sed 's/\$/\$\$/g' $post > "../_drafts/$post"
 
 
 
