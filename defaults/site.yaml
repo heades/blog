@@ -1,0 +1,24 @@
+data-dir: /Users/heades/website/blog/metatheorem/
+
+from: markdown+emoji
+
+to: html
+
+template: layouts/default
+
+output-file: index.html
+
+input-files: [index.md]
+
+standalone: true
+
+self-contained: false
+
+highlight-style: pygments
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+css:
+- /includes/css/style.css

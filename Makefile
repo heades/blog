@@ -1,2 +1,2 @@
 all :
-	bundle exec jekyll serve --drafts --watch
+	pandoc -s --data-dir=. -d site
