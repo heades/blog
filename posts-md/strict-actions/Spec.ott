@@ -1,0 +1,210 @@
+% embed
+%   {{tex-preamble \usepackage{cmll}
+%                  \usepackage{stmaryrd}
+%                  \usepackage{relsize} }}
+
+metavar termvar, x, y , z, f  ::=
+metavar semiringEl, r , s ::=
+metavar type, T , S ::=
+metavar mathcals, CC {{tex \mathcal{C} }}, CM {{tex \mathcal{M} }}, CG {{tex \mathcal{G} }} ::=
+metavar mathsft, FF {{tex \mathsf{F} }}, GF {{tex \mathsf{G} }} ::=
+indexvar o, i, j, k, l ::=
+metavar mode, m ::=
+
+grammar  
+
+  R {{tex \mathcal{R} }} :: 'R_'   ::=
+  {{com Semiring}}
+    | r                 ::   :: Element
+    {{com Element}}
+    | aid               ::   :: AUnit
+    {{com Additive Unit}}
+    {{tex \mathsf{a} }}
+    | mid               ::   :: MUnit
+    {{com Multiplimathcalive Unit}}
+    {{tex \mathsf{m} }}
+    | R1 * R2           ::   :: Mult
+    {{com Multiplimathcalion}}
+    | R1 + R2           ::   :: Add    
+    {{com Addition}}
+    | ( R )             :: M :: Paren
+    {{com Parentheses}}
+    | h( R )            :: M :: HParen
+    {{tex [[R]] }}
+
+  A, B, C, D :: 'A_' ::=
+  {{com Linear Formulas }}
+     | I                      ::   :: UnitType
+     {{com Unit}}
+     | A [*] B                ::   :: Pair
+     {{com Tensor Product }}
+     | ( A @ R ) -> B         ::   :: FType
+     {{com Implication }}
+     | Box R A                ::   :: Box
+     {{com Graded Necessity Modality }}
+     {{tex \Box_{[[R]]} [[A]]}}
+     | ( A )                  :: S :: Parens
+     {{com Parentheses}}
+     | h( A )                 :: M :: HParens
+     {{tex [[A]] }}
+    
+  G {{tex \Gamma}}, DT {{tex \Delta}} :: 'Ctx_' ::=
+  {{com Context }}
+    | Empty          ::   :: Empty
+    {{com Empty Context}}
+    | x : A          ::   :: tEl
+    | G1 , G2        ::   :: Ext
+    {{com Context Extension }}
+    | h( G )         :: M :: HParen
+    {{tex [[G]] }}
+    | { G }          :: S :: Paren
+    {{tex ([[G]]) }}
+
+p :: 'Pat_' ::=
+   | x                :: :: Var
+   | ( p1 , p2 )      :: :: Ten
+   | Box p            :: :: Box
+
+t :: 'Term_' ::=
+  {{com Terms }}
+    | x                          ::   :: Var
+    | i                          ::   :: Unit
+    {{tex \mathsf{i} }}
+    | ( t1 , t2 )                ::   :: Tensor
+    | let p = t3 in t4 ::   :: TensorE
+    {{tex \mathsf{let}\,[[p]] = [[t3]]\,\mathsf{in}\,[[t4]] }}
+    | \ x . t                    ::   :: Lam
+    {{tex \lambda [[x]].[[t]] }}
+    | t1 t2                      ::   :: App
+    {{tex [[t1]]\,[[t2]] }}
+    | Box t                      ::   :: Grd
+    | [ t1 / t2 ] t3             :: M :: Sub
+
+  g {{tex \gamma }} :: 'Vec_' ::=
+  {{com Vectors }}
+    | Empty         ::   :: Empty
+    | R             ::   :: REl
+    | g1 , ... , gi ::   :: Ex
+    | { g }         :: S :: Parens
+    {{tex ( [[g]] ) }}
+    | h{ g }        :: M :: HParens
+    {{tex [[g]] }}
+    | R * g         :: M :: Mult
+
+  terminals :: 'terminals_' ::=
+     | I                 ::   :: Unit
+     {{tex \mathsf{I} }}
+     | <= :: :: LT
+     {{tex \leq }}
+     | =  :: :: Eq
+     {{tex = }}
+     | ->   :: :: Arrow
+     {{tex \rightarrow }}
+     | <:   :: :: Sub
+     | @    :: :: Odot
+     {{tex \mathbin{\odot} }}
+     | Box  :: :: Box
+     {{tex \Box}}
+     | Mny   :: :: RightAdjointG
+     {{tex \mathsf{Mny} }}
+     | Grd   ::   :: RightAdjoint
+     {{tex \mathsf{Grd} }}
+     | Lin   :: M :: LeftAdjointF
+     {{tex \mathsf{Lin} }}
+     | [*]   ::   :: SquareTimes
+     {{tex \boxtimes }}
+     | (*)   ::   :: OTimes
+     {{tex \otimes }}
+     | *     ::   :: CirAst
+     {{tex \circledast }}
+     | +     ::   :: Oplus
+     {{tex \oplus }}
+     | Empty ::   :: Empty
+     {{tex \emptyset }}
+     | |-    ::   :: VDash
+     {{tex \vdash }}
+     | &&    ::   :: Quad
+     {{tex \quad }}
+     | nin   ::   :: Nin
+     {{tex \not\in }}
+     | in    ::   :: In
+     {{tex \in }}
+
+  formula :: 'formula_' ::=
+    | judgement                    ::   :: judgement
+    | formula1 && ... && formulai  ::   :: Quad
+    | ( formula )                  :: S :: parens
+    {{tex [[formula]] }}
+    | R1 , ... , Ri in R           :: M :: InRV
+    | x nin FV ( t )               :: M :: tFV
+    | x nin FV ( l )               :: M :: lFV
+    | g @ G                        :: M :: GCtx
+
+defns
+  Judgments :: '' ::=
+
+defn
+  g1 <= g2 :: :: subx :: 'SCtx_'
+  {{com Context Order }}
+by
+
+  -------------- :: Empty
+  Empty <= Empty
+
+  g1 <= g2 && r1 <= r2
+  -------------------- :: Ext
+  {g1,r1} <= {g2,r2}
+
+defn
+  g @ G |- t : A :: :: tjdg :: 'T_'
+  {{com Graded Term Assignment }}
+by
+
+  ------------------------ :: Id
+  mid @ x : A |- x : A
+
+  -------------------- :: UnitI
+  Empty@Empty |- i : I
+
+  g1@G1 |- t1 : A
+  g2@G2 |- t2 : B
+  ------------------------------------ :: TenI
+  {g1,g2}@{G1,G2} |- (t1,t2) : A [*] B
+
+  g2@G2 |- t1 : A [*] B
+  {g1,r1,r1,g3}@{G1,x : A,y : B,G3} |- t2 : C
+  ------------------------------------------------------------- :: TenE
+  {g1,h{r2 * g2},g3}@{G1,G2,G3} |- let ( x , y ) = t1 in t2 : C
+
+  {g,r1}@{G,x : A} |- t : B
+  ------------------------- :: FunI
+  g@G |- \x.t : (A@r1) -> B
+  
+  g2@G2 |- t2 : A
+  g1@G1 |- t1 : (A @ r1) -> B
+  ------------------------------------ :: FunE
+  {g1,h{r2 * g2}}@{G1,G2} |- t1 t2 : B
+
+  g@G |- t : A
+  ---------------------------- :: BoxI
+  {r * g}@G |- Box t : Box r A
+
+  g2@G2 |- t1 : Box r A && {g1,r,g3}@{G1,x : A,G3} |- t2 : B
+  ---------------------------------------------------------- :: BoxE
+  {g1,g2,g3}@{G1,G2,G3} |- let Box x = t1 in t2 : B
+
+  g1@G1 |- t : A && g1 <= g2
+  -------------------------- :: Sub
+  g2@G2 |- t : A
+
+  {g1,g2}@{G1,G2} |- t : B
+  ---------------------------------- :: Weak
+  {g1,aid,g2}@{G1,x : A,G2} |- t : B
+
+  {g1,r1,r2,g2}@{G1,x : A,y : A,G2} |- t : B
+  --------------------------------------------- :: Cont
+  {g1,(r1 + r2),g2}@{G1,x : A,G2} |- [x/y]t : B
+
+  {g1,r1,r2,g2}@{G1,x : A,y : B,G2} |- t : C
+  ------------------------------------------ :: Ex
+  {g1,r2,r1,g2}@{G1,y : B,x : A,G2} |- t : C

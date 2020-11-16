@@ -53,7 +53,15 @@
 	  <div class="col-md-2">
 	  </div>
 	  <div class="col-md-10" style="font-size:20px;">
-	    $body$            
+	    $body$
+            <hr>
+            <p>
+            $if(twitter-post)$
+            <em>Leave a comment on <a href=$twitter-post$>Twitter</a> or send me an <a href="mailto:$metadata.email$">Email</a></em>
+            $else$
+            <em>Leave a comment by sending me an <a href="mailto:$metadata.email$">Email</a></em>
+            $endif$
+            </p>
 	  <div class="col-md-1">
 	  </div>
 	</div>

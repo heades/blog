@@ -48,49 +48,53 @@
 	  </div>
 	  <div class="col-md-10" style="font-size:20px;">
 	    <p>This is a guest post by Aubrey Bryant.</p>
-<p>If you are searching for a logical system as exact and careful with resources as that infamous miser, Ebenezer Scrooge, look no further. Graded modal linear logic is the system for you. Like linear logic, it is resource-sensitive; however, it goes a step further and tracks not just binary usage, but usage along a continuum of grades, specified by a graded context. The grades can be defined in many different ways, but for simplicity while introducing the concept, let’s imagine that the grades range over the natural numbers, and indicate the number of times a formula must be used. When a formula <span class="math display">\[A\]</span> is needed at a grade of <span class="math display">\[r\]</span> to yield a consequent <span class="math display">\[B\]</span>, the grade for <span class="math display">\[A\]</span> must be added to the account for <span class="math display">\[B\]</span>, once for each use of <span class="math display">\[A\]</span> required to yield <span class="math display">\[B\]</span>. Thus, <span class="math display">\[A\]</span>’s grade must be multiplied by <span class="math display">\[r\]</span> in order to yield the required number of <span class="math display">\[A\]</span>’s. To illustrate, here is the cut rule in our graded system:</p>
-<center>
-<img width="60%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-rule.png">
-</center>
-<p><span class="math display">\[\Gamma_1 \odot \gamma_1\]</span> is the context yielding one <span class="math display">\[A\]</span>, where <span class="math display">\[\gamma_1\]</span> is a vector containing a grade for every corresponding element of <span class="math display">\[\Gamma_1\]</span>; the grade describes the usage for each resource in the context. In our current example, it indicates the number of times that resource must be used. Note that <span class="math display">\[\gamma_1\]</span> is multiplied by <span class="math display">\[r\]</span> to yield the required number of <span class="math display">\[A\]</span>’s.</p>
-<p>Here is a very simple example that illustrates how the grading works. In this derivation, <span class="math display">\[A \rhd A\]</span> is only derivable when there are two <span class="math display">\[A\]</span>’s available to use:</p>
-<center>
-<img width="60%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/example-derivation.png">
-</center>
-<p>While this watchful precision can be somewhat uncomfortable if you’re Bob Cratchitt asking for an extra lump of coal for the stove, remember that Scrooge became a wealthy man through such careful accounting. And, literary references aside, I actually appreciate the subtlety and precision that this system requires. I have been working through a cut-elimination proof for this system for the past couple of months, following the blueprint laid out by <a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf">Melliès</a>. I started with what I thought were the juiciest and most interesting steps, like cuts with tensor products and linear implication playing primary or secondary roles. Then I turned to what I thought would be the boring bits, like those involving the axiom of identity and the tensor unit rules. I expected these to be pretty rote - after all, they are specifically designed to do nothing. But in a system that keeps such careful account, doing nothing is surprisingly difficult. In fact, under the first system of rules, the left rule for tensor unit introduction caused cut-elimination to fail.</p>
-<p>Our initial formulation of the left rule for the tensor unit was:</p>
-<center>
-<img width="40%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/unitL.png">
-</center>
-<p>Notice that this rule allows you to introduce <span class="math display">\[I\]</span> into the context, at a grade of <span class="math display">\[1\]</span>. In ordinary linear logic, the tensor unit is sometimes called the ‘empty resource’, unique among linear hypotheses in that it is the only one derivable from the empty context, and similarly the only one that can be discarded without being used. This behavior is a clue that the grade of <span class="math display">\[1\]</span> is incorrect, since anything with a nonzero grade makes an impact on our ‘bill’, in the language of Scrooge. And certainly, the careful accounting demanded by our system made a vivid case for why the unit grade was wrong.</p>
-<p>Here is an illustration of the problem, using cut (defined above) and contraction, defined as:</p>
-<center>
-<img width="65%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/contraction.png">
-</center>
-<p>Following the cut-elimination procedure outlined by <a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf">Melliès</a>, the general strategy is to show how every complex cut can be transformed into a simpler cut (or multiple simpler cuts). Applied repeatedly, this process moves the application of the cut rule into simpler and simpler proof steps until it is shown to be unnecessary at the axiom steps. So, in this case the task is to move the application of the cut rule to before the application of the left rule for the unit, without changing the final conclusion of the proof. For the case where the cut step follows left introduction of the tensor unit, the following proof transformation is required:</p>
-<center>
-<img width="70%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-1.png">
-</center>
-<p>becomes:</p>
-<center>
-<img width="70%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-2.png">
-</center>
-<p>To match the conclusion of the first proof, <span class="math display">\[I\]</span> must have a grade of <span class="math display">\[r\]</span> in the conclusion of the second proof. The proof above accomplishes this by doing <span class="math display">\[r\]</span> applications of the left unit rule, and then subsequently <span class="math display">\[r-1\]</span> applications of the contraction rule. This works for any <span class="math display">\[r &gt; 0\]</span>, but not for the case when <span class="math display">\[r = 0\]</span>. Furthermore, this solution fails entirely when addition is not defined in the system, or when <span class="math display">\[1 + 1 \notin \mathcal{R}\]</span>, as this is the only option available to match the grading.</p>
-<p>The root of the problem is that <span class="math display">\[I\]</span> gets a grade of <span class="math display">\[1\]</span> in the left unit rule specified above. This means that when it is part of a context brought across a cut, it is multiplied by the required grade <span class="math display">\[r\]</span>, and <span class="math display">\[1 * r = r\]</span>. Besides breaking cut elimination, grading <span class="math display">\[I\]</span> with <span class="math display">\[1\]</span> does not accurately capture the behavior we want, because we want to be able to ‘throw it away’ or leave it out of the grade accounting so we can use the tensor identity axioms:</p>
-<p><span class="math display">\[
-\begin{array}{l}
-    A \rhd I \rightarrow A\\
-    I \rhd A \rightarrow A
-\end{array}
-\]</span></p>
-<p>With <span class="math display">\[I\]</span> at a grade of <span class="math display">\[1\]</span>, we aren’t allowed to toss it out and keep only the <span class="math display">\[A\]</span>. While <span class="math display">\[1\]</span> is a tempting grade to use, being the multiplicative unit, it does not produce the behavior we expect from <span class="math display">\[I\]</span>. The best option is to grade it at <span class="math display">\[0\]</span> in its left rule, but then the rule is equivalent to weakening, and so we just let weakening take on both roles and throw out the left rule for the tensor unit altogether. This gives us the control we want while still allowing us to use the tensor identity axioms when weakening is allowed - that is, whenever <span class="math display">\[0 \in \mathcal{R}\]</span>. The new system has just a single right rule for tensor unit, and we have already proven cut elimination for it.</p>
-<p>Checkout out new system the Graded Lambek Calculus below:</p>
-<center>
-<img width="90%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/system-1.png">
-</center>
-<center>
-<img width="70%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/system-2.png">
-</center>            
+     <p>If you are searching for a logical system as exact and careful with resources as that infamous miser, Ebenezer Scrooge, look no further. Graded modal linear logic is the system for you. Like linear logic, it is resource-sensitive; however, it goes a step further and tracks not just binary usage, but usage along a continuum of grades, specified by a graded context. The grades can be defined in many different ways, but for simplicity while introducing the concept, let’s imagine that the grades range over the natural numbers, and indicate the number of times a formula must be used. When a formula <span class="math display">\[A\]</span> is needed at a grade of <span class="math display">\[r\]</span> to yield a consequent <span class="math display">\[B\]</span>, the grade for <span class="math display">\[A\]</span> must be added to the account for <span class="math display">\[B\]</span>, once for each use of <span class="math display">\[A\]</span> required to yield <span class="math display">\[B\]</span>. Thus, <span class="math display">\[A\]</span>’s grade must be multiplied by <span class="math display">\[r\]</span> in order to yield the required number of <span class="math display">\[A\]</span>’s. To illustrate, here is the cut rule in our graded system:</p>
+     <center>
+     <img width="60%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-rule.png">
+     </center>
+     <p><span class="math display">\[\Gamma_1 \odot \gamma_1\]</span> is the context yielding one <span class="math display">\[A\]</span>, where <span class="math display">\[\gamma_1\]</span> is a vector containing a grade for every corresponding element of <span class="math display">\[\Gamma_1\]</span>; the grade describes the usage for each resource in the context. In our current example, it indicates the number of times that resource must be used. Note that <span class="math display">\[\gamma_1\]</span> is multiplied by <span class="math display">\[r\]</span> to yield the required number of <span class="math display">\[A\]</span>’s.</p>
+     <p>Here is a very simple example that illustrates how the grading works. In this derivation, <span class="math display">\[A \rhd A\]</span> is only derivable when there are two <span class="math display">\[A\]</span>’s available to use:</p>
+     <center>
+     <img width="60%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/example-derivation.png">
+     </center>
+     <p>While this watchful precision can be somewhat uncomfortable if you’re Bob Cratchitt asking for an extra lump of coal for the stove, remember that Scrooge became a wealthy man through such careful accounting. And, literary references aside, I actually appreciate the subtlety and precision that this system requires. I have been working through a cut-elimination proof for this system for the past couple of months, following the blueprint laid out by <a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf">Melliès</a>. I started with what I thought were the juiciest and most interesting steps, like cuts with tensor products and linear implication playing primary or secondary roles. Then I turned to what I thought would be the boring bits, like those involving the axiom of identity and the tensor unit rules. I expected these to be pretty rote - after all, they are specifically designed to do nothing. But in a system that keeps such careful account, doing nothing is surprisingly difficult. In fact, under the first system of rules, the left rule for tensor unit introduction caused cut-elimination to fail.</p>
+     <p>Our initial formulation of the left rule for the tensor unit was:</p>
+     <center>
+     <img width="40%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/unitL.png">
+     </center>
+     <p>Notice that this rule allows you to introduce <span class="math display">\[I\]</span> into the context, at a grade of <span class="math display">\[1\]</span>. In ordinary linear logic, the tensor unit is sometimes called the ‘empty resource’, unique among linear hypotheses in that it is the only one derivable from the empty context, and similarly the only one that can be discarded without being used. This behavior is a clue that the grade of <span class="math display">\[1\]</span> is incorrect, since anything with a nonzero grade makes an impact on our ‘bill’, in the language of Scrooge. And certainly, the careful accounting demanded by our system made a vivid case for why the unit grade was wrong.</p>
+     <p>Here is an illustration of the problem, using cut (defined above) and contraction, defined as:</p>
+     <center>
+     <img width="65%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/contraction.png">
+     </center>
+     <p>Following the cut-elimination procedure outlined by <a href="https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf">Melliès</a>, the general strategy is to show how every complex cut can be transformed into a simpler cut (or multiple simpler cuts). Applied repeatedly, this process moves the application of the cut rule into simpler and simpler proof steps until it is shown to be unnecessary at the axiom steps. So, in this case the task is to move the application of the cut rule to before the application of the left rule for the unit, without changing the final conclusion of the proof. For the case where the cut step follows left introduction of the tensor unit, the following proof transformation is required:</p>
+     <center>
+     <img width="70%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-1.png">
+     </center>
+     <p>becomes:</p>
+     <center>
+     <img width="70%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-2.png">
+     </center>
+     <p>To match the conclusion of the first proof, <span class="math display">\[I\]</span> must have a grade of <span class="math display">\[r\]</span> in the conclusion of the second proof. The proof above accomplishes this by doing <span class="math display">\[r\]</span> applications of the left unit rule, and then subsequently <span class="math display">\[r-1\]</span> applications of the contraction rule. This works for any <span class="math display">\[r &gt; 0\]</span>, but not for the case when <span class="math display">\[r = 0\]</span>. Furthermore, this solution fails entirely when addition is not defined in the system, or when <span class="math display">\[1 + 1 \notin \mathcal{R}\]</span>, as this is the only option available to match the grading.</p>
+     <p>The root of the problem is that <span class="math display">\[I\]</span> gets a grade of <span class="math display">\[1\]</span> in the left unit rule specified above. This means that when it is part of a context brought across a cut, it is multiplied by the required grade <span class="math display">\[r\]</span>, and <span class="math display">\[1 * r = r\]</span>. Besides breaking cut elimination, grading <span class="math display">\[I\]</span> with <span class="math display">\[1\]</span> does not accurately capture the behavior we want, because we want to be able to ‘throw it away’ or leave it out of the grade accounting so we can use the tensor identity axioms:</p>
+     <p><span class="math display">\[
+     \begin{array}{l}
+         A \rhd I \rightarrow A\\
+         I \rhd A \rightarrow A
+     \end{array}
+     \]</span></p>
+     <p>With <span class="math display">\[I\]</span> at a grade of <span class="math display">\[1\]</span>, we aren’t allowed to toss it out and keep only the <span class="math display">\[A\]</span>. While <span class="math display">\[1\]</span> is a tempting grade to use, being the multiplicative unit, it does not produce the behavior we expect from <span class="math display">\[I\]</span>. The best option is to grade it at <span class="math display">\[0\]</span> in its left rule, but then the rule is equivalent to weakening, and so we just let weakening take on both roles and throw out the left rule for the tensor unit altogether. This gives us the control we want while still allowing us to use the tensor identity axioms when weakening is allowed - that is, whenever <span class="math display">\[0 \in \mathcal{R}\]</span>. The new system has just a single right rule for tensor unit, and we have already proven cut elimination for it.</p>
+     <p>Checkout out new system the Graded Lambek Calculus below:</p>
+     <center>
+     <img width="90%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/system-1.png">
+     </center>
+     <center>
+     <img width="70%" src="/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/system-2.png">
+     </center>
+            <hr>
+            <p>
+                        <em>Leave a comment by sending me an <a href="mailto:">Email</a></em>
+                        </p>
 	  <div class="col-md-1">
 	  </div>
 	</div>
