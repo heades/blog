@@ -5,5 +5,5 @@ objects := $(patsubst %.md,%.html,$(subst $(source),$(output),$(sources)))
 
 all : $(objects)
 
-$(output)/%.html : %.md
+$(output)/%.html : %.md post.yaml
 	pandoc -s -d post -o $@ $<

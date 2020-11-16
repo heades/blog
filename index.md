@@ -6,10 +6,6 @@ title: Metatheorem
 
 ::: list-group
 ::: list-group-item
-### [Strict vs Lax Graded Necessiity Modalities](/)
-15 November 2020
-:::
-::: list-group-item
 ### [Come One, Come All! The AU CS Colloquium Series is Open to All](/posts/2020-08-17-Colloquium.html)
 :::
 ::: list-group-item
