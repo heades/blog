@@ -19,3 +19,6 @@ highlight-style: pygments
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+css:
+- https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css
