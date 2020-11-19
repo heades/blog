@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-15T18:58:24-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Metatheorem</title><entry><title type="html">Come One, Come All! The AU CS Colloquium Series is Open to All</title><link href="http://localhost:4000/2020/08/17/Colloquium.html" rel="alternate" type="text/html" title="Come One, Come All! The AU CS Colloquium Series is Open to All" /><published>2020-08-17T00:00:00-04:00</published><updated>2020-08-17T00:00:00-04:00</updated><id>http://localhost:4000/2020/08/17/Colloquium</id><content type="html" xml:base="http://localhost:4000/2020/08/17/Colloquium.html">&lt;p&gt;This semester I’m the faculty chair of the AU CS Colloquium, and due
+to it being completely online this semester I decided to open it up to
+the wider community.  So I’ll be doing some advertising here to get
+y’all to come and attend some great presentations.&lt;/p&gt;
+
+&lt;p&gt;The complete schedule can be found here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://the-au-forml-lab.github.io/colloquium.html&quot;&gt;The Colloquium Schedule&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Topics will vary and will include PL, category theory, security, and diversity in CS this semester.&lt;/p&gt;
+
+&lt;p&gt;If you would like to attend please RSVP to &lt;a href=&quot;mailto:harley.eades@gmail.com&quot;&gt;me&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first presentation is by a NEW AU faculty member, Dr. Edward Tremel:&lt;/p&gt;
+
+&lt;p&gt;Title: &lt;strong&gt;Dependable Systems for Managing Valuable Data&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Abstract:&lt;/p&gt;
+
+&lt;p&gt;Distributed computing systems have become an essential piece of infrastructure for today’s businesses, organizations, and governments; they store, manage and interpret vast amounts of data, and allow groups of people to communicate and take coordinated actions. With the emergence of Internet-of-Things devices, distributed systems are also responsible for monitoring and automating the physical world. As a result, distributed systems face competing demands: they must be dependable enough to be relied upon for essential tasks, but responsive enough to handle requests with tight time constraints.&lt;/p&gt;
+
+&lt;p&gt;My research focuses on building distributed systems that provide dependability guarantees while still maintaining high performance. In this talk I will describe my work on one of these systems, Derecho, which is a library for building replicated datacenter applications. Derecho allows distributed services to increase their fault-tolerance and scalability by organizing servers into replicated shards, while achieving incredibly high data throughput and low response latency. It accomplishes this by redesigning state-machine-replication and fault-management protocols to use non-blocking, asynchronous communication, and separating data flow from control messages. Derecho also includes optional mechanisms for making services durable by logging state to persistent storage, and in the second half of my talk I will describe my work on a distributed restart algorithm for Derecho and other durable replicated services. This algorithm efficiently restarts a sharded, replicated service from state stored in persistent logs, while respecting node placement constraints and ensuring the state is mutually consistent across all subsystems.&lt;/p&gt;
+
+&lt;p&gt;More details can be found &lt;a href=&quot;https://the-au-forml-lab.github.io/colloquium_talks/Tremel.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">This semester I’m the faculty chair of the AU CS Colloquium, and due to it being completely online this semester I decided to open it up to the wider community. So I’ll be doing some advertising here to get y’all to come and attend some great presentations.</summary></entry><entry><title type="html">A Simplification to LNL Models</title><link href="http://localhost:4000/2020/04/10/A-Simplification-to-LNL-Models.html" rel="alternate" type="text/html" title="A Simplification to LNL Models" /><published>2020-04-10T00:00:00-04:00</published><updated>2020-04-10T00:00:00-04:00</updated><id>http://localhost:4000/2020/04/10/A-Simplification-to-LNL-Models</id><content type="html" xml:base="http://localhost:4000/2020/04/10/A-Simplification-to-LNL-Models.html">&lt;div id=&quot;divCheckbox&quot; style=&quot;display: none;&quot;&gt;
+$$
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\func}[1]{\mathsf{#1}}
+\newcommand{\Lin}[0]{\func{Lin}}
+\newcommand{\Mny}[0]{\func{Mny}}
+\newcommand{\Forget}[0]{\func{Forget}}
+\newcommand{\Free}[0]{\func{Free}}
+\newcommand{\mto}[0]{\to}
+\newcommand{\Hom}[3]{\mathsf{Hom}_{\cat{#1}}(#2,#3)}
+\newcommand{\interp}[1]{[\negthinspace[#1]\negthinspace]}
+$$
+&lt;/div&gt;
+
+&lt;p&gt;This is a known result that I’m using in some recent work I am writing
+up, and so I figured why not write a post about it.&lt;/p&gt;
+
+&lt;p&gt;In this post I am going to explain a simplification to &lt;a href=&quot;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.36.5454&amp;amp;rep=rep1&amp;amp;type=pdf&quot;&gt;Benton’s
+beautiful LNL
+models&lt;/a&gt;
+that reduces their complexity, but retains their expressive power.  I
+learned of this simplification from &lt;a href=&quot;https://www.irif.fr/~mellies/&quot;&gt;Paul-André
+Melliès’&lt;/a&gt; writings.  First, let’s take
+a look at the original definition of LNL models, and how they relate
+to linear categories.&lt;/p&gt;
+
+&lt;h2 id=&quot;lnl-models&quot;&gt;LNL Models&lt;/h2&gt;
+
+&lt;p&gt;A &lt;strong&gt;Linear/Non-Linear (LNL) model&lt;/strong&gt; is an symmetric monoidal adjunction &lt;script type=&quot;math/tex&quot;&gt;\cat{C} : \Lin \dashv \Mny : \cat{M}&lt;/script&gt;, where:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\cat{C}&lt;/script&gt; is a cartesian closed category,&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt; is a symmetric monoidal closed category,&lt;/li&gt;
+  &lt;li&gt;(Linear) &lt;script type=&quot;math/tex&quot;&gt;\Lin : \cat{C} \mto \cat{M}&lt;/script&gt; is a symmetric monoidal functor, and&lt;/li&gt;
+  &lt;li&gt;(Many)   &lt;script type=&quot;math/tex&quot;&gt;\Mny : \cat{M} \mto \cat{C}&lt;/script&gt; is a symmetric monoidal functor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Intuitively, we can think of &lt;script type=&quot;math/tex&quot;&gt;\cat{C}&lt;/script&gt; as a model of intuitionistic
+logic (or the simply-typed &lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt;-calculus), &lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt; as a
+model of intuitionistic linear logic, and the functors &lt;script type=&quot;math/tex&quot;&gt;\Lin&lt;/script&gt; and
+&lt;script type=&quot;math/tex&quot;&gt;\Mny&lt;/script&gt; as modalities that allows one to translate formulas on one
+side to the other.  The adjunction &lt;script type=&quot;math/tex&quot;&gt;\cat{C} : \Lin \dashv \Mny :
+\cat{M}&lt;/script&gt; ensures that these translations are well behaved.&lt;/p&gt;
+
+&lt;p&gt;LNL models are equivalent to Bierman’s linear categories.  In fact, I
+wrote a &lt;a href=&quot;/2018/07/24/Linear-Categories-A-Folklore-Simplification.html&quot;&gt;blog
+post&lt;/a&gt; in
+2018 on a simplification to linear categories, so check that post out
+if you are unfamiliar with linear categories.  The of-course modality
+of linear logic, denoted by &lt;script type=&quot;math/tex&quot;&gt;!A&lt;/script&gt;, is characterized in linear
+categories by a symmetric monoidal comonad on a symmetric monoidal
+closed category.  Benton showed that we can define the of-course
+modality as &lt;script type=&quot;math/tex&quot;&gt;!A = \Lin(\Mny\,A) : \cat{M} \mto \cat{M}&lt;/script&gt;, and hence,
+is the comonad induced by the adjunction.  Furthermore, since the
+adjunction is monoidal and between two symmetric monoidal functors,
+the induced comonad is symmetric monoidal as well.&lt;/p&gt;
+
+&lt;p&gt;An extremely useful result shown by Benton is that the functor &lt;script type=&quot;math/tex&quot;&gt;\Lin :
+\cat{C} \mto \cat{M}&lt;/script&gt; is strong monoidal; e.g., the following
+isomorphisms hold:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{array}{ll}
+\Lin \perp = I\\
+\Lin\,(X \times Y) = \Lin\,X \otimes \Lin\,Y
+\end{array}&lt;/script&gt;
+
+&lt;p&gt;This is enough to ensure that the category &lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt; with the
+induced comonad of the adjunction forms a linear category.  Thus, LNL
+models imply linear categories, but the other direction is more
+interesting.&lt;/p&gt;
+
+&lt;p&gt;Given a linear category &lt;script type=&quot;math/tex&quot;&gt;(\cat{L}, !, \varepsilon, \delta)&lt;/script&gt; we need
+to find a cartesian closed category and a symmetric monoidal closed
+category that form an LNL model.  It is well known that for any comonad
+&lt;script type=&quot;math/tex&quot;&gt;c : \cat{A} \mto \cat{A}&lt;/script&gt; on some category &lt;script type=&quot;math/tex&quot;&gt;\cat{A}&lt;/script&gt;, there are
+two adjunctions &lt;script type=&quot;math/tex&quot;&gt;\cat{A}^c : \Forget \dashv \Free : \cat{A}&lt;/script&gt; and
+&lt;script type=&quot;math/tex&quot;&gt;\cat{A}_c : \Forget \dashv \Free : \cat{A}&lt;/script&gt; between the category
+&lt;script type=&quot;math/tex&quot;&gt;\cat{A}&lt;/script&gt; and the coEilenberg-Moore category – the category of
+&lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt;-coalgebras – and the Kleisli category – the category of free
+&lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt;-coalgebra respectively, where &lt;script type=&quot;math/tex&quot;&gt;\Forget(A,h_A) = A&lt;/script&gt; and
+&lt;script type=&quot;math/tex&quot;&gt;\Free(A) = (!A,\delta_A)&lt;/script&gt; are the forgetful and free functors.
+Benton showed that &lt;script type=&quot;math/tex&quot;&gt;\cat{L}^!&lt;/script&gt; is cartesian, but it is not the case
+in general that &lt;script type=&quot;math/tex&quot;&gt;\cat{L}_!&lt;/script&gt; is, because the product of two free
+coalgebras may not be free.  Furthermore, neither of these are
+closed in general.&lt;/p&gt;
+
+&lt;p&gt;To remedy these issues Benton found that the free coalgebras have an
+internal hom between them which is also free, and thus, by taking the
+full subcategory of &lt;script type=&quot;math/tex&quot;&gt;\cat{L}^!&lt;/script&gt; of all the exponential objects –
+objects with an internal hom – then we get a cartesian closed
+category, and this full subcategory contains &lt;script type=&quot;math/tex&quot;&gt;\cat{L}_!&lt;/script&gt;.  Then he
+identifies a second cartesian closed category of all of the finite
+products of free coalgebras in the category of exponential objects. We
+can use either of these to form a LNL model.&lt;/p&gt;
+
+&lt;p&gt;This is a lot of work to get an internal hom, but is it worth the
+work?  Is it possible to ask for the category &lt;script type=&quot;math/tex&quot;&gt;\cat{C}&lt;/script&gt; in the
+definition of LNL model to be simply cartesian, and then finding such
+a category from a linear category is easy, it’s &lt;script type=&quot;math/tex&quot;&gt;\cat{L}^!&lt;/script&gt;.  The
+answer turns out to be positive.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-simplified-model&quot;&gt;The Simplified Model&lt;/h2&gt;
+
+&lt;p&gt;Taking the following simplified model we show that it implies a linear
+category, we do not show the opposite, because it follows as a
+corollary from the original proof summarized above.&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;Simplified Linear/Non-Linear (LNL) model&lt;/strong&gt; is an &lt;strong&gt;adjunction&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;\cat{C} : \Lin \dashv \Mny : \cat{M}&lt;/script&gt;, where:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\cat{C}&lt;/script&gt; is a &lt;strong&gt;cartesian category&lt;/strong&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt; is a symmetric monoidal closed category,&lt;/li&gt;
+  &lt;li&gt;(Linear) &lt;script type=&quot;math/tex&quot;&gt;\Lin : \cat{C} \mto \cat{M}&lt;/script&gt; is a strong symmetric monoidal functor, and&lt;/li&gt;
+  &lt;li&gt;(Many)   &lt;script type=&quot;math/tex&quot;&gt;\Mny : \cat{M} \mto \cat{C}&lt;/script&gt; &lt;strong&gt;is functor&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In the above I highlight the simplifications which are actually
+generalizations.  We can see that this definition removes the
+requirements that &lt;script type=&quot;math/tex&quot;&gt;\cat{C}&lt;/script&gt; be closed, the adjunction be symmetric
+monoidal, and the functor &lt;script type=&quot;math/tex&quot;&gt;\Mny&lt;/script&gt; be monoidal.  This is nice, because
+generalizing the definition makes finding LNL models easier.&lt;/p&gt;
+
+&lt;p&gt;The requirement that &lt;script type=&quot;math/tex&quot;&gt;\Lin&lt;/script&gt; be strong symmetric monoidal paired with
+an adjunction is a particularly strong property.  First, suppose
+&lt;script type=&quot;math/tex&quot;&gt;\cat{A} : \func{F} \dashv \func{G} : \cat{B}&lt;/script&gt; is an adjunction
+between monoidal categories; so &lt;script type=&quot;math/tex&quot;&gt;\func{F}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\func{G}&lt;/script&gt; are plan
+functors. The there are two really nice results:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf&quot;&gt;(p. 108, Proposition 12)&lt;/a&gt;
+Every lax monoidal structure, &lt;script type=&quot;math/tex&quot;&gt;m : \func{F}X \otimes \func{F}Y \mto
+\func{F}(X \bullet Y)&lt;/script&gt; on &lt;script type=&quot;math/tex&quot;&gt;\func{F} : \cat{A} \mto \cat{B}&lt;/script&gt;,
+induces an oplax monoidal structure &lt;script type=&quot;math/tex&quot;&gt;n : \func{G}A \bullet \func{G}B
+\mto \func{G}(A \otimes B)&lt;/script&gt; on &lt;script type=&quot;math/tex&quot;&gt;\func{G} : \cat{B} \mto \cat{A}&lt;/script&gt;,
+and conversely.  Furthermore, these mappings from &lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; and
+back define an isomorphism giving a one-to-one relationship between
+the lax monoidal structure on one side of the adjunction and the
+other.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf&quot;&gt;(p. 112, Proposition 14)&lt;/a&gt;
+Suppose &lt;script type=&quot;math/tex&quot;&gt;(\func{F},m)&lt;/script&gt; is lax monoidal.  Then the adjunction
+&lt;script type=&quot;math/tex&quot;&gt;\cat{A} : \func{F} \dashv \func{G} : \cat{B}&lt;/script&gt; lifts to a monoidal adjunction
+&lt;script type=&quot;math/tex&quot;&gt;(\cat{A},m) : \func{F} \dashv \func{G} : (\cat{B},p)&lt;/script&gt; iff
+the lax monoidal functor &lt;script type=&quot;math/tex&quot;&gt;\func{F}&lt;/script&gt; is strong.  In the right-to-left
+case, the lax structure &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; is associated with &lt;script type=&quot;math/tex&quot;&gt;\func{G}&lt;/script&gt; using
+part 1 and setting &lt;script type=&quot;math/tex&quot;&gt;n = m^{-1}&lt;/script&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We can add symmetry to the above properties, and they still hold.
+Thus, the second result above gives us a means of recovering a lax
+monoidal structure on the functor &lt;script type=&quot;math/tex&quot;&gt;\Mny : \cat{M} \mto \cat{C}&lt;/script&gt;.
+Therefore, simplified LNL models imply the following definition:&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;Semi-simplified Linear/Non-Linear (SSLNL) model&lt;/strong&gt; is an symmetric monoidal adjunction &lt;script type=&quot;math/tex&quot;&gt;\cat{C} : \Lin \dashv \Mny : \cat{M}&lt;/script&gt;, where:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\cat{C}&lt;/script&gt; is a &lt;strong&gt;cartesian category&lt;/strong&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt; is a symmetric monoidal closed category,&lt;/li&gt;
+  &lt;li&gt;(Linear) &lt;script type=&quot;math/tex&quot;&gt;\Lin : \cat{C} \mto \cat{M}&lt;/script&gt; is a strong symmetric monoidal functor, and&lt;/li&gt;
+  &lt;li&gt;(Many)   &lt;script type=&quot;math/tex&quot;&gt;\Mny : \cat{M} \mto \cat{C}&lt;/script&gt; is a symmetric monoidal functor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Showing that this definition implies a linear category is easy, we can
+just use &lt;a href=&quot;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.36.5454&amp;amp;rep=rep1&amp;amp;type=pdf&quot;&gt;Benton’s proof (p. 16, Section
+2.2.1)&lt;/a&gt;. Thus,
+the simplified definition of a LNL model implies linear category.&lt;/p&gt;
+
+&lt;p&gt;At this point the only question left is, but what about non-linear
+implications / functions?  In the original model the cartesian closed
+category is a model of non-linear logic / simply-type
+&lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt;-calculus and on the other side we have a model of linear
+logic.  Can we still obtain an encoding of non-linear logic using the
+simplified definition?&lt;/p&gt;
+
+&lt;p&gt;We can indeed by first exploiting the adjunction and the fact that
+&lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt; is closed.  Let &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;B&lt;/script&gt; be objects in &lt;script type=&quot;math/tex&quot;&gt;\cat{C}&lt;/script&gt;
+and &lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt; respectively.  Then define the object:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;X \Rightarrow B := \Lin\,X \multimap B&lt;/script&gt;
+
+&lt;p&gt;Then there is a bijection:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{array}{llll}
+\Hom{C}{X \bullet Y}{\Mny\,B}
+&amp; \cong &amp; \Hom{M}{\Lin(X \bullet Y)}{B} \\
+&amp; \cong &amp; \Hom{M}{\Lin\,X \otimes \Lin\,Y)}{B} \\
+&amp; \cong &amp; \Hom{M}{\Lin\,X}{\Lin\,Y \multimap B} \\
+&amp; = &amp; \Hom{M}{\Lin\,X}{Y \Rightarrow B} \\
+&amp; \cong &amp; \Hom{C}{X}{\Mny\,(Y \Rightarrow B)}
+\end{array} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;This is a kind of currying, and is enough to interpret non-linear
+logic where we encode the formulas in the form of &lt;script type=&quot;math/tex&quot;&gt;\Mny\,A&lt;/script&gt; for
+linear formulas &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt; in &lt;script type=&quot;math/tex&quot;&gt;\cat{M}&lt;/script&gt;. In more detail, the
+interpretation is in the form of a faithful functor defined on types
+as follows:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{array}{ll}
+\interp{\top} = I\\
+\interp{A \times B} = \interp{A} \otimes \interp{B}\\
+\interp{A \Rightarrow B} = (\Lin\,\Mny\,\interp{A} \multimap \interp{B})
+\end{array}&lt;/script&gt;
+
+&lt;p&gt;Then sequents &lt;script type=&quot;math/tex&quot;&gt;x_1 : A_1, \cdots, x_i : A_i \vdash t : b&lt;/script&gt; are
+interpreted as morphisms from &lt;script type=&quot;math/tex&quot;&gt;\Mny\,\interp{A_1} \bullet \cdots \bullet
+\Mny\,\interp{A_i}&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;\Mny\,\interp{B}&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;Using this we can show that every equation in the theory is preserved
+by the interpretation.  This proves that the interpretation soundly
+models the theory in an LNL model.  Faithfulness ensures that every
+proof is caputed by our model.&lt;/p&gt;
+
+&lt;p&gt;This simplifies the model a lot, but how does it affect the syntactic
+side of things?  Well, we get to remove the rules for non-linear
+implication, and derieve them which is appealing both theoretically
+and practically.&lt;/p&gt;</content><author><name></name></author><summary type="html">$$ \newcommand{\cat}[1]{\mathcal{#1}} \newcommand{\func}[1]{\mathsf{#1}} \newcommand{\Lin}[0]{\func{Lin}} \newcommand{\Mny}[0]{\func{Mny}} \newcommand{\Forget}[0]{\func{Forget}} \newcommand{\Free}[0]{\func{Free}} \newcommand{\mto}[0]{\to} \newcommand{\Hom}[3]{\mathsf{Hom}_{\cat{#1}}(#2,#3)} \newcommand{\interp}[1]{[\negthinspace[#1]\negthinspace]} $$</summary></entry><entry><title type="html">Online Seminar: A gentle introduction to template games</title><link href="http://localhost:4000/2020/04/10/A-gentle-introduction-to-template-games.html" rel="alternate" type="text/html" title="Online Seminar: A gentle introduction to template games" /><published>2020-04-10T00:00:00-04:00</published><updated>2020-04-10T00:00:00-04:00</updated><id>http://localhost:4000/2020/04/10/A-gentle-introduction-to-template-games</id><content type="html" xml:base="http://localhost:4000/2020/04/10/A-gentle-introduction-to-template-games.html">&lt;p&gt;&lt;strong&gt;Update: Find the recording of this talk &lt;a href=&quot;https://youtu.be/b6FHzy5xJZ4&quot;&gt;here&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This year I’m the faculty chair of the School of Computer and Cyber
+Sciences’ Colloquium Series.  As many of you, I’ve had to transition
+this course online.  Thus, when choosing the final speaker of the
+semester I did not take distance into consideration, because the
+requirement to physically come to Augusta University and present is no
+longer required.  In addition, since there is no need for financial
+support, I’m also more free in who I ask to present.&lt;/p&gt;
+
+&lt;p&gt;So I am happy to announce that &lt;a href=&quot;https://www.irif.fr/~mellies/&quot;&gt;Paul-André
+Melliès&lt;/a&gt; will be our final presenter
+of the semester, but that’s not all!  I have 100 seats available on my
+Zoom account, and only 30 of them will be needed for AU students and
+faculty.  That leaves open 70 seats!  So I am taking RSVPs from anyone
+who would like to attend the talk online.&lt;/p&gt;
+
+&lt;p&gt;The presentation information is as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;When:&lt;/strong&gt; April 24th at 2pm EDT / 8pm CEST&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;RSVP:&lt;/strong&gt; April 20th by email (&lt;a href=&quot;mailto:harley.eades@gmail.com&quot;&gt;harley.eades@gmail.com&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Who:&lt;/strong&gt; &lt;a href=&quot;https://www.irif.fr/~mellies/&quot;&gt;Paul-André Melliès&lt;/a&gt; (CNRS, University of Paris)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Title:&lt;/strong&gt; “A gentle introduction to template games”&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Abstract:&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Game semantics is the art of interpreting formulas (or types) as
+games and proofs (or programs) as strategies. In order to reflect
+the interactive behaviour of programs, strategies are required to
+follow specific scheduling policies. Typically, in the case of a
+sequential programming language, the program (Player) and its
+environment (Opponent) play one after the other, in a strictly
+alternating way. On the other hand, in the case of a concurrent
+language, Player and Opponent are allowed to play several moves in a
+row, in a non alternating way. In the two cases, the scheduling
+policy is designed very carefully in order to ensure that the
+strategies synchronise properly and compose well when plugged
+together. A longstanding conceptual problem has been to understand
+when and why a given scheduling policy works and is compositional in
+that sense. In this talk, I will introduce the notion of template
+game and exhibit a number of simple and fundamental combinatorial
+properties which ensure that a given scheduling policy defines
+(indeed) a monoidal closed bicategory of games, strategies and
+simulations. The notion of template game will be illustrated by
+constructing two game models of linear logic with different flavours
+(alternating and non alternating) using the same categorical
+combinatorics, performed in the category of small 2-categories.&lt;/p&gt;
+
+    &lt;p&gt;The interested reader will find more material here&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;https://www.irif.fr/~mellies/template-games.html&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;https://www.youtube.com/watch?v=ZC2jtq2R3cw&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;and in the companion papers [1,2,3].&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Bio:&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Paul-André Melliès is a CNRS Researcher in France, and works in the
+Computer Science Department of the University of Paris. He also
+teaches at Ecole Normale Supérieure in Paris a graduate course on
+the connection between lambda-calculus, functional languages and
+category theory.&lt;/p&gt;
+
+    &lt;p&gt;Paul-André Melliès has worked on a number of areas of logic,
+computer science and mathematics, including lambda-calculus,
+rewriting theory, algebraic and monadic effects in functional
+languages, semantics of low level languages, formal certification of
+machine code, game semantics, linear logic, concurrent separation
+logic, higher-order automata, higher categories, axiomatic homotopy
+theory. Behind this apparent diversity, he is looking for common
+unifying patterns, and for a simple description of the linguistic,
+geometric and interactive structures at work in logic and
+mathematics.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;[1] PAM. Categorical combinatorics of scheduling and synchronization
+  in game semantics. Proceedings of POPL 2019.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;https://www.irif.fr/~mellies/papers/Mellies19popl.pdf&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;https://www.irif.fr/~mellies/slides/popl-slides-january-2019.pdf&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;[2] PAM. Template games and differential linear logic. Proceedings
+  of LICS 2019.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;https://www.irif.fr/~mellies/template-games/2-template-games-and-differential-linear-logic.pdf&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;[3] PAM. Une étude micrologique de la négation (in French)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;https://www.irif.fr/~mellies/hdr-mellies.pdf&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Update: Find the recording of this talk here.</summary></entry><entry><title type="html">Several Online Workshops Coming Soon</title><link href="http://localhost:4000/2020/04/08/Worshop-CFPs.html" rel="alternate" type="text/html" title="Several Online Workshops Coming Soon" /><published>2020-04-08T00:00:00-04:00</published><updated>2020-04-08T00:00:00-04:00</updated><id>http://localhost:4000/2020/04/08/Worshop-CFPs</id><content type="html" xml:base="http://localhost:4000/2020/04/08/Worshop-CFPs.html">&lt;p&gt;I wanted to bring to everyones attention a couple of workshops that I’m helping with that will be online, and are waiting for your submission.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://lipn.univ-paris13.fr/LinearityTLLA2020/cfp.html&quot;&gt;LINEARITY &amp;amp;&amp;amp; TLLA 2020&lt;/a&gt; - I’m on the PC for this joint workshop.  I really love these two workshops. Attending these I’ve made lots of freinds and gotten lots of useful feedback.  Please consider submitting!&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://gramsec.uni.lu/&quot;&gt;Graphical Models in Security (GraMSec 2020)&lt;/a&gt; - I’m a cochair of this workhsop on the use of graph-based theory and tools used in security.  This year we have widended the scope, the entires of interest to my research community are:&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;Graph representations: mathematical, conceptual, and implemented
+tools for describing and reasoning about security and safety&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Logical approaches: formal logical tools for representing and
+reasoning about graphs and their use as modelling tools in security&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Semantics: developing or studying semantic approaches to graph-based
+models used in security like set theoretic models, categorical models,
+logical models, etc.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Threat modelling: modelling and analysing software systems security,
+models for DevSecOps, etc.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Security requirements: models and tools for describing and analysing
+requirements on system security and privacy.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Secure systems: safe and secure system design, quantification of
+security/safety, models for system security/safety evaluation.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;These entries have a large non-empty intersection with topics related to PL, types, and category theory.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">I wanted to bring to everyones attention a couple of workshops that I’m helping with that will be online, and are waiting for your submission.</summary></entry><entry><title type="html">Units in Graded Sequent Calculi</title><link href="http://localhost:4000/2020/03/25/Units-in-Graded-Sequent-Calculus.html" rel="alternate" type="text/html" title="Units in Graded Sequent Calculi" /><published>2020-03-25T00:00:00-04:00</published><updated>2020-03-25T00:00:00-04:00</updated><id>http://localhost:4000/2020/03/25/Units-in-Graded-Sequent-Calculus</id><content type="html" xml:base="http://localhost:4000/2020/03/25/Units-in-Graded-Sequent-Calculus.html">&lt;p&gt;This is a guest post by Aubrey Bryant.&lt;/p&gt;
+
+&lt;p&gt;If you are searching for a logical system as exact and careful with resources as that infamous miser, Ebenezer Scrooge, look no further. Graded modal linear logic is the system for you. Like linear logic, it is resource-sensitive; however, it goes a step further and tracks not just binary usage, but usage along a continuum of grades, specified by a graded context. The grades can be defined in many different ways, but for simplicity while introducing the concept, let’s imagine that the grades range over the natural numbers, and indicate the number of times a formula must be used. When a formula &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt; is needed at a grade of &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; to yield a consequent &lt;script type=&quot;math/tex&quot;&gt;B&lt;/script&gt;, the grade for &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt; must be added to the account for &lt;script type=&quot;math/tex&quot;&gt;B&lt;/script&gt;, once for each use of &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt; required to yield &lt;script type=&quot;math/tex&quot;&gt;B&lt;/script&gt;. Thus, &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;’s grade must be multiplied by &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; in order to yield the required number of &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;’s. To illustrate, here is the cut rule in our graded system:&lt;/p&gt;
+
+&lt;center&gt;&lt;img width=&quot;60%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-rule.png&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\Gamma_1 \odot \gamma_1&lt;/script&gt; is the context yielding one &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;, where &lt;script type=&quot;math/tex&quot;&gt;\gamma_1&lt;/script&gt; is a vector containing a grade for every corresponding element of &lt;script type=&quot;math/tex&quot;&gt;\Gamma_1&lt;/script&gt;; the grade describes the usage for each resource in the context. In our current example, it indicates the number of times that resource must be used. Note that &lt;script type=&quot;math/tex&quot;&gt;\gamma_1&lt;/script&gt; is multiplied by &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; to yield the required number of &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;’s.&lt;/p&gt;
+
+&lt;p&gt;Here is a very simple example that illustrates how the grading works. In this derivation, &lt;script type=&quot;math/tex&quot;&gt;A \rhd A&lt;/script&gt; is only derivable when there are two &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;’s available to use:&lt;/p&gt;
+
+&lt;center&gt;&lt;img width=&quot;60%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/example-derivation.png&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;While this watchful precision can be somewhat uncomfortable if you’re Bob Cratchitt asking for an extra lump of coal for the stove, remember that Scrooge became a wealthy man through such careful accounting. And, literary references aside, I actually appreciate the subtlety and precision that this system requires. I have been working through a cut-elimination proof for this system for the past couple of months, following the blueprint laid out by &lt;a href=&quot;https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf&quot;&gt;Melliès&lt;/a&gt;. I started with what I thought were the juiciest and most interesting steps, like cuts with tensor products and linear implication playing primary or secondary roles. Then I turned to what I thought would be the boring bits, like those involving the axiom of identity and the tensor unit rules. I expected these to be pretty rote - after all, they are specifically designed to do nothing. But in a system that keeps such careful account, doing nothing is surprisingly difficult. In fact, under the first system of rules, the left rule for tensor unit introduction caused cut-elimination to fail.&lt;/p&gt;
+
+&lt;p&gt;Our initial formulation of the left rule for the tensor unit was:&lt;/p&gt;
+
+&lt;center&gt;&lt;img width=&quot;40%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/unitL.png&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;Notice that this rule allows you to introduce &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; into the context, at a grade of &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;. In ordinary linear logic, the tensor unit is sometimes called the ‘empty resource’, unique among linear hypotheses in that it is the only one derivable from the empty context, and similarly the only one that can be discarded without being used. This behavior is a clue that the grade of &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; is incorrect, since anything with a nonzero grade makes an impact on our ‘bill’, in the language of Scrooge. And certainly, the careful accounting demanded by our system made a vivid case for why the unit grade was wrong.&lt;/p&gt;
+
+&lt;p&gt;Here is an illustration of the problem, using cut (defined above) and contraction, defined as:&lt;/p&gt;
+
+&lt;center&gt;&lt;img width=&quot;65%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/contraction.png&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;Following the cut-elimination procedure outlined by &lt;a href=&quot;https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/categorical-semantics-of-linear-logic.pdf&quot;&gt;Melliès&lt;/a&gt;, the general strategy is to show how every complex cut can be transformed into a simpler cut (or multiple simpler cuts). Applied repeatedly, this process moves the application of the cut rule into simpler and simpler proof steps until it is shown to be unnecessary at the axiom steps. So, in this case the task is to move the application of the cut rule to before the application of the left rule for the unit, without changing the final conclusion of the proof. For the case where the cut step follows left introduction of the tensor unit, the following proof transformation is required:&lt;/p&gt;
+
+&lt;center&gt;&lt;img width=&quot;70%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-1.png&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;becomes:&lt;/p&gt;
+
+&lt;center&gt;&lt;img width=&quot;70%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/cut-2.png&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;To match the conclusion of the first proof, &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; must have a grade of &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; in the conclusion of the second proof. The proof above accomplishes this by doing &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; applications of the left unit rule, and then subsequently &lt;script type=&quot;math/tex&quot;&gt;r-1&lt;/script&gt; applications of the contraction rule. This works for any &lt;script type=&quot;math/tex&quot;&gt;r &gt; 0&lt;/script&gt;, but not for the case when &lt;script type=&quot;math/tex&quot;&gt;r = 0&lt;/script&gt;. Furthermore, this solution fails entirely when addition is not defined in the system, or when &lt;script type=&quot;math/tex&quot;&gt;1 + 1 \notin \mathcal{R}&lt;/script&gt;, as this is the only option available to match the grading.&lt;/p&gt;
+
+&lt;p&gt;The root of the problem is that &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; gets a grade of &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; in the left unit rule specified above. This means that when it is part of a context brought across a cut, it is multiplied by the required grade &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt;, and &lt;script type=&quot;math/tex&quot;&gt;1 * r = r&lt;/script&gt;. Besides breaking cut elimination, grading &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; with &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; does not accurately capture the behavior we want, because we want to be able to ‘throw it away’ or leave it out of the grade accounting so we can use the tensor identity axioms:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{array}{l}
+    A \rhd I \rightarrow A\\
+    I \rhd A \rightarrow A
+\end{array}&lt;/script&gt;
+
+&lt;p&gt;With &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; at a grade of &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;, we aren’t allowed to toss it out and keep only the &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;. While &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; is a tempting grade to use, being the multiplicative unit, it does not produce the behavior we expect from &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt;. The best option is to grade it at &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt; in its left rule, but then the rule is equivalent to weakening, and so we just let weakening take on both roles and throw out the left rule for the tensor unit altogether. This gives us the control we want while still allowing us to use the tensor identity axioms when weakening is allowed - that is, whenever &lt;script type=&quot;math/tex&quot;&gt;0 \in \mathcal{R}&lt;/script&gt;.  The new system has just a single right rule for tensor unit, and we have already proven cut elimination for it.&lt;/p&gt;
+
+&lt;p&gt;Checkout out new system the Graded Lambek Calculus below:&lt;/p&gt;
+
+&lt;center&gt;&lt;img width=&quot;90%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/system-1.png&quot; /&gt;&lt;/center&gt;
+&lt;center&gt;&lt;img width=&quot;70%&quot; src=&quot;/images/posts/2020-03-25-Units-in-Graded-Sequent-Calculus/system-2.png&quot; /&gt;&lt;/center&gt;</content><author><name></name></author><summary type="html">This is a guest post by Aubrey Bryant.</summary></entry><entry><title type="html">Thoughts on Mentoring Undergraduate Research Assistants</title><link href="http://localhost:4000/2019/11/05/Mentoring-Panel.html" rel="alternate" type="text/html" title="Thoughts on Mentoring Undergraduate Research Assistants" /><published>2019-11-05T00:00:00-05:00</published><updated>2019-11-05T00:00:00-05:00</updated><id>http://localhost:4000/2019/11/05/Mentoring-Panel</id><content type="html" xml:base="http://localhost:4000/2019/11/05/Mentoring-Panel.html">&lt;p&gt;xxxxxx&lt;/p&gt;
+
+&lt;p&gt;The Center for Undergradaute Research at Augusta University asked me to be on two panels about mentoring undergraduate research assistants.  The first being for new faculty and the second for students.  I decided to write up my thoughts on mentoring students so that panel attendees may access my answers later, but also just to share them&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-undergraduate-research-to-me&quot;&gt;What is Undergraduate Research to Me?&lt;/h2&gt;
+
+&lt;p&gt;Undergraduate research means a lot to me, because it is how I fell in love with research, and it is how I decided to go to graduate school.  As a faculty member I work with undergraduates to share my love for research and my field of study.  Thus, to me it is important that a student get to experience the full range of what it means to do research.  I include the student in brainstorming new ideas, synthesizing new results, and communicating those results both orally – through giving talks – and in written form – by writing papers.  Furthermore, I approach working with my students in the same way that I approach working with collaborators.  I treat them as equals whose ideas are valid and important.  Now of course, I am there to mentor them and help them when they need it, but I do not use students to do mediocre tasks.  In fact, I save all the interesting stuff for them, and do the boring stuff myself.&lt;/p&gt;
+
+&lt;p&gt;At this point, I answer some common questions about mentoring students.  One thing I like to point out is that my process for working with undergraduate students is nearly the same as my process for working with graduate students, but their are difficulty differences.  I start a graduate student off on a more difficult project than I would an undergraduate, but the fundamental process is the same.&lt;/p&gt;
+
+&lt;h2 id=&quot;faculty-panel-qa&quot;&gt;Faculty Panel Q&amp;amp;A&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;How do you get the students up to speed to where they can contribute?
+How long does this take? What strategies do you use to make it faster?
+Is it worth it?&lt;/p&gt;
+
+    &lt;p&gt;This is a question I get often, because I have worked with a lot of students, some of whom have produced excellent results.  First, it is important to realize that mentoring new research students takes time, but in my experience it pays off.  Every undergraduate research assistant I hire must get a B or better in both of the following courses:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;CSCI:3030 - Mathematical Structures in Computer Science&lt;/li&gt;
+      &lt;li&gt;CSCI:3300 - Programming Languages Concepts&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;These courses teach the basic background of my research area.  Then I start them out with what is usually called a &lt;em&gt;starter project&lt;/em&gt;.  This is a research project that is a subpart of the overall project I want to work with the student on, but this starter project is a stand-alone component that will introduce the student to key concepts in the overall project that they can approach with nothing but the background acquired from their course work. Furthermore, it is important that this project be self contained – including writing and presenting – that way the student can decide early on whether research is right for them.  Once the student has finished the starter project, I give them another more advanced project, and I keep iterating this process until they are confident enough to start generating their own ideas; but by this time, they are off to graduate school.  This strategy is the most efficient one that I can think of, and gets the student thinking about research right away.&lt;/p&gt;
+
+    &lt;p&gt;Timeline wise, the starter project usually takes a semester or two.  I try and hire students as early as possible usually in sophomore/junior year so that we have plenty of time to work together.  Again, this takes time, but I think it is important not to rush students.  I question questions about making things faster than this, because becoming a researcher takes time, and rushing it puts unfair pressures on an already pressured student.  We do not want to push people away from research.&lt;/p&gt;
+
+    &lt;p&gt;Lastly, is it worth it?  Personally, yes, it is!  The most long-lasting contribution we can give to science is, after all, the students we mentor.  They go on to graduate school, become researchers, and produce more results and more students.  Even when it turns out that a student does not like research, I still think it is worth it, because that student learned something about themselves, and most likely learned a bit more about their field.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How do you recruit and/or decide which student(s) will work with you?&lt;/p&gt;
+
+    &lt;p&gt;I recruit through the courses I teach.  If a student is doing well, then I ask them if they are interested in doing research, and we go from there.  Other times, I have students seek me out for a research position, and then I meet with them, and discuss their interests.  If I am looking for a single student, and I have more than one to consider, then I interview both students, and try and get a sense of their interests and background, and make a judgment call based on this information.  But, this does not happen very often, because when I have two good students, I try and find the funding for both.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How do you handle personality challenges between students?&lt;/p&gt;
+
+    &lt;p&gt;Typically, all of my students work on their own self-contained subprojects of a larger project, but often they will need to discuss how their projects fit together, but I really do not see many issues regarding student-to-student interactions.  I make sure to foster an inclusive environment that does not tolerate any type of harassment, and when hiring students I try and make sure they are willing to uphold this standard.  I think making this clear prevents the problems from happening.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How do you run your research meetings (if you have them), and divvy up responsibilities?&lt;/p&gt;
+
+    &lt;p&gt;I have weekly research meetings with each of my students all of which are one-on-one.  Since their projects are self contained I do not need to meet with a large group.  During these meetings I first address any questions the student my have on their work, discuss the big picture, and set upcoming milestones.  I ask my students to keep a detailed research journal that details meeting notes and milestones that way they are aware of everything that is needing done.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Have ever had to remove a student from your team and if so, how did you do so?&lt;/p&gt;
+
+    &lt;p&gt;Research is not for everyone, sometimes students do not work out.  I have had to stop working with a student before, but largely it comes down to the student typically not wanting to do research.  If a project is not progressing as one might expect, then I check in with the student to see if they are okay, and what might be the cause of the slow progress.  More often than not its due to the student not enjoying research, and so we decide it is best for them to stop.  Other times, there are larger issues that the student needs help with.  It is important to always reach out to the student before becoming angry, because there is almost always a good reason.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Do you interview potential students? If so, what kinds of questions do you ask?&lt;/p&gt;
+
+    &lt;p&gt;I always meet with prospective research students, but rather than an interview, I use this meeting to discuss more about what research is, what area I work in, and their interests and longterm goals.  This meeting also gives them an opportunity to ask me questions, because it is just as important for the student to get to know me as it is for me to get to know them.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What are your tips for publishing/presenting with students?&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;From the start let the student take the lead on their project, let them be first author, and have them write most of the paper, and present the results at a conference.  If the student has to leave the project early or is not able to contribute enough to warrant first authorship, then this is adjusted as necessary.  But, it is important to give them a chance to experience the entire process.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Have the student help with the review process by fixing problems the reviewers find, and preparing the rebuttal.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;When gearing up for a conference presentation have the student present the entire presentation at least three times before going.  Have them present in front of the department and in seminars to give them practice. This helps them get over the nerves of presenting.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What are some other difficulties you’ve had and how did you cope with them?&lt;/p&gt;
+
+    &lt;p&gt;The biggest hurtle is &lt;em&gt;time&lt;/em&gt;.  Students are busy with jobs, courses, families, friends, sports, etc.  It is important to understand the time constraints put on students, and adjust expectations as necessary.  I always discuss time with my students up front, and then revisit it every so often to make sure they are comfortable and not over doing it.&lt;/p&gt;
+
+    &lt;p&gt;It is also important to try and understand how the student likes to be mentored.  Some students need more interaction with me than others, need additional meetings, or require feedback more often.  Understanding how they like to be mentored makes them comfortable which makes doing research a lot easier.  I tend to ask them questions to get an idea on how to better mentor them.&lt;/p&gt;
+
+    &lt;p&gt;I also think it is important to play to your students strengths.  A student might be stronger in one area than another, and so if this can be capitalized on in their project, then the student will be more successful and enjoy it more.&lt;/p&gt;
+
+    &lt;p&gt;Finally, checkout the &lt;a href=&quot;https://teamhelium.co/&quot;&gt;Helium podcast&lt;/a&gt; for early career researchers.  I learned a lot from listening to it.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;student-panel-qa&quot;&gt;Student Panel Q&amp;amp;A&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What do you look for in a potential research/scholarship student?&lt;/p&gt;
+
+    &lt;p&gt;Mainly, interest!  Interest in the subject matter, and an interest to learn are the two best qualities in a research student.  Secondly, the student needs to be comfortable working independently and have a good work ethic.  Everything else I can teach them.  Largely, undergraduate students do not know what research is before starting a research assistantship, and so I cannot really expect much more than this.&lt;/p&gt;
+
+    &lt;p&gt;That being said, I do require my research assistants to do well in their course work, especially the courses related to my research.  This gives us both a foundation to build on.  Furthermore, a research assistantship is extra on top of a student usual studies, and so making sure that they are in good standing – what I would call a B or above average in their major courses – ensures that they are not taking on too much.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What do you want students to get out of the experience?&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;The understanding of what research is.&lt;/li&gt;
+      &lt;li&gt;More developed writing and presentation skills.&lt;/li&gt;
+      &lt;li&gt;More refined learning skills.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;If they learn some cool math and computer science, then that is a bonus.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Why do you enjoy working with students outside of class? What do you get out of it?&lt;/p&gt;
+
+    &lt;p&gt;This is a particularly good question, and until now, I have not really had to utter out loud its answer.  There are a number of things I get out of working with students:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Undergraduate research means a lot to me, because I would not be where I am without it, because I would not have found my love for research.  When I was an undergraduate I was asked by one of my professors to work with them on undergraduate research.  I got to pitch ideas of problems to solve, help solve them, write them up in a paper, and present our results at a conference.  This changed my life!  If I can give some one else this same experience, and change their life in a positive way, then it is all worth it!&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Research is &lt;em&gt;not&lt;/em&gt; a solo genius alone in a library solving the worlds problems, but research &lt;em&gt;is&lt;/em&gt; a social and collaborative effort.  I have my unique way of looking at the world, but all of you have your unique way of looking at the world.  By coming together to do work on research we combine these unique perspectives, and thus, allows us to look at problems in different ways.  This always leads to interesting and ground breaking work.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Impact!  Students are the longest lasting impact a researcher can have on the field.  We introduce students to research, they go off to graduate school and become full-blown researchers, and then generate more results and more students.  All of our students will out last any of our papers.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Working with students helps us get more results, which is good for our career.  In addition, working with students also allows us to get funding that can be used to fund students, but also other aspects of research like travel.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Finally, and this is the best kept professor secret, it is fun!!  We enjoy it!&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For you, how can students be better prepared to get started to work with you?&lt;/p&gt;
+
+    &lt;p&gt;For me, they should take and get a B or better in the courses related to my research:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;CSCI:3030 Mathematical Structures in Computer Science&lt;/li&gt;
+      &lt;li&gt;CSCI:3300 Programming Languages Concepts&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;There are also other resources I can give students to help them, but they would need to come chat with me first.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What does research/ scholarship LOOK like with you?&lt;/p&gt;
+
+    &lt;p&gt;I start students off with what is usually called a &lt;em&gt;starter project&lt;/em&gt;.  This is a research project that is a subpart of the overall project I want to work with the student on, but this starter project is a stand-alone component that will introduce the student to key concepts in the overall project that they can approach with nothing but the background acquired from their course work. Furthermore, it is important that this project be self contained – including writing and presenting – that way the student can decide early on whether research is right for them.  Once the student has finished the starter project, I give them another more advanced project, and I keep iterating this process until they are confident enough to start generating their own ideas; but by this time, they are off to graduate school.  This strategy is the most efficient one that I can think of, and gets the student thinking about research right away.&lt;/p&gt;
+
+    &lt;p&gt;Timeline wise, the starter project usually takes a semester or two.  I try and hire students as early as possible usually in sophomore/junior year so that we have plenty of time to work together.  Again, this takes time, but I think it is important not to rush students.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How many hours do you expect students to work each week? (Min &amp;amp; Max?)&lt;/p&gt;
+
+    &lt;p&gt;The university sets the max at twenty hours per week during the semester.  I do not set a minimum or a max, but they &lt;em&gt;cannot&lt;/em&gt; exceed the twenty hours.  I do this so that the student feels comfortable adjusting their time as more pressures are placed on them; e.g., course work, family, sports, etc.  As long as the project is moving forward a specific amount of time is not necessary.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Do you interview potential students? If so, what kinds of questions might you ask?&lt;/p&gt;
+
+    &lt;p&gt;I always meet with prospective research students, but rather than an interview, I use this meeting to discuss more about what research is, what area I work in, and their interests and longterm goals.  This meeting also gives them an opportunity to ask me questions, because it is just as important for the student to get to know me as it is for me to get to know them.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Do you hold team meetings? What happens during them and what kind of preparation is expected?&lt;/p&gt;
+
+    &lt;p&gt;I have weekly research meetings with each of my students all of which are one-on-one.  Since their projects are self contained I do not need to meet with a large group.  During these meetings I first address any questions the student my have on their work, discuss the big picture, and set upcoming milestones.  I ask my students to keep a detailed research journal that details meeting notes and milestones that way they are aware of everything that is needing done.&lt;/p&gt;
+
+    &lt;p&gt;If the student is working on their project, then the only preparation I expect is for them the tell me how it is going, and ask questions.&lt;/p&gt;
+
+    &lt;p&gt;I also encourage my students to ask questions earlier rather than later, and if necessary schedule additional meetings.  Throughout the week I try and check in with them, and see how it is going through email or Slack just to make sure there is not anything I can do.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Why would you encourage students to participate?&lt;/p&gt;
+
+    &lt;p&gt;I would encourage students to participate if they are interested in going to graduate school, interested in research, or are just interested in figuring out what research is and if they like it.  But, I am also up front about things; for example, I would not encourage students to participate if they do not like writing or presenting, if those are things that they just cannot see themselves doing, then I doubt research would be good for them, and that is okay, because research is not for everyone.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;xxxxxx&lt;/p&gt;</content><author><name></name></author><summary type="html">xxxxxx</summary></entry><entry><title type="html">My Path from Special Education to Assistant Professor</title><link href="http://localhost:4000/2019/08/02/Do-I-Belong-Here.html" rel="alternate" type="text/html" title="My Path from Special Education to Assistant Professor" /><published>2019-08-02T00:00:00-04:00</published><updated>2019-08-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/08/02/Do-I-Belong-Here</id><content type="html" xml:base="http://localhost:4000/2019/08/02/Do-I-Belong-Here.html">&lt;p&gt;Update:  I’ve had a number of people ask about my support structure along the way.  I added a new section called “My Support Structure”, that details how my family has helped me throughout my journey.&lt;/p&gt;
+
+&lt;p&gt;I am wrapping up the preparation of my tenure application which is due August 16th.  This marks a major milestone in my life, and as a result, has caused me to reflect a bit on my path to where I am today.  In doing so I have decided to share my very non-traditional path with everyone.  I’ve decided to do this, because I’ve had to overcome a bit of struggle to get here, and I generally feel less alone when I know of others who deal with similar problems, and even more so when those people are generally successful in their life.  In this post, I would like to share my story and problems I deal with in the hope that someone out there might feel less alone.&lt;/p&gt;
+
+&lt;p&gt;This post is extremely hard for me to write.  The things I am going to reveal are things I have kept a secret for a very long time.  I think of this post as a bit of therapy for myself as much as it is – hopefully – useful to others.&lt;/p&gt;
+
+&lt;p&gt;I am an assistant professor in computer science at &lt;a href=&quot;http://www.augusta.edu/&quot;&gt;Augusta University&lt;/a&gt;, I have Attention-Deficit/Hyper-activity Disorder (ADHD), suffer from anxiety, mild depression, and a major case of imposter syndrome.  Anxiety and depression can be linked to ADHD, but my imposter syndrome comes from my history in academics.  I think of ADHD as an anxiety disorder, and it often has some negative stigmas associated with it.&lt;/p&gt;
+
+&lt;p&gt;Note: Everything I discuss here is from personal experience, and I am not a mental-health expert.  Some stuff might be triggering to others, but I try not to do that.  Finally, if anyone is struggling and needs someone to talk to, then please do not hesitate to reach out to me, even if we do not know each other.  I am always willing to chat.&lt;/p&gt;
+
+&lt;p&gt;ADHD affects me in several ways:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;It causes bursts of anxiety whenever I have to do something I might not really feel like doing.  Consider something mundane like washing the dishes – I hate washing the dishes – whenever I think, I need to get in there and rock these dishes out, a burst of anxiety rushes through my chest all the way up to my head.  It’s not like a “oh bummer, I don’t feel like doing it” kind of burst, it’s a “your world is going to end if you move” kind of burst. Take your worst fear and that’s it, but all the time.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It makes me very impulsive. I’ll get an idea, and then rush to do it without thinking about the consequences.  This caused problems when I was a kid, but I’ve learned to stop and think.  I still have problems though, I really need to think before spending money, or eating bad food, or starting new projects.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It can cause what I call trapped-in-my-head episodes.  This is where I will start to think about something, can be just about anything, and I will space out thinking for minutes or hours.  This has seriously derailed things I am working on.  I hate when this happens, but I try and catch it and stop myself; however, when I do that, I can get bad anxiety.   This also makes it hard staying focused during conversations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It causes me to be easily distracted.  This is a daily struggle.  Distracting sounds can cause me to loose my focus and even irritate me.  Some sounds are painful which can cause me to have to close my eyes until its over; I’m not referring to loud noises that cause everyone do this, but noises most people can ignore.  Take an example, one day I was lecturing to my Theory of Computation students, and someone in the hallway was whistling, this fully distracted me to the point that I couldn’t think about anything, but that sound, and I had to pause for a minute before continuing. Some students noticed, and joked about it a bit, but I had to explain that my mind fully focuses on distractions.  That distraction caused my mind to focus on just that, and so, lecturing was nearly impossible without force.  I managed, but it can be a struggle.  One thing I really hate about this effect of ADHD is I can’t hear people in a noisy environment.  Take going out to lunch or dinner in a crowded restaurant.  I almost always cannot hear the people at my table, because my mind is going a mile a minute due to all of the distractions.  This is why I am usually super quiet at the after conference dinners when attending research conferences, because I generally cannot hear anyone.  While working I almost always listen to music which helps drown out the distracting noises, but when I need to think about something deep and difficult, then I need silence.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That being said, people with ADHD have a super power!  We can get into flow very easily when we are doing something we like.  For me, that’s mathematics. I can enter flow so hard that I form tunnel vision where everything in my peripheral vision goes blurry.  This is amazing for research!  I can really focus on what’s in my head and ignore everything else, but this creates a problem with time, and keeping it.  I have to set alarms that go off – scaring the crap out of me – to tell me to go somewhere or do something else.&lt;/p&gt;
+
+&lt;p&gt;So that’s how ADHD affects me, and still does, and will continue to for the rest of my life.&lt;/p&gt;
+
+&lt;p&gt;However, the story is just getting started.  In the rest of this post I would like to share my path to where I am today as a professor in computer science.&lt;/p&gt;
+
+&lt;p&gt;I think it’s best if I start from the beginning.&lt;/p&gt;
+
+&lt;h2 id=&quot;grade-school-through-high-school&quot;&gt;Grade School through High School&lt;/h2&gt;
+
+&lt;p&gt;I was a handful to say the least as a child.  My brothers and I always joke about how our parents survived it.  I did not like to be told what to do.  If I enjoyed something, then I fully immersed myself in it, but if it was something I was supposed to do, but didn’t enjoy doing it, then good luck!  I wasn’t having it.  In second grade my parents and teachers began to notice that I was not willing to pay attention, or listen, or do anything other than what I wanted to do.  My parents decided to have me checked out by a doctor and I was diagnosed with ADHD, but on top of that they decided that I needed to be put into the special education program, because they also diagnosed me with a learning disability.&lt;/p&gt;
+
+&lt;p&gt;Special education in the eighties and early nineties was a program that consisted of students being placed into special classes that were different from what my fellow students called “the normal classes”.  Everyone with a learning disability was put into the same class, and so, there was a large range of abilities between the students.  I remained in special education until I graduated from high school.  I didn’t really understand the difference between my classes and the normal classes until I was in middle school.&lt;/p&gt;
+
+&lt;p&gt;Being isolated from the general student population as a teen sucks.  I was angry, felt alone, and generally acted out because of it.  I hung out with the wrong crowd, and it wasn’t a period of my life I am particularly proud of.  However, it was in middle school that I had an epiphany.&lt;/p&gt;
+
+&lt;p&gt;Most people do not know this, but I have always wanted to be a scientist.  In fact, my Dad and I made my first science project in first grade.  We made a magnet out of a battery, wire, and a nail.  Then we built a tow truck out of it.  I still have it, and I love it!&lt;/p&gt;
+
+&lt;p&gt;I kept my aspirations secret, because it was not cool, and I knew it was an impossible dream.  Funny story, I used to steal books about robots from the local library, because I didn’t know how to check them out, and I knew no adult would have believed I wanted to read them.&lt;/p&gt;
+
+&lt;p&gt;In eighth grade I had a teacher, Mrs. Flannigan, at Edison Junior High School.  We had to learn the U.S. constitution in order to graduate and enter high school.  I worked hard, and tried my best, when I took the exam with her, she handed it back, and said something along the lines of, see how well you did?  You can do great things if you try!  I recall going back to my locker and deeply looking at myself and where I was headed.  I asked myself, is this you?  Is this it?  Can I be something more?  From that point on I began searching.&lt;/p&gt;
+
+&lt;p&gt;I was searching for who I wanted to be.  I also started caring, and began questioning everything I did and was asked to do.  Special education beginning in middle school doesn’t change from that point until graduation of high school.  In fact, I graduated from high school with a middle school education.  High school was a breeze because of this, and often, I didn’t have to do anything and I got through.  I started to get bored, and a person with ADHD gets really bored, but I was now on my search, and it paid off, only thanks to some luck.&lt;/p&gt;
+
+&lt;p&gt;During my sophomore year, or maybe junior year, my high school setup a partnership with &lt;a href=&quot;https://icc.edu/&quot;&gt;Illinois Central College&lt;/a&gt; where a professor came to our high school and taught a course on CISCO Networking.  I wanted to take it, but I had to fight to do it.  Since it was a normal class the school felt uneasy about me taking it, but I really wanted to.  They made me sit in a room and do a bunch of IQ tests, and then they finally allowed me to enroll into the course.  That class changed my life, because it introduced me to the world of computing.&lt;/p&gt;
+
+&lt;p&gt;I realized that in order to be good at computing I had to be good at other subjects like math, reading, and writing; that is, everything I have been ignoring most of my life.  At that point on I started trying very hard on my academics. I begin reading books on my own, and learning new mathematics and computer programming.  I really wanted to get out of the special education program, but again, they made that really hard.  I fought for the right to take the normal algebra class, and they again, allowed me to based on my performance in the networking course.  However, when I joined the course for the first time I had a panic attack, and retreated back to my usual courses.  I just didn’t feel ready, but I didn’t give up.&lt;/p&gt;
+
+&lt;p&gt;After graduating from high school I decided to enroll at Illinois Central College (ICC) studying information technology (IT), because I wanted to become a system administrator.  I graduated from high school with an eighth-grade education, and so I tested into the lowest of the low courses; for example, I tested into remedial mathematics which taught me how to add, subtract, and count money.  At ICC I basically redid high school, but I was successful.  I also got pretty bored with IT, but as a requirement I had to take a computer science course.  I enrolled in Introduction to Computer Science.  It was there I fell in love with algorithms and computer programming.  I switched to computer science, but the school started canceling all of the computer science courses due to low enrollment.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-university-years&quot;&gt;The University Years&lt;/h2&gt;
+
+&lt;p&gt;The thought of going to a university really never crossed my mind.  I figured I would just finish ICC and get a job, but they stopped offering upper-division CS courses so something had to give. I was talking to a family member about it, and they just came out and said, why don’t you transfer to a university?  They knew I was doing really well, and figured I can get in if I applied.  I was super nervous, because my high school, and lower, education was all in special education, but I found out that they only look at your transcripts from your prior college if you went to one after high school; this gave me strength.&lt;/p&gt;
+
+&lt;p&gt;I had no idea how to apply to a college.  No one in my family went to college, and so I didn’t have anyone to learn from.  So I decided to just start asking friends and colleagues at the local supermarket I worked at.  One colleague said she went to &lt;a href=&quot;https://millikin.edu/&quot;&gt;Millikin University&lt;/a&gt;.  She said, the classes were small – no bigger than 20 – and the professors really cared, because it is a liberal-arts teaching university.  This intrigued me, because the thought of being in a huge lecture hall horrified me.  I applied to their CS program and got in!&lt;/p&gt;
+
+&lt;p&gt;Going to Millikin changed my life.  I realized that what I loved about CS was the mathematics and logic that founded it.  I became a double major in mathematics, and I excelled far past every expectation I had.  In fact, I won the Computer Science Student of the Year award three out of the four years I was there.  The professors there helped me far beyond what they know.  Without them in my life, I wouldn’t be where I am today.&lt;/p&gt;
+
+&lt;p&gt;During my junior year I was trying to figure out what I wanted to do in life, and I kept thinking about how amazing my professor’s lives seemed.  They got to do mathematics all day, help students learn, and do research.  I did several undergraduate research projects while I was at Millikin, and I got the bug.  I presented at a few conferences, and loved it!  So I realized that I wanted to be a professor and be able to do research and teach students.  Most of all, I wanted to share my love with computer science and mathematics with others, and there is no better way than as a professor.&lt;/p&gt;
+
+&lt;p&gt;Several of the professors in the department at Millikin were graduates from the University of Iowa (UIowa), and it so happened that one of them was going to visit UIowa to give a talk while I was looking into graduate schools.  So I tagged along, and I loved it.  I got to meet with several graduate students, and their love of the school really convinced me that I wanted to be there.  Also, it isn’t that far from home, but it will be the furthest away from home I had lived.  I did make a mistake, this was the only place I applied.  But, luckily, I got in.  However, I applied too late to get into the Ph.D. program, and was accepted into the masters program, but I got in, and so my plan was to impress my professors so much, that I could find someone to do research with, and then transfer over to the Ph.D. program.  It was a risk, but it paid off.&lt;/p&gt;
+
+&lt;p&gt;At UIowa I didn’t know which research area I wanted to focus in, but I knew it had to be theory based.  My first semester I took &lt;a href=&quot;http://homepage.divms.uiowa.edu/~astump/&quot;&gt;Aaron Stump’s&lt;/a&gt; Foundations of Programming Languages course.  It was like nothing I had ever seen, it contained programming, but from a mathematical perspective, and it contained all the math and logic I love!  I was also doing really well in the class.  My performance in the course peaked Aaron’s interest, and after he offered me a research assistantship.  This assistantship was another significant moment in my life, because not only did Aaron become my Ph.D. advisor, but he become a mentor and friend.  We still stay in touch, and I still seek his guidance.  I also feel like Aaron took a risk with me, but he may not know that.  My passion for the foundations of programming languages helped me push past my personal struggles, and helped me excel, because I was using my ADHD as a strength.  Doing what I love is easy, and engrossing.&lt;/p&gt;
+
+&lt;p&gt;I managed to do pretty well as a graduate student, and then secured a professorship at Augusta University where I have been for five years now.  I’m very thankful I got a position at a place I love.  So that’s my path.&lt;/p&gt;
+
+&lt;p&gt;I think the biggest take away from this story is I kept pushing and didn’t give up on becoming an academic.  I had struggles and still do, but perseverance helps a lot.&lt;/p&gt;
+
+&lt;h2 id=&quot;my-support-structure&quot;&gt;My Support Structure&lt;/h2&gt;
+
+&lt;p&gt;Throughout this post I have mentioned several teachers, professors, and mentors who have helped shape my thinking in such a way that has impacted my lives trajectory, but none of them compare to the support I’ve gotten from my family.  I don’t see my parents as making the wrong decision to have me put into special education, they were doing as they were advised, and trying to do what they thought was best for their son.  I would’ve done the same thing.&lt;/p&gt;
+
+&lt;p&gt;I have one trait that has helped a lot with my success.  It’s my perseverance, dedication, and work ethic.  I get these traits from my parents.  My father, Harley Eades Jr, was a mechanic for thirty years or more, and hated it, but decided to quite his job, and open his own powder-coating shop called &lt;a href=&quot;https://www.likenewparts.com/&quot;&gt;Like New Parts&lt;/a&gt; knowing how much of a risk it was, but has managed to create an outstanding business that is highly respected in his community.  My whole life he has worked tirelessly for his family to have what he didn’t have growing up.  My mother, Judy Eades, has worked in the fast-food industry for over thirty years, she loves her job, and is one of the most hardworking and dedicated people I have met.  She began as a third shift biscuit maker and worked her way up to a general manager who has won a ton of awards!  They taught me to work hard to get what I want, and that’s what I did.&lt;/p&gt;
+
+&lt;p&gt;My parents also supported me through everything.  One thing I didn’t mention above about my search for who I wanted to be is that I tried everything!  I tried to be a musician, a cowboy, a DJ, a professional skate boarder and roller bladder, a goth (some things never go away), and finally an academic.  In middle school I was full punk/goth, and they got me leather jackets, and let me put on makeup, and anything I wanted to do.  They wanted us to be happy, and as long as we were not committing any crimes, then they let us do it.  They let me be myself, and it has led me to continue to be myself, and I am super grateful for that.&lt;/p&gt;
+
+&lt;p&gt;I honestly would not be who I am without my parents.  I love them to death, and their support has helped me beyond what I can describe in a blog post.&lt;/p&gt;
+
+&lt;p&gt;My brothers and sisters have also greatly supported me.  On top of just being there when I needed them they would let me stay at their places when I was at Millikin, and would let me vent when things weren’t going so well, and let me borrow money when I was a poor student.  I’m lucky, because my family is super close, and we all care for each other, and all do our best to help each other out.  This is a privilege that not everyone has, and having this support structure has had an incredibly positive impact on my life.&lt;/p&gt;
+
+&lt;h2 id=&quot;imposter-syndrome&quot;&gt;Imposter Syndrome&lt;/h2&gt;
+
+&lt;p&gt;Given my early educational upbringing I have a very bad case of &lt;a href=&quot;https://en.wikipedia.org/wiki/Impostor_syndrome&quot;&gt;imposter syndrome&lt;/a&gt;.  In fact, this post is a bit of therapy for me in this department.  I can’t be exposed if everyone already knows.&lt;/p&gt;
+
+&lt;p&gt;I think my imposter syndrome comes out the most at conferences.  I consider other researchers to be at a higher level than I am or will be, and get super nervous talking with them.  It’s all irrational, but I struggle with it a lot.&lt;/p&gt;
+
+&lt;p&gt;The QA section at the end of talks is my worst nightmare, because of imposter syndrome, but also ADHD.  When I get nervous I can forget stuff pretty quickly, I have said the wrong thing by accident before, or I just lock up and don’t know what do say, or I say things in the wrong order.  The fear that I don’t belong in academia or the research community can be so crippling, but I am working on it.&lt;/p&gt;
+
+&lt;p&gt;I also struggle socializing at conferences because of this.  I have thoughts that I don’t belong, I don’t know enough to have meaningful conversations, and everyone is going to realize I am a crackpot.  In the end I shouldn’t care what people think, but a lot rides on peoples perceptions of you in being successful in the research community.&lt;/p&gt;
+
+&lt;p&gt;The only way I can get past these problems is by practicing.  So going forward I am going to be intentionally socializing more at conferences, and giving as many talks as possible.  The more the better, that way I can get past the nerves and think.  It’s a work in progress.&lt;/p&gt;
+
+&lt;p&gt;My closing thought, if you are struggling, hang in there, and keep pursuing what interests you to the best of your ability.&lt;/p&gt;
+
+&lt;p&gt;You matter and are welcome here.&lt;/p&gt;</content><author><name></name></author><summary type="html">Update: I’ve had a number of people ask about my support structure along the way. I added a new section called “My Support Structure”, that details how my family has helped me throughout my journey.</summary></entry><entry><title type="html">Postdoc Opportunity at Augusta University</title><link href="http://localhost:4000/2019/07/25/Postdoc-Ad.html" rel="alternate" type="text/html" title="Postdoc Opportunity at Augusta University" /><published>2019-07-25T00:00:00-04:00</published><updated>2019-07-25T00:00:00-04:00</updated><id>http://localhost:4000/2019/07/25/Postdoc-Ad</id><content type="html" xml:base="http://localhost:4000/2019/07/25/Postdoc-Ad.html">&lt;p&gt;The ForML – formal methods and computational logic – &lt;a href=&quot;https://the-au-forml-lab.github.io/index.html&quot;&gt;Lab at Augusta University&lt;/a&gt; is looking for a postdoc.  The start date, length of term, and salary are all negotiable, but the latter will be competitive with respect to US based postdoc salaries.&lt;/p&gt;
+
+&lt;p&gt;We are looking for those who are interested in working with myself and/or Dr. Clement Aubert.  My current project is called the &lt;a href=&quot;https://granule-project.github.io/&quot;&gt;Granule Project&lt;/a&gt; whose goal is to study the theory and application of graded modalities to type-based programming languages, formal verification, and logic.  &lt;a href=&quot;http://spots.augusta.edu/caubert/&quot;&gt;Dr. Aubert’s project&lt;/a&gt; is on the semantics and applications concurrency in programming languages.&lt;/p&gt;
+
+&lt;p&gt;I will be attending &lt;a href=&quot;https://icfp19.sigplan.org/&quot;&gt;ICFP 2019&lt;/a&gt; this year, and if anyone who is also attending or who is near Berlin would like to chat about this opportunity, then please do not hesitate to contact me.&lt;/p&gt;
+
+&lt;p&gt;The official ad is below, but please send informal inquires to me directly.  When officially applying please indicate in your statement of purpose that you are interested in working with the ForML Lab.&lt;/p&gt;
+
+&lt;p&gt;Very best,
+Harley Eades
+Clement Aubert&lt;/p&gt;
+
+&lt;h2 id=&quot;official-ad&quot;&gt;Official Ad&lt;/h2&gt;
+
+&lt;p&gt;The formal methods group is led by Paul Attie, Clement Aubert, Harley Eades, and Alexander Schwarzmann.  We are interested in state of the art theory and its application.  Among our envisaged directions is the application of formal methods to cybersecurity and sophisticated distributed systems (both hardware and software).  PhD students who expect to graduate within a year are encouraged to apply.&lt;/p&gt;
+
+&lt;p&gt;The formal methods group is located in the Georgia Cyber Center (https://www.gacybercenter.org/) a $100 M facility which is “the single largest investment in a cybersecurity facility by a state government to date.”  The Georgia Cyber Center seeks to prove the USA with a “decisive advantage in cyberspace,” by means of a unique industry-government-academia partnership.  The Georgia Cyber Center hosts companies involved in cybersecurity work, and together with the US Army Cyber Command headquartered in Fort Gordon, Augusta, (https://www.arcyber.army.mil/) and local academia, provides a unique ecosystem where challenge problems from military and industry feed into academic research, and research results feed back into industry and government practice.&lt;/p&gt;
+
+&lt;p&gt;Ms. Regina White
+&lt;a href=&quot;mailto:RHULL@augusta.edu&quot;&gt;RHULL@augusta.edu&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Please include in your application a CV, a statement of purpose, and contact information for at least three referees.&lt;/p&gt;</content><author><name></name></author><summary type="html">The ForML – formal methods and computational logic – Lab at Augusta University is looking for a postdoc. The start date, length of term, and salary are all negotiable, but the latter will be competitive with respect to US based postdoc salaries.</summary></entry><entry><title type="html">POPL Tutorial: Linear and Graded Modal Types for Fine-Grained Program Reasoning</title><link href="http://localhost:4000/2018/11/08/POPL-Tutorial.html" rel="alternate" type="text/html" title="POPL Tutorial: Linear and Graded Modal Types for Fine-Grained Program Reasoning" /><published>2018-11-08T00:00:00-05:00</published><updated>2018-11-08T00:00:00-05:00</updated><id>http://localhost:4000/2018/11/08/POPL-Tutorial</id><content type="html" xml:base="http://localhost:4000/2018/11/08/POPL-Tutorial.html">&lt;p&gt;I am pleased to announce that the &lt;a href=&quot;https://granule-project.github.io/&quot;&gt;Granule Project&lt;/a&gt; will have a &lt;a href=&quot;https://popl19.sigplan.org/event/popl-2019-tutorialfest-t3-linear-and-graded-modal-types-for-fine-grained-program-reasoning&quot;&gt;tutorial&lt;/a&gt; during the &lt;a href=&quot;https://popl19.sigplan.org/track/POPL-2019-TutorialFest&quot;&gt;POPL 2019 TutorialFest&lt;/a&gt; this year in Portugal.  The purpose of the tutorial is to give an in-depth look at everything the Granule Project is trying to accomplish and it will cover what results we have now, and what we are working on for the future.&lt;/p&gt;
+
+&lt;p&gt;The abstract is:&lt;/p&gt;
+
+&lt;p&gt;“Linear types have long been heralded as a mechanism for enforcing strict adherence to resource-based protocols, e.g., file handles, operation system APIs, and communication protocols in concurrency. Recent work has seen linear types become an increasingly popular topic in our community, with the rise in the work on session types, with new proposed extensions to Haskell for linear types, and with languages such as Rust and ATS. This tutorial provides an introduction to linear types and a look at the state-of-the-art in type systems extending linear types with graded modal types as a basis for more fine-grained program reasoning as embodied by the Granule programming language. Granule combines linear types with lightweight dependent types and graded modal types, providing a rich type system for enforcing fine-grained resource constraints on top of a functional language in the style of Haskell/ML. This tutorial will cover both the theoretical and practical aspects of linear and graded modal types, with an opportunity to try Granule via exercises as well an introduction to the research context and recent work in the literature.”&lt;/p&gt;
+
+&lt;p&gt;The schedule for our tutorial will look something along the lines of the following:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;(40 minutes) Introduction to linear types (Orchard)
+    &lt;ul&gt;
+      &lt;li&gt;Basics of how linear type systems work and are defined;&lt;/li&gt;
+      &lt;li&gt;Examples using Granule and Linear Haskell.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(10 minutes) Tinkering session and help installing Granule (all)
+    &lt;ul&gt;
+      &lt;li&gt;Small set of linear typing exercises.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(40 minutes) Fine-grained reasoning via graded modal types and lightweight dependent types (Orchard &amp;amp; Liepelt)
+    &lt;ul&gt;
+      &lt;li&gt;Graded modal type theory;&lt;/li&gt;
+      &lt;li&gt;GADTs and indexed types and their interaction with linearity and grading; Examples uses Granule.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(30 minutes) Coffee break + tinkering session (all)
+    &lt;ul&gt;
+      &lt;li&gt;More comprehensive set of exercises, exploring some of Granule’s standard Prelude library.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(15 minutes) Feedback on tinkering session, solutions, and further examples. (Liepelt)&lt;/li&gt;
+  &lt;li&gt;(45 minutes) The future: challenges of adding full dependent types to linear, graded modal type systems (Eades).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Prerequisite knowledge:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Some basic functional programming experience, e.g., ML, OCaml, Haskell, F#.&lt;/li&gt;
+  &lt;li&gt;Basic understanding of type systems, e.g., simple typed lambda-calculus.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are interested in the next generation programming languages firmly based on substructural logics, then please come to the tutorial, and tell your friends!&lt;/p&gt;
+
+&lt;p&gt;I am looking forward to seeing you there.&lt;/p&gt;</content><author><name></name></author><summary type="html">I am pleased to announce that the Granule Project will have a tutorial during the POPL 2019 TutorialFest this year in Portugal. The purpose of the tutorial is to give an in-depth look at everything the Granule Project is trying to accomplish and it will cover what results we have now, and what we are working on for the future.</summary></entry><entry><title type="html">Augusta University is Hiring Computer Scientists!</title><link href="http://localhost:4000/2018/09/19/Faculty-Search.html" rel="alternate" type="text/html" title="Augusta University is Hiring Computer Scientists!" /><published>2018-09-19T00:00:00-04:00</published><updated>2018-09-19T00:00:00-04:00</updated><id>http://localhost:4000/2018/09/19/Faculty-Search</id><content type="html" xml:base="http://localhost:4000/2018/09/19/Faculty-Search.html">&lt;p&gt;I am pleased to announce that &lt;a href=&quot;https://www.augusta.edu/ccs/&quot;&gt;The School of Computer and Cyber Sciences&lt;/a&gt; at Augusta University is hiring a lot of computer scientists!&lt;/p&gt;
+
+&lt;p&gt;We are looking to fill 12 open positions, and we will keep looking until all of them are filled.&lt;/p&gt;
+
+&lt;p&gt;Applications are due by Dec. 1, 2018, but the sooner the better.&lt;/p&gt;
+
+&lt;p&gt;The complete job ad can be found &lt;a href=&quot;https://jobs.acm.org/jobs/tenure-track-and-tenured-positions-at-the-assistant-associate-and-full-professor-levels-augusta-georgia-30912-109234580-d?contextType=search&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The positions are open rank and not specific to any one subfield, and the percent effort between teaching and research will be balanced.&lt;/p&gt;
+
+&lt;p&gt;However, &lt;a href=&quot;http://spots.augusta.edu/caubert/&quot;&gt;Clément Aubert&lt;/a&gt; and I are looking to recruit at least one of these positions for our new lab:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://metatheorem.org/formlab/&quot;&gt;The ForML Lab&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So I want to make this really clear, we are looking for applications from people whose research falls into PL, or formal methods, or computational logic (including categorical logic), or applictions of these areas to other areas of CS.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-is-this-exciting&quot;&gt;Why is this exciting?&lt;/h2&gt;
+
+&lt;p&gt;This is a really exciting time at Augusta University.  This stream of hiring is all about diversifying our research portfolio in the school.&lt;/p&gt;
+
+&lt;p&gt;Basically, we are starting from scratch, and the time is now to &lt;strong&gt;build&lt;/strong&gt; within the school.&lt;/p&gt;
+
+&lt;p&gt;For example, we established the &lt;a href=&quot;http://metatheorem.org/formlab/&quot;&gt;ForML Lab&lt;/a&gt;, but that is the only research lab in the school currently.  For example, suppose you wanted to join us, and you are applying PL to machine learning, then you can &lt;strong&gt;found&lt;/strong&gt; a machine learning lab, because we don’t have one.&lt;/p&gt;
+
+&lt;p&gt;You will &lt;strong&gt;not just be a COG in the research machine!&lt;/strong&gt; You will get a say in all aspects of the school from its operations and curriculum all the way to research.  We all have a say here!&lt;/p&gt;
+
+&lt;p&gt;We are currently crafting a masters in CS, but a PhD is next, and the new hires will get a say in how we build our PhD program.&lt;/p&gt;
+
+&lt;p&gt;Our students need more access to research and in more areas.  You will help with that.  They need you!&lt;/p&gt;
+
+&lt;h2 id=&quot;contact-me&quot;&gt;Contact Me!&lt;/h2&gt;
+
+&lt;p&gt;I am a member of the search committee, and so if you or anyone you know has any questions please &lt;a href=&quot;mailto:harley.eades@gmail.com&quot;&gt;contact me&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also, share this post with anyone that might be interested.&lt;/p&gt;</content><author><name></name></author><summary type="html">I am pleased to announce that The School of Computer and Cyber Sciences at Augusta University is hiring a lot of computer scientists!</summary></entry></feed>

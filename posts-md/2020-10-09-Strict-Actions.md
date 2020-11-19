@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "Strict vs Lax Graded Necessiity Modalities"
-date: 2020-10-09
+date: 2020-11-15
 categories:
  - logic
  - linear logic
