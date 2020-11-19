@@ -4,6 +4,8 @@ pagetitle: Metatheorem
 title: Metatheorem
 ---
 
+Feed: [RSS](/feed.xml)
+
 ::: list-group
 ::: list-group-item
 ### [Strict vs Lax Graded Necessiity Modalities](/posts/2020-10-09-Strict-Actions.html)
