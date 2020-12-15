@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>On the Categorical Model of Fragmented Y</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/includes/css/proofs.css" />
+          </head>
+  <body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap" ng-app="HomePageApp">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid" id="navfluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Metatheorem</a>
+          </div>
+	  <div>
+            <div class="collapse navbar-collapse" id="navigationbar">
+              <ul class="nav navbar-nav">
+                <li><a href="https://heades.github.io">Author</a></li>
+                <li><a href="/">Posts</a></li>                
+            </ul>
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="well">
+          <h2>On the Categorical Model of Fragmented Y</h2>
+              Published: 2014-12-01
+        </div>
+	<div class="row">
+	  <div class="col-md-2">
+	  </div>
+	  <div class="col-md-10" style="font-size:20px;">
+	    <script type="text/x-mathjax-config">
+       MathJax.Hub.Config({ TeX: { extensions: ["AMSsymbols.js"] }});
+     </script>
+     \(
+     <p>\)</p>
+     <p>I recently published a <a href="?">post</a> on the categorical model of fragmented system T. Aaron Stump – my Ph.D. advisor – asked a very good question. One property the Trellys team wants in a PL is a non-terminating fragment to conduct general purpose programming. However, as Aaron pointed out fragmented system T has a terminating programmatic fragment, but what if we make it non-terminating? He asked particularly about adding the Y combinator. My response was that I did not know how to add just the Y combinator, but I argued that the programmatic fragment could be non-terminating by making it uni-typed.</p>
+     <p>I took his question as a challenge to figure out how to add just the Y combinator, and then obtain a categorical model. One thing had to be true of our model, it must have a cartesian closed subcategory to model the logical fragment in. Adding the Y combinator to STLC is simple enough, and since STLC is modeled by cartesian closed categories, then there should be an extension of cartesian closed categories with fixpoint operators. Keeping this idea in mind I did some thinking, and looked into the literature. It turns out that we can extend a cartesian closed category with fixpoint operators to obtain a model for the Y combinator. This post describes how this is done.</p>
+     <h3>
+     Fragmented Y
+     </h3>
+     First thing is first. We need to define the functional PL we will be analyzing. <img width="90%" height="130%" src="/images/posts/2014-12-01-CT-Frag-Y/def-Y.png"><br> Just as we did in the previous post the programmatic fragment contains all typable terms using the rules annotated with \(\), and the logical fragment contains all typable terms using the rules annotated with \(\). We can easily see that the programmatic fragment is non-terminating. Clearly, \(_{} ,(x:T.x) : T\), and
+     <center>
+     \(,(x:T.x) (x:T.x),(,(x:T.x)) ,(x:T.x)\)
+     </center>
+     <p>In addition, it is well known that the logical fragment is terminating. Thus, the logical fragment is the isolation of a terminating subtheory of a non-terminating theory.</p>
+     <h3>
+     Categorical Model
+     </h3>
+     <p>The idea is to argue how we can model the theory in a cartesian closed category with some additional structure. Just as we have said above the logical fragment can be modeled by a cartesian closed category. The subtheory rule \({}\) can be modeled by functor from the model of the logical fragment to the model of the programmatic fragment. This is the same as it was for fragmented system T. In addition, it is easy to handle \(\) and \(\). So the most interesting question here is how do we model the programmatic fragment? The answer is well known, and can be found <a href="http://www.di.ens.fr/users/longo/files/CategTypesStructures/book.pdf">here</a> – this book has a lot of great things in it, but lacks in presentation and the omission of details in some of the equational reasoning.</p>
+     We model the programmatic fragment in a cartesian closed category extended with fixpoints for each object. <img width="95%" src="/images/posts/2014-12-01-CT-Frag-Y/comm-diag.png"><br> In any cartesian closed category we have the morphism \( _2 : (T T) (T T) \). Using this morphism we can define the following morphism in a cartesian closed category with fixpoint operators:
+     <center>
+     \((_2;_T) : (T T) T\)
+     </center>
+     This morphism is the \(\) combinator. That is, we can define
+     <center>
+     \( ,=,(_2;_{}) \)
+     </center>
+     A categorical model must have enough structure to model every typable term, but it must also model the reduction rules. That is, for any \(_{} t_1 : T\) and \(_{} t_2 : T\), if \(t_1 t_2\), then \( = \), where \({,}\). It is well-known that if \(= \), then the reduction rules of STLC can be modeled by a cartesian closed category. In fact, we have \(\)-equality in the model:
+     <center>
+     (\(\)-cat) \( (f),g ; = ,g ;((f) id); = ,g;f \)
+     </center>
+     Using \(\)-cat we can prove the following:
+     <center>
+     <img width="50%" src="/images/posts/2014-12-01-CT-Frag-Y/Y-cat.png">
+     </center>
+     We call the previous fact \(\)-cat. Now we can show that a cartesian closed category with fixpoint operators models the reduction rule for the \(\)-combinator:
+     <center>
+     <img width="90%" src="/images/posts/2014-12-01-CT-Frag-Y/Y-eq.png">
+     </center>
+     <p>It took me the better part of the weekend to get the equational reasoning right, so hopefully I did not make any mistakes.</p>
+     <p>The way we model the Y combinator is slightly different from the book <a href="http://www.di.ens.fr/users/longo/files/CategTypesStructures/book.pdf">here</a>. There the authors use the morphism \( !_{};(_2;_T) : (T T) T \), where \(!_: \) is the terminal morphism, but I do not see a reason to use the terminal morphism when we can just use \(_2\). We obtain the same result here, but I might be missing something.</p>
+     Finally, we arrive at the following main theorem:
+     <div class="theorem">
+     Suppose that \(\) is cartesian closed category (a model of the logical fragment of fragmented Y), and that \(\) is a cartesian closed category with fixpoint operators (a model of the programmatic fragment of fragmented Y). Then \( (, S, ) \) is a model of fragmented Y, where \( S :   \) is a full and faithful functor.
+     </div>
+     <p>It was a lot of fun figuring this out!</p>
+            <hr>
+            <p>
+                        <em>Leave a comment by sending me an <a href="mailto:">Email</a></em>
+                        </p>
+	  <div class="col-md-1">
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+	<p class="text-right" class="text-muted credit">
+	<small>
+	  All rights reserved: <a href="index.html">Harley Eades III</a>. 
+	</small>
+	</p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-71081670-1', 'auto');
+       ga('send', 'pageview');
+     </script>
+  </body>
+</html>

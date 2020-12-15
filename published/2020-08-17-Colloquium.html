@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>Come One, Come All! The AU CS Colloquium Series is Open to All</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/includes/css/proofs.css" />
+          </head>
+  <body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap" ng-app="HomePageApp">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid" id="navfluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Metatheorem</a>
+          </div>
+	  <div>
+            <div class="collapse navbar-collapse" id="navigationbar">
+              <ul class="nav navbar-nav">
+                <li><a href="https://heades.github.io">Author</a></li>
+                <li><a href="/">Posts</a></li>                
+            </ul>
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="well">
+          <h2>Come One, Come All! The AU CS Colloquium Series is Open to All</h2>
+              Published: 2020-08-17
+        </div>
+	<div class="row">
+	  <div class="col-md-2">
+	  </div>
+	  <div class="col-md-10" style="font-size:20px;">
+	    <p>This semester I’m the faculty chair of the AU CS Colloquium, and due to it being completely online this semester I decided to open it up to the wider community. So I’ll be doing some advertising here to get y’all to come and attend some great presentations.</p>
+     <p>The complete schedule can be found here:</p>
+     <p><a href="https://the-au-forml-lab.github.io/colloquium.html">The Colloquium Schedule</a></p>
+     <p>Topics will vary and will include PL, category theory, security, and diversity in CS this semester.</p>
+     <p>If you would like to attend please RSVP to <a href="mailto:harley.eades@gmail.com">me</a>.</p>
+     <p>The first presentation is by a NEW AU faculty member, Dr. Edward Tremel:</p>
+     <p>Title: <strong>Dependable Systems for Managing Valuable Data</strong></p>
+     <p>Abstract:</p>
+     <p>Distributed computing systems have become an essential piece of infrastructure for today’s businesses, organizations, and governments; they store, manage and interpret vast amounts of data, and allow groups of people to communicate and take coordinated actions. With the emergence of Internet-of-Things devices, distributed systems are also responsible for monitoring and automating the physical world. As a result, distributed systems face competing demands: they must be dependable enough to be relied upon for essential tasks, but responsive enough to handle requests with tight time constraints.</p>
+     <p>My research focuses on building distributed systems that provide dependability guarantees while still maintaining high performance. In this talk I will describe my work on one of these systems, Derecho, which is a library for building replicated datacenter applications. Derecho allows distributed services to increase their fault-tolerance and scalability by organizing servers into replicated shards, while achieving incredibly high data throughput and low response latency. It accomplishes this by redesigning state-machine-replication and fault-management protocols to use non-blocking, asynchronous communication, and separating data flow from control messages. Derecho also includes optional mechanisms for making services durable by logging state to persistent storage, and in the second half of my talk I will describe my work on a distributed restart algorithm for Derecho and other durable replicated services. This algorithm efficiently restarts a sharded, replicated service from state stored in persistent logs, while respecting node placement constraints and ensuring the state is mutually consistent across all subsystems.</p>
+     <p>More details can be found <a href="https://the-au-forml-lab.github.io/colloquium_talks/Tremel.html">here</a>.</p>
+            <hr>
+            <p>
+                        <em>Leave a comment by sending me an <a href="mailto:">Email</a></em>
+                        </p>
+	  <div class="col-md-1">
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+	<p class="text-right" class="text-muted credit">
+	<small>
+	  All rights reserved: <a href="index.html">Harley Eades III</a>. 
+	</small>
+	</p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-71081670-1', 'auto');
+       ga('send', 'pageview');
+     </script>
+  </body>
+</html>
