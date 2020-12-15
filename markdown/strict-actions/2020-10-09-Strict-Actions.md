@@ -13,6 +13,7 @@ categories:
  - type theory
  - coalgebras
  - graded modal types
+abstract: "Encoding graded modalities leads to strict versions."
 ---
 
 <div id="divCheckbox" style="display: none;">
@@ -38,6 +39,8 @@ Graded necessity modalities are commonly defined by the following
 inference rules:
 
 <center><img width="70%" src="/images/posts/strict-actions/box-ifrs.png"></center>
+
+-> $[[Box r A]]$
 
 In this style, the typing judgment has the form of $[[g @ G |- t : A]]$
 where $\gamma$ is a vector of elements from an abstract
@@ -107,4 +110,4 @@ where $[[g3]] * ([ [[g'i]] ]^{l \times j} * [ [[gi]] ]^{j \times k}) = ([[g3]] *
 Finally, we do not distinguish $\alpha$-equivalent morphisms.
 
 
--->
+-->XXXX

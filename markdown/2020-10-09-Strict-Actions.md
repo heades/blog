@@ -13,6 +13,7 @@ categories:
  - type theory
  - coalgebras
  - graded modal types
+abstract: "Encoding graded modalities leads to strict versions."
 ---
 
 <div id="divCheckbox" style="display: none;">
@@ -39,6 +40,8 @@ inference rules:
 
 <center><img width="70%" src="/images/posts/strict-actions/box-ifrs.png"></center>
 
+-> $\Box_{ \ottmv{r} }  \ottnt{A}$
+
 In this style, the typing judgment has the form of $\gamma  \mathbin{\odot}  \Gamma  \vdash  \ottnt{t}  \ottsym{:}  \ottnt{A}$
 where $\gamma$ is a vector of elements from an abstract
 preordered semiring $(\mathcal{R},\mathsf{m},\circledast,\mathsf{a},\oplus,\leq)$ and
@@ -51,11 +54,11 @@ the rules above ignoring the vectors, then we have the standard
 introduction and elimination rules for Linear Logic's of-course!
 modality.
 
-In this post I'm going to explain how $\Box_{ \ottmv{r} } \ottnt{A}$ has a graded
+In this post I'm going to explain how $\Box_{ \ottmv{r} }  \ottnt{A}$ has a graded
 adjoint formalization in terms of a strict graded necessity modality
 that is wrapped around an adjunction.  Then we will look at some
 interesting implications of this, in particularly, we will ask if we
-can define $\Box_{ \ottmv{r} } \ottnt{A}$ in terms of this strict version using the
+can define $\Box_{ \ottmv{r} }  \ottnt{A}$ in terms of this strict version using the
 operators of our theory?
 
 <!--
@@ -104,4 +107,4 @@ where $\gamma_{{\mathrm{3}}} * ([ \gamma'_{\ottmv{i}} ]^{l \times j} * [ \gamma_
 Finally, we do not distinguish $\alpha$-equivalent morphisms.
 
 
--->
+-->XXXX
