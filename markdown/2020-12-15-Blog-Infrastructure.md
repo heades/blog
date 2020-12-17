@@ -6,6 +6,7 @@ categories:
  - pandoc
  - panfeed
 abstract: "This post introduces Metatheorem's new blog infrastructure using Pandoc, GNU Make, and a new tool called Panfeed."
+twitter-post: "https://twitter.com/heades/status/1339392940733546497?s=20"
 ---
 
 I haven't been blogging much over the last few years.  This is in part

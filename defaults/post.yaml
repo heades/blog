@@ -16,12 +16,10 @@ self-contained: false
 
 highlight-style: espresso
 
-variables:
-        monobackgroundcolor: blue
-
 email-obfuscation: javascript
+
 metadata:
-  email: harley.eades@gmail.com
+        email: "harley.eades@gmail.com"
 
 html-math-method:
   method: mathjax
