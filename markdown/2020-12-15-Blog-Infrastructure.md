@@ -149,9 +149,9 @@ run `http-server`.  The commands `make draft`, `make published`, and
 `make clean` are also available. The latter removes all published
 HTML.
 
-Pandoc is an amazing tool for converting to and from Markdown.
+Pandoc is an amazing tool for converting to and from markdown.
 However, it is not a tool for blog management.  Thus, the one issue I
-had was how do I manage my RSS feed (`feed.xml`).  Entire Panfeed.
+had was how do I manage my RSS feed (`feed.xml`).  Enter Panfeed.
 
 ### Panfeed
 
@@ -213,5 +213,5 @@ expressive as possible. In fact, check it out, the math
 $\Gamma_{{\mathrm{1}}}$ looks as it should.
 
 If you are interested in using this blog setup you can simply clone
-this [repo](). Then install Pandoc, GNU Make, and Panfeed.  Then you
-can get blogging.
+this [repo](https://github.com/heades/example-blog). Then install
+Pandoc, GNU Make, and Panfeed.  Then you can get blogging.
