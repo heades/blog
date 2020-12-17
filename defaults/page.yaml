@@ -4,7 +4,7 @@ from: markdown+emoji
 
 to: html
 
-template: ../layouts/post
+template: ../layouts/page
 
 output-file: 
 
@@ -26,4 +26,3 @@ html-math-method:
 
 css:
 - https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css
-- /includes/css/proofs.css

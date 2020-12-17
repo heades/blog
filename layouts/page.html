@@ -7,8 +7,8 @@
     <title>$pagetitle$</title>
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    $for(css)$
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+        $for(css)$
     <link rel="stylesheet" href="$css$" />
     $endfor$
     $if(math)$
@@ -34,8 +34,9 @@
           </div>
 	  <div>
             <div class="collapse navbar-collapse" id="navigationbar">
-            <ul class="nav navbar-nav">
-              <li><a href="https://heades.github.io">Author</a></li>
+              <ul class="nav navbar-nav">
+                <li><a href="https://heades.github.io">Author</a></li>
+                <li><a href="/">Posts</a></li>                
             </ul>
             </div>
           </div><!--/.nav-collapse -->
@@ -45,14 +46,15 @@
       <!-- Begin page content -->
       <div class="container">
         <div class="well">
-          <h1>$title$</h1>
+          <h2>$title$</h2>
+              Published: $date$
         </div>
 	<div class="row">
 	  <div class="col-md-2">
 	  </div>
-	  <div class="col-md-10">
-	    $body$
-	  </div>
+	  <div class="col-md-10" style="font-size:20px;">
+$body$
+            <hr>            
 	  <div class="col-md-1">
 	  </div>
 	</div>
@@ -63,7 +65,7 @@
       <div class="container">
 	<p class="text-right" class="text-muted credit">
 	<small>
-	  All rights reserved: <a href="https://metatheorem.org/">Harley Eades III</a>. 
+	  All rights reserved: <a href="index.html">Harley Eades III</a>. 
 	</small>
 	</p>
       </div>

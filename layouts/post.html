@@ -8,12 +8,12 @@
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">        
-        $for(css)$
-    <link rel="stylesheet" href="$css$" />
-    $endfor$
-    $if(math)$
+$for(css)$
+    $css$
+$endfor$
+$if(math)$
       $math$
-    $endif$
+$endif$
   </head>
   <body>
 
@@ -53,7 +53,7 @@
 	  <div class="col-md-2">
 	  </div>
 	  <div class="col-md-10" style="font-size:20px;">
-	    $body$
+$body$
             <hr>
             <p>
             $if(twitter-post)$
