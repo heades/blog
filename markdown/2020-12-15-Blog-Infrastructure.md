@@ -138,7 +138,7 @@ drafts of posts with others before publishing them and to keep them in
 my Git repo with little hassle.  In fact, you can visit
 [https://blog.metatheorem.org/draft](https://blog.metatheorem.org/draft)
 right now and see the draft version of this site.  Then using the
-`Makfile` at the root of the site by issuing `make publish` the
+`Makefile` at the root of the site by issuing `make publish` the
 generated files in `draft` are moved to their respective locations.
 All posts are moved to `published`, and `index.html` and `feed.xml`
 are both moved to the root of the site.
@@ -197,7 +197,7 @@ records the new entry as located on your site at
 
 Thus, using Panfeed we can easily manage our Pandoc-base site from the
 command line.  In fact, this is done completely automatically within
-the `Makfile` in the `markdown` directory.
+the `Makefile` in the `markdown` directory.
 
 In addition, Panfeed is completely open source and easy to install.
 For more details on Panfeed checkout the
