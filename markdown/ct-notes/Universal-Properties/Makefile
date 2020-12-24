@@ -11,6 +11,7 @@ OTT_GEN_INC_POSTFIX := ottput
 
 PAPER_NAME := note
 POST_NAME := Universal_Properties
+post_date := "`date "+%Y-%m-%d"`"
 
 OTT_FILES = ${PAPER_NAME}.tex	    
 
@@ -41,7 +42,7 @@ ${PAPER_NAME}.tex : ${PAPER_NAME}.md
 	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua -s -f markdown -t latex --template=note ${PAPER_NAME}.md -o ${PAPER_NAME}.tex
 
 ${draft_dir}/${POST_NAME}.html : Makefile ${PAPER_NAME}.md ${OTT_SPEC}
-	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua -s -d ../../../defaults/post --metadata date="`date "+%Y-%m-%d"`" -o ${PAPER_NAME}.html ${PAPER_NAME}.md
+	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua -s -d ../../../defaults/post --metadata date=${post_date} -o ${PAPER_NAME}.html ${PAPER_NAME}.md
 	ott -i ${OTT_SPEC} ${OTT_FLAGS} -tex_filter ${PAPER_NAME}.html ${draft_dir}/${POST_NAME}.html
 	panfeed --add=${PAPER_NAME}.md --post-path=${post_dir} --feed-dest=${draft_dir}/${rss_feed} ${site_dir}/${rss_feed}
 
