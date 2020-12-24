@@ -1,0 +1,67 @@
+metavar var, x, y , z, r, s, t, o  ::=
+indexvar n, m, i, j, k ::=
+
+grammar
+
+  Objects, A, B, C, D, E, F, G, M, X :: 'Obj_'   ::=
+    | r              ::   :: El
+    | 1              ::   :: OneCat
+    {{tex \mathbf{1} }}
+    | Set            ::   :: Set
+    {{tex \mathsf{Set} }}
+    | Nat            ::   :: Nat
+    {{tex \mathbb{N} }}
+    | A * B          ::   :: Product
+    | {*}            ::   :: SSet
+    {{tex \{ \star \} }}
+    | bullet         ::   :: Bullet
+    {{tex \bullet }}
+    | C( A )         ::   :: Cat
+    {{tex \mathcal{[[A]]} }}
+    | ( A )          ::   :: Parens
+    {{tex ([[A]]) }}
+    | f ( g1 , ... , gi ) :: M :: App
+    | f ( A1 , ... , Ai ) :: M :: App2
+    | h{ A }              :: M :: HParens
+    {{tex [[A]] }}
+
+
+  morphisms, f, g, h :: 'Mor_' ::=
+    | e    :: :: MId
+    {{tex e }}
+    | i    :: :: Iid
+    {{tex i}}
+    | id A :: :: Id
+    {{tex \mathsf{id}_{[[A]]} }}
+    | M    :: :: Monoid
+    | phi  :: :: Phi
+    {{tex \phi }}
+    | pi1  :: :: Pi1
+    {{tex \pi_1 }}
+    | pi2  :: :: Pi2
+    {{tex \pi_2 }}
+    | [ bifunctor ] :: :: Product
+    {{tex [[bifunctor]] }}
+    | f bifunctor g :: :: BifApp
+    | ( f )         :: :: Parens
+    | h( f )        :: :: HParen
+    {{tex [[f]] }}
+
+  bifunctor :: 'bifunctor_' ::=
+    | (*) :: :: Oast
+    | *   :: :: Otimes
+    | (x) :: :: OTimes
+
+  terminals :: 'terminals_' ::=
+    | (*) :: :: Oast
+    {{tex \oast }}
+    | *   :: :: Otimes
+    {{tex \times }}
+    | (x) :: :: OTimes
+    {{tex \otimes }}
+    | ->  :: :: Mto
+    {{tex \mto }}
+
+  formula :: 'formula_' ::=
+    | f : A -> B :: :: Mor
+

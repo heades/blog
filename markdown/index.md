@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Universal Properties](/draft/Universal_Properties.html)
+:::
+::: list-group-item
 ### [New Blog Infrastructure](/draft/2020-12-15-Blog-Infrastructure.html)
 :::
 ::: list-group-item

@@ -1,0 +1,163 @@
+It has been said that one of the most important and used results in
+category theory is the Yoneda lemma\footnote{Named after the Japanese
+  mathematician Nobuo Yoneda.}.  The Yoneda lemma can be seen as a
+generalization of Caylay's theorem from group theory.  We begin by
+first understanding the notion of a set-valued functor.
+
+\begin{definition}
+  \label{def:Yoneda-embedding}
+  The \textbf{Yoneda embedding} is the functor $Y : \cat{C} \to
+  \sets^{\catop{C}}$ taking objects $C$ of $\cat{C}$ to the
+  contravariant representable functor:
+  \[ Y_C = \Hom{\cat{C}}{-}{C} : \catop{C} \to \sets\]
+  and taking morphisms, $f : C \to D$, to the natural transformation:
+  \[Y_f = \Hom{\cat{C}}{-}{f} : \Hom{\cat{C}}{-}{C} \to \Hom{\cat{C}}{-}{D}.\]
+\end{definition}
+It helps to think of the Yoneda embedding as a ``representation'' of
+the category $\cat{C}$ in the category of set-valued functors and
+their natural transformations on some index category
+\cite{awodey2006category}.
+
+\begin{lemma}[Yoneda]
+  \label{lemma:yoneda}
+  Let $\cat{C}$ be a locally small category.  For any object $C \in
+  \catobj{C}$ and presheaf $F \in \sets^{\catop{C}}$ there is an isomorphism
+  \[ \Hom{\cat{C}}{Y_C}{F} \cong F(C) \]
+  natural in both $F$ and $C$.
+\end{lemma}
+\begin{proof}
+  Suppose $C \in \catobj{C}$ and $F \in \sets^{\catop{C}}$.  Then we
+  must define an isomorphism $i : \Hom{\cat{C}}{Y_C}{F} \to F(C)$.
+
+  We define $i$ by taking a natural transformation $\alpha : Y_C \to
+  F$ and constructing an element of $F(C)$.  The only means we have to
+  obtain an element of $F(C)$ is by using $\alpha$ which can be
+  instantiated to $\alpha_C : Y_C(C) \to F(C)$, but $Y_C(C) =
+  \Hom{\cat{C}}{C}{C}$, and thus, we can obtain an element of $F(C)$ by
+  supplying a morphism $f: C \to C$ to $\alpha_C$.  In fact, the only
+  candidate for $f$ is indeed the identity function on $C$.  Thus, we
+  obtain the following definition:
+  \[
+  \begin{array}{lll}
+    i(\alpha : Y_C \to F) = \alpha_C(\id_C)\\
+  \end{array}
+  \]
+
+  Next we define $i$'s inverse which follows the same reasoning.  To
+  define $i^{-1}$ we must define a natural transformation $\alpha :
+  Y_C \to F$, and to do this we must define $\alpha$'s components.
+  Suppose $A \in \catobj{C}$.  Then we must define $\alpha_A : Y_C(A)
+  \to F(A)$.  So suppose $f \in Y_C(A) = \Hom{\cat{C}}{A}{C}$.  Then we must
+  define an element of $F(A)$.  First, apply $F$ to $f$ yielding $F(f)
+  : F(C) \to F(A)$, and then apply this to an arbitrary element of
+  $F(C)$.  Thus, we obtain the following definition:
+  \[
+  \begin{array}{lll}
+    i^{-1}(x \in F(C))_A(f \in \Hom{\cat{C}}{A}{C}) = F(f)(x)\\
+  \end{array}
+  \]
+  It is straightforward to show that $i^{-1}(x \in F(C))$ is indeed a
+  natural transformation.
+
+  Finally, we must show that $i;i^{-1} = \id$ and $i^{-1};i = \id$.
+  Consider the former.  Suppose $\alpha : Y_C \to F$ is a natural
+  transformation, $A \in \catobj{C}$, and $f \in \Hom{\cat{C}}{A}{C}$.  Then we
+  have the following reasoning:
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        (i;i^{-1})(\alpha)_{A}(f)
+        & = & i^{-1}(i(\alpha))_{A}(f)\\
+        & = & i^{-1}(\alpha_C(\id_C))_A(f)\\
+        & = & F(f)(\alpha_C(\id_C))\\
+      \end{array}
+    \end{math}
+  \end{center}
+  Now we know by assumption that $\alpha$ is natural, and thus, the
+  following diagram commutes:
+  \[
+  \bfig
+  \square<800,500>[Y_C(C)`F(C)`Y_C(A)`F(A);\alpha_C`Y_C(f)`F(f)`\alpha_A]
+  \efig
+  \]
+  Thus, we know the following:
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        F(f)(\alpha_C(\id_C))
+        & = & \alpha_A(Y_C(f)(\id))\\
+        & = & \alpha_A(f)\\
+      \end{array}
+    \end{math}
+  \end{center}
+  Now suppose $x \in F(C)$ for some $C \in \catobj{C}$.  Then we have
+  the following reasoning:
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        i(i^{-1}(x))
+        & = & i^{-1}(x)_C(\id)\\
+        & = & F(\id)(x)\\
+        & = & \id_{F(C)}(x)\\
+        & = & x\\
+      \end{array}
+    \end{math}
+  \end{center}
+  Therefore, $i$ and $i^{-1}$ are mutually inverse.
+\end{proof}
+Notice what the Yoneda lemma states: the set of natural
+transformations from the Yoneda embedding to $F$ is isomorphic to the
+set indexed by $F$ itself.
+
+\textbf{Example.} A monoid is a triple $(M, \otimes, i)$ where $M$ is
+a set, $\otimes : M \times M \to M$ is a binary operation on $M$
+called the monoidal multiplication, and $i \in M$ is the identify on
+the monoidal multiplication.  A couple of examples of monoids are
+$(\mathbb{N}, \times, 1)$ where $\mathbb{N}$ is the set of natural
+numbers, $\times$ is ordinary multiplication on natural numbers, and
+$1$ is the identity for multiplication.  Another example is
+$(\verb!List!, \verb!++!, \verb![]!)$ where $\verb!List!$ is the
+algebraic datatype defining lists, $\verb!++!$ is list concatenation,
+and $\verb![]!$ is the empty list.
+
+We can equivalently define a monoid as a category in a similar way
+that a set is defined as a category.  Define the category $\mathbb{M}$
+as consisting of only a single object denoted by $\bullet$, the
+hom-set $\Hom{\mathbb{M}}{\bullet}{\bullet}$ defines the elements of the monoid,
+morphism composition defines the monoidal multiplication, and the
+identity morphism is the identity of the monoid.
+
+\begin{lemma}[Full and Faithful]
+  \label{lemma:full_and_faithful}
+  The Yoneda embedding $Y : \cat{C} \to \sets$ is full and
+  faithful.
+\end{lemma}
+\begin{proof}
+  TODO
+\end{proof}
+
+\begin{corollary}[Yoneda Principles]
+  \label{corollary:yoneda_principles}
+  Fix a locally small category $\cat{C}$ with $A , B \in \catobj{C}$.
+  Then we have the following principles:
+  \begin{itemize}
+  \item[i.] If $Y_C(A) \cong Y_C(B)$, then $A \cong B$.
+  \item[ii.] If there exists a natural transformation $\alpha : Y_A
+    \to Y_B$, then there exists a unique morphism $h : A \to B$.
+  \end{itemize}
+\end{corollary}
+\begin{proof}
+  Both of these principles are consequences of the fact that the
+  Yoneda embedding is full and faithful
+  (Lemma~\ref{corollary:yoneda_principles}).  Part i holds by the fact
+  that any full and faithful functor is injective on objects up to an
+  isomorphism, and part ii holds because a full and faithful functor
+  is bijective on morphisms, and thus, if $\alpha : Y_A \to Y_B$
+  exists, then it must be the case that there is an unique $h : A \to
+  B$ such that $Y_h = \alpha$.
+\end{proof}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: note.tex
+%%% End:

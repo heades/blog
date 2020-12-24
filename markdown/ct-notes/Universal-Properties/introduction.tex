@@ -1,0 +1,165 @@
+One hotly debated question is, what is the essence of category theory?
+First appearances would suggest composition as the answer, after all,
+that's the defining property of a category.  However, if we think a
+bit harder, and examine how we use categories we will find that simply
+finding a category is not the most interesting use of our time, but
+rather we find that we use categories to study constructions in them
+or on them.  We strive to find relationships between these
+constructions.  Consider the cartesian product as an example, of
+which, we can find in two seemingly different categories:
+\begin{itemize}
+\item \textbf{Cartesian Products.} Given sets $A$ and $B$ their
+  cartesian product $A \times B$ induces two functions $\pi_1 : A
+  \times B \mto A$ and $\pi_2 : A \times B \mto B$ called the
+  \textbf{projection maps}. Using these projections we can state a
+  useful property of cartesian products.  Suppose we have functions $f
+  : C \mto A$ and $g : C \mto B$ for some arbitrary set $C$.  Then
+  there is a unique function $\langle f,g \rangle : C \mto A \times B$
+  such that the following hold:
+  \[
+  \begin{array}{lll}
+    \langle f,g \rangle;\pi_1 = f\\
+    \langle f,g \rangle;\pi_2 = g
+  \end{array}
+  \]
+  This property can be summed up as the following diagram:
+  \begin{center}
+    \begin{math}
+      \bfig
+      \dtriangle|ama|/->`-->`<-/<500,500>[C`A`A \times B;f`\langle f,g \rangle!`\pi_1]
+      \btriangle(500,0)|maa|/-->`->`->/<500,500>[C`A \times B`B;\langle f,g \rangle!`g`\pi_2]
+      \efig
+    \end{math}
+  \end{center}
+  The dotted line stands for ``there exists'' and the bang (exclamation
+  mark) stands for ``unique''.
+
+  Notice that we have not given the definition of $\langle f,g \rangle$,
+  but only its defining property, but this property
+  implies that $\langle f,g \rangle$ must be defined to be:
+  \[
+  \begin{array}{lll}
+    \langle f,g \rangle : C \mto A \times B\\
+    \langle f,g \rangle(c) = (f(c),g(c))
+  \end{array}
+  \]
+  Thus, this property gives us a way to pair functions with a common
+  domain, and this pairing acts the way we expect it to act when we run
+  it on some elements.
+
+\item \textbf{Meets in Preorders.} Suppose we have a preorder
+  $(P,\leq)$.  Then we say that the preorder $(P,\leq)$ has
+  \textbf{meets} if given two elements $p,q \in P$, there is an
+  element $p \land q \in P$ such that:
+  \begin{enumerate}
+  \item $(p \land q) \leq p$
+  \item $(p \land q) \leq q$
+  \item If $r \leq p$ and $r \leq q$, then $r \leq (p \land q)$
+  \end{enumerate}
+  Recall that if we treat the preorder $(P,\leq)$ as a category then
+  we take $P$ as the set of objects, and there is a morphism $p \mto^f
+  q$ if and only if $p \leq q$.  Thus, every homset $\Hom{P}{p}{q}$
+  has at most one morphism in it.  Using this perspective we can
+  recast the definition of meets in categorical terms.  It says, for
+  any two objects $p$ and $q$ there is an object $p \land q$ with two
+  projection maps $(p \land q) \mto^{\pi_1} p$ and $(p \land q)
+  \mto^{\pi_2} q$ such that for any object $r$, if there are
+  morphisms $r \mto^f p$ and $r \mto^g q$ there is a unique morphism
+  $r \mto^{\langle f,g \rangle} p \land q$\footnote{Note here that if
+    these morphisms exists then the latter is guaranteed to be unique,
+    because at most one morphism exists between any two objects.}.
+
+  Using this definition of meets we can prove two facts:
+  \begin{enumerate}
+  \item Given morphisms $r \mto^f p$ and $r \mto^g q$, $\langle f,g \rangle;\pi_1 = f$.
+    \begin{proof}
+      Suppose we have morphisms $r \mto^f p$ and $r \mto^g q$.  Thus,
+      we know that $r \leq p$ and $r \leq q$.  Then we know by the
+      definition of meets that there are morphisms $(p \land q)
+      \mto^{\pi_1} p$ and $r \mto^{\langle f,g \rangle} p \land q$
+      which both imply that $(p\land q) \leq p$ and $r \leq (p\land
+      q)$.  We must show that $\langle f,g \rangle;\pi_1 = f$, but
+      $\langle f,g \rangle;\pi_1$ is defined to be $r \leq (p \land q)
+      \leq p$ which holds by transitivity, and is exactly $r \leq p$ or $r \mto^f p$.
+    \end{proof}
+    \item Given morphisms $r \mto^f p$ and $r \mto^g q$, $\langle f,g \rangle;\pi_2 = g$.
+    \begin{proof}
+      Left as an exercise.
+    \end{proof}
+  \end{enumerate}
+  We can sum all of this up into the following diagram.  A preorder,
+  $(P,\leq)$, has meets if for any two objects $p,q \in P$, there is
+  an object $(p \land q) \in P$ such that the following diagram commutes:
+  \begin{center}
+    \begin{math}
+      \bfig
+      \dtriangle|ama|/->`-->`<-/<500,500>[r`p`p \land q;f`\langle f,g \rangle!`\pi_1]
+      \btriangle(500,0)|maa|/-->`->`->/<500,500>[r`p \land q`q;\langle f,g \rangle!`g`\pi_2]
+      \efig
+    \end{math}
+  \end{center}
+  This is the same digram as the first example!  Thus, meets in a
+  preorder have the same \textbf{defining property} as cartesian
+  products in sets!
+\end{itemize}
+As we can see from the previous two examples cartesian products and
+meets in a preorder share a common diagram that defines them. It is
+quite surprising that these two seemingly different structures would
+be defined in the same way, but as we have shown they both capture the
+same structure, but in different categories.  A meet is a ``pair'' of
+two elements in a preorder. The diagram
+\begin{center}
+  \begin{math}
+    \bfig
+    \dtriangle|ama|/->`-->`<-/<500,500>[C`A`A \times B;f`\langle f,g \rangle!`\pi_1]
+    \btriangle(500,0)|maa|/-->`->`->/<500,500>[C`A \times B`B;\langle f,g \rangle!`g`\pi_2]
+    \efig
+  \end{math}
+\end{center}
+is the defining property of ``pairing'' objects and morphisms together
+regardless of which category we are in.  If the category supports
+pairing, then they will have a \textbf{product} object $A \times B$
+and the previous diagram will hold. The implementation details of
+pairing and each morphism in the previous diagram will be different in
+different categories, but the property defined by the diagram will
+remain the same. This is a very powerful realization, because this
+shows that using this property we can relate different mathematical
+structures.  Properties that allow us to do this, like the one for
+products, are called \textbf{universal properties.}  Category theory
+is chalked full of universal properties, because nearly every
+categorical structure is defined by a universal property; and thus,
+they are perhaps the most important tool in category.
+
+In this section we will study universal properties focusing on their
+precise definition.  This will require we understand two other
+important tools in category called \textbf{Representable Functors} and
+\textbf{The Yoneda Lemma}.  The road map we will follow is summarized
+as follows:
+\begin{itemize}
+\item Introduce set-valued functors;
+\item Introduce representable functors;
+\item Introduce the Yoneda lemma;
+\item Combine representable functors and the Yoneda lemma to introduce
+  universal elements;
+\item Define universal properties using universal elements;
+\item Show universal properties are universal in the category of
+  elements.
+\end{itemize}
+We will give lots of examples along the way.
+
+One question might be, how do universal properties relate to
+programming language theory?  This is a great question, and the answer
+is, greatly!  Giving a semantics to a programming language requires
+one to model the typing rules as representable functors, and the
+operational semantics as the universal properties induced by these
+representable functors through the Yoneda lemma.  We will conclude
+this chapter with a detailed example for the simply typed
+$\lambda$-calculus with products.  Then we will show how the Yoneda
+lemma relates to normalization by evaluation a technique for deriving
+termination algorithms for typed $\lambda$-calculi.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: note.tex
+%%% End:

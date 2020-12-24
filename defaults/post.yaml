@@ -4,7 +4,8 @@ from: markdown+emoji
 
 to: html
 
-template: ../layouts/post
+template: "/Users/heades/website/blog/metatheorem/layouts/post"
+include-before-body: ["/Users/heades/website/blog/metatheorem/includes/mathjax/math.html"]
 
 output-file: 
 
@@ -17,7 +18,6 @@ self-contained: false
 highlight-style: espresso
 
 email-obfuscation: javascript
-
 metadata:
         email: "harley.eades@gmail.com"
 

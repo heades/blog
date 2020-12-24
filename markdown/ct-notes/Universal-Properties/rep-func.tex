@@ -1,0 +1,178 @@
+Simply put, universal properties are what are called
+\emph{representable functors.}  These correspond to set-valued
+functors with a special property that states that they can be
+completely captured by a collection of morphisms.  An example may help
+make this informal explanation more clear.
+
+Suppose $X$ is a set.  Then we can define the following functions
+between $X$ and the set of functions $\Hom{[[Set]]}{[[{*}]]}{X}$ from
+the singleton set $[[{*}]]$ to $X$:
+\[
+\begin{array}{lll}
+  \begin{array}{lll}
+    [[phi]] : [[X]] \mto \Hom{[[Set]]}{[[{*}]]}{X}\\
+    [[phi]](x) = \lambda \_.x\\
+  \end{array}
+  &
+  \begin{array}{lll}
+    [[phi]]^{-1} : \Hom{[[Set]]}{[[{*}]]}{X} \mto [[X]]\\
+    [[phi]]^{-1}(f) = f(\star)\\
+  \end{array}
+\end{array}
+\]
+The function $\phi$ is the constant function always returning $x$, and
+its inverse takes in a function from $[[{*}]]$ to $X$, and simply
+applies it to its only input.  We can easily see that this forms a
+bijection.  Thus, every set $X$ is in bijection with the set of
+functions $\Hom{[[Set]]}{[[{*}]]}{X}$.  Now consider the functor $[[id
+    Set : Set -> Set]]$.  Using the above argument we can define a
+natural isomorphism $\alpha : \Hom{[[Set]]}{[[{*}]]}{-} \mto [[id
+    Set]]$ by setting $\alpha_X = [[phi]]^{-1}$.  Functors like $[[id
+    Set]]$ that have such an object like $[[{*}]]$ that induces a
+natural isomorphism like $\alpha$ are called \emph{representable
+  functors}.
+
+\begin{definition}
+  \label{def:rep-funct}
+  A set-valued functor $F : \cat{C} \mto \sets$ is called
+  \textbf{representable} if and only if there is an object $A \in
+  \Obj{C}$ and a natural isomorphism $\alpha : F \mto \Hom{C}{A}{-}$.
+  We call the pair $(A,\alpha)$ a \textbf{representation} of $F$.
+\end{definition}
+The definition just given can be recast into a definition for
+contravariant set-valued functors $F : \catop{C} \mto \sets$, called
+presheafs, by proving it naturally isomorphic to the contravariant hom
+functor.
+\begin{definition}
+  \label{def:rep-funct}
+  A set-valued contravariant functor (presheaf) $F : \catop{C} \mto
+  \sets$ is called \textbf{representable} if and only if there is an
+  object $B \in \Obj{C}$ and a natural isomorphism $\beta : F \mto
+  \Hom{\catop{C}}{-}{B}$.  We call the pair $(B,\beta)$ a
+  \textbf{representation} of $F$.
+\end{definition}
+
+\ \\
+\noindent
+Let's consider some example representable functors.
+\begin{enumerate}
+\item The prototypical example of a representable functor is the
+  powerset functor $\mathcal{P} : \sets^{\mathsf{op}} \mto \sets$
+  defined by
+  \[
+  \begin{array}{lll}
+    \mathcal{P}(X) & = & \{Y \mid Y \subseteq X\}\\
+    \mathcal{P}(f : B \mto A) & = & \lambda X \subseteq A.\{x \in B \mid f(x) \in X\} : \mathcal{P}(A) \mto \mathcal{P}(B)\\
+  \end{array}
+  \]
+  We should check that this defines a functor.  First we check that identities are preserved:
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        \pow{\id : A \mto A}
+        & = & \lambda X \subseteq A.\{x \in A \mid \id(x) \in X\}\\
+        & = & \lambda X \subseteq A.\{x \in A \mid x \in X\}\\
+        & = & \lambda X \subseteq A.X\\
+      \end{array}
+    \end{math}
+  \end{center}
+  Next we check that compositions are preserved.  Suppose $f \in
+  \Hom{\sets^{\mathsf{op}}}{B}{A}$ and $g \in \Hom{\sets^{\mathsf{op}}}{C}{B}$.  Then
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        \pow{g;f : C \mto A}
+        & = & \lambda X \subseteq A.\{x \in C \mid f(g(x)) \in X\}\\
+        & = & \lambda X \subseteq A.\{x \in C \mid f(g(x)) \in X\}\\
+        & = & \lambda X \subseteq A.\{x \in C \mid g(x) \in \{y \in B \mid f(y) \in X\}\}\\
+        & = & (\lambda Y \subseteq A.\{y \in B \mid f(y) \in Y\});(\lambda X \subseteq B.\{x \in C \mid g(x) \in X\})\\
+        & = & \pow{f};\pow{g}
+      \end{array}
+    \end{math}
+  \end{center}
+  To prove that the powerset functor is representable we need to find
+  a representation of it.  Thus, we must find a set $B$ together with
+  a natural isomorphism $\alpha : \Hom{\sets^{\mathsf{op}}}{-}{B} \mto \mathcal{P}$.  The
+  most difficult part is finding $B$.  To do this it is helpful to
+  consider how $\mathcal{P}$ is defined.  Suppose we have such a $B$.
+  Then we must define the component of $\alpha$, $\alpha_A :
+  \Hom{\sets^{\mathsf{op}}}{A}{B} \mto \mathcal{P}(A)$, and the only thing we have to work
+  with is the powerset functor.  To define the component $\alpha_A$ we
+  are given a morphism $f : A \mto B$, and then the only sensible thing
+  we can do is apply the powerset functor to it yielding $\pow{f} :
+  \pow{B} \mto \pow{A}$, which by definition computes the inverse image
+  of $f$ with respect to the input subset of $B$.  Now we need a
+  subset of $A$, and the only way to get it is by finding a subset of
+  $B$ in addition to $B$ itself.  Choose $B = \{0,1\}$, then we define
+  $\alpha_A(f : A \mto B) = \pow{f}(\{1\})$.  This construction uses
+  the characteristic function on $A$ to determine which subset to
+  choose.
+
+  It is easy to see that we can also define the component
+  $\alpha^{-1}_A : \pow{A} \mto \Hom{\sets^{\mathsf{op}}}{A}{B}$ by
+  \begin{displaymath}
+    \alpha^{-1}_A(X)  = \lambda x \in A.\left\{
+    \begin{array}{lr}
+      1 & : x \in X\\
+      0 & : x \notin X
+    \end{array}
+    \right.
+  \end{displaymath}
+  We can see that $\alpha_A;\alpha^{-1}_A = \id =
+  \alpha^{-1}_A;\alpha_A$.  Hence, each $\alpha_A$ is an 
+  isomorphism.
+
+  Last but not least, we must show that $\alpha$ is a natural
+  transformation.  Thus, we must prove that the following diagram
+  commutes for any $f : A' \mto A$:
+  \[\bfig
+  \square<700,500>[\Hom{\sets^{\mathsf{op}}}{A}{B}`\pow{A}`\Hom{\sets^{\mathsf{op}}}{A'}{B}`\pow{A'};\alpha_A`\Hom{\sets^{\mathsf{op}}}{f}{B}`\pow{f}`\alpha_{A'}]
+  \efig\] This follows from straightforward equational reasoning using
+  the definitions of the respective functions in play.  
+
+\item Suppose $A,B \in \Obj{C}$. What is a representation of the
+  functor $\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$? It must be
+  a pair $(C,\beta)$ such that $\beta : (\Hom{\cat{C}}{-}{A} \times
+  \Hom{\cat{C}}{-}{B}) \mto \Hom{C}{-}{C}$ is natural isomorphism.
+  The structure of $\beta$ tells us that given a pair $(f,g)$ of
+  morphisms $f : X \mto A$ and $g : X \mto B$ we must produce a
+  morphism $h : X \mto C$.  We have seen this pattern before in the
+  universal property of products given in the introduction.  Suppose
+  $\cat{C}$ has binary products, then take $C = A \times B$.  Then the
+  universal property of binary products implies that $\beta :
+  (\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}) \mto \Hom{C}{-}{A
+    \times B}$ is defined to be $\beta_{X}(f,g) = \langle f,g\rangle$.
+  That is, the universal map of the binary product.  In the opposite,
+  we have $\beta^{-1}_X(h) = (h;\pi_1,h;\pi_2)$.  The universal
+  property of binary products implies that these are mutual inverses.
+
+  The previous example assumes $\cat{C}$ has products, but
+  representablity is more general than that.  It actually gives a
+  formal means of describing the universal property of binary
+  products.  Given a category $\cat{C}$ requiring that the functor
+  $\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$ is representable
+  implies there is a pair $(C,\beta)$ such that the following
+  morphisms are definable:
+  \[
+  \begin{array}{lll}
+    \pi_1 = \beta^{-1}_{C}(\id_C);\mathsf{fst} \in \Hom{\cat{C}}{C}{A}\\
+    \pi_2 = \beta^{-1}_{C}(\id_C);\mathsf{snd} \in \Hom{\cat{C}}{C}{B}\\
+    \langle f,g \rangle = \beta_{X}(f,g) \in \Hom{\cat{C}}{X}{C}\\
+  \end{array}
+  \]
+  Now consider naturality of
+  $\beta : \Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B} \mto \Hom{C}{-}{C}$:
+  \[
+  \bfig
+  \square|amma|<1500,1000>[
+    \Hom{\cat{C}}{X}{A} \times \Hom{\cat{C}}{X}{B}`
+    \Hom{C}{X}{C}`
+    \Hom{\cat{C}}{Y}{A} \times \Hom{\cat{C}}{Y}{B}`
+    \Hom{C}{Y}{C};
+    \beta`
+    \Hom{\cat{C}}{f}{\id_A} \times \Hom{\cat{C}}{f}{\id_B}`
+    \Hom{\cat{C}}{f}{\id_C}`
+    \beta]
+  \efig
+  \]
+\end{enumerate}

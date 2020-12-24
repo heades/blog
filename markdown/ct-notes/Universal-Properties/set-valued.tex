@@ -1,0 +1,175 @@
+A functor $F : \cat{C} \mto \sets$ from some category $\cat{C}$ to the
+category of sets is called a \textbf{set-valued functor}.  It relates
+objects to sets and morphisms to functions.  One can think of them as
+an interpretation of an abstract category to a concrete category; that
+is, we can interpret a category without a notion of elements into one
+with such a notion, and one that we understand quite well.
+
+We give several example set-valued functors below.
+\begin{enumerate}  
+\item
+  Suppose $\cat{C}$ has objects $\{0,1\}$ and the following
+  morphisms:
+  \begin{center}
+    \begin{math}
+      1 \two<500> 0
+    \end{math}
+  \end{center}
+  Then a functor $F : \cat{C} \to \sets$ maps $1$ to a set $E$ and $0$
+  to a set $N$, and the two arrows to functions $s : E \to N$ and $t :
+  E \to N$.  A graph is a tuple $(N,E,s,t)$ where $N$ is the set of
+  nodes, $E$ is the set of edge labels, $s : E \to N$ assigns edges
+  their source nodes, and $t : E \to N$ assigns edges their target
+  nodes.  Therefore, $F$ represents a graph!  In addition, natural
+  transformations between functors like $F$ correspond to graph
+  homomorphisms \cite{awodey2006category}.  Notice that this functor
+  is definable for any category at all, and thus, we can think of a
+  category as an abstraction of a directed graph with a monoid
+  structure given by composition.
+
+\item A monoid $([[M]], [[e]], [[(x)]])$ can be thought of as a set-valued functor
+  $[[M : 1 -> Set]]$ with two natural transformations:
+  \[
+  \begin{array}{lll}
+    \text{(Identity)} & [[e : {*} -> M]]\\
+    \text{(Multiplication)} & [[ [(x)] : M * M -> M]]
+  \end{array}
+  \]
+  with the following commutative diagrams:
+  \[
+  \begin{array}{c}
+    \bfig
+    \qtriangle|ama|/<-`->`->/<1000,400>[ [[M * M]]`[[{*} * M]]`[[M]];[[e * id M]]`[[ [(x)] ]]`[[pi2]] ]
+    \btriangle|ama|/<-`->`->/<1000,400>[ [[M * M]]`[[M * {*}]]`[[M]];[[id M * e]]`[[ [(x)] ]]`[[pi1]] ]
+    \efig
+    \\[5pt]    
+    \bfig
+    \square|amma|/->`=`->`/<1900,400>[ [[(M * M) * M]]`[[M * M]]`[[M * (M * M)]]`[[M]];[[ [(x)] * id M]]``[[ [(x)] ]]`]
+    \morphism<950,0>[ [[M * (M * M)]]`[[M * M]];[[id M * [(x)] ]] ]
+    \morphism(950,0)<950,0>[ [[M * M]]`[[M]];[[ [(x)] ]] ]
+    \efig
+  \end{array}
+  \]
+  The left diagram corresponds to the identity axioms of the monoid,
+  and the right diagram corresponds to associativity of
+  multiplication.
+  In this example, we made use of the following functors:
+  \[
+  \begin{array}{lllllll}
+    \begin{array}{lll}
+      \text{(Singleton Set)}\\
+      \begin{array}{lll}
+        [[{*} : 1 -> Set]]\\
+        [[{*}]](\bullet) = [[{*}]]\\
+        [[{*}]]([[id bullet]]) = [[id {*}]]
+      \end{array}
+    \end{array}
+    & \quad & 
+    \begin{array}{lll}
+      \text{(Product Functor)}\\
+      \begin{array}{lll}
+        [[M * M : 1 -> Set]]\\
+        [[(M * M)(bullet,bullet)]] = [[M(bullet) * M(bullet)]]\\
+        [[(M * M)(id bullet,id bullet)]] = [[id (M(bullet) * M(bullet))]]\\
+      \end{array}
+    \end{array}
+  \end{array}
+  \]
+  These are also both examples of set-valued functors.  The left
+  functor is essentially the singleton set, and the right functor is
+  the cartesian product of the underlying set of the monoid with
+  itself.  Thus, a set-valued functor, $[[X : 1 -> Set]]$, is
+  a set $[[X]]$ lifted up a level to functors.
+
+\item Suppose we have a monoid $([[M]], [[e]], [[(x)]])$.
+  A \emph{graded monoid} is a set-valued functor $[[G : M -> Set]]$ with two natural transformations:
+  \[
+  \begin{array}{lll}
+    \text{(Identity)} & [[i : {*} -> G(e)]]\\
+    \text{(Multiplication)} & [[ [(*)] : G(r1) * G(r2) -> G(r1 (x) r_2)]]
+  \end{array}
+  \]
+  with the following commutative diagrams:
+  \[
+  \begin{array}{cccc}
+    \begin{array}{lll}
+      \bfig
+      \square|amma|/->`->`=`->/<1000,500>[ [[G(r) * {*}]]`[[G(r)]]`[[G(r) * G(e)]]`[[G(r (x) e)]];[[pi1]]`[[id h{G(r)} * i]]``[[(*)]] ]
+      \efig
+      &
+      \bfig
+      \square|amma|/->`->`=`->/<1000,500>[ [[{*} * G(r)]]`[[G(r)]]`[[G(e) * G(r)]]`[[G(e (x) r)]];[[pi2]]`[[i * id h{G(r)}]]``[[(*)]] ]
+      \efig    
+    \end{array}
+    \\[5pt]
+    \bfig
+    %% Top
+    \morphism|a|/->/<1400,0>[ [[(G(r1) * G(r2)) * G(r3)]]`[[G(r1 (x) r2) * G(r3)]];[[ [(*)] * id h{G(r3)}]] ]
+    \morphism(1400,0)|a|/->/<1200,0>[ [[G(r1 (x) r2) * G(r3)]]`[[G((r1 (x) r2) (x) r3)]];[[(*)]] ]
+
+    %% Sides
+    \morphism/=/<0,-500>[ [[(G(r1) * G(r2)) * G(r3)]]`[[G(r1) * (G(r2) * G(r3))]];]
+    \morphism(2600,0)/=/<0,-500>[ [[G((r1 (x) r2) (x) r3)]]`[[G(r1 (x) (r2 (x) r3))]];]
+    %% Bottom
+    \morphism(0,-500)|a|/->/<1400,0>[ [[G(r1) * (G(r2) * G(r3))]]`[[G(r1) * G(r2 (x) r3)]];[[ id h{G(r1)} * [(*)] ]] ]
+    \morphism(1400,-500)|a|/->/<1200,0>[ [[G(r1) * G(r2 (x) r3)]]`[[G(r1 (x) (r2 (x) r3))]];[[(*)]] ]
+    \efig
+  \end{array}
+  \]
+  The diagrams on top correspond to the identity axioms of the graded
+  monoid, and the diagram on bottom corresponds to associativity of
+  graded multiplication.
+
+  An example graded monoid can be found in formal language theory.
+  Take $\Sigma^n$ to be all the words of length $n$ over an alphabet
+  $\Sigma$.  Then $\Sigma^0$ contains only the empty word, and can be
+  lifted to a map $\varepsilon : [[{*}]] \mto \Sigma^0$, and
+  composition of words lifts to a map $\cdot : \Sigma^m \times
+  \Sigma^n \mto \Sigma^{m + n}$. Thus, since the empty word is the
+  identity of composition of words, and composition is associative up
+  to associativity of addition we have a graded monoid
+  $(\Sigma^{-},\varepsilon, \cdot)$ over the additive natural number
+  monoid $([[Nat]],0, +)$.  Using this graded monoid we can define the
+  Kleene-star of an alphabet $\Sigma$ to be
+  $\Sigma^* = \bigcup_{n \in [[Nat]]} \Sigma^n$.
+
+\item There is one very important set-valued functor we have seen
+  several times.  Suppose $A$ is an object of the category $\cat{C}$.
+  Then we can define the \textbf{covariant hom-set functor}:
+  \[
+  \begin{array}{lll}
+    \Hom{C}{A}{-} : \cat{C} \to \sets\\
+    \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+    \Hom{C}{A}{h}(g) = g;h
+  \end{array}
+  \] 
+  The proof that this is indeed a functor is left as an exercise. In
+  addition, prove that this functor is natural in $B$.
+
+\item Suppose $B$ is an object of the category $\cat{C}$.  Then we can
+  define the \textbf{contravariant hom-set functor}:
+  \[
+  \begin{array}{lll}
+    \Hom{C}{-}{B} : \catop{C} \to \sets\\
+    \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+    \Hom{C}{f}{B}(g) = f;g
+  \end{array}
+  \] 
+  The proof that this is indeed a functor is left as an exercise. In
+  addition, prove that this functor is natural in both $A$.
+
+\item Suppose $A$ and $B$ are objects of the category $\cat{C}$.  Then
+  we can define the \textbf{hom-set functor}:
+  \[
+  \begin{array}{lll}
+    \Hom{C}{-}{-} : \catop{C} \times \cat{C} \to \sets\\
+    \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+    \Hom{C}{f}{h}(g) = f;g;h
+  \end{array}
+  \] 
+  The proof that this is indeed a functor is left as an exercise. In
+  addition, prove that this functor is natural in both $A$ and $B$.
+\end{enumerate}
+The last three examples are of particular importance, because they
+underly the definition of a very important class of functors called
+representable functors.

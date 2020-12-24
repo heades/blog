@@ -47,6 +47,26 @@
 	  <div class="col-md-2">
 	  </div>
 	  <div class="col-md-10" style="font-size:20px;">
+<div id="divCheckbox" style="display: none;">
+  <span class="math display">
+    \[    
+    \newcommand{\ottnt}[1]{\mathit{#1}}
+    \newcommand{\ottsym}[1]{#1}
+    \newcommand{\ottmv}[1]{\mathit{#1}}
+
+    \newcommand{\cat}[1]{\mathcal{#1}}
+    \newcommand{\func}[1]{\mathsf{#1}}
+    \newcommand{\Lin}[0]{\func{Lin}}
+    \newcommand{\Mny}[0]{\func{Mny}}
+    \newcommand{\Forget}[0]{\func{Forget}}
+    \newcommand{\Free}[0]{\func{Free}}
+    \newcommand{\Endo}[0]{\func{Endo}}
+    \newcommand{\mto}[0]{\to}
+    \newcommand{\Hom}[3]{\mathsf{Hom}_{\cat{#1}}(#2,#3)}
+    \newcommand{\interp}[1]{[\negthinspace[#1]\negthinspace]}
+    \]
+  </span>
+</div>
 <p>This is a guest post by Aubrey Bryant.</p>
 <p>If you are searching for a logical system as exact and careful with resources as that infamous miser, Ebenezer Scrooge, look no further. Graded modal linear logic is the system for you. Like linear logic, it is resource-sensitive; however, it goes a step further and tracks not just binary usage, but usage along a continuum of grades, specified by a graded context. The grades can be defined in many different ways, but for simplicity while introducing the concept, let’s imagine that the grades range over the natural numbers, and indicate the number of times a formula must be used. When a formula <span class="math display">\[A\]</span> is needed at a grade of <span class="math display">\[r\]</span> to yield a consequent <span class="math display">\[B\]</span>, the grade for <span class="math display">\[A\]</span> must be added to the account for <span class="math display">\[B\]</span>, once for each use of <span class="math display">\[A\]</span> required to yield <span class="math display">\[B\]</span>. Thus, <span class="math display">\[A\]</span>’s grade must be multiplied by <span class="math display">\[r\]</span> in order to yield the required number of <span class="math display">\[A\]</span>’s. To illustrate, here is the cut rule in our graded system:</p>
 <center>
