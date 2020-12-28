@@ -5,13 +5,15 @@ author: 'Harley Eades III'
 contact: 'harley.eades@gmail.com'
 ---
 
+# Introduction
+
 - __Cartesian Products.__ Given sets $A$ and $B$ their cartesian
-  product $A \times B$ induces two functions $\pi_1 : A \times B \mto
-  A$ and $\pi_2 : A \times B \mto B$ called the __projection
+  product $A \times B$ induces two functions $\pi_1 : A \times B \mto{}
+  A$ and $\pi_2 : A \times B \mto{} B$ called the __projection
   maps__. Using these projections we can state a useful property of
-  cartesian products.  Suppose we have functions $f : C \mto A$ and $g
-  : C \mto B$ for some arbitrary set $C$.  Then there is a unique
-  function $\langle f,g \rangle : C \mto A \times B$ such that the
+  cartesian products.  Suppose we have functions $f : C \mto{} A$ and $g
+  : C \mto{} B$ for some arbitrary set $C$.  Then there is a unique
+  function $\langle f,g \rangle : C \mto{} A \times B$ such that the
   following hold:
 
   $$
@@ -23,10 +25,12 @@ contact: 'harley.eades@gmail.com'
   
   This property can be summed up as the following diagram:
 
-  ```{.latex-disp-img src="foo" cap="bar"}
+  ```{.latex-disp-img width="30%"
+                      src="/images/posts/ct-notes/Universal-Properties/prod-uniprop.png"
+                      cap="Commutative diagram of the universal property for products in the category of sets and functions."}
   \bfig
-        \dtriangle|ama|/->`-->`<-/<500,500>[C`A`A \times B;f`\langle f,g \rangle!`\pi_1]
-        \btriangle(500,0)|maa|/-->`->`->/<500,500>[C`A \times B`B;\langle f,g \rangle!`g`\pi_2]
+  \dtriangle|ama|/->`-->`<-/<500,500>[C`A`A \times B;f`\langle f,g \rangle!`\pi_1]
+  \btriangle(500,0)|maa|/-->`->`->/<500,500>[C`A \times B`B;\langle f,g \rangle!`g`\pi_2]
   \efig
   ```
 
@@ -39,7 +43,7 @@ contact: 'harley.eades@gmail.com'
   
   $$
   \begin{array}{lll}
-    \langle f,g \rangle : C \mto A \times B\\
+    \langle f,g \rangle : C \mto{} A \times B\\
     \langle f,g \rangle(c) = (f(c),g(c))
   \end{array}
   $$
@@ -58,33 +62,33 @@ contact: 'harley.eades@gmail.com'
   - If $r \leq p$ and $r \leq q$, then $r \leq (p \land q)$
   
   Recall that if we treat the preorder $(P,\leq)$ as a category then
-  we take $P$ as the set of objects, and there is a morphism $p \mto^f
+  we take $P$ as the set of objects, and there is a morphism $p \mto{f}
   q$ if and only if $p \leq q$.  Thus, every homset $\Hom{P}{p}{q}$
   has at most one morphism in it.  Using this perspective we can
   recast the definition of meets in categorical terms.  It says, for
   any two objects $p$ and $q$ there is an object $p \land q$ with two
-  projection maps $(p \land q) \mto^{\pi_1} p$ and $(p \land q)
-  \mto^{\pi_2} q$ such that for any object $r$, if there are morphisms
-  $r \mto^f p$ and $r \mto^g q$ there is a unique morphism $r
-  \mto^{\langle f,g \rangle} p \land q$\footnote{Note here that if
+  projection maps $(p \land q) \mto{\pi_1} p$ and $(p \land q)
+  \mto{\pi_2} q$ such that for any object $r$, if there are morphisms
+  $r \mto{f} p$ and $r \mto{g} q$ there is a unique morphism $r
+  \mto{\langle f,g \rangle} p \land q$\footnote{Note here that if
   these morphisms exists then the latter is guaranteed to be unique,
   because at most one morphism exists between any two objects.}.
 
   Using this definition of meets we can prove two facts:
 
-  1. Given morphisms $r \mto^f p$ and $r \mto^g q$, $\langle f,g \rangle;\pi_1 = f$.
+  1. Given morphisms $r \mto{f} p$ and $r \mto{g} q$, $\langle f,g \rangle;\pi_1 = f$.
      \begin{proof}
-      Suppose we have morphisms $r \mto^f p$ and $r \mto^g q$.  Thus,
+      Suppose we have morphisms $r \mto{f} p$ and $r \mto{g} q$.  Thus,
       we know that $r \leq p$ and $r \leq q$.  Then we know by the
       definition of meets that there are morphisms $(p \land q)
-      \mto^{\pi_1} p$ and $r \mto^{\langle f,g \rangle} p \land q$
+      \mto{\pi_1} p$ and $r \mto{\langle f,g \rangle} p \land q$
       which both imply that $(p\land q) \leq p$ and $r \leq (p\land
       q)$.  We must show that $\langle f,g \rangle;\pi_1 = f$, but
       $\langle f,g \rangle;\pi_1$ is defined to be $r \leq (p \land q)
-      \leq p$ which holds by transitivity, and is exactly $r \leq p$ or $r \mto^f p$.
+      \leq p$ which holds by transitivity, and is exactly $r \leq p$ or $r \mto{f} p$.
       \end{proof}
       
-  2. Given morphisms $r \mto^f p$ and $r \mto^g q$, $\langle f,g \rangle;\pi_2 = g$.
+  2. Given morphisms $r \mto{f} p$ and $r \mto{g} q$, $\langle f,g \rangle;\pi_2 = g$.
      \begin{proof}
         Left as an exercise.
      \end{proof}
@@ -93,13 +97,414 @@ contact: 'harley.eades@gmail.com'
   $(P,\leq)$, has meets if for any two objects $p,q \in P$, there is
   an object $(p \land q) \in P$ such that the following diagram commutes:
 
-  ```{.latex-disp-img src="foo" cap="bar"}
+  ```{.latex-disp-img width="30%"
+                      src="/images/posts/ct-notes/Universal-Properties/preorder-prod-uniprop.png"
+                      cap="Commutative diagram of the universal property for products in a preorder treated as a category."}
   \bfig
-    \dtriangle|ama|/->`-->`<-/<500,500>[r`p`p \land q;f`\langle f,g \rangle!`\pi_1]
-    \btriangle(500,0)|maa|/-->`->`->/<500,500>[r`p \land q`q;\langle f,g \rangle!`g`\pi_2]
+  \dtriangle|ama|/->`-->`<-/<500,500>[r`p`p \land q;f`\langle f,g \rangle!`\pi_1]
+  \btriangle(500,0)|maa|/-->`->`->/<500,500>[r`p \land q`q;\langle f,g \rangle!`g`\pi_2]
   \efig
   ```
 
   This is the same digram as the first example!  Thus, meets in a
   preorder have the same __defining property__ as cartesian
   products in sets!
+
+# Set-Valued Functors
+
+A functor $F : \cat{C} \mto{} \sets$ from some category $\cat{C}$ to the
+category of sets is called a __set-valued functor__.  It relates
+objects to sets and morphisms to functions.  One can think of them as
+an interpretation of an abstract category to a concrete category; that
+is, we can interpret a category without a notion of elements into one
+with such a notion, and one that we understand quite well.
+
+We give several example set-valued functors below.
+
+- Suppose $\cat{C}$ has objects $\{0,1\}$ and the following
+  morphisms:
+
+  ```{.latex-disp-img width="20%"
+                      src="/images/posts/ct-notes/Universal-Properties/direted-graph-morph.png"
+                      cap="The source and target morphisms defining a directed graph."}
+  1 \two<500> 0
+  ```
+  
+  Then a functor $F : \cat{C} \to \sets$ maps $1$ to a set $E$ and $0$
+  to a set $N$, and the two arrows to functions $s : E \to N$ and $t :
+  E \to N$.  A graph is a tuple $(N,E,s,t)$ where $N$ is the set of
+  nodes, $E$ is the set of edge labels, $s : E \to N$ assigns edges
+  their source nodes, and $t : E \to N$ assigns edges their target
+  nodes.  Therefore, $F$ represents a graph!  In addition, natural
+  transformations between functors like $F$ correspond to graph
+  homomorphisms \cite{awodey2006category}.  Notice that this functor
+  is definable for any category at all, and thus, we can think of a
+  category as an abstraction of a directed graph with a monoid
+  structure given by composition.
+
+- A monoid $([[M]], [[e]], [[(x)]])$ can be thought of as a set-valued functor
+  $[[M : 1 -> Set]]$ with two natural transformations:
+
+  $$
+  \begin{array}{lll}
+    \text{(Identity)} & [[e : {*} -> M]]\\
+    \text{(Multiplication)} & [[ [(x)] : M * M -> M]]
+  \end{array}
+  $$
+  
+  with the following commutative diagrams:
+
+  ```{.latex-disp-img width="40%"
+                      src="/images/posts/ct-notes/Universal-Properties/monoid-identity-axioms.png"
+                      cap="Commutative diagram for the left and right identity axioms for a monoid."}
+  \bfig
+  \qtriangle|ama|/<-`->`->/<1000,400>[ [[M * M]]`[[{*} * M]]`[[M]];[[e * id M]]`[[ [(x)] ]]`[[pi2]] ]
+  \btriangle|ama|/<-`->`->/<1000,400>[ [[M * M]]`[[M * {*}]]`[[M]];[[h{id M} * e]]`[[ [(x)] ]]`[[pi1]] ]
+  \efig
+  ```
+
+  ```{.latex-disp-img width="60%"
+                      src="/images/posts/ct-notes/Universal-Properties/monoid-assoc-axiom.png"
+                      cap="Commutative diagram for associativity axiom for a monoid."}
+  \bfig
+  \square|amma|/->`=`->`/<1900,400>[ [[{M * M} * M]]`[[M * M]]`[[M * {M * M}]]`[[M]];[[ [(x)] * id M]]``[[ [(x)] ]]`]
+  \morphism<950,0>[ [[M * {M * M}]]`[[M * M]];[[h{id M} * [(x)] ]] ]
+  \morphism(950,0)<950,0>[ [[M * M]]`[[M]];[[ [(x)] ]] ]
+  \efig
+  ```
+  
+  The left diagram corresponds to the identity axioms of the monoid,
+  and the right diagram corresponds to associativity of
+  multiplication.
+  In this example, we made use of the following functors:
+
+  $$
+  \begin{array}{lllllll}
+    \begin{array}{lll}
+      \text{(Singleton Set)}\\
+      \begin{array}{lll}
+        [[{*} : 1 -> Set]]\\
+        [[{*}]](\bullet) = [[{*}]]\\
+        [[{*}]]([[id bullet]]) = [[id {*}]]
+      \end{array}
+    \end{array}
+    & \quad & 
+    \begin{array}{lll}
+      \text{(Product Functor)}\\
+      \begin{array}{lll}
+        [[M * M : 1 -> Set]]\\
+        [[{M * M}(bullet,bullet)]] = [[M(bullet) * M(bullet)]]\\
+        [[{M * M}(id bullet,id bullet)]] = [[id {M(bullet) * M(bullet)}]]\\
+      \end{array}
+    \end{array}
+  \end{array}
+  $$
+  
+  These are also both examples of set-valued functors.  The left
+  functor is essentially the singleton set, and the right functor is
+  the cartesian product of the underlying set of the monoid with
+  itself.  Thus, a set-valued functor, $[[X : 1 -> Set]]$, is
+  a set $[[X]]$ lifted up a level to functors.
+
+- Suppose we have a monoid $([[M]], [[e]], [[(x)]])$.
+  A __graded monoid__ is a set-valued functor $[[G : M -> Set]]$ with two natural transformations:
+  
+  $$
+  \begin{array}{lll}
+    \text{(Identity)} & [[i : {*} -> G(e)]]\\
+    \text{(Multiplication)} & [[ [(*)] : G(r1) * G(r2) -> G(r1 (x) r_2)]]
+  \end{array}
+  $$
+  
+  with the following commutative diagrams:  
+        
+  ```{.latex-disp-img width="70%"
+                      src="/images/posts/ct-notes/Universal-Properties/graded-monoid-identity-axioms.png"
+                      cap="Commutative diagram for the left-identity axiom for a graded monoid."}
+  \begin{array}{cc}
+  \bfig
+  \square|amma|/->`->`=`->/<1000,500>[ [[G(r) * {*}]]`[[G(r)]]`[[G(r) * G(e)]]`[[G(r (x) e)]];[[pi1]]`[[h{id h{G(r)}} * i]]``[[ [(*)] ]] ]
+  \efig
+  &
+  \bfig
+  \square|amma|/->`->`=`->/<1000,500>[ [[{*} * G(r)]]`[[G(r)]]`[[G(e) * G(r)]]`[[G(e (x) r)]];[[pi2]]`[[i * h{id h{G(r)}}]]``[[ [(*)] ]] ]
+  \efig    
+  \end{array}
+  ```
+
+  ```{.latex-disp-img width="80%"
+                      src="/images/posts/ct-notes/Universal-Properties/graded-monoid-assoc-axiom.png"
+                      cap="Commutative diagram for the associativity axiom for a graded monoid."}
+  \bfig
+  %% Top
+  \morphism|a|/->/<1400,0>[ [[{G(r1) * G(r2)} * G(r3)]]`[[G(r1 (x) r2) * G(r3)]];[[ [(*)] * h{id h{G(r3)}}]] ]
+  \morphism(1400,0)|a|/->/<1200,0>[ [[G(r1 (x) r2) * G(r3)]]`[[G({r1 (x) r2} (x) r3)]];[[ [(*)] ]] ]
+
+  %% Sides
+  \morphism/=/<0,-500>[ [[{G(r1) * G(r2)} * G(r3)]]`[[G(r1) * {G(r2) * G(r3)}]];]
+  \morphism(2600,0)/=/<0,-500>[ [[G({r1 (x) r2} (x) r3)]]`[[G(r1 (x) {r2 (x) r3})]];]
+  %% Bottom
+  \morphism(0,-500)|a|/->/<1400,0>[ [[G(r1) * {G(r2) * G(r3)}]]`[[G(r1) * G(r2 (x) r3)]];[[ h{id h{G(r1)}} * [(*)] ]] ]
+  \morphism(1400,-500)|a|/->/<1200,0>[ [[G(r1) * G(r2 (x) r3)]]`[[G(r1 (x) {r2 (x) r3})]];[[ [(*)] ]] ]
+  \efig
+  ```
+  
+  The diagrams on top correspond to the identity axioms of the graded
+  monoid, and the diagram on bottom corresponds to associativity of
+  graded multiplication.
+
+  An example graded monoid can be found in formal language theory.
+  Take $\Sigma^n$ to be all the words of length $n$ over an alphabet
+  $\Sigma$.  Then $\Sigma^0$ contains only the empty word, and can be
+  lifted to a map $\varepsilon : [[{*}]] \mto{} \Sigma^0$, and
+  composition of words lifts to a map $\cdot : \Sigma^m \times
+  \Sigma^n \mto{} \Sigma^{m + n}$. Thus, since the empty word is the
+  identity of composition of words, and composition is associative up
+  to associativity of addition we have a graded monoid
+  $(\Sigma^{-},\varepsilon, \cdot)$ over the additive natural number
+  monoid $([[Nat]],0, +)$.  Using this graded monoid we can define the
+  Kleene-star of an alphabet $\Sigma$ to be
+  $\Sigma^* = \bigcup_{n \in [[Nat]]} \Sigma^n$.
+
+- There is one very important set-valued functor we have seen
+  several times.  Suppose $A$ is an object of the category $\cat{C}$.
+  Then we can define the __covariant hom-set functor__:
+  
+  $$
+  \begin{array}{lll}
+    \Hom{C}{A}{-} : \cat{C} \to \sets\\
+    \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+    \Hom{C}{A}{h}(g) = g;h
+  \end{array}
+  $$
+  
+  The proof that this is indeed a functor is left as an exercise. In
+  addition, prove that this functor is natural in $B$.
+
+- Suppose $B$ is an object of the category $\cat{C}$.  Then we can
+  define the __contravariant hom-set functor__:
+  
+  $$
+  \begin{array}{lll}
+    \Hom{C}{-}{B} : \catop{C} \to \sets\\
+    \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+    \Hom{C}{f}{B}(g) = f;g
+  \end{array}
+  $$
+  
+  The proof that this is indeed a functor is left as an exercise. In
+  addition, prove that this functor is natural in both $A$.
+
+- Suppose $A$ and $B$ are objects of the category $\cat{C}$.  Then
+  we can define the __hom-set functor__:
+  
+  $$
+  \begin{array}{lll}
+    \Hom{C}{-}{-} : \catop{C} \times \cat{C} \to \sets\\
+    \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+    \Hom{C}{f}{h}(g) = f;g;h
+  \end{array}
+  $$
+  
+  The proof that this is indeed a functor is left as an exercise. In
+  addition, prove that this functor is natural in both $A$ and $B$.
+
+The last three examples are of particular importance, because they
+underly the definition of a very important class of functors called
+representable functors.
+
+# Representable Functors
+
+Simply put, universal properties are what are called
+__representable functors.__  These correspond to set-valued
+functors with a special property that states that they can be
+completely captured by a collection of morphisms.  An example may help
+make this informal explanation more clear.
+
+Suppose $X$ is a set.  Then we can define the following functions
+between $X$ and the set of functions $\Hom{[[Set]]}{[[{*}]]}{X}$ from
+the singleton set $[[{*}]]$ to $X$:
+
+$$
+\begin{array}{lll}
+  \begin{array}{lll}
+    [[phi]] : [[X]] \mto{} \Hom{[[Set]]}{[[{*}]]}{X}\\
+    [[phi]](x) = \lambda \_.x\\
+  \end{array}
+  &
+  \begin{array}{lll}
+    [[phi]]^{-1} : \Hom{[[Set]]}{[[{*}]]}{X} \mto{} [[X]]\\
+    [[phi]]^{-1}(f) = f(\star)\\
+  \end{array}
+\end{array}
+$$
+
+The function $\phi$ is the constant function always returning $x$, and
+its inverse takes in a function from $[[{*}]]$ to $X$, and simply
+applies it to its only input.  We can easily see that this forms a
+bijection.  Thus, every set $X$ is in bijection with the set of
+functions $\Hom{[[Set]]}{[[{*}]]}{X}$.  Now consider the functor 
+$[[id Set : Set -> Set]]$.  Using the above argument we can define a
+natural isomorphism 
+$\alpha : \Hom{[[Set]]}{[[{*}]]}{-} \mto{} [[id Set]]$ by setting $\alpha_X = [[phi]]^{-1}$.  
+Functors like $[[id Set]]$ that have such an object like $[[{*}]]$ that induces a
+natural isomorphism like $\alpha$ are called __representable functors__.
+
+:::{.definition label="def:rep-funct"} 
+  A set-valued functor $F : \cat{C} \mto{} \sets$ is called
+  __representable__ if and only if there is an object $A \in
+  \Obj{C}$ and a natural isomorphism $\alpha : F \mto{} \Hom{C}{A}{-}$.
+  We call the pair $(A,\alpha)$ a __representation__ of $F$.
+:::
+
+The definition just given can be recast into a definition for
+contravariant set-valued functors $F : \catop{C} \mto{} \sets$, called
+presheafs, by proving it naturally isomorphic to the contravariant hom
+functor.
+
+:::{.definition label="def:rep-contra-funct"}
+  A set-valued contravariant functor (presheaf) $F : \catop{C} \mto{}
+  \sets$ is called __representable__ if and only if there is an
+  object $B \in \Obj{C}$ and a natural isomorphism $\beta : F \mto{}
+  \Hom{\catop{C}}{-}{B}$.  We call the pair $(B,\beta)$ a
+  __representation__ of $F$.
+:::
+
+Let's consider some example representable functors.
+
+- The prototypical example of a representable functor is the
+  powerset functor $\mathcal{P} : \sets^{\mathsf{op}} \mto{} \sets$
+  defined by
+
+  $$
+  \begin{array}{lll}
+    \mathcal{P}(X) & = & \{Y \mid Y \subseteq X\}\\
+    \mathcal{P}(f : B \mto{} A) & = & \lambda X \subseteq A.\{x \in B \mid f(x) \in X\} : \mathcal{P}(A) \mto{} \mathcal{P}(B)\\
+  \end{array}
+  $$
+  
+  We should check that this defines a functor.  First we check that identities are preserved:
+  
+  $$
+  \begin{array}{lll}
+    \pow{\id : A \mto{} A}
+        & = & \lambda X \subseteq A.\{x \in A \mid \id(x) \in X\}\\
+        & = & \lambda X \subseteq A.\{x \in A \mid x \in X\}\\
+        & = & \lambda X \subseteq A.X\\
+  \end{array}
+  $$
+
+  Next we check that compositions are preserved.  Suppose $f \in
+  \Hom{\sets^{\mathsf{op}}}{B}{A}$ and $g \in \Hom{\sets^{\mathsf{op}}}{C}{B}$.  Then
+  
+  $$
+  \begin{array}{lll}
+    \pow{g;f : C \mto{} A}
+        & = & \lambda X \subseteq A.\{x \in C \mid f(g(x)) \in X\}\\
+        & = & \lambda X \subseteq A.\{x \in C \mid f(g(x)) \in X\}\\
+        & = & \lambda X \subseteq A.\{x \in C \mid g(x) \in \{y \in B \mid f(y) \in X\}\}\\
+        & = & (\lambda Y \subseteq A.\{y \in B \mid f(y) \in Y\});(\lambda X \subseteq B.\{x \in C \mid g(x) \in X\})\\
+        & = & \pow{f};\pow{g}
+  \end{array}
+  $$
+  
+  To prove that the powerset functor is representable we need to find
+  a representation of it.  Thus, we must find a set $B$ together with
+  a natural isomorphism $\alpha : \Hom{\sets^{\mathsf{op}}}{-}{B} \mto{} \mathcal{P}$.  The
+  most difficult part is finding $B$.  To do this it is helpful to
+  consider how $\mathcal{P}$ is defined.  Suppose we have such a $B$.
+  Then we must define the component of $\alpha$, $\alpha_A :
+  \Hom{\sets^{\mathsf{op}}}{A}{B} \mto{} \mathcal{P}(A)$, and the only thing we have to work
+  with is the powerset functor.  To define the component $\alpha_A$ we
+  are given a morphism $f : A \mto{} B$, and then the only sensible thing
+  we can do is apply the powerset functor to it yielding $\pow{f} :
+  \pow{B} \mto{} \pow{A}$, which by definition computes the inverse image
+  of $f$ with respect to the input subset of $B$.  Now we need a
+  subset of $A$, and the only way to get it is by finding a subset of
+  $B$ in addition to $B$ itself.  Choose $B = \{0,1\}$, then we define
+  $\alpha_A(f : A \mto{} B) = \pow{f}(\{1\})$.  This construction uses
+  the characteristic function on $A$ to determine which subset to
+  choose.
+
+  It is easy to see that we can also define the component
+  $\alpha^{-1}_A : \pow{A} \mto{} \Hom{\sets^{\mathsf{op}}}{A}{B}$ by
+
+  $$
+  \alpha^{-1}_A(X)  = \lambda x \in A.\left\{
+  \begin{array}{lr}
+      1 & : x \in X\\
+      0 & : x \notin X
+    \end{array}
+    \right.
+  $$
+  
+  We can see that $\alpha_A;\alpha^{-1}_A = \id =
+  \alpha^{-1}_A;\alpha_A$.  Hence, each $\alpha_A$ is an 
+  isomorphism.
+
+  Last but not least, we must show that $\alpha$ is a natural
+  transformation.  Thus, we must prove that the following diagram
+  commutes for any $f : A' \mto{} A$:
+
+  ```{.latex-disp-img width="30%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-powerset-funct.png"
+                      cap="Naturality diagram for the representation of the powerset functor."}
+  \bfig
+  \square<700,500>[\Hom{\sets^{\mathsf{op}}}{A}{B}`\pow{A}`\Hom{\sets^{\mathsf{op}}}{A'}{B}`\pow{A'};\alpha_A`\Hom{\sets^{\mathsf{op}}}{f}{B}`\pow{f}`\alpha_{A'}]
+  \efig
+  ```
+  
+  This follows from straightforward equational reasoning using
+  the definitions of the respective functions in play.  
+
+- Suppose $A,B \in \Obj{C}$. What is a representation of the
+  functor $\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$? It must be
+  a pair $(C,\beta)$ such that $\beta : (\Hom{\cat{C}}{-}{A} \times
+  \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{C}$ is natural isomorphism.
+  The structure of $\beta$ tells us that given a pair $(f,g)$ of
+  morphisms $f : X \mto{} A$ and $g : X \mto{} B$ we must produce a
+  morphism $h : X \mto{} C$.  We have seen this pattern before in the
+  universal property of products given in the introduction.  Suppose
+  $\cat{C}$ has binary products, then take $C = A \times B$.  Then the
+  universal property of binary products implies that $\beta :
+  (\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{A
+    \times B}$ is defined to be $\beta_{X}(f,g) = \langle f,g\rangle$.
+  That is, the universal map of the binary product.  In the opposite,
+  we have $\beta^{-1}_X(h) = (h;\pi_1,h;\pi_2)$.  The universal
+  property of binary products implies that these are mutual inverses.
+
+  The previous example assumes $\cat{C}$ has products, but
+  representablity is more general than that.  It actually gives a
+  formal means of describing the universal property of binary
+  products.  Given a category $\cat{C}$ requiring that the functor
+  $\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$ is representable
+  implies there is a pair $(C,\beta)$ such that the following
+  morphisms are definable:
+  
+  $$
+  \begin{array}{lll}
+    \pi_1 = \beta^{-1}_{C}(\id_C);\mathsf{fst} \in \Hom{\cat{C}}{C}{A}\\
+    \pi_2 = \beta^{-1}_{C}(\id_C);\mathsf{snd} \in \Hom{\cat{C}}{C}{B}\\
+    \langle f,g \rangle = \beta_{X}(f,g) \in \Hom{\cat{C}}{X}{C}\\
+  \end{array}
+  $$
+
+  Now consider naturality of
+  $\beta : \Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B} \mto{} \Hom{C}{-}{C}$:
+
+  ```{.latex-disp-img width="70%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-products.png"
+                      cap="Naturality of the representation of the product functor."}
+  \bfig
+  \square|amma|<1500,1000>[
+    \Hom{\cat{C}}{X}{A} \times \Hom{\cat{C}}{X}{B}`
+    \Hom{C}{X}{C}`
+    \Hom{\cat{C}}{Y}{A} \times \Hom{\cat{C}}{Y}{B}`
+    \Hom{C}{Y}{C};
+    \beta`
+    \Hom{\cat{C}}{f}{\id_A} \times \Hom{\cat{C}}{f}{\id_B}`
+    \Hom{\cat{C}}{f}{\id_C}`
+    \beta]
+  \efig
+  ```
+

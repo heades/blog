@@ -12,6 +12,8 @@ OTT_GEN_INC_POSTFIX := ottput
 PAPER_NAME := note
 POST_NAME := Universal_Properties
 post_date := "`date "+%Y-%m-%d"`"
+lua_filters := --lua-filter=../../../lua-filters/latex-disp-img.lua \
+	       --lua-filter=../../../lua-filters/definition.lua
 
 OTT_FILES = ${PAPER_NAME}.tex	    
 
@@ -38,19 +40,24 @@ $(OTT_SPEC_INC) : $(OTT_SPEC)
 $(OTT_TARGETS) : $(OTT_FILES) $(OTT_SPEC_INC) 
 	$(OTT) -i $(OTT_SPEC) $(OTT_FLAGS) $(OTT_FILTER)
 
+# Produce the LaTeX:
 ${PAPER_NAME}.tex : ${PAPER_NAME}.md
-	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua -s -f markdown -t latex --template=note ${PAPER_NAME}.md -o ${PAPER_NAME}.tex
-
-${draft_dir}/${POST_NAME}.html : Makefile ${PAPER_NAME}.md ${OTT_SPEC}
-	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua -s -d ../../../defaults/post --metadata date=${post_date} -o ${PAPER_NAME}.html ${PAPER_NAME}.md
-	ott -i ${OTT_SPEC} ${OTT_FLAGS} -tex_filter ${PAPER_NAME}.html ${draft_dir}/${POST_NAME}.html
-	panfeed --add=${PAPER_NAME}.md --post-path=${post_dir} --feed-dest=${draft_dir}/${rss_feed} ${site_dir}/${rss_feed}
+	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua --lua-filter=../../../lua-filters/definition.lua -s -f markdown -t latex --template=note ${PAPER_NAME}.md -o ${PAPER_NAME}.tex
 
 ${PAPER_NAME}.pdf : $(FILES) $(OTT_TARGETS) Makefile 
 	$(PDFLATEX) -jobname=${POST_NAME} ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.tex
 	$(BIBTEX) ${PAPER_NAME}
 	$(PDFLATEX) -jobname=${POST_NAME} ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.tex
 	$(PDFLATEX) -jobname=${POST_NAME} ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.tex
+
+# Produce the blog post:
+${draft_dir}/${POST_NAME}.html : Makefile ${PAPER_NAME}.md ${OTT_SPEC}
+#       First process the markdown with Ott:
+	ott -i ${OTT_SPEC} ${OTT_FLAGS} -tex_filter ${PAPER_NAME}.md ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.md
+#       Now convert the Ott-filtered markdown to html:
+	pandoc ${lua_filters} -s -d ../../../defaults/post --metadata date=${post_date} -o ${draft_dir}/${POST_NAME}.html ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.md
+#       Add the post to the RSS feed.
+	panfeed --add=${PAPER_NAME}.md --post-path=${post_dir} --feed-dest=${draft_dir}/${rss_feed} ${site_dir}/${rss_feed}
 
 clean :
 	rm -f *.aux *.dvi *.ps *.log *-ott.tex *-output.tex *.bbl *.blg \
