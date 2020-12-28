@@ -1,18 +1,27 @@
+function environment(id, body, format, label)
+  if format == "latex" then        
+     return {
+      pandoc.RawBlock('latex', '\\begin{'..id..'}\\label{'..label..'}'),
+      pandoc.Plain(body),
+      pandoc.RawBlock('latex', '\\end{'..id..'}')
+      }
+  elseif format == "html" then
+      return {
+      pandoc.RawBlock('html', '<div class="'..id..'">'),
+      pandoc.Plain(body),
+      pandoc.RawBlock('html', '</div>')
+      }
+  end
+end
+
 function Div(el)
-  if el.classes[1] == "definition" then
+  local id = el.classes[1]
+  if id == "definition" or
+     id == "lemma"      or
+     id == "theorem"    or
+     id == "corollary"  then
      local label = el.attributes["label"]
-     if FORMAT == "latex" then        
-        return {
-         pandoc.RawBlock('latex', '\\begin{definition}\\label{'..label..'}'),
-         pandoc.Plain(el.content[1].content),
-         pandoc.RawBlock('latex', '\\end{definition}')
-         }
-     elseif FORMAT == "html" then
-         return {
-         pandoc.RawBlock('html', '<div class="definition">'),
-         pandoc.Plain(el.content[1].content),
-         pandoc.RawBlock('html', '</div>')
-         }
-     end
+     local body = el.content[1].content
+     return environment(id, body, FORMAT, label)
   end
 end
