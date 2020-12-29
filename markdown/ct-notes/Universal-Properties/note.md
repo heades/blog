@@ -1,8 +1,12 @@
 ---
 title: 'Universal Properties'
-abstract: 'A note on universal properties and the Yoneda lemma.'
+abstract: 
+    'A note on universal properties and the Yoneda lemma.<br>
+     Updates: Finished product example in representable functors.'
 author: 'Harley Eades III'
 contact: 'harley.eades@gmail.com'
+bibliography: ref.bib
+link-citations: true
 ---
 
 # Introduction
@@ -137,7 +141,7 @@ We give several example set-valued functors below.
   their source nodes, and $t : E \to N$ assigns edges their target
   nodes.  Therefore, $F$ represents a graph!  In addition, natural
   transformations between functors like $F$ correspond to graph
-  homomorphisms \cite{awodey2006category}.  Notice that this functor
+  homomorphisms [@awodey2006category].  Notice that this functor
   is definable for any category at all, and thus, we can think of a
   category as an abstraction of a directed graph with a monoid
   structure given by composition.
@@ -459,13 +463,13 @@ Let's consider some example representable functors.
 
 - Suppose $A,B \in \Obj{C}$. What is a representation of the
   functor $\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$? It must be
-  a pair $(C,\beta)$ such that $\beta : (\Hom{\cat{C}}{-}{A} \times
-  \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{C}$ is natural isomorphism.
+  a pair $(P,\beta)$ such that $\beta : (\Hom{\cat{C}}{-}{A} \times
+  \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{P}$ is natural isomorphism.
   The structure of $\beta$ tells us that given a pair $(f,g)$ of
   morphisms $f : X \mto{} A$ and $g : X \mto{} B$ we must produce a
-  morphism $h : X \mto{} C$.  We have seen this pattern before in the
+  morphism $h : X \mto{} P$.  We have seen this pattern before in the
   universal property of products given in the introduction.  Suppose
-  $\cat{C}$ has binary products, then take $C = A \times B$.  Then the
+  $\cat{C}$ has binary products, then take $P = A \times B$.  Then the
   universal property of binary products implies that $\beta :
   (\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{A
     \times B}$ is defined to be $\beta_{X}(f,g) = \langle f,g\rangle$.
@@ -478,33 +482,53 @@ Let's consider some example representable functors.
   formal means of describing the universal property of binary
   products.  Given a category $\cat{C}$ requiring that the functor
   $\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$ is representable
-  implies there is a pair $(C,\beta)$ such that the following
+  implies there is a pair $(P,\beta)$ such that the following
   morphisms are definable:
   
   $$
   \begin{array}{lll}
-    \pi_1 = \beta^{-1}_{C}(\id_C);\mathsf{fst} \in \Hom{\cat{C}}{C}{A}\\
-    \pi_2 = \beta^{-1}_{C}(\id_C);\mathsf{snd} \in \Hom{\cat{C}}{C}{B}\\
-    \langle f,g \rangle = \beta_{X}(f,g) \in \Hom{\cat{C}}{X}{C}\\
+    \pi_1 = \beta^{-1}_{P}(\id_P);\mathsf{fst} \in \Hom{\cat{C}}{P}{A}\\
+    \pi_2 = \beta^{-1}_{P}(\id_P);\mathsf{snd} \in \Hom{\cat{C}}{P}{B}\\
+    \langle f,g \rangle = \beta_{X}(f,g) \in \Hom{\cat{C}}{X}{P}\\
   \end{array}
   $$
 
   Now consider naturality of
-  $\beta : \Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B} \mto{} \Hom{C}{-}{C}$:
+  $\beta : \Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B} \mto{} \Hom{C}{-}{P}$ and its inverse
+  $\beta^{-1} : \Hom{C}{-}{P} \mto{} \Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$:
 
   ```{.latex-disp-img width="70%"
                       src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-products.png"
                       cap="Naturality of the representation of the product functor."}
-  \bfig
-  \square|amma|<1500,1000>[
-    \Hom{\cat{C}}{X}{A} \times \Hom{\cat{C}}{X}{B}`
-    \Hom{C}{X}{C}`
-    \Hom{\cat{C}}{Y}{A} \times \Hom{\cat{C}}{Y}{B}`
-    \Hom{C}{Y}{C};
-    \beta`
-    \Hom{\cat{C}}{f}{\id_A} \times \Hom{\cat{C}}{f}{\id_B}`
-    \Hom{\cat{C}}{f}{\id_C}`
-    \beta]
-  \efig
+  \begin{array}{c}
+    \bfig
+      \square|amma|<1500,1000>[
+      \Hom{\cat{C}}{X}{A} \times \Hom{\cat{C}}{X}{B}`
+      \Hom{C}{X}{P}`
+      \Hom{\cat{C}}{Y}{A} \times \Hom{\cat{C}}{Y}{B}`
+      \Hom{C}{Y}{P};
+      \beta`
+      \Hom{\cat{C}}{h}{\id_A} \times \Hom{\cat{C}}{h}{\id_B}`
+      \Hom{\cat{C}}{h}{\id_P}`
+      \beta]
+    \efig
+    \\\\
+    \bfig
+      \square|amma|<1500,1000>[
+      \Hom{C}{X}{P}`
+      \Hom{\cat{C}}{X}{A} \times \Hom{\cat{C}}{X}{B}`
+      \Hom{C}{Y}{P}`
+      \Hom{\cat{C}}{Y}{A} \times \Hom{\cat{C}}{Y}{B};
+      \beta^{-1}`
+      \Hom{\cat{C}}{h}{\id_P}`
+      \Hom{\cat{C}}{h}{\id_A} \times \Hom{\cat{C}}{h}{\id_B}`
+      \beta^{-1}]
+    \efig
+  \end{array}
   ```
 
+
+# References
+
+::: {#refs}
+:::

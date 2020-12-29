@@ -37,25 +37,17 @@ OTT_FILTER := $(subst .tex,.tex ,$(addprefix -tex_filter ,$(join $(OTT_FILES), $
 $(OTT_SPEC_INC) : $(OTT_SPEC)
 	$(OTT) -i $(OTT_SPEC) -o $(OTT_SPEC_INC) $(OTT_FLAGS)
 
-$(OTT_TARGETS) : $(OTT_FILES) $(OTT_SPEC_INC) 
-	$(OTT) -i $(OTT_SPEC) $(OTT_FLAGS) $(OTT_FILTER)
-
-# Produce the LaTeX:
-${PAPER_NAME}.tex : ${PAPER_NAME}.md
-	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua --lua-filter=../../../lua-filters/definition.lua -s -f markdown -t latex --template=note ${PAPER_NAME}.md -o ${PAPER_NAME}.tex
-
-${PAPER_NAME}.pdf : $(FILES) $(OTT_TARGETS) Makefile 
-	$(PDFLATEX) -jobname=${POST_NAME} ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.tex
-	$(BIBTEX) ${PAPER_NAME}
-	$(PDFLATEX) -jobname=${POST_NAME} ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.tex
-	$(PDFLATEX) -jobname=${POST_NAME} ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.tex
+${PAPER_NAME}.pdf : ${PAPER_NAME}.md ${OTT_SPEC_INC} Makefile
+#       First process the markdown with Ott:
+	ott -i ${OTT_SPEC} ${OTT_FLAGS} -tex_filter ${PAPER_NAME}.md ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.md
+	pandoc --lua-filter=../../../lua-filters/latex-disp-img.lua --lua-filter=../../../lua-filters/definition.lua -s --citeproc -f markdown -t pdf --template=note ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.md -o ${POST_NAME}.pdf
 
 # Produce the blog post:
-${draft_dir}/${POST_NAME}.html : Makefile ${PAPER_NAME}.md ${OTT_SPEC}
+${draft_dir}/${POST_NAME}.html : Makefile ${PAPER_NAME}.md ${OTT_SPEC_INC}
 #       First process the markdown with Ott:
 	ott -i ${OTT_SPEC} ${OTT_FLAGS} -tex_filter ${PAPER_NAME}.md ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.md
 #       Now convert the Ott-filtered markdown to html:
-	pandoc ${lua_filters} -s -d ../../../defaults/post --metadata date=${post_date} -o ${draft_dir}/${POST_NAME}.html ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.md
+	pandoc ${lua_filters} -s --citeproc --toc -d ../../../defaults/post --metadata date=${post_date} -o ${draft_dir}/${POST_NAME}.html ${PAPER_NAME}-${OTT_GEN_INC_POSTFIX}.md
 #       Add the post to the RSS feed.
 	panfeed --add=${PAPER_NAME}.md --post-path=${post_dir} --feed-dest=${draft_dir}/${rss_feed} ${site_dir}/${rss_feed}
 

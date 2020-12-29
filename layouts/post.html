@@ -54,6 +54,17 @@ $endif$
 	  </div>
 	  <div class="col-md-10" style="font-size:20px;">
 $include-before$
+$if(toc)$
+<nav id="$idprefix$TOC" role="doc-toc">
+$if(toc-title)$
+<h2 id="$idprefix$toc-title">$toc-title$</h2>
+$else$
+<h2 id="$idprefix$toc-title">Contents</h2>
+$endif$
+$table-of-contents$
+</nav>
+$endif$
+
 $body$
             <hr>
             <p>
