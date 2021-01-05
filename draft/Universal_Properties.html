@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>Universal Properties</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/includes/css/proofs.css" />
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  </head>
+  <body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap" ng-app="HomePageApp">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid" id="navfluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Metatheorem</a>
+          </div>
+	  <div>
+            <div class="collapse navbar-collapse" id="navigationbar">
+              <ul class="nav navbar-nav">
+                <li><a href="https://heades.github.io">Author</a></li>
+                <li><a href="/">Posts</a></li>                
+            </ul>
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="well">
+          <h2>Universal Properties</h2>
+              Published: 2021-01-05
+        </div>
+	<div class="row">
+	  <div class="col-md-2">
+	  </div>
+	  <div class="col-md-10" style="font-size:20px;">
+<div id="divCheckbox" style="display: none;">
+  <span class="math display">
+    \[    
+    \newcommand{\ottnt}[1]{\mathit{#1}}
+    \newcommand{\ottsym}[1]{#1}
+    \newcommand{\ottmv}[1]{\mathit{#1}}
+
+    \newcommand{\func}[1]{\mathsf{#1}}
+    \newcommand{\Lin}[0]{\func{Lin}}
+    \newcommand{\Mny}[0]{\func{Mny}}
+    \newcommand{\Forget}[0]{\func{Forget}}
+    \newcommand{\Free}[0]{\func{Free}}
+    \newcommand{\Endo}[0]{\func{Endo}}
+    \newcommand{\mto}[1]{\xrightarrow{#1}}
+    \newcommand{\interp}[1]{[\negthinspace[#1]\negthinspace]}
+
+    \newcommand{\cat}[1]{\mathcal{#1}}
+    \newcommand{\catobj}[1]{\mathsf{Obj}(\cat{#1})}
+    \newcommand{\Obj}[1]{\catobj{#1}}
+    \newcommand{\catop}[1]{\mathbb{#1}^{\mathsf{op}}}
+    \newcommand{\sets}[0]{\mathsf{Set}}
+    \newcommand{\Set}[0]{\sets}
+    \newcommand{\mor}[1]{\mathsf{Mor}(\cat{#1})}
+    \newcommand{\Hom}[3]{\mathsf{Hom}_{#1}(#2,#3)}
+    \newcommand{\cur}[0]{\mathsf{cur}}
+    \newcommand{\curi}[0]{\mathsf{cur}^{-1}}
+    \newcommand{\app}[0]{\mathsf{app}}
+    \newcommand{\id}[0]{\mathsf{id}}
+    \newcommand{\injl}[0]{\mathsf{inj_l}}
+    \newcommand{\injr}[0]{\mathsf{inj_r}}
+    \newcommand{\pow}[1]{\mathcal{P}(#1)}
+
+    \newcommand{\oast}{&circledast;}
+    \]
+  </span>
+</div>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#set-valued-functors">Set-Valued Functors</a></li>
+<li><a href="#representable-functors">Representable Functors</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</nav>
+
+<h1 id="introduction">Introduction</h1>
+<ul>
+<li><p><strong>Cartesian Products.</strong> Given sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> their cartesian product <span class="math inline">\(A \times B\)</span> induces two functions <span class="math inline">\(\pi_1 : A \times B \mto{} A\)</span> and <span class="math inline">\(\pi_2 : A \times B \mto{} B\)</span> called the <strong>projection maps</strong>. Using these projections we can state a useful property of cartesian products. Suppose we have functions <span class="math inline">\(f : C \mto{} A\)</span> and <span class="math inline">\(g : C \mto{} B\)</span> for some arbitrary set <span class="math inline">\(C\)</span>. Then there is a unique function <span class="math inline">\(\langle f,g \rangle : C \mto{} A \times B\)</span> such that the following hold:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \langle f,g \rangle;\pi_1 = f\\
+  \langle f,g \rangle;\pi_2 = g
+\end{array}
+\]</span></p>
+<p>This property can be summed up as the following diagram:</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/prod-uniprop.png" style="margin:auto; display: block;width:30%;" alt="Commutative diagram of the universal property for products in the category of sets and functions." /></p>
+<p>The dotted line stands for <em>there exists</em> and the bang (exclamation mark) stands for <em>unique</em>.</p>
+<p>Notice that we have not given the definition of <span class="math inline">\(\langle f,g \rangle\)</span>, but only its defining property, but this property implies that <span class="math inline">\(\langle f,g \rangle\)</span> must be defined to be:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \langle f,g \rangle : C \mto{} A \times B\\
+  \langle f,g \rangle(c) = (f(c),g(c))
+\end{array}
+\]</span></p>
+<p>Thus, this property gives us a way to pair functions with a common domain, and this pairing acts the way we expect it to act when we run it on some elements.</p></li>
+<li><p><strong>Meets in Preorders.</strong> Suppose we have a preorder <span class="math inline">\((P,\leq)\)</span>. Then we say that the preorder <span class="math inline">\((P,\leq)\)</span> has <strong>meets</strong> if given two elements <span class="math inline">\(p,q \in P\)</span>, there is an element <span class="math inline">\(p \land q \in P\)</span> such that:</p>
+<ul>
+<li><span class="math inline">\((p \land q) \leq p\)</span></li>
+<li><span class="math inline">\((p \land q) \leq q\)</span></li>
+<li>If <span class="math inline">\(r \leq p\)</span> and <span class="math inline">\(r \leq q\)</span>, then <span class="math inline">\(r \leq (p \land q)\)</span></li>
+</ul>
+<p>Recall that if we treat the preorder <span class="math inline">\((P,\leq)\)</span> as a category then we take <span class="math inline">\(P\)</span> as the set of objects, and there is a morphism <span class="math inline">\(p \mto{f} q\)</span> if and only if <span class="math inline">\(p \leq q\)</span>. Thus, every homset <span class="math inline">\(\Hom{P}{p}{q}\)</span> has at most one morphism in it. Using this perspective we can recast the definition of meets in categorical terms. It says, for any two objects <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> there is an object <span class="math inline">\(p \land q\)</span> with two projection maps <span class="math inline">\((p \land q) \mto{\pi_1} p\)</span> and <span class="math inline">\((p \land q) \mto{\pi_2} q\)</span> such that for any object <span class="math inline">\(r\)</span>, if there are morphisms <span class="math inline">\(r \mto{f} p\)</span> and <span class="math inline">\(r \mto{g} q\)</span> there is a unique morphism <span class="math inline">\(r \mto{\langle f,g \rangle} p \land q\)</span>.</p>
+<p>Using this definition of meets we can prove two facts:</p>
+<ol type="1">
+<li>Given morphisms <span class="math inline">\(r \mto{f} p\)</span> and <span class="math inline">\(r \mto{g} q\)</span>, <span class="math inline">\(\langle f,g \rangle;\pi_1 = f\)</span>.</li>
+<li>Given morphisms <span class="math inline">\(r \mto{f} p\)</span> and <span class="math inline">\(r \mto{g} q\)</span>, <span class="math inline">\(\langle f,g \rangle;\pi_2 = g\)</span>.</li>
+</ol>
+<p>We can sum all of this up into the following diagram. A preorder, <span class="math inline">\((P,\leq)\)</span>, has meets if for any two objects <span class="math inline">\(p,q \in P\)</span>, there is an object <span class="math inline">\((p \land q) \in P\)</span> such that the following diagram commutes:</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/preorder-prod-uniprop.png" style="margin:auto; display: block;width:30%;" alt="Commutative diagram of the universal property for binary products in a preorder treated as a category." /></p>
+<p>This is the same digram as the first example! Thus, meets in a preorder have the same <strong>defining property</strong> as cartesian products in sets!</p></li>
+</ul>
+<h1 id="set-valued-functors">Set-Valued Functors</h1>
+<p>A functor <span class="math inline">\(F : \cat{C} \mto{} \sets\)</span> from some category <span class="math inline">\(\cat{C}\)</span> to the category of sets is called a <strong>set-valued functor</strong>. It relates objects to sets and morphisms to functions. One can think of them as an interpretation of an abstract category to a concrete category; that is, we can interpret a category without a notion of elements into one with such a notion, and one that we understand quite well.</p>
+<p>We give several example set-valued functors below.</p>
+<ul>
+<li><p>Suppose <span class="math inline">\(\cat{C}\)</span> has objects <span class="math inline">\(\{0,1\}\)</span> and the following morphisms:</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/direted-graph-morph.png" style="margin:auto; display: block;width:20%;" alt="The source and target morphisms defining a directed graph." /></p>
+<p>Then a functor <span class="math inline">\(F : \cat{C} \to \sets\)</span> maps <span class="math inline">\(1\)</span> to a set <span class="math inline">\(E\)</span> and <span class="math inline">\(0\)</span> to a set <span class="math inline">\(N\)</span>, and the two arrows to functions <span class="math inline">\(s : E \to N\)</span> and <span class="math inline">\(t : E \to N\)</span>. A graph is a tuple <span class="math inline">\((N,E,s,t)\)</span> where <span class="math inline">\(N\)</span> is the set of nodes, <span class="math inline">\(E\)</span> is the set of edge labels, <span class="math inline">\(s : E \to N\)</span> assigns edges their source nodes, and <span class="math inline">\(t : E \to N\)</span> assigns edges their target nodes. Therefore, <span class="math inline">\(F\)</span> represents a graph! In addition, natural transformations between functors like <span class="math inline">\(F\)</span> correspond to graph homomorphisms <span class="citation" data-cites="awodey2006category">(<a href="#ref-awodey2006category" role="doc-biblioref">Awodey 2006</a>)</span>. Notice that this functor is definable for any category at all, and thus, we can think of a category as an abstraction of a directed graph with a monoid structure given by composition.</p></li>
+<li><p>A monoid <span class="math inline">\((\ottnt{M}, e, \otimes)\)</span> can be thought of as a set-valued functor <span class="math inline">\(\ottnt{M} \ottsym{:} \mathbf{1} \mto{} \mathsf{Set}\)</span> with two natural transformations:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \text{(Identity)} &amp; e   \ottsym{:}   \{ \star \}   \mto{}  \ottnt{M}\\
+  \text{(Multiplication)} &amp; \otimes   \ottsym{:}  \ottnt{M} \, \times \, \ottnt{M}  \mto{}  \ottnt{M}
+\end{array}
+\]</span></p>
+<p>with the following commutative diagrams:</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/monoid-identity-axioms.png" style="margin:auto; display: block;width:40%;" alt="Commutative diagram for the left and right identity axioms for a monoid." /></p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/monoid-assoc-axiom.png" style="margin:auto; display: block;width:60%;" alt="Commutative diagram for associativity axiom for a monoid." /></p>
+<p>The left diagram corresponds to the identity axioms of the monoid, and the right diagram corresponds to associativity of multiplication. In this example, we made use of the following functors:</p>
+<p><span class="math display">\[
+\begin{array}{lllllll}
+  \begin{array}{lll}
+    \text{(Singleton Set)}\\
+    \begin{array}{lll}
+      \{ \star \}   \ottsym{:}   \mathbf{1}   \mto{}   \mathsf{Set}\\
+      \{ \star \}(\bullet) = \{ \star \}\\
+      \{ \star \}(\mathsf{id} _{  \bullet  }) = \mathsf{id} _{  \{ \star \}  }
+    \end{array}
+  \end{array}
+  &amp; \quad &amp; 
+  \begin{array}{lll}
+    \text{(Product Functor)}\\
+    \begin{array}{lll}
+      \ottnt{M} \, \times \, \ottnt{M}  \ottsym{:}   \mathbf{1}   \mto{}   \mathsf{Set}\\
+      (  \ottnt{M} \, \times \, \ottnt{M}  )   \ottsym{(}   \bullet   \ottsym{,}   \bullet   \ottsym{)} = \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)} \, \times \, \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)}\\
+      (  \ottnt{M} \, \times \, \ottnt{M}  )   \ottsym{(}   \mathsf{id} _{  \bullet  }   \ottsym{,}   \mathsf{id} _{  \bullet  }   \ottsym{)} = \mathsf{id} _{  (  \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)} \, \times \, \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)}  )  }\\
+    \end{array}
+  \end{array}
+\end{array}
+\]</span></p>
+<p>These are also both examples of set-valued functors. The left functor is essentially the singleton set, and the right functor is the cartesian product of the underlying set of the monoid with itself. Thus, a set-valued functor, <span class="math inline">\(\ottnt{X} \ottsym{:} \mathbf{1} \mto{} \mathsf{Set}\)</span>, is a set <span class="math inline">\(\ottnt{X}\)</span> lifted up a level to functors.</p></li>
+<li><p>Suppose we have a monoid <span class="math inline">\((\ottnt{M}, e, \otimes)\)</span>. A <strong>graded monoid</strong> is a set-valued functor <span class="math inline">\(\ottnt{G} \ottsym{:} \ottnt{M} \mto{} \mathsf{Set}\)</span> with two natural transformations:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \text{(Identity)} &amp; i   \ottsym{:}   \{ \star \}   \mto{}  \ottnt{G}  \ottsym{(}   e   \ottsym{)}\\
+  \text{(Multiplication)} &amp; \oast   \ottsym{:}  \ottnt{G}  \ottsym{(}  \ottmv{r_{{\mathrm{1}}}}  \ottsym{)} \, \times \, \ottnt{G}  \ottsym{(}  \ottmv{r_{{\mathrm{2}}}}  \ottsym{)}  \mto{}  \ottnt{G}  \ottsym{(}  \ottmv{r_{{\mathrm{1}}}} \, \otimes \, \ottmv{r_{{\mathrm{2}}}}  \ottsym{)}
+\end{array}
+\]</span></p>
+<p>with the following commutative diagrams:</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/graded-monoid-identity-axioms.png" style="margin:auto; display: block;width:70%;" alt="Commutative diagram for the left-identity axiom for a graded monoid." /></p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/graded-monoid-assoc-axiom.png" style="margin:auto; display: block;width:80%;" alt="Commutative diagram for the associativity axiom for a graded monoid." /></p>
+<p>The diagrams on top correspond to the identity axioms of the graded monoid, and the diagram on bottom corresponds to associativity of graded multiplication.</p>
+<p>An example graded monoid can be found in formal language theory. Take <span class="math inline">\(\Sigma^n\)</span> to be all the words of length <span class="math inline">\(n\)</span> over an alphabet <span class="math inline">\(\Sigma\)</span>. Then <span class="math inline">\(\Sigma^0\)</span> contains only the empty word, and can be lifted to a map <span class="math inline">\(\varepsilon : \{ \star \} \mto{} \Sigma^0\)</span>, and composition of words lifts to a map <span class="math inline">\(\cdot : \Sigma^m \times \Sigma^n \mto{} \Sigma^{m + n}\)</span>. Thus, since the empty word is the identity of composition of words, and composition is associative up to associativity of addition we have a graded monoid <span class="math inline">\((\Sigma^{-},\varepsilon, \cdot)\)</span> over the additive natural number monoid <span class="math inline">\((\mathbb{N},0, +)\)</span>. Using this graded monoid we can define the Kleene-star of an alphabet <span class="math inline">\(\Sigma\)</span> to be <span class="math inline">\(\Sigma^* = \bigcup_{n \in \mathbb{N}} \Sigma^n\)</span>.</p></li>
+<li><p>There is one very important set-valued functor we have seen several times. Suppose <span class="math inline">\(A\)</span> is an object of the category <span class="math inline">\(\cat{C}\)</span>. Then we can define the <strong>covariant hom-set functor</strong>:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \Hom{C}{A}{-} : \cat{C} \to \sets\\
+  \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+  \Hom{C}{A}{h}(g) = g;h
+\end{array}
+\]</span></p>
+<p>The proof that this is indeed a functor is left as an exercise. In addition, prove that this functor is natural in <span class="math inline">\(B\)</span>.</p></li>
+<li><p>Suppose <span class="math inline">\(B\)</span> is an object of the category <span class="math inline">\(\cat{C}\)</span>. Then we can define the <strong>contravariant hom-set functor</strong>:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \Hom{C}{-}{B} : \catop{C} \to \sets\\
+  \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+  \Hom{C}{f}{B}(g) = f;g
+\end{array}
+\]</span></p>
+<p>The proof that this is indeed a functor is left as an exercise. In addition, prove that this functor is natural in both <span class="math inline">\(A\)</span>.</p></li>
+<li><p>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are objects of the category <span class="math inline">\(\cat{C}\)</span>. Then we can define the <strong>hom-set functor</strong>:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \Hom{C}{-}{-} : \catop{C} \times \cat{C} \to \sets\\
+  \Hom{C}{A}{B} = \{f : A \to B \mid f \in \mor{C}\}\\
+  \Hom{C}{f}{h}(g) = f;g;h
+\end{array}
+\]</span></p>
+<p>The proof that this is indeed a functor is left as an exercise. In addition, prove that this functor is natural in both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p></li>
+</ul>
+<p>The last three examples are of particular importance, because they underly the definition of a very important class of functors called representable functors.</p>
+<h1 id="representable-functors">Representable Functors</h1>
+<p>Simply put, universal properties are what are called <strong>representable functors.</strong> These correspond to set-valued functors with a special property that states that they can be completely captured by a collection of morphisms. An example may help make this informal explanation more clear.</p>
+<p>Suppose <span class="math inline">\(X\)</span> is a set. Then we can define the following functions between <span class="math inline">\(X\)</span> and the set of functions <span class="math inline">\(\Hom{\mathsf{Set}}{\{ \star \}}{X}\)</span> from the singleton set <span class="math inline">\(\{ \star \}\)</span> to <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \begin{array}{lll}
+    \phi : \ottnt{X} \mto{} \Hom{\mathsf{Set}}{\{ \star \}}{X}\\
+    \phi(x) = \lambda \_.x\\
+  \end{array}
+  &amp;
+  \begin{array}{lll}
+    \phi^{-1} : \Hom{\mathsf{Set}}{\{ \star \}}{X} \mto{} \ottnt{X}\\
+    \phi^{-1}(f) = f(\star)\\
+  \end{array}
+\end{array}
+\]</span></p>
+<p>The function <span class="math inline">\(\phi\)</span> is the constant function always returning <span class="math inline">\(x\)</span>, and its inverse takes in a function from <span class="math inline">\(\{ \star \}\)</span> to <span class="math inline">\(X\)</span>, and simply applies it to its only input. We can easily see that this forms a bijection. Thus, every set <span class="math inline">\(X\)</span> is in bijection with the set of functions <span class="math inline">\(\Hom{\mathsf{Set}}{\{ \star \}}{X}\)</span>. Now consider the functor <span class="math inline">\(\mathsf{id} _{ \mathsf{Set} } \ottsym{:} \mathsf{Set} \mto{} \mathsf{Set}\)</span>. Using the above argument we can define a natural isomorphism <span class="math inline">\(\alpha : \Hom{\mathsf{Set}}{\{ \star \}}{-} \mto{} \mathsf{id} _{ \mathsf{Set} }\)</span> by setting <span class="math inline">\(\alpha_X = \phi^{-1}\)</span>.<br />
+Functors like <span class="math inline">\(\mathsf{id} _{ \mathsf{Set} }\)</span> that have such an object like <span class="math inline">\(\{ \star \}\)</span> that induces a natural isomorphism like <span class="math inline">\(\alpha\)</span> are called <strong>representable functors</strong>.</p>
+<div class="definition">
+A set-valued functor <span class="math inline">\(F : \cat{C} \mto{} \sets\)</span> is called <strong>representable</strong> if and only if there is an object <span class="math inline">\(A \in  \Obj{C}\)</span> and a natural isomorphism <span class="math inline">\(\alpha : F \mto{} \Hom{C}{A}{-}\)</span>. We call the pair <span class="math inline">\((A,\alpha)\)</span> a <strong>representation</strong> of <span class="math inline">\(F\)</span>.
+</div>
+<p>The definition just given can be recast into a definition for contravariant set-valued functors <span class="math inline">\(F : \catop{C} \mto{} \sets\)</span>, called presheafs, by proving it naturally isomorphic to the contravariant hom functor.</p>
+<div class="definition">
+A set-valued contravariant functor (presheaf) <span class="math inline">\(F : \catop{C} \mto{}  \sets\)</span> is called <strong>representable</strong> if and only if there is an object <span class="math inline">\(B \in \Obj{C}\)</span> and a natural isomorphism <span class="math inline">\(\beta : F \mto{}  \Hom{\catop{C}}{-}{B}\)</span>. We call the pair <span class="math inline">\((B,\beta)\)</span> a <strong>representation</strong> of <span class="math inline">\(F\)</span>.
+</div>
+<p>Let’s consider some example representable functors.</p>
+<ul>
+<li><p>The prototypical example of a representable functor is the powerset functor <span class="math inline">\(\mathcal{P} : \sets^{\mathsf{op}} \mto{} \sets\)</span> defined by</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \mathcal{P}(X) &amp; = &amp; \{Y \mid Y \subseteq X\}\\
+  \mathcal{P}(f : B \mto{} A) &amp; = &amp; \lambda X \subseteq A.\{x \in B \mid f(x) \in X\} : \mathcal{P}(A) \mto{} \mathcal{P}(B)\\
+\end{array}
+\]</span></p>
+<p>We should check that this defines a functor. First we check that identities are preserved:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \pow{\id : A \mto{} A}
+      &amp; = &amp; \lambda X \subseteq A.\{x \in A \mid \id(x) \in X\}\\
+      &amp; = &amp; \lambda X \subseteq A.\{x \in A \mid x \in X\}\\
+      &amp; = &amp; \lambda X \subseteq A.X\\
+\end{array}
+\]</span></p>
+<p>Next we check that compositions are preserved. Suppose <span class="math inline">\(f \in \Hom{\sets^{\mathsf{op}}}{B}{A}\)</span> and <span class="math inline">\(g \in \Hom{\sets^{\mathsf{op}}}{C}{B}\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \pow{g;f : C \mto{} A}
+      &amp; = &amp; \lambda X \subseteq A.\{x \in C \mid f(g(x)) \in X\}\\
+      &amp; = &amp; \lambda X \subseteq A.\{x \in C \mid f(g(x)) \in X\}\\
+      &amp; = &amp; \lambda X \subseteq A.\{x \in C \mid g(x) \in \{y \in B \mid f(y) \in X\}\}\\
+      &amp; = &amp; (\lambda Y \subseteq A.\{y \in B \mid f(y) \in Y\});(\lambda X \subseteq B.\{x \in C \mid g(x) \in X\})\\
+      &amp; = &amp; \pow{f};\pow{g}
+\end{array}
+\]</span></p>
+<p>To prove that the powerset functor is representable we need to find a representation of it. Thus, we must find a set <span class="math inline">\(B\)</span> together with a natural isomorphism <span class="math inline">\(\alpha : \Hom{\sets^{\mathsf{op}}}{-}{B} \mto{} \mathcal{P}\)</span>. The most difficult part is finding <span class="math inline">\(B\)</span>. To do this it is helpful to consider how <span class="math inline">\(\mathcal{P}\)</span> is defined. Suppose we have such a <span class="math inline">\(B\)</span>. Then we must define the component of <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\alpha_A : \Hom{\sets^{\mathsf{op}}}{A}{B} \mto{} \mathcal{P}(A)\)</span>, and the only thing we have to work with is the powerset functor. To define the component <span class="math inline">\(\alpha_A\)</span> we are given a morphism <span class="math inline">\(f : A \mto{} B\)</span>, and then the only sensible thing we can do is apply the powerset functor to it yielding <span class="math inline">\(\pow{f} : \pow{B} \mto{} \pow{A}\)</span>, which by definition computes the inverse image of <span class="math inline">\(f\)</span> with respect to the input subset of <span class="math inline">\(B\)</span>. Now we need a subset of <span class="math inline">\(A\)</span>, and the only way to get it is by finding a subset of <span class="math inline">\(B\)</span> in addition to <span class="math inline">\(B\)</span> itself. Choose <span class="math inline">\(B = \{0,1\}\)</span>, then we define <span class="math inline">\(\alpha_A(f : A \mto{} B) = \pow{f}(\{1\})\)</span>. This construction uses the characteristic function on <span class="math inline">\(A\)</span> to determine which subset to choose.</p>
+<p>It is easy to see that we can also define the component <span class="math inline">\(\alpha^{-1}_A : \pow{A} \mto{} \Hom{\sets^{\mathsf{op}}}{A}{B}\)</span> by</p>
+<p><span class="math display">\[
+\alpha^{-1}_A(X)  = \lambda x \in A.\left\{
+\begin{array}{lr}
+    1 &amp; : x \in X\\
+    0 &amp; : x \notin X
+  \end{array}
+  \right.
+\]</span></p>
+<p>We can see that <span class="math inline">\(\alpha_A;\alpha^{-1}_A = \id = \alpha^{-1}_A;\alpha_A\)</span>. Hence, each <span class="math inline">\(\alpha_A\)</span> is an isomorphism.</p>
+<p>Last but not least, we must show that <span class="math inline">\(\alpha\)</span> is a natural transformation. Thus, we must prove that the following diagram commutes for any <span class="math inline">\(f : A&#39; \mto{} A\)</span>:</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-powerset-funct.png" style="margin:auto; display: block;width:30%;" alt="Naturality diagram for the representation of the powerset functor." /></p>
+<p>This follows from straightforward equational reasoning using the definitions of the respective functions in play.</p></li>
+<li><p>Suppose <span class="math inline">\(A,B \in \Obj{C}\)</span>. What is a representation of the functor <span class="math inline">\(\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}\)</span>? It must be a pair <span class="math inline">\((P,\beta)\)</span> such that <span class="math inline">\(\beta : (\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{P}\)</span> is natural isomorphism. The structure of <span class="math inline">\(\beta\)</span> tells us that given a pair <span class="math inline">\((f,g)\)</span> of morphisms <span class="math inline">\(f : X \mto{} A\)</span> and <span class="math inline">\(g : X \mto{} B\)</span> we must produce a morphism <span class="math inline">\(h : X \mto{} P\)</span>. We have seen this pattern before in the universal property of binary products given in the introduction. Suppose <span class="math inline">\(\cat{C}\)</span> has binary products, then take <span class="math inline">\(P = A \times B\)</span>. Then the universal property of binary products implies that <span class="math inline">\(\beta : (\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{A  \times B}\)</span> is defined to be <span class="math inline">\(\beta_{X}(f,g) = \langle f,g\rangle\)</span>. That is, the universal map of the binary product. In the opposite, we have <span class="math inline">\(\beta^{-1}_X(h) = (h;\pi_1,h;\pi_2)\)</span>. The universal property of binary products implies that these are mutual inverses.</p>
+<p>The previous example assumes <span class="math inline">\(\cat{C}\)</span> has binary products, but representablity is more general than that. It actually gives a formal means of describing the universal property of binary products, and when a category has binary products. Given a category <span class="math inline">\(\cat{C}\)</span> requiring that the functor <span class="math inline">\(\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}\)</span> is representable implies there is a representation <span class="math inline">\((P,\beta)\)</span> that can be used to define the following morphisms:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \pi_1 = \mathsf{fst}(\beta^{-1}_{P}(\id_P)) \in \Hom{\cat{C}}{P}{A}\\
+  \pi_2 = \mathsf{snd}(\beta^{-1}_{P}(\id_P)) \in \Hom{\cat{C}}{P}{B}\\
+  \langle f,g \rangle = \beta_{X}(f,g) \in \Hom{\cat{C}}{X}{P}\\
+\end{array}
+\]</span></p>
+<p>Here <span class="math inline">\(\mathsf{fst}\)</span> and <span class="math inline">\(\mathsf{snd}\)</span> are the projections for the cartesian product in <span class="math inline">\(\mathsf{Set}\)</span>. Now we must show the following equations hold:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \langle f,g \rangle;\pi_1 = f : P \mto{} A\\
+  \langle f,g \rangle;\pi_2 = g : P \mto{} B\\
+\end{array}
+\]</span></p>
+<p>By definition, these are equivalent to the following fully spelled out equations:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \beta_{X}(f,g);\mathsf{fst}(\beta^{-1}_{P}(\id_P)) = f : P \mto{} A\\
+  \beta_{X}(f,g);\mathsf{snd}(\beta^{-1}_{P}(\id_P)) = g : P \mto{} B\\
+\end{array}
+\]</span></p>
+<p>Let’s consider the former and the latter will follow similarly. Consider the naturality condition for <span class="math inline">\(\mathsf{fst}\)</span>.</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/diag-nat-fst.png" style="margin:auto; display: block;width:60%;" alt="Naturality the first project of the cartesian product in Set." /></p>
+<p>This diagram states the following:</p>
+<p><span class="math display">\[
+h;\mathsf{fst}(f,g) = f = \mathsf{fst}(h;f,h;g)
+\]</span></p>
+<p>Let’s pair this diagram up with the naturality diagram for <span class="math inline">\(\beta^{-1}_P\)</span>, because we apply <span class="math inline">\(\mathsf{fst}\)</span> to this in our equation:</p>
+<p><img src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-fst.png" style="margin:auto; display: block;width:90%;" alt="Naturality of the representation of the product functor." /></p>
+<p>Since we know that both of these diagrams commute we know that the outer diagram commutes. Thus, we know the following:</p>
+<p><span class="math display">\[
+h;\mathsf{fst}(\beta^{-1}(p)) = \mathsf{fst}(\beta^{-1}(h;p))
+\]</span></p>
+<p>This equation is exactly what we need, because our original equation we set out to prove:</p>
+<p><span class="math display">\[
+\beta_{X}(f,g);\mathsf{fst}(\beta^{-1}_{P}(\id_P)) = f : P \mto{} A
+\]</span></p>
+<p>fits the form of <span class="math inline">\(h;\mathsf{fst}(\beta^{-1}(p))\)</span> where we replace <span class="math inline">\(h\)</span> with <span class="math inline">\(\beta_{X}(f,g)\)</span> and <span class="math inline">\(p\)</span> with <span class="math inline">\(\mathsf{id} _{ \ottnt{P} }\)</span>. Thus, we may conclude that:</p>
+<p><span class="math display">\[
+\beta_{X}(f,g);\mathsf{fst}(\beta^{-1}(\mathsf{id} _{ \ottnt{P} })) = \mathsf{fst}(\beta^{-1}(\beta_{X}(f,g);\mathsf{id} _{ \ottnt{P} })) = \mathsf{fst}(\beta^{-1}(\beta_{X}(f,g)))
+\]</span></p>
+<p>But, we also know that <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\beta^{-1}\)</span> are mutual inverses because they form a representation with <span class="math inline">\(P\)</span>, and thus, we know that:</p>
+<p><span class="math display">\[
+\mathsf{fst}(\beta^{-1}(\beta_{X}(f,g))) = \mathsf{fst}(f,g))) = f
+\]</span></p>
+<p>therefore proving the equation we set out to prove. The case for <span class="math inline">\(\pi_2\)</span> is similar.</p>
+<p>What we have shown is that to require that a category <span class="math inline">\(\mathcal{ \ottnt{C} }\)</span> has binary products we merely ask that for every pair of objects <span class="math inline">\((A,B) \in \mathsf{Obj} ( \ottnt{C} )\)</span>, the contravariant functor <span class="math inline">\(\Hom{\mathcal{ \ottnt{C} }}{-}{A} \times \Hom{\mathcal{ \ottnt{C} }}{-}{B} : \mathcal{ \ottnt{C} }^{\mathsf{op} } \, \mto{} \, \mathsf{Set}\)</span> is representable which as we have shown implies the universal property of binary products. In fact, we can say that each representable functor <strong>is</strong> the universal property for the binary product the representable functor witnesses.</p>
+<p>A final interesting point is that the representable functor can also be seen as an interpretation of the binary products in <span class="math inline">\(\mathcal{ \ottnt{C} }\)</span> into the cartesian product in <span class="math inline">\(\mathsf{Set}\)</span>. We move from a universe without elements into a universe with elements.</p></li>
+</ul>
+<h1 id="references">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-awodey2006category" class="csl-entry" role="doc-biblioentry">
+<p>Awodey, S. 2006. <em>Category Theory</em>. Oxford Logic Guides. Ebsco Publishing. <a href="https://books.google.com/books?id=IK\_sIDI2TCwC">https://books.google.com/books?id=IK\_sIDI2TCwC</a>.</p>
+</div>
+</div>
+            <hr>
+            <p>
+                        <em>Leave a comment by sending me an <a href="mailto:harley.eades@gmail.com">Email</a></em>
+                        </p>
+	  <div class="col-md-1">
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+	<p class="text-right" class="text-muted credit">
+	<small>
+	  All rights reserved: <a href="index.html">Harley Eades III</a>. 
+	</small>
+	</p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-71081670-1', 'auto');
+       ga('send', 'pageview');
+     </script>
+  </body>
+</html>

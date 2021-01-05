@@ -3,7 +3,7 @@ indexvar n, m, j, k ::=
 
 grammar
 
-  Objects, A, B, C, D, E, F, G, M, X, f, g, h :: 'Obj_'   ::=
+  Objects, A, B, C, D, E, F, G, M, X, P, f, g, h :: 'Obj_'   ::=
     | r              ::   :: El
     | 1              ::   :: OneCat
     {{tex \mathbf{1} }}
@@ -15,8 +15,12 @@ grammar
     {{tex \{ \star \} }}
     | bullet         ::   :: Bullet
     {{tex \bullet }}
-    | C( A )         ::   :: Cat
+    | Cat A          ::   :: Cat
     {{tex \mathcal{[[A]]} }}
+    | Catop A        ::   :: Catop
+    {{tex \mathcal{[[A]]}^{\mathsf{op} } }}
+    | obj ( A )      ::   :: obj
+    {{tex [[obj]]([[A]]) }}
     | f ( g1 , ... , gj ) :: M :: App
     | f ( A1 , ... , Aj ) :: M :: App2
     | h{ A }              :: M :: HOParens
@@ -26,7 +30,7 @@ grammar
     | i    :: :: Iid
     {{tex i}}
     | id A :: :: Id
-    {{tex \mathsf{id}_{[[A]]} }}
+    {{tex [[id]]_{[[A]]} }}
     | phi  :: :: Phi
     {{tex \phi }}
     | pi1  :: :: Pi1
@@ -43,6 +47,7 @@ grammar
     | (*) :: :: Oast
     | *   :: :: Otimes
     | (x) :: :: OTimes
+    | ->  :: :: Arrow
 
   terminals :: 'terminals_' ::=
     | (*) :: :: Oast
@@ -53,6 +58,14 @@ grammar
     {{tex \otimes }}
     | ->  :: :: Mto
     {{tex \mto{} }}
+    | id  :: :: Id
+    {{tex \mathsf{id} }}
+    | fst :: :: Fst
+    {{tex \mathsf{fst} }}
+    | snd :: :: Snd
+    {{tex \mathsf{snd} }}
+    | obj :: :: obj
+    {{tex \mathsf{Obj} }}
 
   formula :: 'formula_' ::=
     | f : A -> B :: :: Mor

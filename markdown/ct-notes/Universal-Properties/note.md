@@ -103,7 +103,7 @@ link-citations: true
 
   ```{.latex-disp-img width="30%"
                       src="/images/posts/ct-notes/Universal-Properties/preorder-prod-uniprop.png"
-                      cap="Commutative diagram of the universal property for products in a preorder treated as a category."}
+                      cap="Commutative diagram of the universal property for binary products in a preorder treated as a category."}
   \bfig
   \dtriangle|ama|/->`-->`<-/<500,500>[r`p`p \land q;f`\langle f,g \rangle!`\pi_1]
   \btriangle(500,0)|maa|/-->`->`->/<500,500>[r`p \land q`q;\langle f,g \rangle!`g`\pi_2]
@@ -468,7 +468,7 @@ Let's consider some example representable functors.
   The structure of $\beta$ tells us that given a pair $(f,g)$ of
   morphisms $f : X \mto{} A$ and $g : X \mto{} B$ we must produce a
   morphism $h : X \mto{} P$.  We have seen this pattern before in the
-  universal property of products given in the introduction.  Suppose
+  universal property of binary products given in the introduction.  Suppose
   $\cat{C}$ has binary products, then take $P = A \times B$.  Then the
   universal property of binary products implies that $\beta :
   (\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}) \mto{} \Hom{C}{-}{A
@@ -477,56 +477,142 @@ Let's consider some example representable functors.
   we have $\beta^{-1}_X(h) = (h;\pi_1,h;\pi_2)$.  The universal
   property of binary products implies that these are mutual inverses.
 
-  The previous example assumes $\cat{C}$ has products, but
+  The previous example assumes $\cat{C}$ has binary products, but
   representablity is more general than that.  It actually gives a
   formal means of describing the universal property of binary
-  products.  Given a category $\cat{C}$ requiring that the functor
-  $\Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$ is representable
-  implies there is a pair $(P,\beta)$ such that the following
-  morphisms are definable:
+  products, and when a category has binary products.  Given a category
+  $\cat{C}$ requiring that the functor $\Hom{\cat{C}}{-}{A} \times
+  \Hom{\cat{C}}{-}{B}$ is representable implies there is a
+  representation $(P,\beta)$ that can be used to define the following
+  morphisms:
   
   $$
   \begin{array}{lll}
-    \pi_1 = \beta^{-1}_{P}(\id_P);\mathsf{fst} \in \Hom{\cat{C}}{P}{A}\\
-    \pi_2 = \beta^{-1}_{P}(\id_P);\mathsf{snd} \in \Hom{\cat{C}}{P}{B}\\
+    \pi_1 = [[fst]](\beta^{-1}_{P}(\id_P)) \in \Hom{\cat{C}}{P}{A}\\
+    \pi_2 = [[snd]](\beta^{-1}_{P}(\id_P)) \in \Hom{\cat{C}}{P}{B}\\
     \langle f,g \rangle = \beta_{X}(f,g) \in \Hom{\cat{C}}{X}{P}\\
   \end{array}
   $$
 
-  Now consider naturality of
-  $\beta : \Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B} \mto{} \Hom{C}{-}{P}$ and its inverse
-  $\beta^{-1} : \Hom{C}{-}{P} \mto{} \Hom{\cat{C}}{-}{A} \times \Hom{\cat{C}}{-}{B}$:
-
-  ```{.latex-disp-img width="70%"
-                      src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-products.png"
-                      cap="Naturality of the representation of the product functor."}
-  \begin{array}{c}
-    \bfig
-      \square|amma|<1500,1000>[
-      \Hom{\cat{C}}{X}{A} \times \Hom{\cat{C}}{X}{B}`
-      \Hom{C}{X}{P}`
-      \Hom{\cat{C}}{Y}{A} \times \Hom{\cat{C}}{Y}{B}`
-      \Hom{C}{Y}{P};
-      \beta`
-      \Hom{\cat{C}}{h}{\id_A} \times \Hom{\cat{C}}{h}{\id_B}`
-      \Hom{\cat{C}}{h}{\id_P}`
-      \beta]
-    \efig
-    \\\\
-    \bfig
-      \square|amma|<1500,1000>[
-      \Hom{C}{X}{P}`
-      \Hom{\cat{C}}{X}{A} \times \Hom{\cat{C}}{X}{B}`
-      \Hom{C}{Y}{P}`
-      \Hom{\cat{C}}{Y}{A} \times \Hom{\cat{C}}{Y}{B};
-      \beta^{-1}`
-      \Hom{\cat{C}}{h}{\id_P}`
-      \Hom{\cat{C}}{h}{\id_A} \times \Hom{\cat{C}}{h}{\id_B}`
-      \beta^{-1}]
-    \efig
+  Here $[[fst]]$ and $[[snd]]$ are the projections for the cartesian
+  product in $[[Set]]$.  Now we must show the following equations
+  hold:
+  
+  $$
+  \begin{array}{lll}
+    \langle f,g \rangle;[[pi1]] = f : P \mto{} A\\
+    \langle f,g \rangle;[[pi2]] = g : P \mto{} B\\
   \end{array}
-  ```
+  $$
 
+  By definition, these are equivalent to the following fully spelled
+  out equations:
+
+  $$
+  \begin{array}{lll}
+    \beta_{X}(f,g);[[fst]](\beta^{-1}_{P}(\id_P)) = f : P \mto{} A\\
+    \beta_{X}(f,g);[[snd]](\beta^{-1}_{P}(\id_P)) = g : P \mto{} B\\
+  \end{array}
+  $$
+
+  Let's consider the former and the latter will follow similarly.  Consider
+  the naturality condition for $[[fst]]$.
+
+  ```{.latex-disp-img width="60%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-nat-fst.png"
+                      cap="Naturality the first project of the cartesian product in Set."}
+  \bfig
+    \square|amma|<1500,1000>[
+    \Hom{[[Cat C]]}{P_1}{A} \times \Hom{[[Cat C]]}{P_1}{B}`
+    \Hom{[[Cat C]]}{P_1}{A}`
+    \Hom{[[Cat C]]}{P_2}{A} \times \Hom{[[Cat C]]}{P_2}{B}`
+    \Hom{[[Cat C]]}{P_2}{A};
+    [[fst]]`
+    \Hom{[[C]]}{h}{[[id A]]} \times \Hom{[[C]]}{h}{[[id B]]}`
+    \Hom{[[C]]}{h}{[[id A]]}`
+    [[fst]] ]
+  \efig
+  ```
+  
+  This diagram states the following:
+
+  $$
+  h;[[fst]](f,g) = f = [[fst]](h;f,h;g)
+  $$
+
+  Let's pair this diagram up with the naturality diagram for
+  $\beta^{-1}_P$, because we apply $[[fst]]$ to this in our equation:
+  
+  ```{.latex-disp-img width="90%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-fst.png"
+                      cap="Naturality of the representation of the product functor."} 
+    \bfig
+      \square|amma|<1500,1000>[
+        \Hom{[[Cat C]]}{P}{P}`
+      \Hom{[[Cat C]]}{P}{A} \times \Hom{[[Cat C]]}{P}{B}`
+      \Hom{[[Cat C]]}{X}{P}`
+      \Hom{[[Cat C]]}{X}{A} \times \Hom{[[Cat C]]}{X}{B};
+      \beta^{-1}`
+      \Hom{[[Cat C]]}{h}{\id_P}`
+      \Hom{[[Cat C]]}{h}{[[id A]]} \times \Hom{[[Cat C]]}{h}{[[id B]]}`
+      \beta^{-1}]
+      
+      \square(1500,0)|amma|<1500,1000>[
+        \Hom{[[Cat C]]}{P}{A} \times \Hom{[[Cat C]]}{P}{B}`
+      \Hom{[[Cat C]]}{P}{A}`
+      \Hom{[[Cat C]]}{X}{A} \times \Hom{[[Cat C]]}{X}{B}`
+      \Hom{[[Cat C]]}{X}{A};
+      [[fst]]`
+      \Hom{[[Cat C]]}{h}{[[id A]]} \times \Hom{[[Cat C]]}{h}{[[id B]]}`
+      \Hom{[[Cat C]]}{h}{[[id A]]}`
+      [[fst]] ]
+    \efig  
+  ```  
+
+  Since we know that both of these diagrams commute we know that the
+  outer diagram commutes.  Thus, we know the following:
+
+  $$
+  h;[[fst]](\beta^{-1}(p)) = [[fst]](\beta^{-1}(h;p))
+  $$
+
+  This equation is exactly what we need, because our original equation
+  we set out to prove:
+
+  $$
+  \beta_{X}(f,g);[[fst]](\beta^{-1}_{P}(\id_P)) = f : P \mto{} A
+  $$
+
+  fits the form of $h;[[fst]](\beta^{-1}(p))$ where we replace $h$
+  with $\beta_{X}(f,g)$ and $p$ with $[[id P]]$.  Thus, we may conclude
+  that:
+
+  $$
+  \beta_{X}(f,g);[[fst]](\beta^{-1}([[id P]])) = [[fst]](\beta^{-1}(\beta_{X}(f,g);[[id P]])) = [[fst]](\beta^{-1}(\beta_{X}(f,g)))
+  $$
+
+  But, we also know that $\beta$ and $\beta^{-1}$ are mutual inverses because they form a representation with $P$, and thus,
+  we know that:
+
+  $$
+  [[fst]](\beta^{-1}(\beta_{X}(f,g))) = [[fst]](f,g))) = f
+  $$
+
+  therefore proving the equation we set out to prove.  The case for $[[pi2]]$ is similar.
+
+  What we have shown is that to require that a category $[[Cat C]]$
+  has binary products we merely ask that for every pair of objects
+  $(A,B) \in [[obj(C)]]$, the contravariant functor $\Hom{[[Cat
+        C]]}{-}{A} \times \Hom{[[Cat C]]}{-}{B} : [[Catop C -> Set]]$
+  is representable which as we have shown implies the universal
+  property of binary products.  In fact, we can say that each
+  representable functor __is__ the universal property for the binary
+  product the representable functor witnesses.
+
+  A final interesting point is that the representable functor can also
+  be seen as an interpretation of the binary products in $[[Cat C]]$
+  into the cartesian product in $[[Set]]$.  We move from a universe
+  without elements into a universe with elements.
 
 # References
 

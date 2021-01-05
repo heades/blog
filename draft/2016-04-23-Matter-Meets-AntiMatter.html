@@ -53,19 +53,36 @@
     \newcommand{\ottsym}[1]{#1}
     \newcommand{\ottmv}[1]{\mathit{#1}}
 
-    \newcommand{\cat}[1]{\mathcal{#1}}
     \newcommand{\func}[1]{\mathsf{#1}}
     \newcommand{\Lin}[0]{\func{Lin}}
     \newcommand{\Mny}[0]{\func{Mny}}
     \newcommand{\Forget}[0]{\func{Forget}}
     \newcommand{\Free}[0]{\func{Free}}
     \newcommand{\Endo}[0]{\func{Endo}}
-    \newcommand{\mto}[0]{\to}
-    \newcommand{\Hom}[3]{\mathsf{Hom}_{\cat{#1}}(#2,#3)}
+    \newcommand{\mto}[1]{\xrightarrow{#1}}
     \newcommand{\interp}[1]{[\negthinspace[#1]\negthinspace]}
+
+    \newcommand{\cat}[1]{\mathcal{#1}}
+    \newcommand{\catobj}[1]{\mathsf{Obj}(\cat{#1})}
+    \newcommand{\Obj}[1]{\catobj{#1}}
+    \newcommand{\catop}[1]{\mathbb{#1}^{\mathsf{op}}}
+    \newcommand{\sets}[0]{\mathsf{Set}}
+    \newcommand{\Set}[0]{\sets}
+    \newcommand{\mor}[1]{\mathsf{Mor}(\cat{#1})}
+    \newcommand{\Hom}[3]{\mathsf{Hom}_{#1}(#2,#3)}
+    \newcommand{\cur}[0]{\mathsf{cur}}
+    \newcommand{\curi}[0]{\mathsf{cur}^{-1}}
+    \newcommand{\app}[0]{\mathsf{app}}
+    \newcommand{\id}[0]{\mathsf{id}}
+    \newcommand{\injl}[0]{\mathsf{inj_l}}
+    \newcommand{\injr}[0]{\mathsf{inj_r}}
+    \newcommand{\pow}[1]{\mathcal{P}(#1)}
+
+    \newcommand{\oast}{&circledast;}
     \]
   </span>
 </div>
+
 \(
 <p>\) One characteristic which sets category theory apart from other theories is that for any concept there exists a dual. This makes category theory an obvious choice when setting out on an investigation of a dual concept. In this post we take a look at the less well-known dual of implication which we call coimplication, but is also known as <a href="http://www.sciencedirect.com/science/article/pii/S0304397599001243">subtraction</a> or <a href="http://www.aiml.net/volumes/volume7/Gore-Postniece-Tiu.pdf">exclusion</a>.</p>
 <p>Implication corresponds to the right adjoint of the cartesian product. That is, a cartesian category \(\) models implication if the functor \(A (-) :  \) has a right adjoint, which we denote \(A B\) for objects \(A\) and \(B\). By the functor \(A (-) :  \) having a right adjoint we mean that there is a natural bijection \( :  \). This gives rise to the necessary tools for working with implication like currying, which is given by the bijection itself, and evalution \( : (A B) A B\). As an example using these morphisms along with the associator, \(: (A B) C A (B C)\), and the symmetry, \(: A B B A\), of the cartesian product we can prove \((;( );^{-1};( );;) : (A B) (B C) (A C)\). A category with products, a terminal object, and the right adjoint to the product functor is called a <strong>cartesian closed category (CCC)</strong>, and the right adjoint to the product is often called the interal hom, because it can be seen as a bifunctor: \((-) (-) : ^{}  \) which is an internalization of the homspace functor.</p>
