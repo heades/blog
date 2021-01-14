@@ -3,12 +3,14 @@ indexvar n, m, j, k ::=
 
 grammar
 
-  Objects, A, B, C, D, E, F, G, M, X, P, f, g, h :: 'Obj_'   ::=
+  Objects, A, a, B, b, C, c, D, d, E, F, G, M, X, x, P, f, g, h :: 'Obj_'   ::=
+    | hole           ::   :: hole
     | r              ::   :: El
     | 1              ::   :: OneCat
     {{tex \mathbf{1} }}
     | Set            ::   :: Set
     {{tex \mathsf{Set} }}
+    | CAT            ::   :: CAT
     | Nat            ::   :: Nat
     {{tex \mathbb{N} }}
     | {*}            ::   :: SSet
@@ -16,9 +18,9 @@ grammar
     | bullet         ::   :: Bullet
     {{tex \bullet }}
     | Cat A          ::   :: Cat
-    {{tex \mathcal{[[A]]} }}
+    {{tex \cat{[[A]]} }}
     | Catop A        ::   :: Catop
-    {{tex \mathcal{[[A]]}^{\mathsf{op} } }}
+    {{tex \catop{[[A]]} }}
     | obj ( A )      ::   :: obj
     {{tex [[obj]]([[A]]) }}
     | f ( g1 , ... , gj ) :: M :: App
@@ -50,6 +52,10 @@ grammar
     | ->  :: :: Arrow
 
   terminals :: 'terminals_' ::=
+    | hole :: :: hole
+    {{tex - }}
+    | CAT :: :: CAT    
+    {{tex \mathsf{Cat} }}
     | (*) :: :: Oast
     {{tex \oast }}
     | *   :: :: Otimes

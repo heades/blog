@@ -50,7 +50,7 @@
 <div id="divCheckbox" style="display: none;">
   <span class="math display">
     \[    
-    \newcommand{\ottnt}[1]{\mathit{#1}}
+    \newcommand{\ottnt}[1]{#1}
     \newcommand{\ottsym}[1]{#1}
     \newcommand{\ottmv}[1]{\mathit{#1}}
 
@@ -66,7 +66,7 @@
     \newcommand{\cat}[1]{\mathcal{#1}}
     \newcommand{\catobj}[1]{\mathsf{Obj}(\cat{#1})}
     \newcommand{\Obj}[1]{\catobj{#1}}
-    \newcommand{\catop}[1]{\mathbb{#1}^{\mathsf{op}}}
+    \newcommand{\catop}[1]{\cat{#1}^{\mathsf{op}}}
     \newcommand{\sets}[0]{\mathsf{Set}}
     \newcommand{\Set}[0]{\sets}
     \newcommand{\mor}[1]{\mathsf{Mor}(\cat{#1})}
@@ -89,7 +89,6 @@
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#set-valued-functors">Set-Valued Functors</a></li>
 <li><a href="#representable-functors">Representable Functors</a></li>
-<li><a href="#references">References</a></li>
 </ul>
 </nav>
 
@@ -136,11 +135,11 @@
 <li><p>Suppose <span class="math inline">\(\cat{C}\)</span> has objects <span class="math inline">\(\{0,1\}\)</span> and the following morphisms:</p>
 <p><img src="/images/posts/ct-notes/Universal-Properties/direted-graph-morph.png" style="margin:auto; display: block;width:20%;" alt="The source and target morphisms defining a directed graph." /></p>
 <p>Then a functor <span class="math inline">\(F : \cat{C} \to \sets\)</span> maps <span class="math inline">\(1\)</span> to a set <span class="math inline">\(E\)</span> and <span class="math inline">\(0\)</span> to a set <span class="math inline">\(N\)</span>, and the two arrows to functions <span class="math inline">\(s : E \to N\)</span> and <span class="math inline">\(t : E \to N\)</span>. A graph is a tuple <span class="math inline">\((N,E,s,t)\)</span> where <span class="math inline">\(N\)</span> is the set of nodes, <span class="math inline">\(E\)</span> is the set of edge labels, <span class="math inline">\(s : E \to N\)</span> assigns edges their source nodes, and <span class="math inline">\(t : E \to N\)</span> assigns edges their target nodes. Therefore, <span class="math inline">\(F\)</span> represents a graph! In addition, natural transformations between functors like <span class="math inline">\(F\)</span> correspond to graph homomorphisms <span class="citation" data-cites="awodey2006category">(<a href="#ref-awodey2006category" role="doc-biblioref">Awodey 2006</a>)</span>. Notice that this functor is definable for any category at all, and thus, we can think of a category as an abstraction of a directed graph with a monoid structure given by composition.</p></li>
-<li><p>A monoid <span class="math inline">\((\ottnt{M}, e, \otimes)\)</span> can be thought of as a set-valued functor <span class="math inline">\(\ottnt{M} \ottsym{:} \mathbf{1} \mto{} \mathsf{Set}\)</span> with two natural transformations:</p>
+<li><p>A monoid <span class="math inline">\((M, e, \otimes)\)</span> can be thought of as a set-valued functor <span class="math inline">\(M \ottsym{:} \mathbf{1} \mto{} \mathsf{Set}\)</span> with two natural transformations:</p>
 <p><span class="math display">\[
 \begin{array}{lll}
-  \text{(Identity)} &amp; e   \ottsym{:}   \{ \star \}   \mto{}  \ottnt{M}\\
-  \text{(Multiplication)} &amp; \otimes   \ottsym{:}  \ottnt{M} \, \times \, \ottnt{M}  \mto{}  \ottnt{M}
+  \text{(Identity)} &amp; e   \ottsym{:}   \{ \star \}   \mto{}  M\\
+  \text{(Multiplication)} &amp; \otimes   \ottsym{:}  M \, \times \, M  \mto{}  M
 \end{array}
 \]</span></p>
 <p>with the following commutative diagrams:</p>
@@ -161,19 +160,19 @@
   \begin{array}{lll}
     \text{(Product Functor)}\\
     \begin{array}{lll}
-      \ottnt{M} \, \times \, \ottnt{M}  \ottsym{:}   \mathbf{1}   \mto{}   \mathsf{Set}\\
-      (  \ottnt{M} \, \times \, \ottnt{M}  )   \ottsym{(}   \bullet   \ottsym{,}   \bullet   \ottsym{)} = \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)} \, \times \, \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)}\\
-      (  \ottnt{M} \, \times \, \ottnt{M}  )   \ottsym{(}   \mathsf{id} _{  \bullet  }   \ottsym{,}   \mathsf{id} _{  \bullet  }   \ottsym{)} = \mathsf{id} _{  (  \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)} \, \times \, \ottnt{M}  \ottsym{(}   \bullet   \ottsym{)}  )  }\\
+      M \, \times \, M  \ottsym{:}   \mathbf{1}   \mto{}   \mathsf{Set}\\
+      (  M \, \times \, M  )   \ottsym{(}   \bullet   \ottsym{,}   \bullet   \ottsym{)} = M  \ottsym{(}   \bullet   \ottsym{)} \, \times \, M  \ottsym{(}   \bullet   \ottsym{)}\\
+      (  M \, \times \, M  )   \ottsym{(}   \mathsf{id} _{  \bullet  }   \ottsym{,}   \mathsf{id} _{  \bullet  }   \ottsym{)} = \mathsf{id} _{  (  M  \ottsym{(}   \bullet   \ottsym{)} \, \times \, M  \ottsym{(}   \bullet   \ottsym{)}  )  }\\
     \end{array}
   \end{array}
 \end{array}
 \]</span></p>
-<p>These are also both examples of set-valued functors. The left functor is essentially the singleton set, and the right functor is the cartesian product of the underlying set of the monoid with itself. Thus, a set-valued functor, <span class="math inline">\(\ottnt{X} \ottsym{:} \mathbf{1} \mto{} \mathsf{Set}\)</span>, is a set <span class="math inline">\(\ottnt{X}\)</span> lifted up a level to functors.</p></li>
-<li><p>Suppose we have a monoid <span class="math inline">\((\ottnt{M}, e, \otimes)\)</span>. A <strong>graded monoid</strong> is a set-valued functor <span class="math inline">\(\ottnt{G} \ottsym{:} \ottnt{M} \mto{} \mathsf{Set}\)</span> with two natural transformations:</p>
+<p>These are also both examples of set-valued functors. The left functor is essentially the singleton set, and the right functor is the cartesian product of the underlying set of the monoid with itself. Thus, a set-valued functor, <span class="math inline">\(X \ottsym{:} \mathbf{1} \mto{} \mathsf{Set}\)</span>, is a set <span class="math inline">\(X\)</span> lifted up a level to functors.</p></li>
+<li><p>Suppose we have a monoid <span class="math inline">\((M, e, \otimes)\)</span>. A <strong>graded monoid</strong> is a set-valued functor <span class="math inline">\(G \ottsym{:} M \mto{} \mathsf{Set}\)</span> with two natural transformations:</p>
 <p><span class="math display">\[
 \begin{array}{lll}
-  \text{(Identity)} &amp; i   \ottsym{:}   \{ \star \}   \mto{}  \ottnt{G}  \ottsym{(}   e   \ottsym{)}\\
-  \text{(Multiplication)} &amp; \oast   \ottsym{:}  \ottnt{G}  \ottsym{(}  \ottmv{r_{{\mathrm{1}}}}  \ottsym{)} \, \times \, \ottnt{G}  \ottsym{(}  \ottmv{r_{{\mathrm{2}}}}  \ottsym{)}  \mto{}  \ottnt{G}  \ottsym{(}  \ottmv{r_{{\mathrm{1}}}} \, \otimes \, \ottmv{r_{{\mathrm{2}}}}  \ottsym{)}
+  \text{(Identity)} &amp; i   \ottsym{:}   \{ \star \}   \mto{}  G  \ottsym{(}   e   \ottsym{)}\\
+  \text{(Multiplication)} &amp; \oast   \ottsym{:}  G  \ottsym{(}  \ottmv{r_{{\mathrm{1}}}}  \ottsym{)} \, \times \, G  \ottsym{(}  \ottmv{r_{{\mathrm{2}}}}  \ottsym{)}  \mto{}  G  \ottsym{(}  \ottmv{r_{{\mathrm{1}}}} \, \otimes \, \ottmv{r_{{\mathrm{2}}}}  \ottsym{)}
 \end{array}
 \]</span></p>
 <p>with the following commutative diagrams:</p>
@@ -216,12 +215,12 @@
 <p><span class="math display">\[
 \begin{array}{lll}
   \begin{array}{lll}
-    \phi : \ottnt{X} \mto{} \Hom{\mathsf{Set}}{\{ \star \}}{X}\\
+    \phi : X \mto{} \Hom{\mathsf{Set}}{\{ \star \}}{X}\\
     \phi(x) = \lambda \_.x\\
   \end{array}
   &amp;
   \begin{array}{lll}
-    \phi^{-1} : \Hom{\mathsf{Set}}{\{ \star \}}{X} \mto{} \ottnt{X}\\
+    \phi^{-1} : \Hom{\mathsf{Set}}{\{ \star \}}{X} \mto{} X\\
     \phi^{-1}(f) = f(\star)\\
   \end{array}
 \end{array}
@@ -317,21 +316,23 @@ h;\mathsf{fst}(\beta^{-1}(p)) = \mathsf{fst}(\beta^{-1}(h;p))
 <p><span class="math display">\[
 \beta_{X}(f,g);\mathsf{fst}(\beta^{-1}_{P}(\id_P)) = f : P \mto{} A
 \]</span></p>
-<p>fits the form of <span class="math inline">\(h;\mathsf{fst}(\beta^{-1}(p))\)</span> where we replace <span class="math inline">\(h\)</span> with <span class="math inline">\(\beta_{X}(f,g)\)</span> and <span class="math inline">\(p\)</span> with <span class="math inline">\(\mathsf{id} _{ \ottnt{P} }\)</span>. Thus, we may conclude that:</p>
+<p>fits the form of <span class="math inline">\(h;\mathsf{fst}(\beta^{-1}(p))\)</span> where we replace <span class="math inline">\(h\)</span> with <span class="math inline">\(\beta_{X}(f,g)\)</span> and <span class="math inline">\(p\)</span> with <span class="math inline">\(\mathsf{id} _{ P }\)</span>. Thus, we may conclude that:</p>
 <p><span class="math display">\[
-\beta_{X}(f,g);\mathsf{fst}(\beta^{-1}(\mathsf{id} _{ \ottnt{P} })) 
-  = \mathsf{fst}(\beta^{-1}(\beta_{X}(f,g);\mathsf{id} _{ \ottnt{P} })) = \mathsf{fst}(\beta^{-1}(\beta_{X}(f,g)))
+\beta_{X}(f,g);\mathsf{fst}(\beta^{-1}(\mathsf{id} _{ P })) 
+  = \mathsf{fst}(\beta^{-1}(\beta_{X}(f,g);\mathsf{id} _{ P })) = \mathsf{fst}(\beta^{-1}(\beta_{X}(f,g)))
 \]</span></p>
 <p>But, we also know that <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\beta^{-1}\)</span> are mutual inverses because they form a representation with <span class="math inline">\(P\)</span>, and thus, we know that:</p>
 <p><span class="math display">\[
 \mathsf{fst}(\beta^{-1}(\beta_{X}(f,g))) = \mathsf{fst}(f,g))) = f
 \]</span></p>
 <p>therefore proving the equation we set out to prove. The case for <span class="math inline">\(\pi_2\)</span> is similar.</p>
-<p>What we have shown is that to require that a category <span class="math inline">\(\mathcal{ \ottnt{C} }\)</span> has binary products we merely ask that for every pair of objects <span class="math inline">\((A,B) \in \mathsf{Obj} ( \ottnt{C} )\)</span>, the contravariant functor <span class="math inline">\(\Hom{\mathcal{ \ottnt{C} }}{-}{A} \times \Hom{\mathcal{ \ottnt{C} }}{-}{B} : \mathcal{ \ottnt{C} }^{\mathsf{op} } \, \mto{} \, \mathsf{Set}\)</span> is representable which as we have shown implies the universal property of binary products. In fact, we can say that each representable functor <strong>is</strong> the universal property for the binary product the representable functor witnesses.</p>
-<p>A final interesting point is that the representable functor can also be seen as an interpretation of the binary products in <span class="math inline">\(\mathcal{ \ottnt{C} }\)</span> into the cartesian product in <span class="math inline">\(\mathsf{Set}\)</span>. We move from a universe without elements into a universe with elements.</p></li>
-<li><p>Suppose we have functors <span class="math inline">\(\ottnt{F} \ottsym{:} \ottnt{A} \mto{} \ottnt{B}\)</span> and <span class="math inline">\(\ottnt{G} \ottsym{:} \ottnt{B} \mto{} \ottnt{A}\)</span>.</p></li>
+<p>What we have shown is that to require that a category <span class="math inline">\(\cat{ C }\)</span> has binary products we merely ask that for every pair of objects <span class="math inline">\((A,B) \in \mathsf{Obj} ( C )\)</span>, the contravariant functor <span class="math inline">\(\Hom{\cat{ C }}{-}{A} \times \Hom{\cat{ C }}{-}{B} : \catop{ C } \, \mto{} \, \mathsf{Set}\)</span> is representable which as we have shown implies the universal property of binary products. In fact, we can say that each representable functor <strong>is</strong> the universal property for the binary product the representable functor witnesses.</p>
+<p>A final interesting point is that the representable functor can also be seen as an interpretation of the binary products in <span class="math inline">\(\cat{ C }\)</span> into the cartesian product in <span class="math inline">\(\mathsf{Set}\)</span>. We move from a universe without elements into a universe with elements.</p></li>
+<li><p>Suppose we have functors <span class="math inline">\(F \ottsym{:} \cat{ A } \mto{} \cat{ B }\)</span> and <span class="math inline">\(G \ottsym{:} \cat{ B } \mto{} \cat{ A }\)</span>. Now ask the question, what universal property arises from requiring the following functor to be representable?</p>
+<p><span class="math display">\[
+\mathsf{Fun}(\Hom{\mathsf{Cat}}{F  \ottsym{(}  -  \ottsym{)}}{b},\Hom{\mathsf{Cat}}{-}{G  \ottsym{(}  b  \ottsym{)}}) : \cat{ A }  \, \mto{} \,  \mathsf{Set}
+\]</span> where <span class="math inline">\(\mathsf{Fun}(X,Y)\)</span> is the set of functions from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span>. # References</p></li>
 </ul>
-<h1 id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-awodey2006category" class="csl-entry" role="doc-biblioentry">
 <p>Awodey, S. 2006. <em>Category Theory</em>. Oxford Logic Guides. Ebsco Publishing. <a href="https://books.google.com/books?id=IK\_sIDI2TCwC">https://books.google.com/books?id=IK\_sIDI2TCwC</a>.</p>

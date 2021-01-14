@@ -9,6 +9,9 @@ bibliography: ref.bib
 link-citations: true
 ---
 
+\renewcommand{\ottnt}[1]{#1}
+\newcommand{\Fun}[2]{\Hom{[[Set]]}{#1}{#2}}
+
 # Introduction
 
 - __Cartesian Products.__ Given sets $A$ and $B$ their cartesian
@@ -615,7 +618,28 @@ Let's consider some example representable functors.
   into the cartesian product in $[[Set]]$.  We move from a universe
   without elements into a universe with elements.
 
-- Suppose we have functors $[[F : A -> B]]$ and $[[G : B -> A]]$.  
+- Suppose we have functors $[[F : Cat A -> Cat B]]$ and 
+  $[[G : Cat B -> Cat A]]$. Now ask the question, what 
+  universal property arises from requiring the following 
+  functor to be representable?
+    
+  $$
+  \Fun{\Hom{[[CAT]]}{[[F(hole)]]}{[[b]]}}{\Hom{[[CAT]]}{[[hole]]}{[[G(b)]]}} : [[Catop A -> Set]]
+  $$
+  
+  where $\Fun{X}{Y}$ is the set of functions from $X$ to $Y$.
+  Representablity states that there must be a representation $(\alpha,
+  a)$ such that:
+
+  $$
+  \alpha : \Fun{\Hom{[[CAT]]}{[[F(hole)]]}{[[b]]}}{\Hom{[[CAT]]}{[[hole]]}{[[G(b)]]}} \mto{} \Hom{[[Cat A]]}{-}{a} : [[Catop A -> Set]]
+  $$
+  
+  is a natural isomorphism.
+
+  $$
+  \alpha : \Fun{\Hom{[[CAT]]}{[[F(G(b))]]}{[[b]]}}{\Hom{[[CAT]]}{[[G(b)]]}{[[G(b)]]}} \mto{} \Hom{[[Cat A]]}{G(b)}{[[G(b)]]} : [[Catop A -> Set]]
+  $$
 
 # References
 
