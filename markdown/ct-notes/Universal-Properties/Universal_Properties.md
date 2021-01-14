@@ -2,7 +2,7 @@
 title: 'Universal Properties'
 abstract: 
     'A note on universal properties and the Yoneda lemma.<br>
-     Updates: Finished product example in representable functors.'
+     Updates: TODO'
 author: 'Harley Eades III'
 contact: 'harley.eades@gmail.com'
 bibliography: ref.bib
@@ -588,11 +588,12 @@ Let's consider some example representable functors.
   that:
 
   $$
-  \beta_{X}(f,g);[[fst]](\beta^{-1}([[id P]])) = [[fst]](\beta^{-1}(\beta_{X}(f,g);[[id P]])) = [[fst]](\beta^{-1}(\beta_{X}(f,g)))
+  \beta_{X}(f,g);[[fst]](\beta^{-1}([[id P]])) 
+    = [[fst]](\beta^{-1}(\beta_{X}(f,g);[[id P]])) = [[fst]](\beta^{-1}(\beta_{X}(f,g)))
   $$
 
-  But, we also know that $\beta$ and $\beta^{-1}$ are mutual inverses because they form a representation with $P$, and thus,
-  we know that:
+  But, we also know that $\beta$ and $\beta^{-1}$ are mutual inverses
+  because they form a representation with $P$, and thus, we know that:
 
   $$
   [[fst]](\beta^{-1}(\beta_{X}(f,g))) = [[fst]](f,g))) = f
@@ -613,6 +614,8 @@ Let's consider some example representable functors.
   be seen as an interpretation of the binary products in $[[Cat C]]$
   into the cartesian product in $[[Set]]$.  We move from a universe
   without elements into a universe with elements.
+
+- Suppose we have functors $[[F : A -> B]]$ and $[[G : B -> A]]$.  
 
 # References
 
