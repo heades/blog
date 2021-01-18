@@ -618,28 +618,45 @@ Let's consider some example representable functors.
   into the cartesian product in $[[Set]]$.  We move from a universe
   without elements into a universe with elements.
 
-- Suppose we have functors $[[F : Cat A -> Cat B]]$ and 
-  $[[G : Cat B -> Cat A]]$. Now ask the question, what 
-  universal property arises from requiring the following 
-  functor to be representable?
+- Suppose we have a functor $[[F : Cat A -> Cat B]]$. Now ask the
+  question, what universal property arises from requiring the
+  following functor to be representable?
     
   $$
-  \Fun{\Hom{[[CAT]]}{[[F(hole)]]}{[[b]]}}{\Hom{[[CAT]]}{[[hole]]}{[[G(b)]]}} : [[Catop A -> Set]]
+  \Hom{[[CAT]]}{[[F(hole)]]}{[[b]]} : [[Catop A -> Set]]
   $$
   
-  where $\Fun{X}{Y}$ is the set of functions from $X$ to $Y$.
   Representablity states that there must be a representation $(\alpha,
-  a)$ such that:
+  X)$ such that:
 
   $$
-  \alpha : \Fun{\Hom{[[CAT]]}{[[F(hole)]]}{[[b]]}}{\Hom{[[CAT]]}{[[hole]]}{[[G(b)]]}} \mto{} \Hom{[[Cat A]]}{-}{a} : [[Catop A -> Set]]
+  \alpha : \Hom{[[CAT]]}{[[F(hole)]]}{[[b]]} \mto{} \Hom{[[Cat A]]}{-}{X} : [[Catop A -> Set]]
   $$
   
-  is a natural isomorphism.
-
+  is a natural isomorphism.  This implies that for any morphism $[[f :
+  F(a) -> b]]$ there is a unique morphism $\alpha(f) : [[a -> X]]$.
+  One thing that our previous examples have shown is that we get
+  interesting arrows when we apply the representation bijection to the
+  identity morphism.  We can do this only for $\alpha^{-1}$ here,
+  which gives a morphism $\alpha^{-1}([[id X]]) : [[F(X) -> b]]$; the
+  morphisms arising from the application of the representation
+  bijection to the identity are called *universal arrows*.  
+  
+  The universal arrow $[[alphai(id X) : F(X) -> b]]$ implies that
+  $[[X]]$ must depend on the object $[[b]]$. However, $[[X in
+  obj(A)]]$ and $[[b in obj(B)]]$, this leads us to think of $[[X]]$
+  as $[[G(b)]]$ for some functor $[[G : B -> A]]$. Thus, we have a
+  bijection:
+  
   $$
-  \alpha : \Fun{\Hom{[[CAT]]}{[[F(G(b))]]}{[[b]]}}{\Hom{[[CAT]]}{[[G(b)]]}{[[G(b)]]}} \mto{} \Hom{[[Cat A]]}{G(b)}{[[G(b)]]} : [[Catop A -> Set]]
+  \alpha : \Hom{[[CAT]]}{[[F(hole)]]}{[[b]]} \mto{} \Hom{[[Cat A]]}{-}{G(b)} : [[Catop A -> Set]]
   $$
+  
+  such that there is an universal arrow $[[alphai(id B) : F(G(b)) ->
+  b]]$, and for any morphism $[[f : F(a) -> b]]$ we have a unique
+  morphism $[[alpha(f) : a -> G(b)]]$. But, how are these morphisms
+  related?  That is, what is the universal property implied by
+  $\alpha$?  This is where the naturality property comes in.
 
 # References
 

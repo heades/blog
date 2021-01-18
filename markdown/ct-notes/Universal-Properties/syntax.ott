@@ -35,6 +35,10 @@ grammar
     {{tex [[id]]_{[[A]]} }}
     | phi  :: :: Phi
     {{tex \phi }}
+    | alpha  :: :: Alpha
+    {{tex \alpha }}
+    | alphai :: :: Alphai
+    {{tex \alpha^{-1} }}
     | pi1  :: :: Pi1
     {{tex \pi_1 }}
     | pi2  :: :: Pi2
@@ -72,6 +76,9 @@ grammar
     {{tex \mathsf{snd} }}
     | obj :: :: obj
     {{tex \mathsf{Obj} }}
+    | in  :: :: In
+    {{tex \in }}
 
   formula :: 'formula_' ::=
     | f : A -> B :: :: Mor
+    | A in obj ( B ) :: :: inObj

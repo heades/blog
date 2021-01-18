@@ -41,7 +41,7 @@
       <div class="container">
         <div class="well">
           <h2>Universal Properties</h2>
-              Published: 2021-01-14
+              Published: 2021-01-18
         </div>
 	<div class="row">
 	  <div class="col-md-2">
@@ -89,6 +89,7 @@
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#set-valued-functors">Set-Valued Functors</a></li>
 <li><a href="#representable-functors">Representable Functors</a></li>
+<li><a href="#references">References</a></li>
 </ul>
 </nav>
 
@@ -328,11 +329,22 @@ h;\mathsf{fst}(\beta^{-1}(p)) = \mathsf{fst}(\beta^{-1}(h;p))
 <p>therefore proving the equation we set out to prove. The case for <span class="math inline">\(\pi_2\)</span> is similar.</p>
 <p>What we have shown is that to require that a category <span class="math inline">\(\cat{ C }\)</span> has binary products we merely ask that for every pair of objects <span class="math inline">\((A,B) \in \mathsf{Obj} ( C )\)</span>, the contravariant functor <span class="math inline">\(\Hom{\cat{ C }}{-}{A} \times \Hom{\cat{ C }}{-}{B} : \catop{ C } \, \mto{} \, \mathsf{Set}\)</span> is representable which as we have shown implies the universal property of binary products. In fact, we can say that each representable functor <strong>is</strong> the universal property for the binary product the representable functor witnesses.</p>
 <p>A final interesting point is that the representable functor can also be seen as an interpretation of the binary products in <span class="math inline">\(\cat{ C }\)</span> into the cartesian product in <span class="math inline">\(\mathsf{Set}\)</span>. We move from a universe without elements into a universe with elements.</p></li>
-<li><p>Suppose we have functors <span class="math inline">\(F \ottsym{:} \cat{ A } \mto{} \cat{ B }\)</span> and <span class="math inline">\(G \ottsym{:} \cat{ B } \mto{} \cat{ A }\)</span>. Now ask the question, what universal property arises from requiring the following functor to be representable?</p>
+<li><p>Suppose we have a functor <span class="math inline">\(F \ottsym{:} \cat{ A } \mto{} \cat{ B }\)</span>. Now ask the question, what universal property arises from requiring the following functor to be representable?</p>
 <p><span class="math display">\[
-\mathsf{Fun}(\Hom{\mathsf{Cat}}{F  \ottsym{(}  -  \ottsym{)}}{b},\Hom{\mathsf{Cat}}{-}{G  \ottsym{(}  b  \ottsym{)}}) : \cat{ A }  \, \mto{} \,  \mathsf{Set}
-\]</span> where <span class="math inline">\(\mathsf{Fun}(X,Y)\)</span> is the set of functions from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span>. # References</p></li>
+\Hom{\mathsf{Cat}}{F  \ottsym{(}  -  \ottsym{)}}{b} : \catop{ A }  \, \mto{} \,  \mathsf{Set}
+\]</span></p>
+<p>Representablity states that there must be a representation <span class="math inline">\((\alpha, X)\)</span> such that:</p>
+<p><span class="math display">\[
+\alpha : \Hom{\mathsf{Cat}}{F  \ottsym{(}  -  \ottsym{)}}{b} \mto{} \Hom{\cat{ A }}{-}{X} : \catop{ A }  \, \mto{} \,  \mathsf{Set}
+\]</span></p>
+<p>is a natural isomorphism. This implies that for any morphism <span class="math inline">\(f \ottsym{:} F \ottsym{(} a \ottsym{)} \mto{} b\)</span> there is a unique morphism <span class="math inline">\(\alpha(f) : a \, \mto{} \, X\)</span>. One thing that our previous examples have shown is that we get interesting arrows when we apply the representation bijection to the identity morphism. We can do this only for <span class="math inline">\(\alpha^{-1}\)</span> here, which gives a morphism <span class="math inline">\(\alpha^{-1}(\mathsf{id} _{ X }) : F \ottsym{(} X \ottsym{)} \, \mto{} \, b\)</span>; the morphisms arising from the application of the representation bijection to the identity are called <em>universal arrows</em>.</p>
+<p>The universal arrow <span class="math inline">\(\alpha^{-1} \ottsym{(} \mathsf{id} _{ X } \ottsym{)} \ottsym{:} F \ottsym{(} X \ottsym{)} \mto{} b\)</span> implies that <span class="math inline">\(X\)</span> must depend on the object <span class="math inline">\(b\)</span>. However, <span class="math inline">\(X \, \in \, \mathsf{Obj} \, \ottsym{(} A \ottsym{)}\)</span> and <span class="math inline">\(b \, \in \, \mathsf{Obj} \, \ottsym{(} B \ottsym{)}\)</span>, this leads us to think of <span class="math inline">\(X\)</span> as <span class="math inline">\(G \ottsym{(} b \ottsym{)}\)</span> for some functor <span class="math inline">\(G \ottsym{:} B \mto{} A\)</span>. Thus, we have a bijection:</p>
+<p><span class="math display">\[
+\alpha : \Hom{\mathsf{Cat}}{F  \ottsym{(}  -  \ottsym{)}}{b} \mto{} \Hom{\cat{ A }}{-}{G(b)} : \catop{ A }  \, \mto{} \,  \mathsf{Set}
+\]</span></p>
+<p>such that there is an universal arrow <span class="math inline">\(\alpha^{-1} \ottsym{(} \mathsf{id} _{ B } \ottsym{)} \ottsym{:} F \ottsym{(} G \ottsym{(} b \ottsym{)} \ottsym{)} \mto{} b\)</span>, and for any morphism <span class="math inline">\(f \ottsym{:} F \ottsym{(} a \ottsym{)} \mto{} b\)</span> we have a unique morphism <span class="math inline">\(\alpha \ottsym{(} f \ottsym{)} \ottsym{:} a \mto{} G \ottsym{(} b \ottsym{)}\)</span>. But, how are these morphisms related? That is, what is the universal property implied by <span class="math inline">\(\alpha\)</span>? This is where the naturality property comes in.</p></li>
 </ul>
+<h1 id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-awodey2006category" class="csl-entry" role="doc-biblioentry">
 <p>Awodey, S. 2006. <em>Category Theory</em>. Oxford Logic Guides. Ebsco Publishing. <a href="https://books.google.com/books?id=IK\_sIDI2TCwC">https://books.google.com/books?id=IK\_sIDI2TCwC</a>.</p>
