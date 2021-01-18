@@ -5,7 +5,7 @@ categories:
  - semantics
  - logic
 abstract: "A short post about the history of semantic brackets."
-
+twitter-post: "https://twitter.com/heades/status/1351189636853489668?s=20"
 ---
 
 My Ph.D. advisor [Aaron Stump ](https://homepage.divms.uiowa.edu/~astump/ ) 
