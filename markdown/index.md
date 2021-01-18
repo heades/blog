@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Who came up with semantic brackets?](/draft/Semantic-Brackets.html)
+:::
+::: list-group-item
 ### [Category Theory Notes](/draft/CT-Notes.html)
 :::
 ::: list-group-item

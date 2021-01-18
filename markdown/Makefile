@@ -24,3 +24,6 @@ $(output)/%.html : %.md $(post-defaults).yaml $(post-layout).html
 
 $(output)/index.html : index.md $(page-defaults).yaml $(page-layout).html 
 	pandoc -s -d $(page-defaults) -o $@ $<
+
+watch :
+	cd .. && make watch
