@@ -2,7 +2,7 @@
 title: 'Universal Properties'
 abstract: 
     'A note on universal properties and the Yoneda lemma.<br>
-     Updates: TODO'
+     Updates: Added example showing representability for adjoint functors.'
 author: 'Harley Eades III'
 contact: 'harley.eades@gmail.com'
 bibliography: ref.bib
@@ -649,15 +649,112 @@ Let's consider some example representable functors.
   bijection:
   
   $$
-  \alpha : \Hom{[[CAT]]}{[[F(hole)]]}{[[b]]} \mto{} \Hom{[[Cat A]]}{-}{G(b)} : [[Catop A -> Set]]
+  \alpha : \Hom{[[B]]}{[[F(hole)]]}{[[b]]} \mto{} \Hom{[[Cat A]]}{-}{G(b)} : [[Catop A -> Set]]
   $$
   
-  such that there is an universal arrow $[[alphai(id B) : F(G(b)) ->
+  such that there is an universal arrow $[[alphai(id h{G(b)}) : F(G(b)) ->
   b]]$, and for any morphism $[[f : F(a) -> b]]$ we have a unique
   morphism $[[alpha(f) : a -> G(b)]]$. But, how are these morphisms
   related?  That is, what is the universal property implied by
   $\alpha$?  This is where the naturality property comes in.
+  
+  ```{.latex-disp-img width="30%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-left-adjoint.png"
+                      cap="Naturality diagram for the representation of the left-adjoint functor."}
+  %% \bfig
+  %% \square|amma|<1000,500>[
+  %%   [[Hom[B](F(a1),b)]]`
+  %%   [[Hom[B](a1,G(b))]]`
+  %%   [[Hom[B](F(a2),b)]]`
+  %%   [[Hom[B](a2,G(b))]];
+  %%   [[alpha]]`
+  %%   [[Hom[B](h,id b)]]`
+  %%   [[Hom[B](F(h),id h{G(b)})]]`
+  %%   [[alpha]]
+  %% ]
+  %% \efig
+  \bfig
+  \square|amma|<1200,500>[
+    [[Hom[B](G(b),G(b))]]`
+    [[Hom[B](F(G(b)),b)]]`
+    [[Hom[B](a,G(b))]]`
+    [[Hom[B](F(a),b)]];
+    [[alphai]]`
+    [[Hom[B](alpha(f),id h{G(b)})]]`
+    [[Hom[B](F(alpha(f)),id b)]]`
+    [[alphai]]
+  ]
+  \efig
+  ```
 
+  Following the previous example we plug $[[alpha(f)]]$ into the
+  naturality diagram for the universal arrow $[[alphai(id h{G(b)})]]$.
+  Tracing the identity arrow around this diagram implies that the
+  following equation holds:
+
+  $$
+  [[F(alpha(f));alphai(id h{G(b)});h{id b}]] = [[alphai(alpha(f);h{id h{G(b)}};h{id h{G(b)}})]]
+  $$
+  
+  and as we can see we can drop all the identity compositions to obtain:
+  
+  $$
+  [[F(alpha(f));alphai(id h{G(b)})]] = [[alphai(alpha(f))]] = [[f]]
+  $$
+
+  This is equivalent to the diagram:
+
+  ```{.latex-disp-img width="30%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-left-adjoint-prop-rep.png"
+                      cap="Universal property for a left-adjoint functor using the representation."}
+  \bfig
+  \btriangle|mma|<1300,500>[F(a)`F(G(b))`b;[[F(alpha(f))]]`f`[[alphai(id h{G(b)})]] ]
+  \efig
+  ```
+
+  We can now capture this line of reasoning as an abstract universal property:
+
+  - For a functor $[[F : A -> B]]$, there is a functor $[[G : B -> A]]$ where for any object $[[b in obj(B)]]$,
+    there is a universal arrow $\varepsilon_{b} : [[F(G(b)) -> b]]$ such that
+    for every morphism $[[f : F(a) -> b]]$ there is a unique morphism $[[g : a -> G(b)]]$
+    making the following diagram commute:
+
+    ```{.latex-disp-img width="30%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-left-adjoint-prop-rep.png"
+                      cap="Universal property for a left-adjoint functor using the representation."}
+    \bfig
+    \btriangle|mma|/-->`->`->/<1300,500>[F(a)`F(G(b))`b;[[F(g)]]`f`[[vep b]] ]
+    \efig
+    ```
+
+  If for a functor $[[F : A -> B]]$ there is a functor $[[G : B -> A]]$
+  satisfying the previous universal property we say __$F$ is left adjoint to the functor $[[G]]$__.
+  This is often denoted by $[[F -| G]]$.
+
+  Given there are left adjoints you might ask if there are right
+  adjoints.  In fact there are, and they have the following universal
+  property:
+
+  - For a functor $[[G : B -> A]]$, there is a functor $[[F : A -> B]]$ where for any object $[[a in obj(A)]]$,
+    there is a universal arrow $\eta_{a} : [[a -> G(F(a))]]$ such that
+    for every morphism $[[g : a -> G(b)]]$ there is a unique morphism $[[f : F(a) -> b]]$
+    making the following diagram commute:
+
+    ```{.latex-disp-img width="30%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-left-adjoint-prop-rep.png"
+                      cap="Universal property for a left-adjoint functor using the representation."}
+    \bfig
+    \btriangle|mma|/<--`<-`<-/<1300,500>[G(b)`G(F(a))`a;[[G(f)]]`g`[[vep b]] ]
+    \efig
+    ```
+
+    We leave deriving the previous universal property as an exercise.
+    If for a functor $[[G : B -> A]]$ there is a functor $[[F : A ->
+        B]]$ satisfying the previous universal property we say __$G$
+    is right adjoint to the functor $[[F]]$__. Again, we denote this
+    by $[[F -| G]]$. There is a lot we can say about adjoint functors
+    (or adjunctions for short), but we leave that for a later time.
+    
 # References
 
 ::: {#refs}

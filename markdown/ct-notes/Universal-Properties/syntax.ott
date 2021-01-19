@@ -48,6 +48,11 @@ grammar
     | f bifunctor g :: :: BifApp
     | { f }         :: :: Parens
     {{tex ( [[f]] ) }}
+    | h{ f }        :: :: HParens
+    {{tex [[f]] }}
+    | f1 ; ... ; fj :: :: Comp
+    | vep b         :: :: vep
+    {{tex \varepsilon_{[[b]]} }}
 
   bifunctor :: 'bifunctor_' ::=
     | (*) :: :: Oast
@@ -78,7 +83,12 @@ grammar
     {{tex \mathsf{Obj} }}
     | in  :: :: In
     {{tex \in }}
+    | -|  :: :: DashV
+    {{tex \dashv }}
 
   formula :: 'formula_' ::=
-    | f : A -> B :: :: Mor
+    | f : A -> B     :: :: Mor
     | A in obj ( B ) :: :: inObj
+    | Hom [ A ] ( B ,  C ) :: :: Hom
+    {{tex \Hom{[[A]]}{[[B]]}{[[C]]} }}
+    | F -| G               :: :: Adj
