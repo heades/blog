@@ -53,6 +53,9 @@ ${draft_dir}/${POST_NAME}.html : Makefile ${POST_NAME}.md ${OTT_SPEC_INC}
 watch :
 	find . | entr -p -c 'make'
 
+watch-post :
+	find . | entr -p -c './watchpost.sh'
+
 open-pdf : ${POST_NAME}.pdf
 	open -a Skim ${POST_NAME}.pdf
 

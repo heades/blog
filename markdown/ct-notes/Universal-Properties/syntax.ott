@@ -22,7 +22,7 @@ grammar
     | Catop A        ::   :: Catop
     {{tex \catop{[[A]]} }}
     | obj ( A )      ::   :: obj
-    {{tex [[obj]]([[A]]) }}
+    {{tex \Obj{[[A]]} }}
     | f ( g1 , ... , gj ) :: M :: App
     | f ( A1 , ... , Aj ) :: M :: App2
     | h{ A }              :: M :: HOParens
@@ -89,6 +89,7 @@ grammar
   formula :: 'formula_' ::=
     | f : A -> B     :: :: Mor
     | A in obj ( B ) :: :: inObj
+    {{tex [[A]] \in \Obj{[[B]]} }}
     | Hom [ A ] ( B ,  C ) :: :: Hom
     {{tex \Hom{[[A]]}{[[B]]}{[[C]]} }}
     | F -| G               :: :: Adj

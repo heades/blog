@@ -643,9 +643,9 @@ Let's consider some example representable functors.
   bijection to the identity are called *universal arrows*.  
   
   The universal arrow $[[alphai(id X) : F(X) -> b]]$ implies that
-  $[[X]]$ must depend on the object $[[b]]$. However, $[[X in
-  obj(A)]]$ and $[[b in obj(B)]]$, this leads us to think of $[[X]]$
-  as $[[G(b)]]$ for some functor $[[G : B -> A]]$. Thus, we have a
+  $[[X]]$ must depend on the object $[[b]]$. However, $[[X in obj(A)]]$ and
+  $[[b in obj(B)]]$, this leads us to think of $[[X]]$
+  as $[[G(b)]]$ for some functor $[[G : Cat B -> Cat A]]$. Thus, we have a
   bijection:
   
   $$
@@ -658,7 +658,7 @@ Let's consider some example representable functors.
   related?  That is, what is the universal property implied by
   $\alpha$?  This is where the naturality property comes in.
   
-  ```{.latex-disp-img width="30%"
+  ```{.latex-disp-img width="70%"
                       src="/images/posts/ct-notes/Universal-Properties/diag-nat-rep-left-adjoint.png"
                       cap="Naturality diagram for the representation of the left-adjoint functor."}
   %% \bfig
@@ -704,7 +704,7 @@ Let's consider some example representable functors.
 
   This is equivalent to the diagram:
 
-  ```{.latex-disp-img width="30%"
+  ```{.latex-disp-img width="50%"
                       src="/images/posts/ct-notes/Universal-Properties/diag-left-adjoint-prop-rep.png"
                       cap="Universal property for a left-adjoint functor using the representation."}
   \bfig
@@ -714,20 +714,20 @@ Let's consider some example representable functors.
 
   We can now capture this line of reasoning as an abstract universal property:
 
-  - For a functor $[[F : A -> B]]$, there is a functor $[[G : B -> A]]$ where for any object $[[b in obj(B)]]$,
+  - For a functor $[[F : Cat A -> Cat B]]$, there is a functor $[[G : Cat B -> Cat A]]$ where for any object $[[b in obj(B)]]$,
     there is a universal arrow $\varepsilon_{b} : [[F(G(b)) -> b]]$ such that
     for every morphism $[[f : F(a) -> b]]$ there is a unique morphism $[[g : a -> G(b)]]$
     making the following diagram commute:
 
-    ```{.latex-disp-img width="30%"
-                      src="/images/posts/ct-notes/Universal-Properties/diag-left-adjoint-prop-rep.png"
-                      cap="Universal property for a left-adjoint functor using the representation."}
+    ```{.latex-disp-img width="50%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-left-adjoint-prop.png"
+                      cap="Universal property for a left-adjoint functor."}
     \bfig
     \btriangle|mma|/-->`->`->/<1300,500>[F(a)`F(G(b))`b;[[F(g)]]`f`[[vep b]] ]
     \efig
     ```
 
-  If for a functor $[[F : A -> B]]$ there is a functor $[[G : B -> A]]$
+  If for a functor $[[F : Cat A -> Cat B]]$ there is a functor $[[G : Cat B -> Cat A]]$
   satisfying the previous universal property we say __$F$ is left adjoint to the functor $[[G]]$__.
   This is often denoted by $[[F -| G]]$.
 
@@ -735,25 +735,26 @@ Let's consider some example representable functors.
   adjoints.  In fact there are, and they have the following universal
   property:
 
-  - For a functor $[[G : B -> A]]$, there is a functor $[[F : A -> B]]$ where for any object $[[a in obj(A)]]$,
+  - For a functor $[[G : Cat B -> Cat A]]$, there is a functor $[[F : Cat A -> Cat B]]$ where for any object $[[a in obj(A)]]$,
     there is a universal arrow $\eta_{a} : [[a -> G(F(a))]]$ such that
     for every morphism $[[g : a -> G(b)]]$ there is a unique morphism $[[f : F(a) -> b]]$
     making the following diagram commute:
 
-    ```{.latex-disp-img width="30%"
-                      src="/images/posts/ct-notes/Universal-Properties/diag-left-adjoint-prop-rep.png"
-                      cap="Universal property for a left-adjoint functor using the representation."}
+    ```{.latex-disp-img width="50%"
+                      src="/images/posts/ct-notes/Universal-Properties/diag-right-adjoint-prop.png"
+                      cap="Universal property for a right-adjoint functor."}
     \bfig
     \btriangle|mma|/<--`<-`<-/<1300,500>[G(b)`G(F(a))`a;[[G(f)]]`g`[[vep b]] ]
     \efig
     ```
 
     We leave deriving the previous universal property as an exercise.
-    If for a functor $[[G : B -> A]]$ there is a functor $[[F : A ->
-        B]]$ satisfying the previous universal property we say __$G$
-    is right adjoint to the functor $[[F]]$__. Again, we denote this
-    by $[[F -| G]]$. There is a lot we can say about adjoint functors
-    (or adjunctions for short), but we leave that for a later time.
+    If for a functor $[[G : Cat B -> Cat A]]$ there is a functor $[[F
+        : Cat A -> Cat B]]$ satisfying the previous universal property
+    we say __$G$ is right adjoint to the functor $[[F]]$__. Again, we
+    denote this by $[[F -| G]]$. There is a lot we can say about
+    adjoint functors (or adjunctions for short), but we leave that for
+    a later time.
     
 # References
 
