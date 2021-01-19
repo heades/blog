@@ -752,9 +752,10 @@ Let's consider some example representable functors.
     If for a functor $[[G : Cat B -> Cat A]]$ there is a functor $[[F
         : Cat A -> Cat B]]$ satisfying the previous universal property
     we say __$G$ is right adjoint to the functor $[[F]]$__. Again, we
-    denote this by $[[F -| G]]$. There is a lot we can say about
-    adjoint functors (or adjunctions for short), but we leave that for
-    a later time.
+    denote this by $[[F -| G]]$.
+
+  There is a lot we can say about adjoint functors (or adjunctions for
+  short), but we leave that for a later time.
     
 # References
 
