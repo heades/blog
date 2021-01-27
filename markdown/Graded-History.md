@@ -30,7 +30,6 @@ Additions and clarifications welcome!
 
 ## Graded Comonads
 
-- 1955: [Three Grades of Modal Involvement](https://www.pdcnet.org/wcp11/content/wcp11_1953XIV_0065_0081) by W. V. O. Quine
 - 1970: [Grades of Modality](http://www.jstor.org/stable/44083605) by L. F. Goble
 - 1972: [In so many possible worlds](https://doi.org/10.1305/ndjfl/1093890715) by Kit Fine
 - 1973: [Counterfactuals](https://books.google.com/books?hl=en&lr=&id=bCvnk3JMvfAC&oi=fnd&pg=PT7&dq=counterfacuals+lewis&ots=5HCYoi5SVC&sig=fGUu59lErwYzca0Cf0opf_2o1TA#v=onepage&q=counterfacuals%20lewis&f=false) by David K. Lewis
