@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [A brief history of graded modalities](/draft/Graded-History.html)
+:::
+::: list-group-item
 ### [Who came up with semantic brackets?](/draft/Semantic-Brackets.html)
 :::
 ::: list-group-item
