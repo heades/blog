@@ -4,7 +4,7 @@ date: 2021-01-27
 categories:
  - graded modalities
 abstract: "I give a brief introduction to the history around graded modalities (graded (co)monads)."
-twitter-post: 
+twitter-post: "https://twitter.com/heades/status/1354476370651459588?s=20"
 ---
 
 I've been asked a few times now for the history behind graded
