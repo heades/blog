@@ -44,6 +44,8 @@ respectively.  This means that for the of-course comonad there is no
 equivalent monad, because it does not have a right adjoint. The case
 is similar for the why-not monad.
 
+blah
+
 But, if your monad or comonad can be shown to have left and right
 adjoints, then those adjoints are an equivalent--in terms of
 expressivity--comonad or monad respectively. This is a nice result.
