@@ -3,7 +3,7 @@ title: "A brief history of graded modalities"
 date: 2021-01-27
 categories:
  - graded modalities
-abstract: "I give a brief introduction to the history around graded modalities (graded (co)monads)."
+abstract: "I give a brief introduction to the history around graded modalities (graded (co)monads). Updated 2021-01-29: added Wadler:2003, Petricek:2013, and Petricek:2014."
 twitter-post: "https://twitter.com/heades/status/1354476370651459588?s=20"
 ---
 
