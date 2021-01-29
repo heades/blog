@@ -9,7 +9,7 @@ categories:
  - adjunctions
  - paper-review
 abstract: "A brief review of the paper 'Monads from Comonads, Comonads from Monads' by Ralf Hinze."
-twitter-post: ""
+twitter-post: "https://twitter.com/heades/status/1355212471917826048?s=20"
 ---
 
 
