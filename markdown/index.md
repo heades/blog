@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [From monads to comonads and back](/draft/Monads-From-Comonads.html)
+:::
+::: list-group-item
 ### [A brief history of graded modalities](/draft/Graded-History.html)
 :::
 ::: list-group-item
