@@ -7,6 +7,7 @@ categories:
  - category theory
  - semantics
  - adjunctions
+ - paper-review
 abstract: "A brief review of the paper 'Monads from Comonads, Comonads from Monads' by Ralf Hinze."
 twitter-post: ""
 ---
