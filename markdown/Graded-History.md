@@ -19,6 +19,7 @@ Additions and clarifications welcome!
 
 ## Graded Monads
 
+- 2003: [The marriage of effects and monads](http://homepages.inf.ed.ac.uk/wadler/papers/effectstocl/effectstocl.pdf) by Wadler and Thiemann
 - 2007: [New approach to Arakelov geometry](https://arxiv.org/abs/0704.2030) by Nikolai Durov
 - 2007: [Graded monads and rings of polynomials](http://www.mathnet.ru/links/da6af8ece6368cfa9dc70a1c3864b3f8/znsl58.pdf) by A. L. Smirnov
 - 2008: [Graded monads and rings of polynomials](https://link.springer.com/article/10.1007/s10958-008-9013-7) by A. L. Smirnov
@@ -34,6 +35,8 @@ Additions and clarifications welcome!
 - 1972: [In so many possible worlds](https://doi.org/10.1305/ndjfl/1093890715) by Kit Fine
 - 1973: [Counterfactuals](https://books.google.com/books?hl=en&lr=&id=bCvnk3JMvfAC&oi=fnd&pg=PT7&dq=counterfacuals+lewis&ots=5HCYoi5SVC&sig=fGUu59lErwYzca0Cf0opf_2o1TA#v=onepage&q=counterfacuals%20lewis&f=false) by David K. Lewis
 - 1992: [Bounded linear logic: a modular approach to polynomial-time computability](https://doi.org/10.1016/0304-3975(92)90386-T) by Jean-Yves Girardm Andre Scedrov, Philip J. Scott
+- 2013: [Coeffects: Unified static analysis of context-dependence](https://core.ac.uk/download/pdf/46521271.pdf) by Petricek, Orchard, and Mycroft
+- 2014: [Coeffects: A calculus of context-dependent computation](https://core.ac.uk/download/pdf/189163334.pdf) by Petricek, Orchard, and Mycroft
 - 2014: [A Core Quantitative Coeffect Calculus](https://link.springer.com/chapter/10.1007/978-3-642-54833-8_19) by Aloïs BrunelMarco GaboardiDamiano MazzaSteve Zdancewic
 - 2014: [Bounded linear types in a resource semiring](https://link.springer.com/chapter/10.1007/978-3-642-54833-8_18) by Dan R. GhicaAlex I. Smith
 - 2016: [Combining effects and coeffects via grading](https://dl.acm.org/doi/pdf/10.1145/3022670.2951939) by Marco Gaboardi, Shin-ya Katsumata, Dominic A. Orchard, Flavien  Breuvart, Tarmo Uustalu
