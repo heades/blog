@@ -75,16 +75,15 @@ $endif$
 
 $if(author)$
   $if(contact)$
-    $if(date)$
-    \author{$author$\footnote{Updated ($date$); $contact$}}
-    $else$
-      \author{$author$\footnote{$contact$}}
-    $endif$
+    \author{$author$\footnote{$contact$}}
   $else$
     \author{$author$}
   $endif$
 $else$
   \author{Fill in the author.}
+$endif$
+$if(date)$  
+\date{Updated: $date$}
 $endif$
 
 \begin{document}

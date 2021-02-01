@@ -51,7 +51,7 @@ ${draft_dir}/${POST_NAME}.html : Makefile ${POST_NAME}.md ${OTT_SPEC_INC}
 	panfeed --add=${POST_NAME}.md --post-path=${post_dir} --feed-dest=${draft_dir}/${rss_feed} ${site_dir}/${rss_feed}
 
 watch :
-	find . | entr -p -c 'make'
+	find . | entr -c 'make'
 
 watch-post :
 	find . | entr -p -c './watchpost.sh'

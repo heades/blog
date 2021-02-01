@@ -1,5 +1,6 @@
 ---
 title: 'Universal Properties'
+date: 02-01-2021
 abstract: 
     'A note on universal properties and the Yoneda lemma.<br>
      Updates: Added example showing representability for adjoint functors.'
@@ -22,7 +23,7 @@ link-citations: true
   : C \mto{} B$ for some arbitrary set $C$.  Then there is a unique
   function $\langle f,g \rangle : C \mto{} A \times B$ such that the
   following hold:
-
+  
   $$
   \begin{array}{lll}
     \langle f,g \rangle;\pi_1 = f\\
@@ -39,8 +40,8 @@ link-citations: true
   \dtriangle|ama|/->`-->`<-/<500,500>[C`A`A \times B;f`\langle f,g \rangle!`\pi_1]
   \btriangle(500,0)|maa|/-->`->`->/<500,500>[C`A \times B`B;\langle f,g \rangle!`g`\pi_2]
   \efig
-  ```
-
+  ````
+  
   The dotted line stands for *there exists* and the bang (exclamation
   mark) stands for *unique*.
 
@@ -756,7 +757,62 @@ Let's consider some example representable functors.
 
   There is a lot we can say about adjoint functors (or adjunctions for
   short), but we leave that for a later time.
-    
+  
+- Suppose we have a partially-ordered monoid $(M,*, e, \leq)$. Then
+  what is a representable action on $[[Set]]$? First, an action is a
+  functor $\odot : [[M * Set -> Set]]$ with the following data:
+  
+  - Natural transformations:
+    - $u : e \odot a \mto{} a$, for any $[[a in obj(Set)]]$
+    - $d : m_1 \odot (m_2 \odot a) \mto{} (m_1 * m_2) \odot a$
+  - The following coherence diagrams hold:
+
+  ```{.latex-disp-img width="50%"
+                      src="/images/posts/ct-notes/Universal-Properties/action-diag-unit.png"
+                      cap="Unit Diagrams for Actions on Set"}
+  \begin{array}{lll}
+    \begin{array}{lll}
+    \bfig
+    \btriangle|mma|/->`->`=/<1300,500>[e \odot (m \odot a)`(e * m) \odot a`m \odot a;d_{e,m,a}`u_{m \odot a}`[[id]] ]      
+    \efig
+    &
+    \bfig
+    \btriangle|mma|/->`->`=/<1300,500>[m \odot (e \odot a)`(m * e) \odot a`m \odot a;d_{m,e,a}`u_{m \odot a}`[[id]] ]
+    \efig
+  \end{array}\\
+  \\
+  \begin{array}{lll}
+    \bfig
+    \square|amma|/->`->`->`/<3000,500>[m_1 \odot (m_2 \odot (m_3 \odot a))`m_1 \odot ((m_2 * m_3) \odot a)`(m_1 * m_2) \odot (m_3 \odot a)`(m_1 * (m_2 * m_3)) \odot a;[[id]]_{m_1} \odot d_{m_2,m_3,a}`d_{m_1,m_2,(m_3 \odot a)}`d_{m_1,(m_2 * m_3),a}`]
+    \morphism<1500,0>[(m_1 * m_2) \odot (m_3 \odot a)`((m_1 * m_2) * m_3) \odot a;d_{(m_1 * m_2),m_3,a}]
+    \morphism(1500,0)/=/<1500,0>[((m_1 * m_2) * m_3) \odot a`(m_1 * (m_2 * m_3)) \odot a;[[id]] ]
+    \efig
+    \end{array}
+  \end{array}
+  ```
+
+  A representable action $\odot : [[M * Set -> Set]]$ is one in which
+  there is an object $[[P in obj(M * Set)]]$ such that the following
+  is a natural isomorphism:
+
+  $$
+  \alpha : \odot \mto{} [[Hom[ M * Set ](P, hole)]]
+  $$
+
+  We can refine this, notice that $[[P]]$ is a pair $(m,r) \in [[M * Set]]$, so we obtain:
+  
+  $$
+  \alpha : \odot \mto{} [[Hom[ M * Set ]((m,r), hole)]]
+  $$
+
+  Then given any pair $(m',a) \in [[M * Set]]$, the following must be an isomorphism:
+
+  $$
+  \alpha_{m',a} : m' \odot a \mto{} [[Hom[ M * Set ]((m,r), (m',a))]]
+  $$
+
+  
+
 # References
 
 ::: {#refs}

@@ -3,7 +3,7 @@ indexvar n, m, j, k ::=
 
 grammar
 
-  Objects, A, a, B, b, C, c, D, d, E, F, G, M, X, x, P, f, g, h :: 'Obj_'   ::=
+  Objects, A, a, B, b, C, c, D, d, E, F, G, m, M, X, x, P, f, g, h :: 'Obj_'   ::=
     | hole           ::   :: hole
     | r              ::   :: El
     | 1              ::   :: OneCat
@@ -53,6 +53,7 @@ grammar
     | f1 ; ... ; fj :: :: Comp
     | vep b         :: :: vep
     {{tex \varepsilon_{[[b]]} }}
+    | ( a1 , ... , an ) :: :: Tuples
 
   bifunctor :: 'bifunctor_' ::=
     | (*) :: :: Oast
