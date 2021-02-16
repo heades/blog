@@ -10,7 +10,7 @@ function environment(id, body, format, label)
           content[i+1] = bi
           block_count = block_count + 1
      end
-     -- Close the latex environment id with \end{id}.
+     --   3. Close the latex environment id with \end{id}.
      content[block_count+1] = pandoc.RawBlock('latex', '\\end{'..id..'}')
 
      -- Return out newly formated block.

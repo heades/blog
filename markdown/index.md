@@ -40,7 +40,7 @@ Feed: [RSS](feed.xml)
 ### [Thoughts on Mentoring Undergraduate Research Assistants](/draft/2019-11-05-Mentoring-Panel.html)
 :::
 ::: list-group-item
-### [My Path from Special Education to Assistant Professor](/draft/2019-08-02-Do-I-Belong-Here.html)
+### [My Path from Special Education to Assistant Professor](/draft/2018-05-10-Do-I-Belong-Here.html)
 :::
 ::: list-group-item
 ### [Postdoc Opportunity at Augusta University](/draft/2019-07-25-Postdoc-Ad.html)
