@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [I'm Recruiting a PhD Student](/draft/2021-30-04-PhD-Student-Ad.html)
+:::
+::: list-group-item
 ### [From monads to comonads and back](/draft/Monads-From-Comonads.html)
 :::
 ::: list-group-item
