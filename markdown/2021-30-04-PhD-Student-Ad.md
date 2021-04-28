@@ -6,7 +6,7 @@ categories:
   - PhD Student
   - Granule Project
 abstract: "I'm actively recruiting a PhD student for Fall 2021.  Read more for the details."
-twitter-post: ""
+twitter-post: "https://twitter.com/heades/status/1387431819646279681?s=20"
 ---
 
 My recent NSF proposal called "Semantically and Practically
