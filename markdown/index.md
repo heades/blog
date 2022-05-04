@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [An Update on CHI 2022](https://medium.com/@harley.eades/an-update-on-chi-2022-73042ad8d51a)
+:::
+::: list-group-item
 ### [I'm Recruiting a PhD Student](/draft/2021-30-04-PhD-Student-Ad.html)
 :::
 ::: list-group-item
