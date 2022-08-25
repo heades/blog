@@ -1,6 +1,6 @@
 ---
 title: "Indexed Operations"
-date: 2022-05-04
+date: 2022-08-25
 categories:
   - functional programming  
 abstract: "Discusses a very useful combinator that combines folds and maps."

@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [SODBeans: A debugger for people with vision impairments](/draft/2022-08-25-SODBeans.html)
+:::
+::: list-group-item
 ### [Indexed Operations](/draft/2022-08-25-Indexed-Ops.html)
 :::
 ::: list-group-item
