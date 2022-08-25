@@ -60,7 +60,7 @@ booleans.
 
 However, consider a third example where we have an operation `i : a ->
 b` and a set `s : Set a`, and we want to map over the set `s`, but
-we want to do this using the accumilator pattern.  Then we can define
+we want to do this using the accumulator pattern.  Then we can define
 this function as follows:
 
 ```

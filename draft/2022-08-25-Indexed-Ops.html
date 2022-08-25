@@ -101,7 +101,7 @@ indexedAnd i = foldr (\x r -&gt; (i x) &amp;&amp; r) True</code></pre>
 <p>This is an instance of the well known <code>foldMap</code> function on monoids:</p>
 <pre><code>foldMap :: Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m</code></pre>
 <p>where we get our examples above if we take the monoid on sets to be union and the empty set, and conjunction and <code>True</code> for the monoid on booleans.</p>
-<p>However, consider a third example where we have an operation <code>i : a -&gt; b</code> and a set <code>s : Set a</code>, and we want to map over the set <code>s</code>, but we want to do this using the accumilator pattern. Then we can define this function as follows:</p>
+<p>However, consider a third example where we have an operation <code>i : a -&gt; b</code> and a set <code>s : Set a</code>, and we want to map over the set <code>s</code>, but we want to do this using the accumulator pattern. Then we can define this function as follows:</p>
 <pre><code>indexedInsert :: (a -&gt; b) -&gt; Set a -&gt; Set b
 indexedInsert i = foldl (\a x -&gt; (i x) `insert` a) empty</code></pre>
 <p>This uses the same programming pattern, but has a slightly more general type:</p>
