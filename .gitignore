@@ -15,3 +15,11 @@ _drafts/*
 *-ottput.*
 /markdown/ct-notes/Universal-Properties/note.tex
 *.dvi
+*~
+*.log
+/.sass-cache/
+/markdown/ct-notes/Universal-Properties/syntax-ott.tex
+/markdown/strict-actions/Spec-inc.tex
+/markdown/strict-actions/note-output.tex
+*.aux
+*.out

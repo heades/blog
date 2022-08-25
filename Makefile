@@ -24,11 +24,11 @@ $(post_dir)/CT-Notes.html : $(draft_dir)/CT-Notes.html
 feed.xml : $(draft_dir)/feed.xml
 	cp $(draft_dir)/feed.xml feed.xml
 
-serve :
+serve : draft
 	http-server
 
 watch :
 	find $(md_dir) | entr -c 'make'
 
-clean :
+clean : 
 	rm -f $(post_dir)/* index.html

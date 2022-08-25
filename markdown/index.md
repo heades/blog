@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Indexed Operations](/draft/2022-08-25-Indexed-Ops.html)
+:::
+::: list-group-item
 ### [An Update on CHI 2022](https://medium.com/@harley.eades/an-update-on-chi-2022-73042ad8d51a)
 :::
 ::: list-group-item

@@ -27,3 +27,6 @@ $(output)/index.html : index.md $(page-defaults).yaml $(page-layout).html
 
 watch :
 	cd .. && make watch
+
+serve : all
+	cd .. && make serve
