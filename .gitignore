@@ -23,3 +23,5 @@ _drafts/*
 /markdown/strict-actions/note-output.tex
 *.aux
 *.out
+
+*.DS_Store

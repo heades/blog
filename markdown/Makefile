@@ -19,7 +19,7 @@ objects := $(patsubst %.md,%.html,$(subst $(source),$(output),$(sources)))
 all : $(objects) $(output)/index.html
 
 $(output)/%.html : %.md $(post-defaults).yaml $(post-layout).html 
-	pandoc -s -d $(post-defaults) -o $@ $<
+	pandoc -s --toc -d $(post-defaults) -o $@ $<
 	panfeed --add=$< --post-path=$(post_dir) --feed-dest=$(output)/$(rss_feed) ../$(rss_feed)
 
 $(output)/index.html : index.md $(page-defaults).yaml $(page-layout).html 

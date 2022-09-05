@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Glanceable Visualizations on Smartwatches](/draft/2022-09-01-Smartwatch-Viz.html)
+:::
+::: list-group-item
 ### [SODBeans: A debugger for people with vision impairments](/draft/2022-08-25-SODBeans.html)
 :::
 ::: list-group-item
