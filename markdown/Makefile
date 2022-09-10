@@ -18,6 +18,9 @@ objects := $(patsubst %.md,%.html,$(subst $(source),$(output),$(sources)))
 
 all : $(objects) $(output)/index.html
 
+publish : all
+	cd .. && make publish
+
 $(output)/%.html : %.md $(post-defaults).yaml $(post-layout).html 
 	pandoc -s --toc -d $(post-defaults) -o $@ $<
 	panfeed --add=$< --post-path=$(post_dir) --feed-dest=$(output)/$(rss_feed) ../$(rss_feed)
