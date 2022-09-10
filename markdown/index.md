@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Open Questions in the Accessibility of Programming with Vision Impairments](/draft/2022-09-09-Blind-PL-Lit-Review.html)
+:::
+::: list-group-item
 ### [Glanceable Visualizations on Smartwatches](/draft/2022-09-01-Smartwatch-Viz.html)
 :::
 ::: list-group-item
