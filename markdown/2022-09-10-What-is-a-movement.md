@@ -53,7 +53,7 @@ capturing newly create movements.
 A movement is described by several attributes akin to how we describe
 a table in a database. The following table describes each attribute.
 
-<table summary="This data table describes the attributes associated with a movement: description, labels, notes, increment, scalars, measures, submovements.">
+<table summary="This data table describes the attributes associated with a movement: description, labels, notes, targets, increment, scalars, measures, submovements.">
     <caption>
       Movement Attributes
     </caption>    
