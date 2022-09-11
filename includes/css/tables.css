@@ -1,0 +1,23 @@
+*:focus { 
+    outline: 3px solid #27B; 
+}
+
+th, td { 
+    padding: 0.5em; text-align: left; border: 1px solid #ccc; 
+}
+
+tbody tr:nth-child(odd) { 
+    background: #eee; 
+}
+
+th { 
+    background: #ddd; 
+}
+
+caption { 
+    font-weight: bold; font-size: 130%; 
+}
+
+table {
+    width:80%; border-collapse:collapse;
+}

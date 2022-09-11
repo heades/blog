@@ -7,6 +7,9 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Fitness: What is a movement?](/draft/2022-09-10-What-is-a-movement.html)
+:::
+::: list-group-item
 ### [Open Questions in the Accessibility of Programming with Vision Impairments](/draft/2022-09-09-Blind-PL-Lit-Review.html)
 :::
 ::: list-group-item

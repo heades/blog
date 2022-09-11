@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>Fitness: What is a movement?</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/includes/css/proofs.css" />
+    <link rel="stylesheet" href="/includes/css/tables.css" />
+  </head>
+  <body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap" ng-app="HomePageApp">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid" id="navfluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Metatheorem</a>
+          </div>
+	  <div>
+            <div class="collapse navbar-collapse" id="navigationbar">
+              <ul class="nav navbar-nav">
+                <li><a href="https://heades.github.io">Author</a></li>
+                <li><a href="/">Posts</a></li>                
+            </ul>
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="well">
+          <h2>Fitness: What is a movement?</h2>
+              Updated: 2022-09-10
+        </div>
+	<div class="row">
+	  <div class="col-md-2">
+	  </div>
+	  <div class="col-md-10" style="font-size:20px;">
+<div id="divCheckbox" style="display: none;">
+  <span class="math display">
+    \[    
+    \newcommand{\ottnt}[1]{#1}
+    \newcommand{\ottsym}[1]{#1}
+    \newcommand{\ottmv}[1]{\mathit{#1}}
+
+    \newcommand{\func}[1]{\mathsf{#1}}
+    \newcommand{\Lin}[0]{\func{Lin}}
+    \newcommand{\Mny}[0]{\func{Mny}}
+    \newcommand{\Forget}[0]{\func{Forget}}
+    \newcommand{\Free}[0]{\func{Free}}
+    \newcommand{\Endo}[0]{\func{Endo}}
+    \newcommand{\mto}[1]{\xrightarrow{#1}}
+    \newcommand{\interp}[1]{[\negthinspace[#1]\negthinspace]}
+
+    \newcommand{\cat}[1]{\mathcal{#1}}
+    \newcommand{\catobj}[1]{\mathsf{Obj}(\cat{#1})}
+    \newcommand{\Obj}[1]{\catobj{#1}}
+    \newcommand{\catop}[1]{\cat{#1}^{\mathsf{op}}}
+    \newcommand{\sets}[0]{\mathsf{Set}}
+    \newcommand{\Set}[0]{\sets}
+    \newcommand{\mor}[1]{\mathsf{Mor}(\cat{#1})}
+    \newcommand{\Hom}[3]{\mathsf{Hom}_{#1}(#2,#3)}
+    \newcommand{\cur}[0]{\mathsf{cur}}
+    \newcommand{\curi}[0]{\mathsf{cur}^{-1}}
+    \newcommand{\app}[0]{\mathsf{app}}
+    \newcommand{\id}[0]{\mathsf{id}}
+    \newcommand{\injl}[0]{\mathsf{inj_l}}
+    \newcommand{\injr}[0]{\mathsf{inj_r}}
+    \newcommand{\pow}[1]{\mathcal{P}(#1)}
+
+    \newcommand{\oast}{&circledast;}
+    \]
+  </span>
+</div>
+
+<main>
+  <p>I’m currently studying the best way to design and develop remote-training tools for athletic training. The first question I asked myself is what are the similarities of training protocols across sports and fitness training. Surprisingly, they all use the same basic concepts!</p>
+  <p>In this post I’m going to lay out an abstract characterization of the most important basic element found in every training protocol, a <strong>movement</strong>. When we think of fitness training we first think of a workout, and depending on the level of ones training, this might be a twenty-minute workout, or it could be larger with multiple workouts in a day. Despite which one we follow, at their core workouts consist mainly of training movements. Thus, before we can even define what a workout is formally, we need a formal definition of a training movement.</p>
+  <p>Movements can take on many forms, for example:</p>
+  <ul>
+  <li>10 pushups</li>
+  <li>200m swim (moderate pace)</li>
+  <li>5 snatches <span class="citation" data-cites="115lbs">@115lbs</span></li>
+  <li>5000m run, but every 2min do 5 burpees</li>
+  </ul>
+  <p>This list of movements captures nearly all of the properties one finds in a movement. We can see that we have:</p>
+  <ul>
+  <li>Descriptions (pushups, swim, snatches, run)</li>
+  <li>Repetitions (10, 5)</li>
+  <li>Pacing (moderate pace)</li>
+  <li>Weight (115lbs)</li>
+  <li>Distances (200m, 5000m)</li>
+  <li>Submovements (burpees)</li>
+  <li>Timing (2min)</li>
+  </ul>
+  <p>Just in those few examples we have a lot of structure. It was when I realized that movements could have submovements that movements didn’t seem so simple anymore. An abstract characterization must account for all this structure, and be amendable to creativity capable of capturing newly create movements.</p>
+  <h2 id="movements">Movements</h2>
+  <p>A movement is described by several attributes akin to how we describe a table in a database. The following table describes each attribute.</p>
+  <table summary="This data table describes the attributes associated with a movement: description, labels, notes, increment, scalars, measures, submovements.">
+  <caption>
+  Movement Attributes
+  </caption>
+  <thead>
+  <tr>
+  <th scope="col">
+  Description
+  </th>
+  <th scope="col">
+  Notes
+  </th>
+  <th scope="col">
+  Labels
+  </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>
+  A simple explanation of the movement.
+  </td>
+  <td>
+  Useful information about the movement.
+  </td>
+  <td>
+  One or more tags for organizing and searching for movements.
+  </td>
+  </tr>
+  </tbody>
+  <thead>
+  <tr>
+  <th scope="col">
+  Iteration
+  </th>
+  <th scope="col">
+  Scalars
+  </th>
+  <th scope="col">
+  Measures
+  </th>
+  <th scope="col">
+  Submovements
+  </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>
+  A quantitative total describing the amount of work the athlete must do to complete the movement.
+  </td>
+  <td>
+  One or more additional factors that affects the difficulty of completing each iteration.
+  </td>
+  <td>
+  One or more inputs the athlete must record after completing the movement.
+  </td>
+  <td>
+  One or more movements that must be completed at some point during the parent movement.
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  <p>The set of attributes is broken up into two levels: the top level describes the movement via the description, notes, and labels attributes, and the bottom level describes the set of attributes that make up the core of the movement: iteration, scalars, measures, and submovements. The bottom level is perhaps the most interesting, and so we concentrate on that.</p>
+  <p><strong>Iteration</strong>. The iteration tells the athlete how to successfully complete the movement. For example, an iteration can be the total number of reps, or a distance they must run or swim, or the number of calories to complete, or an amount of time they must continually do the movement without stopping.</p>
+  <p><strong>Scalars</strong>. Now scalars modify a movements difficulty in some way. For example, specifying a weight for an olympic weightlifting movement, or requiring the athlete to wear a weighted vest during GHD situps, or requiring a moderate pace during a run, or even a slow pace during a run, or scaling handstand pushups to make them easier by placing their head under an abmat. Thus, scalars can make a movement more difficult or they can make them easier.</p>
+  <p><strong>Measures</strong>. During training an athletes performance must be <em>measured</em> against some aspect of the movements they complete. Therefore, measures are one or more inputs the athlete must record after completing the movement. For example, they might be asked to record their pace while doing a run or swim, or the total time it took them to complete the movement, or the number of reps they were able to finish. Then we can compare measures against multiple completions of the movement over time and assess the athletes performance.</p>
+  <p><strong>Submovements</strong>. During a particular movement an athlete might be asked to complete some additional movements at some point in time. For example, having to complete 5 burpees every 2min during a 5K run, or having to row 50 calories if they fail to complete 50 toes to bar. As we can see submovements consist of a movement as described above, but also an additional property we call a <strong>modality</strong> which describes at which point the athlete must do the submovement. The modality can be linked to the iteration or can be independent; e.g., in the former case, completing 3 push-ups every 10 reps of 50 pull ups (the iteration is 50 reps), or in the latter case, completing 5 burpees every 2 min during the 5K run (the iteration is 5K meters).</p>
+  <h2 id="conclusion">Conclusion</h2>
+  <p>As we can see movements are actually quite interesting. Now that we can formally define a movement we can build and design tools that can track, query, and analyze every aspect of a movement. In a future post I’ll describe how we can put movements together to form workouts and complete training programs.</p>
+</main>
+            <hr>
+            <p>
+                        <em>Leave a comment by sending me an <a href="mailto:harley.eades@gmail.com">Email</a></em>
+                        </p>
+	  <div class="col-md-1">
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+	<p class="text-right" class="text-muted credit">	
+	</p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-71081670-1', 'auto');
+       ga('send', 'pageview');
+     </script>
+  </body>
+</html>

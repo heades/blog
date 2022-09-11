@@ -28,3 +28,4 @@ html-math-method:
 css:
 - <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 - <link rel="stylesheet" href="/includes/css/proofs.css" />
+- <link rel="stylesheet" href="/includes/css/tables.css" />
