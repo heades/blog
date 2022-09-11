@@ -11,7 +11,7 @@ toc: false
 I'm currently studying the best way to design and develop
 remote-training tools for athletic training.  The first question I
 asked myself is what are the similarities of training protocols across
-sports and fitness training.  Surprisingly, they all use the same
+sports and fitness training?  Surprisingly, they all use the same
 basic concepts!  
 
 In this post I'm going to lay out an abstract characterization of the
