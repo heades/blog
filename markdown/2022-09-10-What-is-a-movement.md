@@ -62,6 +62,7 @@ a table in a database. The following table describes each attribute.
       <th scope="col">Description</th>      
       <th scope="col">Notes</th>
       <th scope="col">Labels</th>
+      <th scope="col">Targets</th>
     </tr>
   </thead>
   <tbody>
@@ -69,6 +70,7 @@ a table in a database. The following table describes each attribute.
       <td>A simple explanation of the movement.</td>      
       <td>Useful information about the movement.</td>
       <td>One or more tags for organizing and searching for movements.</td>
+      <td>One or more focus areas the movement targets.</td>
     </tr>
   </tbody>
   <thead>
@@ -90,11 +92,16 @@ a table in a database. The following table describes each attribute.
 </table>  
 
 The set of attributes is broken up into two levels: the top level
-describes the movement via the description, notes, and labels
+describes the movement via the description, notes, labels, and target
 attributes, and the bottom level describes the set of attributes that
 make up the core of the movement: iteration, scalars, measures, and
 submovements. The bottom level is perhaps the most interesting, and so
-we concentrate on that. 
+we concentrate on that, but we do mention targets first.
+
+**Targets**. A movement can target a specific area of the body or
+physical system.  Across an athletes training it can be important to
+understand which areas have been trained the most or the least to help
+identify weakness.
 
 **Iteration**. The iteration tells the athlete how to successfully
 complete the movement.  For example, an iteration can be the total
