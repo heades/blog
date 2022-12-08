@@ -7,7 +7,7 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
-### [HCI: Movement Correction and Repair: Questions from an HCIer](/draft/2022-11-12-Correction.html)
+### [HCI: Movement Correction and Remote Coaching: A New Research Program](/draft/2022-11-12-Correction.html)
 :::
 ::: list-group-item
 ### [HCI: Fitness: What is a movement?](/draft/2022-09-10-What-is-a-movement.html)
