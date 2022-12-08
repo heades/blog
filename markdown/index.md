@@ -7,28 +7,31 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
-### [Fitness: What is a movement?](/draft/2022-09-10-What-is-a-movement.html)
+### [HCI: Movement Correction and Repair: Questions from an HCIer](/draft/2022-11-12-Correction.html)
 :::
 ::: list-group-item
-### [Open Questions in the Accessibility of Programming with Vision Impairments](/draft/2022-09-09-Blind-PL-Lit-Review.html)
+### [HCI: Fitness: What is a movement?](/draft/2022-09-10-What-is-a-movement.html)
 :::
 ::: list-group-item
-### [Glanceable Visualizations on Smartwatches](/draft/2022-09-01-Smartwatch-Viz.html)
+### [HCI: Open Questions in the Accessibility of Programming with Vision Impairments](/draft/2022-09-09-Blind-PL-Lit-Review.html)
 :::
 ::: list-group-item
-### [SODBeans: A debugger for people with vision impairments](/draft/2022-08-25-SODBeans.html)
+### [HCI: Glanceable Visualizations on Smartwatches](/draft/2022-09-01-Smartwatch-Viz.html)
 :::
 ::: list-group-item
-### [Indexed Operations](/draft/2022-08-25-Indexed-Ops.html)
+### [HCI: SODBeans: A debugger for people with vision impairments](/draft/2022-08-25-SODBeans.html)
 :::
 ::: list-group-item
-### [An Update on CHI 2022](https://medium.com/@harley.eades/an-update-on-chi-2022-73042ad8d51a)
+### [PL: Indexed Operations](/draft/2022-08-25-Indexed-Ops.html)
+:::
+::: list-group-item
+### [HCI: An Update on CHI 2022](https://medium.com/@harley.eades/an-update-on-chi-2022-73042ad8d51a)
 :::
 ::: list-group-item
 ### [I'm Recruiting a PhD Student](/draft/2021-30-04-PhD-Student-Ad.html)
 :::
 ::: list-group-item
-### [From monads to comonads and back](/draft/Monads-From-Comonads.html)
+### [PL: From monads to comonads and back](/draft/Monads-From-Comonads.html)
 :::
 ::: list-group-item
 ### [A brief history of graded modalities](/draft/Graded-History.html)

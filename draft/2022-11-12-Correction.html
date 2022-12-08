@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>Movement Correction and Remote Coaching: A New Research Program</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/includes/css/proofs.css" />
+    <link rel="stylesheet" href="/includes/css/tables.css" />
+  </head>
+  <body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap" ng-app="HomePageApp">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid" id="navfluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Metatheorem</a>
+          </div>
+	  <div>
+            <div class="collapse navbar-collapse" id="navigationbar">
+              <ul class="nav navbar-nav">
+                <li><a href="https://heades.github.io">Author</a></li>
+                <li><a href="/">Posts</a></li>                
+            </ul>
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="well">
+          <h2>Movement Correction and Remote Coaching: A New Research Program</h2>
+              Updated: 2022-11-12
+        </div>
+	<div class="row">
+	  <div class="col-md-2">
+	  </div>
+	  <div class="col-md-10" style="font-size:20px;">
+<div id="divCheckbox" style="display: none;">
+  <span class="math display">
+    \[    
+    \newcommand{\ottnt}[1]{#1}
+    \newcommand{\ottsym}[1]{#1}
+    \newcommand{\ottmv}[1]{\mathit{#1}}
+
+    \newcommand{\func}[1]{\mathsf{#1}}
+    \newcommand{\Lin}[0]{\func{Lin}}
+    \newcommand{\Mny}[0]{\func{Mny}}
+    \newcommand{\Forget}[0]{\func{Forget}}
+    \newcommand{\Free}[0]{\func{Free}}
+    \newcommand{\Endo}[0]{\func{Endo}}
+    \newcommand{\mto}[1]{\xrightarrow{#1}}
+    \newcommand{\interp}[1]{[\negthinspace[#1]\negthinspace]}
+
+    \newcommand{\cat}[1]{\mathcal{#1}}
+    \newcommand{\catobj}[1]{\mathsf{Obj}(\cat{#1})}
+    \newcommand{\Obj}[1]{\catobj{#1}}
+    \newcommand{\catop}[1]{\cat{#1}^{\mathsf{op}}}
+    \newcommand{\sets}[0]{\mathsf{Set}}
+    \newcommand{\Set}[0]{\sets}
+    \newcommand{\mor}[1]{\mathsf{Mor}(\cat{#1})}
+    \newcommand{\Hom}[3]{\mathsf{Hom}_{#1}(#2,#3)}
+    \newcommand{\cur}[0]{\mathsf{cur}}
+    \newcommand{\curi}[0]{\mathsf{cur}^{-1}}
+    \newcommand{\app}[0]{\mathsf{app}}
+    \newcommand{\id}[0]{\mathsf{id}}
+    \newcommand{\injl}[0]{\mathsf{inj_l}}
+    \newcommand{\injr}[0]{\mathsf{inj_r}}
+    \newcommand{\pow}[1]{\mathcal{P}(#1)}
+
+    \newcommand{\oast}{&circledast;}
+    \]
+  </span>
+</div>
+
+<main>
+  <p>I’ve been working with my CrossFit coach remotely for my entire time as an athlete. She provides me with both my training program and feedback on technique and form. This style of coaching has been gaining in popularity over the course of the last three years. The COVID pandemic revealed that remote training can link athletes with great coaches and athletes can progress in their sport quickly. As a result of this more and more coaches in CrossFit are offering remote coaching options. Some notable examples are Hard Work Pays Off, six-times CrossFit Games champion Matt Fraser’s company, and PRVN, the company behind seven-times CrossFit Games champion Tia-Clair Toomey. The dynamic between coach and athlete is quite different in remote coaching than in traditional face-to-face coaching. A Notable difference is the use of technology, in the form of mobile applications and video, as a bridge between coach and athlete.</p>
+  <p>I believe that this boom in remote training of CrossFit athletes is a perfect setting for HCI research into remote training of athletes, tracking athlete performance, and the use of technology in sports. In this post I discuss the differences in how a coach and an athlete identify errors in movements and offer corrections when working together remotely compared to face-to-face coaching. I will offer some anecdotal insights and research questions both of which I’m preparing a study to investigate.</p>
+  <h1 id="correction-and-remote-coaching">Correction and Remote Coaching</h1>
+  <p>There are two main goals of a coach-athlete relationship:</p>
+  <ul>
+  <li>Maintain strengths within the athlete’s performance.</li>
+  <li>Identify and strengthen weaknesses within the athlete’s performance.</li>
+  </ul>
+  <p>These will allow the athlete to progress in their sport over time. This is accomplished through:</p>
+  <ul>
+  <li>personalized training,</li>
+  <li>feedback, and</li>
+  <li>tracking and assessment of past performance.</li>
+  </ul>
+  <p>While there are a lot of interesting things to consider in each of the previous categories we will concentrate on the second, feedback, in this post.</p>
+  <p>Physical training research has introduced the following feedback process between coach and athlete:</p>
+  <ul>
+  <li><strong>correction</strong> : the central process of collaboratively assessing a physical activity.</li>
+  </ul>
+  <p>Correction as a process is the pairing of an identification of a weakness in an athletes movement during a physical activity and the correction made by the athlete to strengthen their movement. There is also a notion of <strong>repair</strong>, but we leave this to a future post.</p>
+  <div style="background-color: #F0F0F0; padding: 10pt;">
+  <p>In the literature I’ve read, they speak of errors and fixes to these errors, but in my experience as an athlete most errors do not have simple fixes, but a fix is really a spectrum where the athlete strengthens their movement over time. Thus, I speak of weaknesses and strengthening these weaknesses.</p>
+  </div>
+  <p>An example correction might be: The coach identifies that their athlete is not engaging their scapular muscles, the weakness, during their strict pull ups. The athlete strengthens their pull ups by engaging their scapular, but they are not able to take full advantage due to their t-spine being tight. So while their pull up is now stronger, they need to continue to develop their mobility and strength of their scapular muscles to continue to strengthen their pull ups. This shows that there is a spectrum of fixes captured by the notion of continually strengthening a movement.</p>
+  <p>Corrections can be initiated by identification of a weakness by either the coach or the athlete, and a change in the athletes movement to strengthen the identified weakness can be initiated by either the coach or the athlete. In traditional face-to-face coaching the identification of a weakness is most often done by the coach, and the coach and athlete collaborate on how to strengthen the weakness.</p>
+  <div style="background-color: #F0F0F0; padding: 10pt;">
+  <p>Remotely coached athletes have to take a greater role in the identification of weaknesses, because the coach is not present watching the athlete as they do their movements. Identification consists of the athlete recording their movements, watching their video to identify any corrections that may need to be done right away, and then sending their video to the coach for further assessment which may lead to further corrections. The coach most likely will not respond to the video until after the days training, and thus, there can be a delay in corrections. This need to self correct and delay in expert correction is important when it comes to the athletes progression, because the delay of expert correction prevents the athlete from strengthening their weaknesses quickly and so self correction becomes important to maintain steady progression.</p>
+  This also implies that athlete lead corrections become more frequent, and it also highlights the prominent role of the camera in the coach-athlete dynamic. The camera becomes an extension of both the athlete and the coach. To the athlete its a vehicle of self-correction and their connection to the their coach. In comparison, to the coach, the camera is the way to reach out and touch the athlete, it is their window into the training room and a means to assessment. Finally, in traditional face-to-face coaching the coach can literally touch the athlete and correct them, but this is not possible in remote coaching, and so, the coach may create videos themselves to send to the athlete to be able to model correct technique. In this way, the camera really is an extension of the collaboration.
+  </div>
+  <h1 id="research-agenda">Research Agenda</h1>
+  <p>As I’ve reiterated too many times, technology plays a major role in remote training. In particular:</p>
+  <ul>
+  <li><p><strong>Video</strong> allows the coach/athlete to communicate, assess, and correct movement.</p></li>
+  <li><p><strong>Digital journal</strong> allows the coach/athlete to record, assess, and communicate past and future training performance.</p></li>
+  </ul>
+  <p>Existing tools are largely mobile applications augmented with email and text messaging. They do not offer much improvement in making remote coaching closer to the traditional in-person coaching. We believe this can be changed. The following are the research focuses of our overall project:</p>
+  <ul>
+  <li><p>enhance video recording and feedback by allowing markup on videos, side-by-side comparisons, and quick editing features;</p></li>
+  <li><p>create a virtual training journal capable of easily conducting training programming, analysis, and feedback; and</p></li>
+  <li><p>integrate video communication and storage into the digital journal.</p></li>
+  </ul>
+  <p>Hitting these goals will require studying visualizations, tracking of fitness data, UI design, user research, and a number of contextual design studies.</p>
+  <p>I’m in the process of finalizing an IRB package for a contextual design study looking at the processes remote coaches, traditional coaches, and athletes use to track, asses, and program fitness training.</p>
+  <p>I’ve also begun prototyping the foundation of a mobile training journal app with basic functionality, but whose design will be conducted after our initial study. I’m really looking forward to the next year of research on this topic.</p>
+  <h1 id="literature">Literature</h1>
+  <p>I did a literature search on correction and remote training, but there were no results that I could find. Here is the list of related work in traditional face-to-face coaching:</p>
+  <ol type="1">
+  <li><p>Jacquelyn Allen-Collinson and websupport@bath.ac.uk. 2006. Running together: some ethnomethodological considerations. Ethnographic Studies 8: 17–29.</p></li>
+  <li><p>Bryn Evans. 2017. Sports coaching as action-in-context: using ethnomethodological conversation analysis to understand the coaching process. Qualitative Research in Sport, Exercise and Health 9, 1: 111–132. https://doi.org/10.1080/2159676X.2016.1246473</p></li>
+  <li><p>Bryn Evans and Edward Reynolds. 2016. The Organization of Corrective Demonstrations Using Embodied Action in Sports Coaching Feedback. Symbolic Interaction 39, 4: 525–556. https://doi.org/10.1002/symb.255</p></li>
+  <li><p>Guy Faulkner and Sara-Jane Finlay. 2002. It’s Not What You Say, It’s the Way You Say It! Conversation Analysis: A Discursive Methodology for Sport, Exercise, and Physical Education. Quest 54, 1: 49–66. https://doi.org/10.1080/00336297.2002.10491766</p></li>
+  <li><p>Brian T. Gearity and Joseph P. Mills. 2012. Discipline and punish in the weight room. Sports Coaching Review 1, 2: 124–134. https://doi.org/10.1080/21640629.2012.746049</p></li>
+  <li><p>Charles Goodwin and John Heritage. 1990. Conversation Analysis. Annual Review of Anthropology 19: 283–307.</p></li>
+  <li><p>Leelo Keevallik. 2010. Bodily Quoting in Dance Correction. Research on Language and Social Interaction 43, 4: 401–426. https://doi.org/10.1080/08351813.2010.518065</p></li>
+  <li><p>Anthony J. Liddicoat. 2007. An Introduction to Conversation Analysis. A&amp;C Black.</p></li>
+  <li><p>Douglas Macbeth. 2004. The Relevance of Repair for Classroom Correction. Language in Society 33, 5: 703–</p></li>
+  <li><p>Cathrin Martin and Fritjof Sahlström. 2010. Learning as Longitudinal Interactional Change: From Other-Repair to Self-Repair in Physiotherapy Treatment. Discourse Processes 47, 8: 668–697. https://doi.org/10.1080/01638531003628965</p></li>
+  </ol>
+</main>
+            <hr>
+            <p>
+                        <em>Leave a comment by sending me an <a href="mailto:harley.eades@gmail.com">Email</a></em>
+                        </p>
+	  <div class="col-md-1">
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+	<p class="text-right" class="text-muted credit">	
+	</p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-71081670-1', 'auto');
+       ga('send', 'pageview');
+     </script>
+  </body>
+</html>
