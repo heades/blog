@@ -1,6 +1,6 @@
 ---
-pagetitle: hde.design
-title: hde.design
+pagetitle: blog.hde.design
+title: blog.hde.design
 ---
 
 Feed: [RSS](feed.xml)
