@@ -1,6 +1,6 @@
 ---
 title: "Movement Correction and Remote Coaching: A New Research Program"
-date: 2022-11-12
+date: 2022-12-07
 categories:
   - HCI
   - sports-HCI
