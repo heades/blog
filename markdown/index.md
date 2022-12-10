@@ -1,6 +1,6 @@
 ---
 pagetitle: blog.hde.design
-title: blog.hde.design
+title: Harley Eades' Blog
 ---
 
 Feed: [RSS](feed.xml)
