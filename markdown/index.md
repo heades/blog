@@ -1,6 +1,6 @@
 ---
-pagetitle: Metatheorem
-title: Metatheorem
+pagetitle: hde.design
+title: hde.design
 ---
 
 Feed: [RSS](feed.xml)
