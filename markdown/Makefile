@@ -13,6 +13,9 @@ post_dir := published
 
 rss_feed := feed.xml
 
+lua_filter_dir := ../lua-filters
+lua_filters := --lua-filter=$(lua_filter_dir)/grey-background-html.lua
+
 sources := $(filter-out $(source)/index.md, $(wildcard $(source)/*.md))
 objects := $(patsubst %.md,%.html,$(subst $(source),$(output),$(sources)))
 
@@ -22,7 +25,7 @@ publish : all
 	cd .. && make publish
 
 $(output)/%.html : %.md $(post-defaults).yaml $(post-layout).html 
-	pandoc -s --toc -d $(post-defaults) -o $@ $<
+	pandoc ${lua_filters} -s -f markdown -t html --toc -d $(post-defaults) -o $@ $<
 	panfeed --add=$< --post-path=$(post_dir) --feed-dest=$(output)/$(rss_feed) ../$(rss_feed)
 
 $(output)/index.html : index.md $(page-defaults).yaml $(page-layout).html 

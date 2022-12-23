@@ -7,7 +7,12 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
-### [HCI: Movement Correction and Remote Coaching: A New Research Program](/draft/2022-11-12-Correction.html)
+### [A review of "E-coaching Ecosystem: Design and Effectiveness Analysis of the Engagement of Remote Coaching on Athletes"](/draft/2022-12-13-ECoaching-Ecosystem.html)
+categories: HCI, remote coaching, sports
+:::
+::: list-group-item
+### [Movement Correction and Remote Coaching: A New Research Program](/draft/2022-11-12-Correction.html)
+categories: HCI, remote coaching, sports
 :::
 ::: list-group-item
 ### [HCI: Fitness: What is a movement?](/draft/2022-09-10-What-is-a-movement.html)
