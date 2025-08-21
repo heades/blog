@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="/includes/css/proofs.css" />
     <link rel="stylesheet" href="/includes/css/tables.css" />
-      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+      <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      type="text/javascript"></script>
   </head>
   <body>
 
@@ -87,29 +89,89 @@
 <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Contents</h2>
 <ul>
-<li><a href="#the-old">The Old</a></li>
-<li><a href="#the-new">The New</a></li>
-<li><a href="#panfeed">Panfeed</a></li>
-<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#the-old" id="toc-the-old">The Old</a></li>
+<li><a href="#the-new" id="toc-the-new">The New</a></li>
+<li><a href="#panfeed" id="toc-panfeed">Panfeed</a></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
 </ul>
 </nav>
 
 <main>
-  <p>I haven’t been blogging much over the last few years. This is in part due to just being really busy and then part due to the infrastructure my blog was based on. The latter was a big impediment because it made writing difficult by getting in the way of just writing. In addition, the infrastructure I chose didn’t handle advanced mathematics well enough for what I currently want to write about. So I decided to replace it with a more easily manageable and more mathematically expressive infrastructure. In this post I’m going to introduce this simple system so that if there is anyone else who wants a simple blog they can use it as well.</p>
+  <p>I haven’t been blogging much over the last few years. This is in
+  part due to just being really busy and then part due to the
+  infrastructure my blog was based on. The latter was a big impediment
+  because it made writing difficult by getting in the way of just
+  writing. In addition, the infrastructure I chose didn’t handle
+  advanced mathematics well enough for what I currently want to write
+  about. So I decided to replace it with a more easily manageable and
+  more mathematically expressive infrastructure. In this post I’m going
+  to introduce this simple system so that if there is anyone else who
+  wants a simple blog they can use it as well.</p>
   <h3 id="the-old">The Old</h3>
-  <p>Let me explain the problems I was running into with my old system. It was a <a href="https://jekyllrb.com/">Jekyll</a> based blog which used <a href="https://www.mathjax.org/">Mathjax</a> and the <a href="https://github.com/jekyll/jekyll-feed">jekyll-feed plugin</a> and it was hosted (and still is) as a <a href="https://pages.github.com/">Github Page</a>. This system was quite nice to work with. I had collections enabled which allowed me to separate posts from pages and even drafts. I loved the command:</p>
+  <p>Let me explain the problems I was running into with my old system.
+  It was a <a href="https://jekyllrb.com/">Jekyll</a> based blog which
+  used <a href="https://www.mathjax.org/">Mathjax</a> and the <a
+  href="https://github.com/jekyll/jekyll-feed">jekyll-feed plugin</a>
+  and it was hosted (and still is) as a <a
+  href="https://pages.github.com/">Github Page</a>. This system was
+  quite nice to work with. I had collections enabled which allowed me to
+  separate posts from pages and even drafts. I loved the command:</p>
   <pre><code> bundle exec jekyll serve --drafts --watch</code></pre>
-  <p>to locally serve my site and test it out before publishing it. However, there a few things that made using Jekyll a bit annoying and one thing that made it very hard to keep using it:</p>
+  <p>to locally serve my site and test it out before publishing it.
+  However, there a few things that made using Jekyll a bit annoying and
+  one thing that made it very hard to keep using it:</p>
   <ol type="1">
-  <li><p>Jekyll is based on a number of technologies like <a href="https://www.ruby-lang.org/en/">Ruby</a> (Jekyll is developed in it and the templates are based on it), <a href="https://jekyllrb.com/docs/configuration/markdown/">Markdown</a>, and <a href="https://github.com/Shopify/liquid">Liquid</a>. I found for my simple needs these were just too much to keep up with. Updates required messing with the Ruby package manager called <a href="https://rubygems.org/">RubyGems</a> which was often nightmarish. Then factor in Mathjax and RSS feeds and this is getting out of hand. I felt like I was having to tweak these things too often for my liking. So reducing the number of technologies is important for me. I want simplicity and minimalism, because it is easier to maintain over time.</p></li>
-  <li><p>Jekyll doesn’t play nice with Mathjax. When you build a Jekyll site what happens is the static site is generated using the above technologies which means the markdown you write is going to go through several translations before the final HTML is output. These translations would break Mathjax code.</p>
-  <p>Consider an example. The Mathjax <code>$$\Gamma_{{\mathrm{1}}}$$</code> would end up getting translated into the code <code>&lt;script type="math/tex"&gt;\Gamma_}&lt;/script&gt;</code> instead of <code>&lt;script type="math/tex"&gt;\Gamma_{{\mathrm{1}}}&lt;/script&gt;</code>. The problem is the nesting of curly braces, if you remove the nesting giving <code>$$\Gamma_{\mathrm{1}}$$</code> then it works fine. Keep in mind that Mathjax has no problem rendering the original if it were translated properly by Jekyll.</p>
-  <p>You might wonder why this is a big deal. I mean, I could just remove the extra curly braces and we are good. But, I use a tool called <a href="https://github.com/heades/ott">Ott</a> that is used for generating parsers of formal languages like programming languages and logics. I use it to write papers and blog posts to catch syntax errors in my writing. Well for whatever reason Ott adds these nested parens all the time. So this was annoying.</p></li>
+  <li><p>Jekyll is based on a number of technologies like <a
+  href="https://www.ruby-lang.org/en/">Ruby</a> (Jekyll is developed in
+  it and the templates are based on it), <a
+  href="https://jekyllrb.com/docs/configuration/markdown/">Markdown</a>,
+  and <a href="https://github.com/Shopify/liquid">Liquid</a>. I found
+  for my simple needs these were just too much to keep up with. Updates
+  required messing with the Ruby package manager called <a
+  href="https://rubygems.org/">RubyGems</a> which was often nightmarish.
+  Then factor in Mathjax and RSS feeds and this is getting out of hand.
+  I felt like I was having to tweak these things too often for my
+  liking. So reducing the number of technologies is important for me. I
+  want simplicity and minimalism, because it is easier to maintain over
+  time.</p></li>
+  <li><p>Jekyll doesn’t play nice with Mathjax. When you build a Jekyll
+  site what happens is the static site is generated using the above
+  technologies which means the markdown you write is going to go through
+  several translations before the final HTML is output. These
+  translations would break Mathjax code.</p>
+  <p>Consider an example. The Mathjax
+  <code>$$\Gamma_{{\mathrm{1}}}$$</code> would end up getting translated
+  into the code
+  <code>&lt;script type="math/tex"&gt;\Gamma_}&lt;/script&gt;</code>
+  instead of
+  <code>&lt;script type="math/tex"&gt;\Gamma_{{\mathrm{1}}}&lt;/script&gt;</code>.
+  The problem is the nesting of curly braces, if you remove the nesting
+  giving <code>$$\Gamma_{\mathrm{1}}$$</code> then it works fine. Keep
+  in mind that Mathjax has no problem rendering the original if it were
+  translated properly by Jekyll.</p>
+  <p>You might wonder why this is a big deal. I mean, I could just
+  remove the extra curly braces and we are good. But, I use a tool
+  called <a href="https://github.com/heades/ott">Ott</a> that is used
+  for generating parsers of formal languages like programming languages
+  and logics. I use it to write papers and blog posts to catch syntax
+  errors in my writing. Well for whatever reason Ott adds these nested
+  parens all the time. So this was annoying.</p></li>
   </ol>
-  <p>These problems were enough for me to rethink my blog infrastructure.</p>
+  <p>These problems were enough for me to rethink my blog
+  infrastructure.</p>
   <h3 id="the-new">The New</h3>
-  <p>One tool I use a lot to generate various files for work and research is <a href="https://pandoc.org/">Pandoc</a>, and Pandoc heavily supports Mathjax and plays well with Ott. So it would be very natural to engineer my blog to use Pandoc, and that’s exactly what I did.</p>
-  <p>This blog is now purely Pandoc, <a href="https://github.com/http-party/http-server">http-server</a>, <a href="https://www.gnu.org/software/make/">GNU Make</a>, and a new tool I created called <a href="https://github.com/heades/panfeed">Panfeed</a>. That is it! And I managed to keep all of the things I liked about my Jekyll based site!</p>
+  <p>One tool I use a lot to generate various files for work and
+  research is <a href="https://pandoc.org/">Pandoc</a>, and Pandoc
+  heavily supports Mathjax and plays well with Ott. So it would be very
+  natural to engineer my blog to use Pandoc, and that’s exactly what I
+  did.</p>
+  <p>This blog is now purely Pandoc, <a
+  href="https://github.com/http-party/http-server">http-server</a>, <a
+  href="https://www.gnu.org/software/make/">GNU Make</a>, and a new tool
+  I created called <a
+  href="https://github.com/heades/panfeed">Panfeed</a>. That is it! And
+  I managed to keep all of the things I liked about my Jekyll based
+  site!</p>
   <p>Here is the listing of the structure of this blog:</p>
   <ul>
   <li>Templates/Markdown:
@@ -132,30 +194,104 @@
   <li><code>index.html</code></li>
   </ul></li>
   </ul>
-  <p>The sites static-files (the files in the Generated Site section above) are the result of applying Pandoc to the files in the template/markdown section. The <code>defaults</code> and <code>layouts</code> directories are the Pandoc configuration directories and they are linked. The former, tells Pandoc things like what kind of markdown to generate, where to find the markdown files, which output format to use (for this site this should be HTML), the type of highlighter to use, to enable Mathjax, and to enable CSS (this blog uses Bootstrap). In addition, it sets the HTML template in <code>layouts</code> for the HTML document we are generating. There are two page templates: post and page. The former is the template for each blog post and the latter is used for pages like the index page of this site. For more information on how this works checkout <a href="https://pandoc.org/MANUAL.html#default-files">Default Files</a> and <a href="https://pandoc.org/MANUAL.html#templates">Templates</a> in the Pandoc User Manual.</p>
-  <p>The <code>markdown</code> directory contains all of the markdown for the entire site. This includes the <code>index.md</code> file and all posts. For example, the file for this post <code>2020-12-15-Blog-Infrastructure.md</code> is also in the <code>markdown</code> directory. So all editing/drafting takes place in <code>markdown</code>.</p>
-  <p>Everything else is generated. In <code>markdown</code> there is a <code>Makefile</code> that runs Pandoc on each markdown file that has been modified. It then places its generated HTML in the <code>draft</code> directory. This includes the <code>index.md</code> file. It also adds all modified posts to a new <code>feed.xml</code> file (more on this later). Thus, the entire site is generated as a <code>draft</code> first. This makes it possible for me to share drafts of posts with others before publishing them and to keep them in my Git repo with little hassle. In fact, you can visit <a href="https://blog.metatheorem.org/draft">https://blog.metatheorem.org/draft</a> right now and see the draft version of this site. Then using the <code>Makefile</code> at the root of the site by issuing <code>make publish</code> the generated files in <code>draft</code> are moved to their respective locations. All posts are moved to <code>published</code>, and <code>index.html</code> and <code>feed.xml</code> are both moved to the root of the site.</p>
-  <p>To locally view the generated site either the <code>draft</code> version or the <code>published</code> version we can use the command <code>make serve</code> at the root to run <code>http-server</code>. The commands <code>make draft</code>, <code>make published</code>, and <code>make clean</code> are also available. The latter removes all published HTML.</p>
-  <p>Pandoc is an amazing tool for converting to and from markdown. However, it is not a tool for blog management. Thus, the one issue I had was how do I manage my RSS feed (<code>feed.xml</code>). Enter Panfeed.</p>
+  <p>The sites static-files (the files in the Generated Site section
+  above) are the result of applying Pandoc to the files in the
+  template/markdown section. The <code>defaults</code> and
+  <code>layouts</code> directories are the Pandoc configuration
+  directories and they are linked. The former, tells Pandoc things like
+  what kind of markdown to generate, where to find the markdown files,
+  which output format to use (for this site this should be HTML), the
+  type of highlighter to use, to enable Mathjax, and to enable CSS (this
+  blog uses Bootstrap). In addition, it sets the HTML template in
+  <code>layouts</code> for the HTML document we are generating. There
+  are two page templates: post and page. The former is the template for
+  each blog post and the latter is used for pages like the index page of
+  this site. For more information on how this works checkout <a
+  href="https://pandoc.org/MANUAL.html#default-files">Default Files</a>
+  and <a href="https://pandoc.org/MANUAL.html#templates">Templates</a>
+  in the Pandoc User Manual.</p>
+  <p>The <code>markdown</code> directory contains all of the markdown
+  for the entire site. This includes the <code>index.md</code> file and
+  all posts. For example, the file for this post
+  <code>2020-12-15-Blog-Infrastructure.md</code> is also in the
+  <code>markdown</code> directory. So all editing/drafting takes place
+  in <code>markdown</code>.</p>
+  <p>Everything else is generated. In <code>markdown</code> there is a
+  <code>Makefile</code> that runs Pandoc on each markdown file that has
+  been modified. It then places its generated HTML in the
+  <code>draft</code> directory. This includes the <code>index.md</code>
+  file. It also adds all modified posts to a new <code>feed.xml</code>
+  file (more on this later). Thus, the entire site is generated as a
+  <code>draft</code> first. This makes it possible for me to share
+  drafts of posts with others before publishing them and to keep them in
+  my Git repo with little hassle. In fact, you can visit <a
+  href="https://blog.metatheorem.org/draft">https://blog.metatheorem.org/draft</a>
+  right now and see the draft version of this site. Then using the
+  <code>Makefile</code> at the root of the site by issuing
+  <code>make publish</code> the generated files in <code>draft</code>
+  are moved to their respective locations. All posts are moved to
+  <code>published</code>, and <code>index.html</code> and
+  <code>feed.xml</code> are both moved to the root of the site.</p>
+  <p>To locally view the generated site either the <code>draft</code>
+  version or the <code>published</code> version we can use the command
+  <code>make serve</code> at the root to run <code>http-server</code>.
+  The commands <code>make draft</code>, <code>make published</code>, and
+  <code>make clean</code> are also available. The latter removes all
+  published HTML.</p>
+  <p>Pandoc is an amazing tool for converting to and from markdown.
+  However, it is not a tool for blog management. Thus, the one issue I
+  had was how do I manage my RSS feed (<code>feed.xml</code>). Enter
+  Panfeed.</p>
   <h3 id="panfeed">Panfeed</h3>
-  <p>One of the cool plugins I used with Jekyll was jekyll-feed. This automatically managed my RSS feed by extracting the necessary details from the markdown files and adding a new entry to my RSS feed. Moving to pure Pandoc meant I no longer had this feature. After looking around a bunch I noticed there wasn’t a solution to this problem. So I solved it myself.</p>
-  <p>I have developed a simple tool called <a href="https://github.com/heades/panfeed">Panfeed</a> which manages an RSS feed using Pandoc. The name is a combination of “Pandoc” and “Feed” the latter being the <a href="">Haskell</a> library for managing RSS+Atom feeds.</p>
-  <p>Panfeed supports creating a new RSS feed and then adding new entries to an existing RSS feed based on Pandoc’s markdown with YAML blocks. The markdown files look like the following:</p>
+  <p>One of the cool plugins I used with Jekyll was jekyll-feed. This
+  automatically managed my RSS feed by extracting the necessary details
+  from the markdown files and adding a new entry to my RSS feed. Moving
+  to pure Pandoc meant I no longer had this feature. After looking
+  around a bunch I noticed there wasn’t a solution to this problem. So I
+  solved it myself.</p>
+  <p>I have developed a simple tool called <a
+  href="https://github.com/heades/panfeed">Panfeed</a> which manages an
+  RSS feed using Pandoc. The name is a combination of “Pandoc” and
+  “Feed” the latter being the <a href="">Haskell</a> library for
+  managing RSS+Atom feeds.</p>
+  <p>Panfeed supports creating a new RSS feed and then adding new
+  entries to an existing RSS feed based on Pandoc’s markdown with YAML
+  blocks. The markdown files look like the following:</p>
   <pre><code>---
-  title: &quot;The most amazingest post&quot;
-  date: 2020-12-04
-  abstract: &quot;About my amazingest advertures through the ether.&quot;
-  ---
+title: &quot;The most amazingest post&quot;
+date: 2020-12-04
+abstract: &quot;About my amazingest advertures through the ether.&quot;
+---
 
-  content</code></pre>
+content</code></pre>
   <p>Then Using the following Panfeed command:</p>
   <pre><code>panfeed --add=2020-12-04-Amazingest-Adventures.md --post-path=posts bestestFeed.rss</code></pre>
-  <p>we can add a new entry to <code>bestestFeed.rss</code> with the title and date specified, but the entries content will be set to the abstract. The option <code>--post-path</code> adds the releative path to where <code>2020-12-04-Amazingest-Adventures.html</code> is located on your site. Panfeed first grabs the URL to your website from <code>bestestFeed.rss</code> and records the new entry as located on your site at <code>http://bestest.com/posts/2020-12-04-Amazingest-Adventures.html</code>.</p>
-  <p>Thus, using Panfeed we can easily manage our Pandoc-base site from the command line. In fact, this is done completely automatically within the <code>Makefile</code> in the <code>markdown</code> directory.</p>
-  <p>In addition, Panfeed is completely open source and easy to install. For more details on Panfeed checkout the <a href="https://github.com/heades/panfeed/blob/main/README.md">README</a>.</p>
+  <p>we can add a new entry to <code>bestestFeed.rss</code> with the
+  title and date specified, but the entries content will be set to the
+  abstract. The option <code>--post-path</code> adds the releative path
+  to where <code>2020-12-04-Amazingest-Adventures.html</code> is located
+  on your site. Panfeed first grabs the URL to your website from
+  <code>bestestFeed.rss</code> and records the new entry as located on
+  your site at
+  <code>http://bestest.com/posts/2020-12-04-Amazingest-Adventures.html</code>.</p>
+  <p>Thus, using Panfeed we can easily manage our Pandoc-base site from
+  the command line. In fact, this is done completely automatically
+  within the <code>Makefile</code> in the <code>markdown</code>
+  directory.</p>
+  <p>In addition, Panfeed is completely open source and easy to install.
+  For more details on Panfeed checkout the <a
+  href="https://github.com/heades/panfeed/blob/main/README.md">README</a>.</p>
   <h3 id="conclusion">Conclusion</h3>
-  <p>Moving to Pandoc required a bit of work, but now that it’s done my blog is very basic and easy to manage. Everything is literally a markdown file. Combing Pandoc, GNU Make, and Panfeed made it possible to make the infrastructure as simple as possible. And it’s as expressive as possible. In fact, check it out, the math <span class="math inline">\(\Gamma_{{\mathrm{1}}}\)</span> looks as it should.</p>
-  <p>If you are interested in using this blog setup you can simply clone this <a href="https://github.com/heades/example-blog">repo</a>. Then install Pandoc, GNU Make, and Panfeed. Then you can get blogging.</p>
+  <p>Moving to Pandoc required a bit of work, but now that it’s done my
+  blog is very basic and easy to manage. Everything is literally a
+  markdown file. Combing Pandoc, GNU Make, and Panfeed made it possible
+  to make the infrastructure as simple as possible. And it’s as
+  expressive as possible. In fact, check it out, the math <span
+  class="math inline">\(\Gamma_{{\mathrm{1}}}\)</span> looks as it
+  should.</p>
+  <p>If you are interested in using this blog setup you can simply clone
+  this <a href="https://github.com/heades/example-blog">repo</a>. Then
+  install Pandoc, GNU Make, and Panfeed. Then you can get blogging.</p>
 </main>
             <hr>
             <p>
