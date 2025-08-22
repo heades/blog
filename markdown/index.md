@@ -7,6 +7,10 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Just Some Notes on Linear Haskell](/draft/linear-haskell.html)
+categories: Haskell, Linear Types, PL
+:::
+::: list-group-item
 ### [A review of "E-coaching Ecosystem: Design and Effectiveness Analysis of the Engagement of Remote Coaching on Athletes"](/draft/2022-12-13-ECoaching-Ecosystem.html)
 categories: HCI, remote coaching, sports
 :::

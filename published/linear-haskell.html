@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-        <title>Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language</title>
+        <title>Some notes on programming with Linear Haskell</title>
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">        
@@ -40,8 +40,7 @@
       <!-- Begin page content -->
       <div class="container">
         <div class="well">
-          <h2>Linear Haskell: Practical Linearity in a Higher-Order
-Polymorphic Language</h2>
+          <h2>Some notes on programming with Linear Haskell</h2>
               Updated: 2025-08-20
         </div>
 	<div class="row">
@@ -84,9 +83,99 @@ Polymorphic Language</h2>
     \]
   </span>
 </div>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul>
+<li><a href="#using-linear-types-in-haskell"
+id="toc-using-linear-types-in-haskell">Using Linear Types in
+Haskell</a></li>
+<li><a href="#linear-base" id="toc-linear-base">Linear Base</a></li>
+<li><a href="#renaming-the-linear-bound-type-annotations"
+id="toc-renaming-the-linear-bound-type-annotations">Renaming the linear
+bound type annotations</a></li>
+<li><a href="#useful-links" id="toc-useful-links">Useful Links</a></li>
+</ul>
+</nav>
 
 <main>
-  
+  <p>So I’m learning about Linear Haskell for some new project ideas I
+  have brewing, and I thought, why not just add it to a note on the OLD
+  blog! It took me a day to get this thing dusted off and building
+  again, but after a few updates to my hella-hacked Haskell blogging
+  tools I use on the backend, I managed to get this thing up and running
+  again.</p>
+  <p><strong>Warning:</strong> This is really just something for me to
+  use to think and refer back to later; don’t expect greatness or
+  polished writing.</p>
+  <h1 id="using-linear-types-in-haskell">Using Linear Types in
+  Haskell</h1>
+  <p>Using linear types in GHC is pretty easy; as long as you are using
+  a GHC version of at least 9.0.1. Simply add the following language
+  extension to the files you plan on using them in:</p>
+  <pre><code>{-# LANGUAGE LinearTypes #-}</code></pre>
+  <p>One nice features of Cabal is that you can add default language
+  extensions that will be applied to all files in your project without
+  having to add them to each file. Add the following to your cabal file
+  under the executable or library (or both) configurations:</p>
+  <pre><code>-- LANGUAGE extensions used by modules in this package.
+default-extensions:     LinearTypes                        </code></pre>
+  <p>You can add others to this field as well (as a comma separated
+  list).</p>
+  <h1 id="linear-base">Linear Base</h1>
+  <p>There is an ongoing effort to bring linear types to the Haskell
+  Base by Tweag they are calling <a
+  href="https://hackage-content.haskell.org/package/linear-base-0.5.0">Linear
+  Base</a>. The idea is that it makes programming with linear types
+  easier by importing some of the basic facilities found in the Haskell
+  standard library into the linear world by adding linear bounds to the
+  definitions, and adding some new support for new abstractions based on
+  linear types.</p>
+  <p>To make it easier to work with linear base I found it easier to add
+  the following language extensions.</p>
+  <pre><code>-- LANGUAGE extensions used by modules in this package.
+default-extensions:     LinearTypes, 
+                        DataKinds,
+                        QualifiedDo, 
+                        NoImplicitPrelude</code></pre>
+  <p>When using linear base we want to default to it’s prelude
+  <code>Prelude.Linear</code>. Thus, having the non-linear prelude
+  qualified we can more easily control when to use non-linearity. For
+  example, I qualify mine as follows:</p>
+  <pre><code>-- Our Prelude is Linear by default:
+import Prelude.Linear
+import qualified Prelude as NLPrelude</code></pre>
+  <p>This way I can see in my code when I’m using non-linear
+  features.</p>
+  <h1 id="renaming-the-linear-bound-type-annotations">Renaming the
+  linear bound type annotations</h1>
+  <p>I thought this was pretty cool! Because of the choice to make the
+  linear bounds Haskell datatypes, we can simply alias them to different
+  constructors to give them names we might like for the project we are
+  using them for:</p>
+  <pre><code>import GHC.Types (Multiplicity(..))
+
+data LNLMult = Linear | Nonlinear
+
+type Linear = One
+type NonLinear = Many</code></pre>
+  <p>Now we can annotate our types with the new names:</p>
+  <pre><code>linearId :: a %Linear -&gt; a
+linearId x = x</code></pre>
+  <h1 id="useful-links">Useful Links</h1>
+  <ul>
+  <li><a
+  href="https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/linear_types.html">GHC
+  Docs: Linear Types Extension</a></li>
+  <li><a
+  href="https://hackage-content.haskell.org/package/linear-base-0.5.0">Hackage:
+  Linear Base</a></li>
+  <li><a href="https://dl.acm.org/doi/10.1145/3158093">Paper: Linear
+  Haskell: practical linearity in a higher-order polymorphic
+  language</a></li>
+  <li><a href="https://dl.acm.org/doi/10.1145/3547626">Paper: Linearly
+  qualified types: generic inference for capabilities and
+  uniqueness</a></li>
+  </ul>
 </main>
             <hr>
             <p>
