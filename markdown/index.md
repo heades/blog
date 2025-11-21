@@ -7,6 +7,10 @@ Feed: [RSS](feed.xml)
 
 ::: list-group
 ::: list-group-item
+### [Notes on how Servant works](/draft/2025-11-20-Servant.html)
+categories: Haskell, Servant, WebAPI, Web Development
+:::
+::: list-group-item
 ### [Just Some Notes on Linear Haskell](/draft/linear-haskell.html)
 categories: Haskell, Linear Types, PL
 :::
