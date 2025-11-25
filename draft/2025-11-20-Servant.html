@@ -41,7 +41,7 @@
       <div class="container">
         <div class="well">
           <h2>All about Servant</h2>
-              Updated: 2025-11-21
+              Updated: 2025-11-25
         </div>
 	<div class="row">
 	  <div class="col-md-2">
@@ -265,7 +265,18 @@ main = run 5000 gamesApp</code></pre>
 - testcontainers-postgresql
 - text-builder-core
 - text-builder</code></pre>
-  <p>HASQL wouldn’t compile without them.</p>
+  <p>HASQL wouldn’t compile without them. Now that I have a working
+  build we can proceed with setting up HASQL to query my database. I
+  created a new module <code>Database</code> to house all of our
+  database specific code.</p>
+  <p>First, we have to establish a connection with the database. Based
+  on the documentation we should use these:</p>
+  <pre class=".haskell"><code>Hasql.Connection
+Hasql.Connection.Setting
+Hasql.Connection.Setting.Connection</code></pre>
+  <p>Authorization uses <a
+  href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic
+  Auth</a></p>
   <p>To be continued….</p>
 </main>
             <hr>
