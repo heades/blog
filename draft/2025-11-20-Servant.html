@@ -91,6 +91,8 @@
 <ul>
 <li><a href="#the-database" id="toc-the-database">The Database</a></li>
 </ul></li>
+<li><a href="#authorization-tba"
+id="toc-authorization-tba">Authorization (TBA)</a></li>
 </ul>
 </nav>
 
@@ -274,10 +276,71 @@ main = run 5000 gamesApp</code></pre>
   <pre class=".haskell"><code>Hasql.Connection
 Hasql.Connection.Setting
 Hasql.Connection.Setting.Connection</code></pre>
+  <p>I setup a database settings record:</p>
+  <pre class=".haskell"><code>data ConnectionSettings = ConnectionSettings {
+    ipAddr :: String,
+    port :: Int,
+    user :: String,
+    dbname :: String
+}
+
+settings :: ConnectionSettings
+settings = ConnectionSettings {
+    ipAddr = &quot;123.4.5.6&quot;,
+    port = 5432,
+    user = &quot;postgres&quot;,
+    dbname = &quot;postgres&quot;
+}</code></pre>
+  <p>Then we can establish a connection to the database using
+  <code>Connection.acquire :: [Setting] -&gt; IO (Either ConnectionError Connection)</code>
+  where we first define a <code>Setting</code> as a Postgres connection
+  string:</p>
+  <pre class=".haskell"><code>psqlSettings :: T.Text
+psqlSettings = T.pack $ &quot;host=&quot;++settings.ipAddr++&quot; dbname=&quot;++settings.dbname++&quot; user=&quot;++settings.user++&quot; port=&quot;++(show settings.port)
+
+connect :: IO (Either Connection.ConnectionError Connection.Connection)
+connect = Connection.acquire [connectSettings]
+    where
+        connectSettings = ConnectionSetting.connection $ ConnectionSettingConnection.string psqlSettings</code></pre>
+  <p>Updating the main loop to make a connection to the database is
+  pretty easy now:</p>
+  <pre class=".haskell"><code>main :: IO ()
+main = do
+    _dbcon &lt;- connect
+    case _dbcon of
+        Left err -&gt; putStrLn . show $ err
+        Right dbcon -&gt; do putStrLn &quot;Connected to Postgres&quot;
+                          hFlush stdout
+                          -- Make use of dbcon.
+                          run 5000 gamesApp</code></pre>
+  <p>In order to pass the database connection to <code>gamesApp</code>,
+  we modify the type of <code>gamesApp</code> placing it into the
+  <code>Control.Monad.Reader</code> monad.</p>
+  <pre class=".haskell"><code>gamesApp :: Reader Connection Application
+gamesApp = do
+    sg &lt;- serverGames
+    return $ serve gamesAPI sg</code></pre>
+  <p>Since the resolution of the query happens in
+  <code>serverGames</code> we update it as well:</p>
+  <pre class=".haskell"><code>serverGames :: Reader Connection (Server GameAPI)
+serverGames = do
+    dbconn &lt;- ask
+    return . liftIO $ games dbconn</code></pre>
+  <p>The type of <code>gamesProxy</code> doesn’t need to change, because
+  it does’nt need to access the database. However, <code>games</code> is
+  the resolution function, and hence does need access to the database,
+  but we update it as a pure function:</p>
+  <pre class=".haskell"><code>games :: Connection -&gt; IO [Game]
+games dbconn = return []</code></pre>
+  <p>We now have access to the database in the resolution function for
+  the <code>games</code> query. So the next step is to actually write an
+  SQL query for all of the games in the database, and execute the query
+  on the database using <code>dbconn</code>.</p>
+  <p>To be continued….</p>
+  <h1 id="authorization-tba">Authorization (TBA)</h1>
   <p>Authorization uses <a
   href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic
   Auth</a></p>
-  <p>To be continued….</p>
 </main>
             <hr>
             <p>
