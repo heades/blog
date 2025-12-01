@@ -306,12 +306,12 @@ connect = Connection.acquire [connectSettings]
   pretty easy now:</p>
   <pre class=".haskell"><code>main :: IO ()
 main = do
-    _dbcon &lt;- connect
-    case _dbcon of
+    _dbconn &lt;- connect
+    case _dbconn of
         Left err -&gt; putStrLn . show $ err
-        Right dbcon -&gt; do putStrLn &quot;Connected to Postgres&quot;
+        Right dbconn -&gt; do putStrLn &quot;Connected to Postgres&quot;
                           hFlush stdout
-                          -- Make use of dbcon.
+                          -- Make use of dbconn.
                           run 5000 gamesApp</code></pre>
   <p>In order to pass the database connection to <code>gamesApp</code>,
   we modify the type of <code>gamesApp</code> placing it into the
@@ -336,6 +336,13 @@ games dbconn = return []</code></pre>
   the <code>games</code> query. So the next step is to actually write an
   SQL query for all of the games in the database, and execute the query
   on the database using <code>dbconn</code>.</p>
+  <p>Querying the database requires us to define two things: a
+  <code>Statement</code> and a <code>Session</code>. The former boils
+  down to the actual Postgres query while the latter is the action,
+  synthesized from the statement, to be executed on the database
+  connection. Then we simply pass the database connection and the
+  session to the <code>run</code> function and the query will be
+  executed on the database.</p>
   <p>To be continued….</p>
   <h1 id="authorization-tba">Authorization (TBA)</h1>
   <p>Authorization uses <a
