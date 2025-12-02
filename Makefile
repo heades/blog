@@ -10,7 +10,7 @@ all : draft
 draft : $(md_sources)
 	cd $(md_dir) && make
 
-publish : $(post_targets) index.html $(post_dir)/CT-Notes.html feed.xml
+publish : draft $(post_targets) index.html $(post_dir)/CT-Notes.html feed.xml
 
 $(post_dir)/%.html : $(draft_dir)/%.html
 	cp $< $@

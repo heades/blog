@@ -90,6 +90,10 @@
 <li><a href="#a-simple-api" id="toc-a-simple-api">A Simple API</a>
 <ul>
 <li><a href="#the-database" id="toc-the-database">The Database</a></li>
+<li><a href="#query-resolution" id="toc-query-resolution">Query
+Resolution</a></li>
+<li><a href="#executing-a-query" id="toc-executing-a-query">Executing a
+query</a></li>
 </ul></li>
 <li><a href="#authorization-tba"
 id="toc-authorization-tba">Authorization (TBA)</a></li>
@@ -343,6 +347,106 @@ games dbconn = return []</code></pre>
   connection. Then we simply pass the database connection and the
   session to the <code>run</code> function and the query will be
   executed on the database.</p>
+  <p>These both require encoding/decoding of the data to/from the
+  database and Haskell. I defined the encoding between <code>Game</code>
+  and Postgres as follows:</p>
+  <pre class=".haskell"><code>gameParams :: HEnc.Params Game
+gameParams = (title &gt;$&lt; HEnc.param (HEnc.nonNullable HEnc.text))
+          &lt;&gt; (fmap fromInteger . seriesNumber &gt;$&lt; HEnc.param (HEnc.nullable HEnc.int8))
+          &lt;&gt; (releaseDate &gt;$&lt; HEnc.param (HEnc.nullable HEnc.timestamptz))
+          &lt;&gt; (platform &gt;$&lt; HEnc.param (HEnc.nullable HEnc.text))</code></pre>
+  <p>This encoder allows for the <code>Game</code> record to be given as
+  a parameter to an SQL statement. Each field of <code>Game</code> needs
+  it’s own encoding using
+  <code>param :: NullableOrNot Value a -&gt; Params a</code> that takes
+  as input an encoder between a Postgres value that can be nullable or
+  not and a Haskell type. We compose this encoder with the projection
+  function of the field we are encoding. For example,</p>
+  <pre class=".haskell"><code>fmap fromInteger . seriesNumber &gt;$&lt; HEnc.param (HEnc.nullable HEnc.int8)</code></pre>
+  <p>This encoder of the <code>seriesNumber</code> field, first projects
+  the series number, then converts it into an <code>Int64</code> which
+  is then encoded as a parameter into Postgres. We need the call to
+  <code>fmap</code>, because the series number is nullable, hence the
+  type of <code>seriesNumber</code> is <code>Maybe Integer</code> and we
+  need a <code>Maybe Int64</code> which is encodable into Postgres.</p>
+  <p>Decoding is opposite, but operates at the row level of the returned
+  data from the database. Ultimately, we wish to query for the list of
+  all <code>Game</code>’s which corresponds to a list of games
+  <code>[Game]</code>. Decoding a list of games is easy if we can decode
+  single row containing a <code>Game</code>. We do this as follows:</p>
+  <pre class=".haskell"><code>gameRow :: HDec.Row Game
+gameRow = Game &lt;$&gt; HDec.column (HDec.nonNullable HDec.text)               -- title
+               &lt;*&gt; HDec.column (HDec.nullable (fmap toInteger HDec.int8)) -- seriesNumber
+               &lt;*&gt; HDec.column (HDec.nullable HDec.timestamptz)           -- releaseDate
+               &lt;*&gt; HDec.column (HDec.nullable HDec.text)                  -- platform</code></pre>
+  <p>Here <code>gameRow</code> returns <code>Game</code> record by
+  decoding each column of the row. The title of the game is decoded
+  as:</p>
+  <pre class=".haskell"><code>HDec.column (HDec.nonNullable HDec.text) -- title</code></pre>
+  <p>This says, decode this column as a <code>Text</code> value that is
+  non-nullable. Thus, the above code has the type <code>Row Text</code>
+  whereas the following:</p>
+  <pre class=".haskell"><code>HDec.column (HDec.nullable (fmap toInteger HDec.int8)) -- seriesNumber</code></pre>
+  <p>has type <code>Row (Maybe Integer)</code>, because the series
+  number is nullable.</p>
+  <p>Next we use this decoder to decode lists of <code>Games</code>:</p>
+  <pre class=".haskell"><code>gamesDecoder :: HDec.Result [Game]
+gamesDecoder = HDec.rowList gameRow</code></pre>
+  <p>We use the library function
+  <code>rowList :: Row a -&gt; Result [a]</code> to lift our
+  <code>Game</code> decoder to lists. At this point we have everything
+  we need to be able to resolve queries using the database.</p>
+  <h2 id="query-resolution">Query Resolution</h2>
+  <p>In the previous section we finished with needing to define a
+  <code>Statement</code> and a <code>Session</code> in order to execute
+  a query on the database. These are both coupled tightly to the actual
+  query being resolved by Servant; and thus, we define these as part of
+  the resolver for our <code>games</code> query in the module
+  <code>Resolver</code>. The actual SQL statement we wish to execute is
+  defined as a Hasql <code>Statement</code>:</p>
+  <pre class=".haskell"><code>selectGames :: Statement () [Game]
+selectGames = Statement sql HEnc.noParams gamesDecoder True
+    where
+        sql = &quot;select title, series_number, release_date, platform from games&quot;</code></pre>
+  <p>The <code>selectGames</code> statement simply configures Hasql for
+  parsing the SQL statement <code>sql</code>. This statement has no
+  parameters indicated by using <code>noParams</code>, Hasql should
+  decode the returned data using the <code>gamesDecoder</code> defined
+  in the previous section, and finally, Hasql should execute this as a
+  single query indicated by <code>True</code> which should improve
+  performance (based on the Hasql documentation).</p>
+  <p>Using <code>selectGames</code> we can define our Hasql
+  <code>Session</code>:</p>
+  <pre class=".haskell"><code>gamesSession :: Session [Game]
+gamesSession = statement () selectGames</code></pre>
+  <p>Since we have no parameters we give
+  <code>statement :: params -&gt; Statement params result -&gt; Session result</code>
+  the unit <code>()</code>, but give <code>selectGames</code> as our
+  result.</p>
+  <p>Now we can use <code>gamesSession</code> to define our resolver for
+  our <code>games</code> Servant query:</p>
+  <pre class=".haskell"><code>games :: Connection -&gt; IO [Game]
+games dbconn = do
+    result &lt;- run gamesSession dbconn
+    case result of
+        Left err -&gt; error . show $ err
+        Right g -&gt; do print g
+                      hFlush stdout
+                      return g</code></pre>
+  <p>We first run the <code>gamesSession</code> on the database using
+  the given connection <code>dbconn</code>, and then simply case split
+  on the result to determine if we got an error or a value result.</p>
+  <h2 id="executing-a-query">Executing a query</h2>
+  <p>We can now execute our <code>games</code> query to obtain the list
+  of games:</p>
+  <div class="sourceCode" id="cb29"><pre
+  class="sourceCode .bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># curl http://localhost:5000/games</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[</span><span class="dt">{</span><span class="st">&quot;platform&quot;</span><span class="dt">:</span><span class="st">&quot;NES&quot;</span><span class="op">,</span><span class="st">&quot;releaseDate&quot;</span><span class="dt">:</span><span class="st">&quot;2000-01-01T01:11:34.962898Z&quot;</span><span class="op">,</span><span class="st">&quot;seriesNumber&quot;</span><span class="dt">:1</span><span class="op">,</span><span class="st">&quot;title&quot;</span><span class="dt">:</span><span class="st">&quot;Mega Man&quot;</span><span class="dt">}</span><span class="ex">,</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">{</span><span class="st">&quot;platform&quot;</span><span class="dt">:</span><span class="st">&quot;NES&quot;</span><span class="op">,</span><span class="st">&quot;releaseDate&quot;</span><span class="dt">:</span><span class="st">&quot;2000-01-01T01:11:34.963271Z&quot;</span><span class="op">,</span><span class="st">&quot;seriesNumber&quot;</span><span class="dt">:2</span><span class="op">,</span><span class="st">&quot;title&quot;</span><span class="dt">:</span><span class="st">&quot;Mega Man 2&quot;</span><span class="dt">}</span><span class="ex">,</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">{</span><span class="st">&quot;platform&quot;</span><span class="dt">:</span><span class="st">&quot;NES&quot;</span><span class="op">,</span><span class="st">&quot;releaseDate&quot;</span><span class="dt">:</span><span class="st">&quot;2000-01-01T01:11:34.963914Z&quot;</span><span class="op">,</span><span class="st">&quot;seriesNumber&quot;</span><span class="dt">:3</span><span class="op">,</span><span class="st">&quot;title&quot;</span><span class="dt">:</span><span class="st">&quot;Mega Man 3&quot;</span><span class="dt">}</span><span class="ex">,</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">{</span><span class="st">&quot;platform&quot;</span><span class="dt">:</span><span class="st">&quot;SNES&quot;</span><span class="op">,</span><span class="st">&quot;releaseDate&quot;</span><span class="dt">:</span><span class="st">&quot;2000-01-01T01:11:34.96509Z&quot;</span><span class="op">,</span><span class="st">&quot;seriesNumber&quot;</span><span class="dt">:1</span><span class="op">,</span><span class="st">&quot;title&quot;</span><span class="dt">:</span><span class="st">&quot;Mega Man X&quot;</span><span class="dt">}</span><span class="ex">,</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">{</span><span class="st">&quot;platform&quot;</span><span class="dt">:</span><span class="st">&quot;PS4&quot;</span><span class="op">,</span><span class="st">&quot;releaseDate&quot;</span><span class="dt">:</span><span class="st">&quot;2000-01-01T00:00:00.006849Z&quot;</span><span class="op">,</span><span class="st">&quot;seriesNumber&quot;</span><span class="dt">:11</span><span class="op">,</span><span class="st">&quot;title&quot;</span><span class="dt">:</span><span class="st">&quot;Mega Man 11&quot;</span><span class="dt">}</span><span class="ex">]</span></span></code></pre></div>
+  <p>As we can see all of the games in our database are returned.</p>
   <p>To be continued….</p>
   <h1 id="authorization-tba">Authorization (TBA)</h1>
   <p>Authorization uses <a
