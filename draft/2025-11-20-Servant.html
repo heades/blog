@@ -41,7 +41,7 @@
       <div class="container">
         <div class="well">
           <h2>All about Servant</h2>
-              Updated: 2025-12-02
+              Updated: 2025-12-08
         </div>
 	<div class="row">
 	  <div class="col-md-2">
@@ -95,6 +95,8 @@ Resolution</a></li>
 <li><a href="#executing-a-query" id="toc-executing-a-query">Executing a
 query</a></li>
 </ul></li>
+<li><a href="#extending-our-simple-api"
+id="toc-extending-our-simple-api">Extending our simple API</a></li>
 <li><a href="#authorization-tba"
 id="toc-authorization-tba">Authorization (TBA)</a></li>
 </ul>
@@ -447,6 +449,121 @@ games dbconn = do
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">{</span><span class="st">&quot;platform&quot;</span><span class="dt">:</span><span class="st">&quot;SNES&quot;</span><span class="op">,</span><span class="st">&quot;releaseDate&quot;</span><span class="dt">:</span><span class="st">&quot;2000-01-01T01:11:34.96509Z&quot;</span><span class="op">,</span><span class="st">&quot;seriesNumber&quot;</span><span class="dt">:1</span><span class="op">,</span><span class="st">&quot;title&quot;</span><span class="dt">:</span><span class="st">&quot;Mega Man X&quot;</span><span class="dt">}</span><span class="ex">,</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">{</span><span class="st">&quot;platform&quot;</span><span class="dt">:</span><span class="st">&quot;PS4&quot;</span><span class="op">,</span><span class="st">&quot;releaseDate&quot;</span><span class="dt">:</span><span class="st">&quot;2000-01-01T00:00:00.006849Z&quot;</span><span class="op">,</span><span class="st">&quot;seriesNumber&quot;</span><span class="dt">:11</span><span class="op">,</span><span class="st">&quot;title&quot;</span><span class="dt">:</span><span class="st">&quot;Mega Man 11&quot;</span><span class="dt">}</span><span class="ex">]</span></span></code></pre></div>
   <p>As we can see all of the games in our database are returned.</p>
+  <h1 id="extending-our-simple-api">Extending our simple API</h1>
+  <p>Now let’s try adding a new endpoint I’ll call “character” that will
+  return a list of characters based on a JSON request with some detail
+  we will use to filter the response.</p>
+  <p>A character is defined as follows:</p>
+  <pre class=".haskell"><code>data Character = Character {
+    displayName :: Text,
+    kind :: Text,
+    alignment :: Text,
+    debut_game :: Maybe Text,
+    description :: Maybe Text
+} deriving (Eq, Show, Generic)
+
+instance ToJSON Character
+instance FromJSON Character</code></pre>
+  <p>Then we will pass in via JSON a character detail:</p>
+  <pre class=".haskell"><code>data CharDetails = DisplayName Text 
+                 | Kind Text
+                 | Alignment Text
+  deriving (Eq, Show, Generic)
+
+instance FromJSON CharDetails
+
+newtype GetCharDetails = GetCharDetails {
+    details :: CharDetails
+} deriving (Eq, Show, Generic)
+
+instance FromJSON GetCharDetails</code></pre>
+  <p>The type <code>GetCharDetails</code> will be the structure of our
+  JSON. For example,</p>
+  <div class="sourceCode" id="cb32"><pre
+  class="sourceCode .json"><code class="sourceCode json"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;details&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;tag&quot;</span><span class="fu">:</span> <span class="st">&quot;DisplayName&quot;</span><span class="fu">,</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;contents&quot;</span><span class="fu">:</span> <span class="st">&quot;Mega Man&quot;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+  <p>Now we can add a new endpoint to our <code>GameAPI</code>:</p>
+  <pre class=".haskell"><code>type GameAPI = &quot;games&quot;     :&gt; Get &#39;[JSON] [Game]
+          :&lt;|&gt; &quot;character&quot; :&gt; ReqBody &#39;[JSON] GetCharDetails :&gt; Post &#39;[JSON] [Character]</code></pre>
+  <p>Servant allows us to name the endpoint “character” and then require
+  a JSON request body whose contents must parse as a
+  <code>GetCharDetails</code> (the parsing will be done using AESON).
+  Since we are passing information to the server we must do this through
+  a POST request. Servant makes this pretty easy!</p>
+  <p>After updating the definition of our API type, we will need to
+  update our server. Based on how we wrote the <code>gamesApp</code>
+  which serves the API we do not need to change it.</p>
+  <p>However, our server <code>serverGames</code> now requires we define
+  our resolvers as Servant handlers:</p>
+  <pre class=".haskell"><code>characterHandler :: Connection -&gt; GetCharDetails -&gt; Handler [Character]
+characterHandler dbconn deets = liftIO $ character dbconn (details deets)
+
+gamesHandler :: Connection -&gt; Handler [Game]
+gamesHandler dbconn = liftIO $ games dbconn</code></pre>
+  <p>The handler <code>gamesHandler</code> doesn’t change, except for
+  being in the <code>Handler</code> monad. The handler for our new
+  endpoint <code>characterHandler</code> takes as input a database
+  connection as well as a <code>GetCharDetails</code> which is the
+  character details obtained from the JSON request body. In Servant,
+  this simply corresponds to a new argument to the function. We
+  implement this handler as follows:</p>
+  <pre class=".haskell"><code>characterHandler :: Connection -&gt; GetCharDetails -&gt; Handler [Character]
+characterHandler dbconn deets = liftIO $ character dbconn (details deets)</code></pre>
+  <p>We simply call a resolver function that operates in <code>IO</code>
+  and lift its result into the <code>Handler</code> monad. This allows
+  <code>character</code> to be written fairly simply.</p>
+  <pre class=".haskell"><code>character :: Connection -&gt; CharDetails -&gt; IO [Character]
+character dbconn details = do
+    print details
+    hFlush stdout
+    result &lt;- run (characterSession details) dbconn
+    case result of
+        Left err -&gt; error . (++&quot;\n&quot;) . show $ err
+        Right g -&gt; do print g
+                      hFlush stdout
+                      return g</code></pre>
+  <p>In fact, the only differences from the <code>games</code> resolver
+  is that we call <code>characterSession</code> the Hasql session for
+  executing the SQL query on our database using the character details,
+  <code>details</code>.</p>
+  <p>Then <code>characterSession</code> case splits on which character
+  detail was passed in, and filter our results based on that:</p>
+  <pre class=".haskell"><code>characterSession :: CharDetails -&gt; Session [Character]
+characterSession (DisplayName name) = statement name $ Statement sql textEncoder characterDecoder True
+    where 
+        sql = sqlStr $ selectCharacterBySQL &quot;characters.display_name&quot;
+characterSession (Kind kind) = statement kind $ Statement sql textEncoder characterDecoder True
+    where 
+        sql = sqlStr $ selectCharacterBySQL &quot;characters.kind&quot;
+characterSession (Alignment alignment) = statement alignment $ Statement sql textEncoder characterDecoder True
+    where 
+        sql = sqlStr $ selectCharacterBySQL &quot;characters.alignment&quot;
+
+selectCharacterBySQL :: String -&gt; String
+selectCharacterBySQL field = &quot;SELECT display_name,kind,alignment,games.title AS game_title,description FROM characters INNER JOIN games on characters.debut_game_id = games.game_id WHERE &quot;++field++&quot; = $1&quot;</code></pre>
+  <p>One thing to note about this, I tried to use the Hasql template
+  haskell library (Hasql-TH) to write my SQL statement, but since I’m
+  using records, and in the future, nested records, it doesn’t support
+  it. However, even for simple types I found it a lot easier to actually
+  just write my own encoder/decoders for my data. The fact that there
+  really isn’t any documentation for Hasql-TH made it even more
+  difficult.</p>
+  <p>Besides the encoders for the data, this is all it took to extend
+  our API with a more advanced endpoint. Here is an example query:</p>
+  <pre><code># curl -X POST -H &quot;Content-Type: application/json&quot; -d &#39;{&quot;details&quot;: {&quot;tag&quot;: &quot;Alignment&quot;, &quot;contents&quot;: &quot;villain&quot;}}&#39; http://localhost:5000/character
+[{&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man&quot;,&quot;description&quot;:&quot;Mad scientist&quot;,&quot;displayName&quot;:&quot;Dr. Wily&quot;,&quot;kind&quot;:&quot;scientist&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man&quot;,&quot;description&quot;:&quot;Timber-cutting robot&quot;,&quot;displayName&quot;:&quot;Cut Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man&quot;,&quot;description&quot;:&quot;Super-strong construction robot&quot;,&quot;displayName&quot;:&quot;Guts Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man&quot;,&quot;description&quot;:&quot;Cold-weather robot&quot;,&quot;displayName&quot;:&quot;Ice Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man&quot;,&quot;description&quot;:&quot;Demolition robot&quot;,&quot;displayName&quot;:&quot;Bomb Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man&quot;,&quot;description&quot;:&quot;Waste disposal robot&quot;,&quot;displayName&quot;:&quot;Fire Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man&quot;,&quot;description&quot;:&quot;Power plant robot&quot;,&quot;displayName&quot;:&quot;Elec Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man 2&quot;,&quot;description&quot;:&quot;Uses deadly Metal Blades&quot;,&quot;displayName&quot;:&quot;Metal Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;},
+ {&quot;alignment&quot;:&quot;villain&quot;,&quot;debut_game&quot;:&quot;Mega Man 2&quot;,&quot;description&quot;:&quot;Controls wind attacks&quot;,&quot;displayName&quot;:&quot;Air Man&quot;,&quot;kind&quot;:&quot;robot_master&quot;}]</code></pre>
   <p>To be continued….</p>
   <h1 id="authorization-tba">Authorization (TBA)</h1>
   <p>Authorization uses <a
